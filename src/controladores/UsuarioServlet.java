@@ -36,13 +36,11 @@ public class UsuarioServlet extends HttpServlet {
 		//generamos las referencias de los objetos a llenar
 		Usuarios u = new Usuarios();
 		UsuarioDAO udao = new UsuarioDAO();
-		
 		switch (op) {
 			case "L":// caso de login
 				// verificamos que los datos son de algun usuario en la bd
 				String Usuario = request.getParameter("Usuario");
 				String Password = request.getParameter("Password");
-				
 				u = udao.ValidarUsuarios(Usuario,Password);
 				
 				if (u.getNombre() != null) {
@@ -53,14 +51,7 @@ public class UsuarioServlet extends HttpServlet {
 					sesion = request.getSession(true);
 					sesion.setAttribute("usuario", u);
 					u = (Usuarios) sesion.getAttribute("usuario");
-					int tipoUsuario = u.getidTipoUsuario();
-					switch(u.getidTipoUsuario())
-					{
-						//Gerente de RH
-						case 1:
-							url = "/comunes/Inicio/gerente-rh.jsp";
-							break;
-					}
+					url="/comunes/RecursosHumanos/registrar-estados.jsp";
 				}
 			break;
 			
