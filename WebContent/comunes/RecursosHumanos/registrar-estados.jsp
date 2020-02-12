@@ -24,7 +24,7 @@
 	</nav>
 	
 	<div class="container" style="margin-top:100px">
-		<form action="/Registrar?op=Estado" method="post">
+		<form action="${pageContext.servletContext.contextPath}/Registrar?op=Estado" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
 				<input type="text" name="nombre">
@@ -38,7 +38,7 @@
 		      			<option value="I">Inactivo</option>
 		    		</select>
 		    	<br>
-		    	<a class="btn btn-primary" type="submit">Registrar</a>
+		    	<button type="submit" class="btn btn-primary">Registrar</button>
 			</div>
 		</form>
 	</div>
