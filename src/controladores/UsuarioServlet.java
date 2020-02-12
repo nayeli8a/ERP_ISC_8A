@@ -51,7 +51,7 @@ public class UsuarioServlet extends HttpServlet {
 					sesion = request.getSession(true);
 					sesion.setAttribute("usuario", u);
 					u = (Usuarios) sesion.getAttribute("usuario");
-					url="/comunes/RecursosHumanos/registrar-estados.jsp";
+					url="/comunes/Inicio/Inicio.jsp";
 				}
 			break;
 			

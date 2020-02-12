@@ -1,6 +1,8 @@
 package controladores;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,9 +53,14 @@ public class RegistrarServlet extends HttpServlet {
 				if(!esdao.ValidarEstado(nom_estado))
 				{
 					esdao.insertarEstado(nom_estado, siglas, estatus);
+					url="/comunes/Inicio/Inicio.jsp";
 				}
 			break;
+			
 		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher(url);
+		rd.forward(request, response);
 	}
 
 	/**

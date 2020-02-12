@@ -28,8 +28,9 @@
 				    Recursos Humanos
 				  </button>
 			  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-			    <a class="dropdown-item" href="#">Estados</a>
-			    <a class="dropdown-item" href="#">Ciudades</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-estados.jsp">Registrar Estados</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/Estado?op=Listar">Consultar Estados</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-ciudades.jsp">Registrar Ciudades</a>
 			  </div>
 			</div> 
 			<div class="dropdown">
