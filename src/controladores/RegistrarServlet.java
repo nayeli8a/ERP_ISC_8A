@@ -50,12 +50,27 @@ public class RegistrarServlet extends HttpServlet {
 				
 				//validamos que el estado no exista ya en la BD
 				//si el estado no existe en la bd, entonces lo agregamos
+				System.out.println(esdao.ValidarEstado(nom_estado));
 				if(!esdao.ValidarEstado(nom_estado))
 				{
 					esdao.insertarEstado(nom_estado, siglas, estatus);
-					url="/comunes/Inicio/Inicio.jsp";
 				}
+				url="/comunes/Inicio/Inicio.jsp";
 			break;
+			
+			case "Ciudad":
+				//generamos el objeto a llenar
+				CiudadesDAO cdao = new CiudadesDAO();
+				
+				String nom_ciudad = request.getParameter("nom_ciudad");
+				nom_estado = request.getParameter("nom_estado");
+				estatus = request.getParameter("estatus");
+				if(!cdao.ValidarCiudades(nom_ciudad))
+				{
+					cdao.insertarCiudades(nom_ciudad,nom_estado, estatus);
+				}
+				url="/comunes/Inicio/Inicio.jsp";
+				break;
 			
 		}
 		

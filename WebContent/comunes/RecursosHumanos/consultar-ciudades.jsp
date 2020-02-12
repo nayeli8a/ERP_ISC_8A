@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<title>Consultar Estados</title>
+<title>Consultar Ciudades</title>
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,7 +27,7 @@
 	
 	
 	<div class="container" style="margin-top:100px">
-		<h2 align="center">Estados</h2>
+		<h2 align="center">Ciudades</h2>
 		<form action="Estado?op=Listar" method="post" >
 			<input type="submit" name="op" value="Actualizar" class="btn btn-info">
 		</form>
@@ -39,7 +39,7 @@
 					<tr>
 						<th>ID</th>
 						<th>Nombre</th>
-						<th>Siglas</th>
+						<th>idEstado</th>
 						<th>Estatus</th>
 					</tr>
 				</thead>
@@ -47,22 +47,22 @@
 					<c:forEach var="dato" items="${datos}">
 						<c:if test="${dato.getEstatus() eq 'I'}">
 							<tr>
-							<td>${dato.getIdEstado()}</td>
+							<td>${dato.getIdCiudad()}</td>
 							<td>${dato.getNombre()}</td>
-							<td>${dato.getSiglas()}</td>
+							<td>${dato.getIdEstado()}</td>
 							<td>${dato.getEstatus()}</td>
 							</tr>
 						</c:if>
 						<c:if test="${dato.getEstatus() eq 'A'}">
 							<tr>
-							<td>${dato.getIdEstado()}</td>
+							<td>${dato.getIdCiudad()}</td>
 							<td>${dato.getNombre()}</td>
-							<td>${dato.getSiglas()}</td>
+							<td>${dato.getIdEstado()}</td>
 							<td>${dato.getEstatus()}</td>
 							<td>
 								<form action="Estado" method="post">
-									<input type="hidden" name="id" value="${dato.getIdEstado()}">
-									<div id="${dato.getIdEstado()}">
+									<input type="hidden" name="id" value="${dato.getIdCiudad()}">
+									<div id="${dato.getIdCiudad()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
 										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">									</div>
 								</form>

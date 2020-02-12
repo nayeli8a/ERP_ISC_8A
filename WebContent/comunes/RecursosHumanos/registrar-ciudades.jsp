@@ -22,30 +22,32 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
-		<button class="btn btn-primary" style="">Atras</button>
+		<a class="btn btn-primary" href="<c:out value="${pageContext.servletContext.contextPath}"/>/comunes/Inicio/Inicio.jsp">Atras</a>
 	</nav>
 	<div  class="card bg-light" style="margin-top:100px">
 	
   <p class="bg-primary text-white">REGISTRO DE CIUDADES</p>
 
-		<form action="/Registrar?op=Estado" method="post">
+		<form action="${pageContext.servletContext.contextPath}/Registrar?op=Ciudad" method="post">
 			<div class="form-group">
-				<label>Nombre: </label>
-			<input type="text" class="form-control" id="usr">
-				<br>
-				<label for="Estatus">Estado</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
-		      			<option value="A">Estados</option>
-		      		
-		    		</select>
-				<br>
-				<label for="Estatus">Estatus</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
-		      			<option value="A">Activo</option>
-		      			<option value="I">Inactivo</option>
+				<label for="Estatus">Estado:</label>
+		    		<select class="form-control" id="nom_estado" name = "nom_estado">
+		      			<c:forEach var="dato" items="${datos}">
+		      				<option value="${dato.getNombre()}">${dato.getNombre()}</option>
+		      			</c:forEach>
 		    		</select>
 		    	<br>
-		    	<a class="btn btn-primary" type="submit">Registrar</a>
+		    	
+				<label>Nombre Ciudad:</label>
+				<input type="text" class="form-control" id="nom_ciudad" name="nom_ciudad">
+				<br>
+				<label for="Estatus">Estatus:</label>
+		    		<select class="form-control" id="estatus" name = "estatus">
+	      				<option value="A">Activo</option>
+	      				<option value="I">Inactivo</option>
+		    		</select>
+		    	<br>
+		    	<button type="submit" class="btn btn-primary">Registrar</button>
 			</div>
 		</form>
 	</div>

@@ -13,15 +13,23 @@ public class CiudadesDAO {
 	PreparedStatement ps;
 	ResultSet rs;
 
-	public void insertarCiudades(String nom_ciudad,int id_Estado, String estatus)
+	public void insertarCiudades(String nom_ciudad,String nombre_estado, String estatus)
 	{
-		String sql = "insert into ciudades(nombre,estatus) values('"+nom_ciudad+"','"+estatus+"')";
+		String sql1 = "select idEstado from Estados where Nombre ='"+nombre_estado+"'";
 		try {
-			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql1);
+			ResultSet rs = ps.executeQuery();
+			int idEstado=0;
+			
+			while(rs.next())
+			{
+				  idEstado = rs.getInt("idEstado");
+			}
+			String sql = "insert into Ciudades(nombre,estatus,idEstado) values('"+nom_ciudad+"','"+estatus+"',"+idEstado+")";
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("Error al insertar el Estado en la BD: "+e.getMessage());
+			System.out.println("Error al insertar la ciudad en la BD: "+e.getMessage());
 		}
 	}
 	
@@ -46,7 +54,7 @@ public class CiudadesDAO {
 			ps.close();
 			
 		} catch (SQLException e) {
-			System.out.println("Error al conectar con la BD " + e.getMessage());
+			System.out.println("Error al conectar con la BD al validar " + e.getMessage());
 		}
 		return salida;
 	}

@@ -15,16 +15,16 @@ import modelo.beans.*;
 import modelo.datos.*;
 
 /**
- * Servlet implementation class EstadoServlet
+ * Servlet implementation class CiudadesServlet
  */
-@WebServlet("/Estado")
-public class EstadoServlet extends HttpServlet {
+@WebServlet("/Ciudades")
+public class CiudadesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EstadoServlet() {
+    public CiudadesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,30 +35,25 @@ public class EstadoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		// aqui va todo el codigo
-		System.out.println("##Dentro de EstadoServlet##");
-		String url = "index.jsp";
-		HttpSession sesion;
-		String op = request.getParameter("op");
-		
-		switch(op)
-		{
-			case "Listar":
-				EstadoDAO esdao = new EstadoDAO();
-				List<Estado> datos = esdao.consultar();
-				request.setAttribute("datos", datos);
-				url="/comunes/RecursosHumanos/consultar-estados.jsp";
-			break;
-			case "ListarPCiudades":
-				esdao = new EstadoDAO();
-				datos = esdao.consultar();
-				request.setAttribute("datos", datos);
-				url="/comunes/RecursosHumanos/registrar-ciudades.jsp";
-			break;
-		}
-		
-		RequestDispatcher rd = request.getRequestDispatcher(url);
-		rd.forward(request, response);
+				System.out.println("##Dentro de CiudadesServlet##");
+				String url = "index.jsp";
+				HttpSession sesion;
+				String op = request.getParameter("op");
+				
+				switch(op)
+				{
+					case "Listar":
+						CiudadesDAO cdao = new CiudadesDAO();
+						List<Ciudades> datos = cdao.consultar();
+						request.setAttribute("datos", datos);
+						url="/comunes/RecursosHumanos/consultar-ciudades.jsp";
+					break;
+				}
+				
+				RequestDispatcher rd = request.getRequestDispatcher(url);
+				rd.forward(request, response);
 	}
 
 	/**
