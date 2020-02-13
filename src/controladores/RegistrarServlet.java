@@ -71,6 +71,25 @@ public class RegistrarServlet extends HttpServlet {
 				}
 				url="/comunes/Inicio/Inicio.jsp";
 				break;
+				
+			case "Deducciones":
+				//generamos el objeto a llenar
+				DeduccionesDAO ddao = new DeduccionesDAO();
+				
+				String nom_deducciones = request.getParameter("nombre");
+				String descripcion = request.getParameter("descripcion");
+				float porcentaje = 	Float.parseFloat(request.getParameter("porcentaje"));
+				estatus = request.getParameter("estatus");
+				
+				//validamos que el estado no exista ya en la BD
+				//si el estado no existe en la bd, entonces lo agregamos
+				System.out.println(ddao.ValidarDeducciones(nom_deducciones));
+				if(!ddao.ValidarDeducciones(nom_deducciones))
+				{
+					ddao.insertarDeducciones(nom_deducciones, descripcion, porcentaje, estatus);
+				}
+				url="/comunes/Inicio/Inicio.jsp";
+			break;
 			
 		}
 		

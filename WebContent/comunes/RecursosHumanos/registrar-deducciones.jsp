@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<title>Registrar Estados</title>
+<title>Registrar Deducciones</title>
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,16 +24,18 @@
 	</nav>
 	
 	
-	<div class="card bg-light" style="margin-top:100px"">
-	  <p class="bg-primary text-white">REGISTRO DE ESTADOS</p>
-		<form action="${pageContext.servletContext.contextPath}/Registrar?op=Estado" method="post">
+	<div class="card bg-light" style="margin-top:100px">
+	  <p class="bg-primary text-white">REGISTRO DE DEDUCCIONES</p>
+		<form action="${pageContext.servletContext.contextPath}/Registrar?op=Deducciones" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
-				<input type="text" class="form-control" id="nom_estado" name="nom_estado">
+				<input type="text" class="form-control" id="nom_deducciones" name="nom_deducciones">
 				<br>
-				<label>Siglas: </label>
-				<input type="text" class="form-control" id="siglas" name="siglas">
+				<label>Descripcion: </label>
+				<input type="text" class="form-control" id="Descripcion" name="Descipcion">
 				<br>
+				<label>Porcentaje: </label>
+				<input type="number" class="form-control" id="porcentaje" name="porcentaje">
 				<label for="Estatus">Estatus</label>
 		    		<select class="form-control" id="estatus" name = "estatus">
 		      			<option value="A">Activo</option>

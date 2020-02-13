@@ -32,8 +32,19 @@
 			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/Estado?op=Listar">Consultar Estados</a>
 			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/Estado?op=ListarPCiudades">Registrar Ciudades</a>
 			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/Ciudades?op=Listar">Consultar Ciudades</a>
+				<a class="dropdown-item" href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-deducciones.jsp">Registrar Deducciones</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar">Consultar Deducciones</a>			 
 			  </div>
+			  
+			  
+			  
+			  
 			</div> 
+		
+                    
+			
+			
+			
 			<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					    Ventas
@@ -52,6 +63,10 @@
 				    <a class="dropdown-item" href="#">Ciudades</a>
 				  </div>
 			</div> 
+			
+			
+			
+			
 		</nav>
 		
 		 
