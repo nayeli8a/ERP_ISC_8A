@@ -6,6 +6,8 @@ public class Percepciones {
 		private String nombre;
 		private String descripcion;
 		private int diasPagar;
+		private String estatus;
+		
 		public int getIdPercepcion() {
 			return idPercepcion;
 		}
@@ -30,6 +32,13 @@ public class Percepciones {
 		public void setDiasPagar(int diasPagar) {
 			this.diasPagar = diasPagar;
 		}
+		public String getEstatus() {
+			return estatus;
+		}
+		public void setEstatus(String estatus) {
+			this.estatus = estatus;
+		}
+		
 		
 		
 }

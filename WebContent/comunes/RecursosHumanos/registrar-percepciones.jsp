@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<title>Registrar Deducciones</title>
+<title>Registrar Percepciones</title>
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,19 +25,19 @@
 	
 	
 	<div class="card bg-light" style="margin-top:100px">
-	  <p class="bg-primary text-white">REGISTRO DE DEDUCCIONES</p>
-		<form action="${pageContext.servletContext.contextPath}/Registrar?op=Deducciones" method="post">
+	  <p class="bg-primary text-white">REGISTRO DE PERCEPCIONES</p>
+		<form action="${pageContext.servletContext.contextPath}/Registrar?op=Percepciones" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
-				<input type="text" class="form-control" id="nom_deducciones" name="nom_deducciones">
+				<input type="text" class="form-control"  name="nom_percepciones">
 				<br>
 				<label>Descripcion: </label>
-				<input type="text" class="form-control" id="Descripcion" name="descripcion">
+				<input type="text" class="form-control"  name="descripcion">
 				<br>
-				<label>Porcentaje: </label>
-				<input type="number" class="form-control" id="porcentaje" name="porcentaje">
+				<label>Dias a pagar: </label>
+				<input type="integer" class="form-control" name="diasPagar">
 				<label for="Estatus">Estatus</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
+		    		<select class="form-control" name = "estatus">
 		      			<option value="A">Activo</option>
 		      			<option value="I">Inactivo</option>
 		    		</select>

@@ -33,7 +33,9 @@
 			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/Estado?op=ListarPCiudades">Registrar Ciudades</a>
 			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/Ciudades?op=Listar">Consultar Ciudades</a>
 				<a class="dropdown-item" href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-deducciones.jsp">Registrar Deducciones</a>
-			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar">Consultar Deducciones</a>			 
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar">Consultar Deducciones</a>			
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-percepciones.jsp">Registrar Percepciones</a>
+			    <a class="dropdown-item" href="${pageContext.servletContext.contextPath}/Percepciones?op=Listar">Consultar Percepciones</a>			  
 			  </div>
 			  
 			  

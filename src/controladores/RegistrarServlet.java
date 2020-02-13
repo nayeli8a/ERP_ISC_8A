@@ -44,7 +44,7 @@ public class RegistrarServlet extends HttpServlet {
 				//generamos el objeto a llenar
 				EstadoDAO esdao = new EstadoDAO();
 				
-				String nom_estado = request.getParameter("nombre");
+				String nom_estado = request.getParameter("nom_estado");
 				String siglas = request.getParameter("siglas");
 				String estatus = request.getParameter("estatus");
 				
@@ -76,7 +76,7 @@ public class RegistrarServlet extends HttpServlet {
 				//generamos el objeto a llenar
 				DeduccionesDAO ddao = new DeduccionesDAO();
 				
-				String nom_deducciones = request.getParameter("nombre");
+				String nom_deducciones = request.getParameter("nom_deducciones");
 				String descripcion = request.getParameter("descripcion");
 				float porcentaje = 	Float.parseFloat(request.getParameter("porcentaje"));
 				estatus = request.getParameter("estatus");
@@ -87,6 +87,23 @@ public class RegistrarServlet extends HttpServlet {
 				if(!ddao.ValidarDeducciones(nom_deducciones))
 				{
 					ddao.insertarDeducciones(nom_deducciones, descripcion, porcentaje, estatus);
+				}
+				url="/comunes/Inicio/Inicio.jsp";
+			break;
+			case "Percepciones":
+				//generamos el objeto a llenar
+				PercepcionesDAO pdao = new PercepcionesDAO();
+				String nom_percepciones = request.getParameter("nom_percepciones");
+				String descripcion_percepciones = request.getParameter("descripcion");
+				int diasPagar = Integer.parseInt(request.getParameter("diasPagar"));
+				estatus = request.getParameter("estatus");
+				
+				//validamos que el estado no exista ya en la BD
+				//si el estado no existe en la bd, entonces lo agregamos
+				System.out.println(pdao.ValidarPercepciones(nom_percepciones));
+				if(!pdao.ValidarPercepciones(nom_percepciones))
+				{
+					pdao.insertarPercepciones(nom_percepciones, descripcion_percepciones, diasPagar, estatus);
 				}
 				url="/comunes/Inicio/Inicio.jsp";
 			break;
