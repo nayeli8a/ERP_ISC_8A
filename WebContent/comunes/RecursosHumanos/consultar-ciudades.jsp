@@ -18,7 +18,8 @@
 		
     <!-- Nuestras hojas de estilo-->
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
-   
+    <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
+    
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
@@ -60,7 +61,7 @@
 							<td>${dato.getIdEstado()}</td>
 							<td>${dato.getEstatus()}</td>
 							<td>
-								<form action="Estado" method="post">
+								<form action="Ciudades" method="post">
 									<input type="hidden" name="id" value="${dato.getIdCiudad()}">
 									<div id="${dato.getIdCiudad()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 

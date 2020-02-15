@@ -50,6 +50,13 @@ public class CiudadesServlet extends HttpServlet {
 						request.setAttribute("datos", datos);
 						url="/comunes/RecursosHumanos/consultar-ciudades.jsp";
 					break;
+					case "Editar":
+						break;
+					case "Eliminar":
+						cdao = new CiudadesDAO();
+						cdao.eliminar(request.getParameter("id"));
+						url = "Ciudades?op=Listar";
+						break;
 				}
 				
 				RequestDispatcher rd = request.getRequestDispatcher(url);

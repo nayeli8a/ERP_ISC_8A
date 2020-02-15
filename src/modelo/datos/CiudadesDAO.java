@@ -105,20 +105,15 @@ public class CiudadesDAO {
 	}
 	
 	public void eliminar(String id){
-		//if() { //estatus inactivo
-			
-			String sql = "delete from usuarios where idUsuario ="+id;
-			try {
+		String sql = "execute sp_EliminarLogicamente 'Ciudades','"+id+"','idCiudad'";
+		System.out.println(sql);
+		try {
 				ps = Conexion.getInstance().getCN().prepareStatement(sql);
 				ps.executeUpdate();
 			} catch (Exception e) {
 				System.out.println("Error: " + e.getMessage());
 			}
-		}
-	//	else {
-			
-		//}
-	
+	}
 	
 	
 	public Ciudades listarId(String id){

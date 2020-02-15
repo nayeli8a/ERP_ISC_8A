@@ -68,4 +68,16 @@ public class EstadoDAO {
 		}
 		return lista;
 	}
+	
+	public void eliminar(String id){
+		String sql = "execute sp_EliminarLogicamente 'Estados','"+id+"','idEstado'";
+		System.out.println(sql);
+		try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("Error: " + e.getMessage());
+			}
+	}
 }
