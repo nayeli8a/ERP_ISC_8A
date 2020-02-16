@@ -69,6 +69,28 @@ public class EstadoDAO {
 		return lista;
 	}
 	
+	public Estado consultaIndividual(int idEstado){
+		String sql="select * from Estados where idEstado=?";
+		Estado c = new Estado();
+		try{
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.setInt(1, idEstado);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()){
+				c.setIdEstado(rs.getInt("idEstado"));
+				c.setNombre(rs.getString("nombre"));
+				c.setEstatus(rs.getString("estatus"));
+				c.setSiglas(rs.getString("siglas"));
+			}
+			ps.close();
+			rs.close();
+		}
+		catch(SQLException e){
+			System.out.println("Error ESDAO:"+e.getMessage());
+		}
+		return c;
+	}
+	
 	public void eliminar(String id){
 		String sql = "execute sp_EliminarLogicamente 'Estados','"+id+"','idEstado'";
 		System.out.println(sql);

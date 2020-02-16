@@ -51,11 +51,30 @@ public class CiudadesServlet extends HttpServlet {
 						url="/comunes/RecursosHumanos/consultar-ciudades.jsp";
 					break;
 					case "Editar":
+						cdao = new CiudadesDAO();
+						EstadoDAO esdao = new EstadoDAO();
+						Ciudades datosciudad = cdao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
+						Estado datosestado = esdao.consultaIndividual(datosciudad.getIdEstado());
+						List<Estado> datosestados = esdao.consultar();
+						request.setAttribute("datosciudad", datosciudad);
+						request.setAttribute("datosestado",datosestado);
+						request.setAttribute("datosestados",datosestados);
+						url="/comunes/RecursosHumanos/editar-ciudades.jsp";
 						break;
 					case "Eliminar":
 						cdao = new CiudadesDAO();
 						cdao.eliminar(request.getParameter("id"));
 						url = "Ciudades?op=Listar";
+						break;
+					case "Modificar":
+						Ciudades ciudades = new Ciudades();
+						ciudades.setIdEstado(Integer.parseInt(request.getParameter("idEstado")));
+						ciudades.setNombre(request.getParameter("nom_ciudad"));
+						ciudades.setEstatus(request.getParameter("estatus"));
+						ciudades.setIdCiudad(Integer.parseInt(request.getParameter("idCiudad")));
+						cdao = new CiudadesDAO();
+						cdao.actualizar(ciudades);
+						url="Ciudades?op=Listar";
 						break;
 				}
 				

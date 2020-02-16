@@ -87,19 +87,16 @@ public class CiudadesDAO {
 			ps.setInt(1, idCiudad);
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()){
-				c.setIdCiudad(rs.getInt("idUsuario"));
+				c.setIdCiudad(rs.getInt("idCiudad"));
 				c.setNombre(rs.getString("Nombre"));
-				c.setIdEstado(rs.getInt("IdEstado"));
+				c.setIdEstado(rs.getInt("idEstado"));
 				c.setEstatus(rs.getString("Estatus"));
-				
 			}
 			ps.close();
 			rs.close();
-			Conexion.getInstance().cerrar();
-			
 		}
 		catch(SQLException e){
-			System.out.println("Error:"+e.getMessage());
+			System.out.println("Error CDAO:"+e.getMessage());
 		}
 		return c;
 	}
@@ -133,6 +130,22 @@ public class CiudadesDAO {
 			System.out.println("Error en UsuarioDAO listarId");
 		}
 		return c;
+	}
+	
+	public void actualizar(Ciudades us)
+	{
+		String sql="update Ciudades set nombre=?,idEstado=?,Estatus=? where idCiudad=?";
+		try {
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.setString(1, us.getNombre());
+			ps.setInt(2,us.getIdEstado());
+			ps.setString(3,us.getEstatus());
+			ps.setInt(4, us.getIdCiudad());
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("Error al actualizar la Ciudad"+e.getMessage());
+		}
 	}
 
 
