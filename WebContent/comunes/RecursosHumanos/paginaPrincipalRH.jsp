@@ -73,6 +73,7 @@
 							<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-percepciones.jsp"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
 							<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/consultar-percepciones.jsp"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
+
 						</div>
 					</center>
 			</div>
