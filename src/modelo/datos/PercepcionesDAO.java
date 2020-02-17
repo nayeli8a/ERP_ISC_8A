@@ -71,4 +71,54 @@ public class PercepcionesDAO {
 		}
 		return lista;
 	}
+	public void eliminar(String id){
+		String sql = "execute sp_EliminarLogicamente 'Percepciones','"+id+"','idPercepcion'";
+		System.out.println(sql);
+		try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("Error: " + e.getMessage());
+			}
+	}
+	public void actualizar(Percepciones p)
+	{
+		String sql="update Percepciones set Nombre=?,Descripcion=?,DiasPagar=?, Estatus=? where idPercepcion=?";
+		try {
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+
+			ps.setString(1, p.getNombre());
+			ps.setString(2,p.getDescripcion());
+			ps.setInt(3,p.getDiasPagar());
+			ps.setString(4, p.getEstatus());	
+			ps.setInt(5, p.getIdPercepcion());
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("Error al actualizar el estado"+e.getMessage());
+		}
+	}
+	public Percepciones consultaIndividual(int idPercepcion){
+		String sql="select * from Percepciones where idPercepcion=?";
+		Percepciones p = new Percepciones();
+		try{
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.setInt(1, idPercepcion);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()){
+				p.setIdPercepcion(rs.getInt("idPercepcion"));
+				p.setNombre(rs.getString("nombre"));
+				p.setDescripcion(rs.getString("descripcion"));
+				p.setDiasPagar(rs.getInt("diasPagar"));
+				p.setEstatus(rs.getString("estatus"));
+			}
+			ps.close();
+			rs.close();
+		}
+		catch(SQLException e){
+			System.out.println("Error ESDAO:"+e.getMessage());
+		}
+		return p;
+	}
 }

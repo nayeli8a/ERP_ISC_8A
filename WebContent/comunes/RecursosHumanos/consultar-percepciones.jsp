@@ -62,7 +62,7 @@
 							<td>${dato.getDiasPagar()}</td>
 							<td>${dato.getEstatus()}</td>
 							<td>
-								<form action="Deducciones" method="post">
+								<form action="Percepciones" method="post">
 									<input type="hidden" name="id" value="${dato.getIdPercepcion()}">
 									<div id="${dato.getIdPercepcion()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
