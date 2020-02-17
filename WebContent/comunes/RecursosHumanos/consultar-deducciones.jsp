@@ -51,7 +51,7 @@
 							<td>${dato.getIdDeduccion()}</td>
 							<td>${dato.getNombre()}</td>
 							<td>${dato.getDescripcion()}</td>
-							<td>${dato.getPorcenjate()}</td>
+							<td>${dato.getPorcentaje()}</td>
 							<td>${dato.getEstatus()}</td>
 							</tr>
 						</c:if>

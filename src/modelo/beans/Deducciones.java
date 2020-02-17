@@ -4,8 +4,8 @@ public class Deducciones {
 	private int idDeduccion;
 	private String nombre;
 	private String descripcion;
-	private float porcentaje;
 	private String estatus; 
+	private Float porcentaje;
 	
 	public int getIdDeduccion() {
 		return idDeduccion;
@@ -25,18 +25,20 @@ public class Deducciones {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	public float getPorcentaje() {
-		return porcentaje;
-	}
-	public void setPorcentaje(float porcentaje) {
-		this.porcentaje = porcentaje;
-	}
+
 	public String getEstatus() {
 		return estatus;
 	}
 	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
+	public Float getPorcentaje() {
+		return porcentaje;
+	}
+	public void setPorcentaje(Float porcentaje) {
+		this.porcentaje = porcentaje;
+	}
+	
 	
 	
 	

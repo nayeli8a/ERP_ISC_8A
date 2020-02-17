@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.beans.Ciudades;
 import modelo.beans.Deducciones;
 import modelo.beans.Estado;
+import modelo.datos.CiudadesDAO;
 import modelo.datos.DeduccionesDAO;
 import modelo.datos.EstadoDAO;
 
@@ -51,6 +53,28 @@ public class DeduccionesServlet extends HttpServlet {
 						request.setAttribute("datos", datos);
 						url="/comunes/RecursosHumanos/consultar-deducciones.jsp";
 					break;
+					case "Editar":
+						ddao = new DeduccionesDAO();
+						Deducciones datosdeducciones = ddao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
+						request.setAttribute("datosdeducciones", datosdeducciones);
+						url="/comunes/RecursosHumanos/editar-deducciones.jsp";
+						break;
+					case "Eliminar":
+						ddao = new DeduccionesDAO();
+						ddao.eliminar(request.getParameter("id"));
+						url = "Deducciones?op=Listar";
+						break;
+					case "Modificar":
+						Deducciones deducciones = new Deducciones();
+						deducciones.setIdDeduccion(Integer.parseInt(request.getParameter("idDeduccion")));
+						deducciones.setNombre(request.getParameter("nom_deducciones"));
+						deducciones.setDescripcion(request.getParameter("descripcion"));
+						deducciones.setPorcentaje(Float.parseFloat(request.getParameter("porcentaje")));
+						deducciones.setEstatus(request.getParameter("estatus"));
+						ddao = new DeduccionesDAO();
+						ddao.actualizar(deducciones);
+						url="Deducciones?op=Listar";
+						break;
 					
 				}
 				

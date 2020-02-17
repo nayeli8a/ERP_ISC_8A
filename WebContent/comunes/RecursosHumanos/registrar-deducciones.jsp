@@ -32,7 +32,7 @@
 				<input type="text" class="form-control" id="nom_deducciones" name="nom_deducciones">
 				<br>
 				<label>Descripcion: </label>
-				<input type="text" class="form-control" id="Descripcion" name="descripcion">
+				<input type="text" class="form-control" id="descripcion" name="descripcion">
 				<br>
 				<label>Porcentaje: </label>
 				<input type="number" class="form-control" id="porcentaje" name="porcentaje">

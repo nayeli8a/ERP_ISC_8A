@@ -32,10 +32,10 @@
 		<form action="${pageContext.servletContext.contextPath}/Deducciones?op=Modificar" method="post">
 			<div class="form-group">
 				<label for="" class="letra" float: left>ID: </label>
-				<input type="text" readonly name="iddeduccion" readonly required placeholder="iddeduccion" value="${datosdeduccion.getIdDeduccion()}">
+				<input type="text" readonly name="idDeduccion" readonly required placeholder="idDeduccion" value="${datosdeducciones.getIdDeduccion()}">
 				<br>
 				<label>Nombre :</label>
-				<input type="text" class="form-control" id="nom_deduccion" name="nom_deduccion" value="${datosdeduccion.getNombre()}">
+				<input type="text" class="form-control" id="nom_deducciones" name="nom_deducciones" value="${datosdeducciones.getNombre()}">
 				<br>
 				
 				<label>Descripcion :</label>

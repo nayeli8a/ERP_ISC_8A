@@ -72,5 +72,57 @@ public class DeduccionesDAO {
 		}
 		return lista;
 	}
+	
+	public Deducciones consultaIndividual(int idDeduccion){
+		String sql="select * from Deducciones where idDeduccion=?";
+		Deducciones d = new Deducciones();
+		try{
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.setInt(1, idDeduccion);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()){
+				d.setIdDeduccion(rs.getInt("idDeduccion"));
+				d.setNombre(rs.getString("nombre"));
+				d.setDescripcion(rs.getString("descripcion"));
+				d.setPorcentaje(rs.getFloat("porcentaje"));
+				d.setEstatus(rs.getString("estatus"));
+			}
+			ps.close();
+			rs.close();
+		}
+		catch(SQLException e){
+			System.out.println("Error ESDAO:"+e.getMessage());
+		}
+		return d;
+	}
+	
+	public void eliminar(String id){
+		String sql = "execute sp_EliminarLogicamente 'Deducciones','"+id+"','idDeduccion'";
+		System.out.println(sql);
+		try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("Error: " + e.getMessage());
+			}
+	}
+	public void actualizar(Deducciones d)
+	{
+		String sql="update Deducciones set Nombre=?,Descripcion=?,Porcentaje=?, Estatus=? where idDeduccion=?";
+		try {
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+
+			ps.setString(1, d.getNombre());
+			ps.setString(2,d.getDescripcion());
+			ps.setFloat(3,d.getPorcentaje());
+			ps.setString(4, d.getEstatus());	
+			ps.setInt(5, d.getIdDeduccion());
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("Error al actualizar el estado"+e.getMessage());
+		}
+	}
 
 }
