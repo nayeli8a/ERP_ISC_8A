@@ -64,7 +64,7 @@ public class PercepcionesServlet extends HttpServlet {
 				break;
 			case "Modificar":
 				Percepciones percepciones = new Percepciones();
-				percepciones.setIdPercepcion(Integer.parseInt(request.getParameter("idPercepcion")));
+				percepciones.setIdPercepcion(Integer.parseInt(request.getParameter("idpercepcion")));
 				percepciones.setNombre(request.getParameter("nom_percepciones"));
 				percepciones.setDescripcion(request.getParameter("descripcion"));
 				percepciones.setDiasPagar(Integer.parseInt(request.getParameter("diasPagar")));

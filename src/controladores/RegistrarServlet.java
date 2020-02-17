@@ -50,7 +50,6 @@ public class RegistrarServlet extends HttpServlet {
 				
 				//validamos que el estado no exista ya en la BD
 				//si el estado no existe en la bd, entonces lo agregamos
-				System.out.println(esdao.ValidarEstado(nom_estado));
 				if(!esdao.ValidarEstado(nom_estado))
 				{
 					esdao.insertarEstado(nom_estado, siglas, estatus);

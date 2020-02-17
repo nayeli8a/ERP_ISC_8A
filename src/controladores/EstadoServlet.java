@@ -70,6 +70,7 @@ public class EstadoServlet extends HttpServlet {
 				break;
 			case "Modificar":
 				Estado estado = new Estado();
+				estado.setIdEstado(Integer.parseInt(request.getParameter("idestado")));
 				estado.setNombre(request.getParameter("nom_estado"));
 				estado.setSiglas(request.getParameter("siglas"));
 				estado.setEstatus(request.getParameter("estatus"));

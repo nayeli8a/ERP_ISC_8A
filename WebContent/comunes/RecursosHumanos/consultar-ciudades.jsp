@@ -29,7 +29,7 @@
 	
 	<div class="container" style="margin-top:100px">
 		<h2 align="center">Ciudades</h2>
-		<form action="Estado?op=Listar" method="post" >
+		<form action="Ciudades?op=Listar" method="post" >
 			<input type="submit" name="op" value="Actualizar" class="btn btn-info">
 		</form>
 		<hr class="bg-info">
