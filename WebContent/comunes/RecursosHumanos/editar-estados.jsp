@@ -34,15 +34,15 @@
 				<input type="text" readonly name="idestado" readonly required placeholder="idestado" value="${datosestado.getIdEstado()}">
 				<br>
 				<label>Nombre Estado:</label>
-				<input type="text" class="form-control" id="nom_estado" name="nom_estado" value="${datosestado.getNombre()}">
+				<input type="text" class="form-control" style="text-transform:uppercase;" id="nom_estado" name="nom_estado" value="${datosestado.getNombre()}">
 				<br>
 				
 				<label>Siglas:</label>
-				<input type="text" class="form-control" id="siglas" name="siglas" value="${datosestado.getSiglas()}">
+				<input type="text" class="form-control" style="text-transform:uppercase;" id="siglas" name="siglas" value="${datosestado.getSiglas()}">
 				<br>
 				
 				<label for="Estatus">Estatus:</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
+		    		<select class="form-control" id="estatus" name ="estatus">
 	      				<option value="A">Activo</option>
 	      				<option value="I">Inactivo</option>
 		    		</select>

@@ -39,7 +39,7 @@
 		    	<br>
 		    	
 				<label>Nombre Ciudad:</label>
-				<input type="text" class="form-control" id="nom_ciudad" name="nom_ciudad">
+				<input type="text" class="form-control" style="text-transform:uppercase;" id="nom_ciudad" name="nom_ciudad">
 				<br>
 				<label for="Estatus">Estatus:</label>
 		    		<select class="form-control" id="estatus" name = "estatus">

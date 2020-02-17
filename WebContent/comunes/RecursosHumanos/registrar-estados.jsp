@@ -11,9 +11,11 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap core CSS -->
-    <link href="<c:out value="${pageContext.servletContext.contextPath}"/>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    
+    <!-- Bootstrap core CSS and JS-->
+	<link href="<c:out value="${pageContext.servletContext.contextPath}"/>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/vendor/jquery/jquery.js"></script>
+	<script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/vendor/bootstrap/js/bootstrap.min.js"></script>
+	
     <!-- Nuestras hojas de estilo-->
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
    
@@ -29,10 +31,10 @@
 		<form action="${pageContext.servletContext.contextPath}/Registrar?op=Estado" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
-				<input type="text" class="form-control" id="nom_estado" name="nom_estado">
+				<input type="text" class="form-control" style="text-transform:uppercase;" id="nom_estado" name="nom_estado">
 				<br>
 				<label>Siglas: </label>
-				<input type="text" class="form-control" id="siglas" name="siglas">
+				<input type="text" class="form-control" style="text-transform:uppercase;" id="siglas" name="siglas">
 				<br>
 				<label for="Estatus">Estatus</label>
 		    		<select class="form-control" id="estatus" name = "estatus">

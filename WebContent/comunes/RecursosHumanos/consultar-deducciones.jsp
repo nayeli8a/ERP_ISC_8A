@@ -18,6 +18,7 @@
 		
     <!-- Nuestras hojas de estilo-->
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
+    <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
    
 </head>
 <body>
@@ -67,7 +68,8 @@
 									<input type="hidden" name="id" value="${dato.getIdDeduccion()}">
 									<div id="${dato.getIdDeduccion()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
-										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">									</div>
+										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
+									</div>
 								</form>
 							</td>
 							</tr>

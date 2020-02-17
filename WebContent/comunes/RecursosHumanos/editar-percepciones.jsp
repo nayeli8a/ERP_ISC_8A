@@ -6,11 +6,6 @@
 <html>
 <head>
 
-	private int idPercepcion;
-		private String nombre;
-		private String descripcion;
-		private int diasPagar;
-		private String estatus;
 		
 <title>Editar Percepciones</title>
 
@@ -38,18 +33,18 @@
 		<form action="${pageContext.servletContext.contextPath}/Percepciones?op=Modificar" method="post">
 			<div class="form-group">
 				<label for="" class="letra" float: left>ID: </label>
-				<input type="text" readonly name="idpercepcion" readonly required placeholder="idpercepcion" value="${datospercepcion.getIdPercepcion()}">
+				<input type="text" readonly name="idpercepcion" readonly required placeholder="idpercepcion" value="${datospercepciones.getIdPercepcion()}">
 				<br>
 				<label>Nombre :</label>
-				<input type="text" class="form-control" id="nom_percepcion" name="nom_percepcion" value="${datospercepcion.getNombre()}">
+				<input type="text" class="form-control" id="nom_percepciones" name="nom_percepciones" value="${datospercepciones.getNombre()}">
 				<br>
 				
 				<label>Descripcion :</label>
-				<input type="text" class="form-control" id="descripcion" name="descripcion" value="${datospercepcion.getDescripcion()}">
+				<input type="text" class="form-control" id="descripcion" name="descripcion" value="${datospercepciones.getDescripcion()}">
 				<br>
 				
 				<label>Dias a pagar :</label>
-				<input type="number" class="form-control" id="diasPagar" name="diasPagar" value="${datospercepcion.getDiasPagar()}">
+				<input type="number" class="form-control" id="diasPagar" name="diasPagar" value="${datospercepciones.getDiasPagar()}">
 				<br>
 				
 				
