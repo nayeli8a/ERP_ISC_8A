@@ -6,7 +6,7 @@
 <html>
 <head>
 
-<title>Editar ciudades</title>
+<title>Editar estados</title>
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,25 +26,21 @@
 	</nav>
 	<div  class="card bg-light" style="margin-top:100px">
 	
-  <p class="bg-primary text-white">EDITAR DE CIUDADES</p>
+  <p class="bg-primary text-white">EDITAR DE ESTADOS</p>
 
-		<form action="${pageContext.servletContext.contextPath}/Ciudades?op=Modificar" method="post">
+		<form action="${pageContext.servletContext.contextPath}/Estado?op=Modificar" method="post">
 			<div class="form-group">
 				<label for="" class="letra" float: left>ID: </label>
-				<input type="text" readonly name="idCiudad" readonly required placeholder="idCiudad" value="${datosciudad.getIdCiudad()}">
-				
-				<label for="Estatus">Estado:</label>
-		    		<select class="form-control" id="idEstado" name = "idEstado">
-		      			<option value="${datosestado.getIdEstado()}" selected>${datosestado.getNombre()}</option>
-		      			<c:forEach var="dato" items="${datosestados}">
-		      				<option value="${dato.getIdEstado()}">${dato.getNombre()}</option>
-		      			</c:forEach>
-		    		</select>
-		    	<br>
-		    	
-				<label>Nombre Ciudad:</label>
-				<input type="text" class="form-control" id="nom_ciudad" name="nom_ciudad" value="${datosciudad.getNombre()}">
+				<input type="text" readonly name="idestado" readonly required placeholder="idestado" value="${datosestado.getIdEstado()}">
 				<br>
+				<label>Nombre Estado:</label>
+				<input type="text" class="form-control" id="nom_estado" name="nom_estado" value="${datosestado.getNombre()}">
+				<br>
+				
+				<label>Siglas:</label>
+				<input type="text" class="form-control" id="siglas" name="siglas" value="${datosestado.getSiglas()}">
+				<br>
+				
 				<label for="Estatus">Estatus:</label>
 		    		<select class="form-control" id="estatus" name = "estatus">
 	      				<option value="A">Activo</option>

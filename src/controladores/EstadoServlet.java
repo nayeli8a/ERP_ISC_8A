@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import modelo.beans.*;
 import modelo.datos.*;
@@ -60,6 +62,22 @@ public class EstadoServlet extends HttpServlet {
 				esdao.eliminar(request.getParameter("id"));
 				url="Estado?op=Listar";
 				break;
+			case "Editar":
+				esdao = new EstadoDAO();
+				Estado datosestado = esdao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
+				request.setAttribute("datosestado", datosestado);
+				url="/comunes/RecursosHumanos/editar-estados.jsp";
+				break;
+			case "Modificar":
+				Estado estado = new Estado();
+				estado.setNombre(request.getParameter("nom_estado"));
+				estado.setSiglas(request.getParameter("siglas"));
+				estado.setEstatus(request.getParameter("estatus"));
+				esdao = new EstadoDAO();
+				esdao.actualizar(estado);
+				url="Estado?op=Listar";
+				break;
+				
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(url);

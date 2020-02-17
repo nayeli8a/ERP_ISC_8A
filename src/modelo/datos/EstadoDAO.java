@@ -102,4 +102,20 @@ public class EstadoDAO {
 				System.out.println("Error: " + e.getMessage());
 			}
 	}
+	public void actualizar(Estado es)
+	{
+		String sql="update Estados set Nombre=?,Siglas=?,Estatus=? where idEstado=?";
+		try {
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+
+			ps.setString(1, es.getNombre());
+			ps.setString(2,es.getSiglas());
+			ps.setString(3,es.getEstatus());
+			ps.setInt(4, es.getIdEstado());			
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("Error al actualizar el estado"+e.getMessage());
+		}
+	}
 }
