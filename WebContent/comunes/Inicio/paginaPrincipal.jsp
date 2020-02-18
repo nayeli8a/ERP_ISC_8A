@@ -17,56 +17,48 @@
 
 	    <!-- Nuestras hojas de estilo-->
 	    <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilos.css">
-
+		<script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
+		
 	</head>
-	<body>
+	<body onload="getHoraActual()">
 		<div class="contenedorPadre">
-
-
+		
 			<div class="cabecera">
-
-
-
-
-						<img src="../../imagenes/campo3.jpg" alt="">
-						<div class="tituloCabecera"><h1>AGRONEGOCIOS</h1></div>
-
-
-						<div class="logo">
-							<img src="../../imagenes/carrito.png" alt="">
-						</div>
-
-
-
+				<img src="${pageContext.servletContext.contextPath}/imagenes/campo3.jpg" alt="">
+				<div class="tituloCabecera">
+					<h1>AGRONEGOCIOS</h1>
+					<h2>Usuario: ${usuario.getNombre()}</h2>
+					<label id="fechaactual"></label>
+				</div>
+				
+				<div class="logo">
+					<img src="${pageContext.servletContext.contextPath}/imagenes/carrito.png" alt="">
+				</div>
 			</div>
-
+			
+			
 			<div class="contenido container">
-							<center>
+	            <a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/paginaPrincipalRH.jsp">
+					<div class="opcion">
+						<img src="${pageContext.servletContext.contextPath}/imagenes/campo5.jpg" alt="">
+						<div class="descripcion"><h2>Recursos Humanos</h2></div>
+					</div>
+	            </a>
 
-            <a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/paginaPrincipalRH.jsp">
-						<div class="opcion">
-							<img src="../../imagenes/campo5.jpg" alt="">
-							<div class="descripcion"><h2>Recursos Humanos</h2></div>
-						</div>
-            </a>
+            	<a href="#">
+					<div class="opcion">
+						<img src="${pageContext.servletContext.contextPath}/imagenes/campo5.jpg" alt="">
+						<div class="descripcion"><h2>Ventas</h2></div>
 
-            <a href="#">
-						<div class="opcion">
-							<img src="../../imagenes/campo5.jpg" alt="">
-							<div class="descripcion"><h2>Ventas</h2></div>
+					</div>
+            	</a>
 
-						</div>
-            </a>
-
-            <a href="#">
-						<div class="opcion">
-							<img src="../../imagenes/campo5.jpg" alt="">
-							<div class="descripcion"><h2>Compras</h2></div>
-						</div>
-            </a>
-
-
-					</center>
+	            <a href="#">
+					<div class="opcion">
+						<img src="${pageContext.servletContext.contextPath}/imagenes/campo5.jpg" alt="">
+						<div class="descripcion"><h2>Compras</h2></div>
+					</div>
+	            </a>
 			</div>
 
 		</div>

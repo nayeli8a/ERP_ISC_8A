@@ -1,6 +1,8 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +34,8 @@ public class UsuarioServlet extends HttpServlet {
 		String op = request.getParameter("op");
 		String url = "index.jsp";
 		HttpSession sesion;
-
+	    response.setContentType("text/html");
+	    
 		//generamos las referencias de los objetos a llenar
 		Usuarios u = new Usuarios();
 		UsuarioDAO udao = new UsuarioDAO();
@@ -47,12 +50,27 @@ public class UsuarioServlet extends HttpServlet {
 					// si existe el usuario en la base de datos
 					// creamos un usuario con sus datos para saber de que tipo es
 					System.out.println("Existe el usuario en la BD");
+					PrintWriter out = response.getWriter();
+					out.println("<tr><td><input type='button' name='Button' value='Search' onclick=\"searchRecord('j');\"></td></tr>");
+					if(u.getEstatus().equals("I"))
+					{
+						System.out.println("El usuario ha sido inhabilitado");
+						out.print("<script>alert( 'Hello, world!' );</script>");
+					}else if(u.getEstatus().equals("A"))
+					{
+						sesion = request.getSession(true);
+						sesion.setAttribute("usuario", u);
+						u = (Usuarios) sesion.getAttribute("usuario");
+						url="/comunes/Inicio/paginaPrincipal.jsp";
+					}
 					
-					sesion = request.getSession(true);
-					sesion.setAttribute("usuario", u);
-					u = (Usuarios) sesion.getAttribute("usuario");
-					url="/comunes/Inicio/Inicio.jsp";
+				}else
+				{
+					System.out.println("El usuario no existe, o la contraseña o el nombre de usuario estan mal");
+					PrintWriter out = response.getWriter();
+					out.println("<tr><td><input type='button' name='Button' value='Search' onclick=\"searchRecord('j');\"></td></tr>");
 				}
+				
 			break;
 			
 			case "CS":

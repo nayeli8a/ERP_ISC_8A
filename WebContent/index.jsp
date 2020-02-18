@@ -26,7 +26,7 @@
 <body style="background-color:">
 
 <nav class">
-<center> <img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/logo.png" alt="logo" height="180" width="980">
+<center> <img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo3.jpg" alt="logo" height="180" width="980">
 
 </nav>
 <div class="alert alert-warning">

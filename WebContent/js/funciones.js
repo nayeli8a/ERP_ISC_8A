@@ -5,6 +5,10 @@ function eliminar()
 	return;
 }
 
+function getHoraActual()
+{
+	document.getElementById("fechaactual").innerHTML = Date();
+}
 
 function modificar() {
   alert("Se ha modificado correctamente!");

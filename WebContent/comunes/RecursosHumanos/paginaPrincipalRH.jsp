@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>GerenteRH</title>
+		<title>Principal</title>
 
 		<meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,58 +24,49 @@
 
 
 			<div class="cabecera">
+				<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo3.jpg" alt="">
+				<div class="tituloCabecera"><h1>AGRONEGOCIOS</h1></div>
 
 
-
-
-						<img src="../../imagenes/campo3.jpg" alt="">
-						<div class="tituloCabecera"><h1>AGRONEGOCIOS</h1></div>
-
-
-						<div class="logo">
-							<img src="../../imagenes/carrito.png" alt="">
-						</div>
-
-
-
+				<div class="logo">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito.png" alt="">
+				</div>
 			</div>
 
 			<div class="contenido container">
-							<center>
-						<div class="opcion">
+				<div class="opcion">
 
-							<img src="../../imagenes/campo5.jpg" alt="">
-							<div class="descripcion"><h2>Estados</h2></div>
-							<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-estados.jsp"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
-							<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/consultar-estados.jsp"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Estados</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-estados.jsp"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
+					<a href="${pageContext.servletContext.contextPath}/Estado?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
-						</div>
+				</div>
 
-						<div class="opcion">
-							<img src="../../imagenes/campo5.jpg" alt="">
-							<div class="descripcion"><h2>Ciudades</h2></div>
-							<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-ciudades.jsp"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
-							<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/consultar-ciudades.jsp"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Ciudades</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Estado?op=ListarPCiudades"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
+					<a href="${pageContext.servletContext.contextPath}/Ciudades?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
-						</div>
+				</div>
 
-						<div class="opcion">
-							<img src="../../imagenes/campo5.jpg" alt="">
-							<div class="descripcion"><h2>Deducciones</h2></div>
-							<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-deducciones.jsp"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
-							<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/consultar-deducciones.jsp"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Deducciones</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-deducciones.jsp"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
+					<a href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
-						</div>
+				</div>
 
-						<div class="opcion">
-							<img src="../../imagenes/campo5.jpg" alt="">
-							<div class="descripcion"><h2>Percepciones</h2></div>
-							<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-percepciones.jsp"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
-							<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/consultar-percepciones.jsp"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				<div class="opcion">
+					<img src="../../imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Percepciones</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-percepciones.jsp"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
+					<a href="${pageContext.servletContext.contextPath}/Percepciones?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
 
-						</div>
-					</center>
+				</div>
 			</div>
 
 		</div>
