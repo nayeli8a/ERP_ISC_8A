@@ -2,7 +2,15 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri  = "http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 
-
+<%
+String url="";
+if(session.getAttribute("usuario") != null)
+	{
+		//existe una sesion anterior
+		url=modelo.datos.Constantes.PAGINAPRINCIPAL;
+		response.sendRedirect(pageContext.getServletContext().getContextPath()+url);
+	}
+%>
 <!DOCTYPE html>
 <html>
 
@@ -30,8 +38,7 @@
 
 </nav>
 <div class="alert alert-warning">
-
- <center> <strong></strong> <a href="#" class="alert-link">B I E N V E N I D O</a> </center>
+ <a href="#" class="alert-link d-flex justify-content-center">B I E N V E N I D O</a>
 </div>
 
     <div class="container" style="margin-top:50px">

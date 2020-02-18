@@ -69,14 +69,16 @@ public class UsuarioServlet extends HttpServlet {
 					System.out.println("El usuario no existe, o la contraseña o el nombre de usuario estan mal");
 					PrintWriter out = response.getWriter();
 					out.println("<tr><td><input type='button' name='Button' value='Search' onclick=\"searchRecord('j');\"></td></tr>");
+					
 				}
 				
 			break;
 			
 			case "CS":
-				sesion = request.getSession();
-				sesion.invalidate();
-				url="index.jsp";
+				//sesion = request.getSession();
+				//sesion.invalidate();
+				request.getSession().invalidate();
+				url=modelo.datos.Constantes.LOGIN;
 			break;
 			
 		}

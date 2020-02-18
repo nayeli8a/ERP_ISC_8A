@@ -54,7 +54,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					esdao.insertarEstado(nom_estado, siglas, estatus);
 				}
-				url="/comunes/Inicio/Inicio.jsp";
+				url=modelo.datos.Constantes.REGRESAR_RH;
 			break;
 			
 			case "Ciudad":
@@ -68,7 +68,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					cdao.insertarCiudades(nom_ciudad,nom_estado, estatus);
 				}
-				url="/comunes/Inicio/Inicio.jsp";
+				url=modelo.datos.Constantes.REGRESAR_RH;
 				break;
 				
 			case "Deducciones":
@@ -87,7 +87,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					ddao.insertarDeducciones(nom_deducciones, descripcion, porcentaje, estatus);
 				}
-				url="/comunes/Inicio/Inicio.jsp";
+				url=modelo.datos.Constantes.REGRESAR_RH;
 			break;
 			case "Percepciones":
 				//generamos el objeto a llenar
@@ -104,7 +104,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					pdao.insertarPercepciones(nom_percepciones, descripcion_percepciones, diasPagar, estatus);
 				}
-				url="/comunes/Inicio/Inicio.jsp";
+				url=modelo.datos.Constantes.REGRESAR_RH;
 			break;
 			
 		}

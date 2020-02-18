@@ -34,6 +34,11 @@
 				<div class="logo">
 					<img src="${pageContext.servletContext.contextPath}/imagenes/carrito.png" alt="">
 				</div>
+				<div class="cerrarsesion">
+					<form action="${pageContext.servletContext.contextPath}/Usuario?op=CS" method="post">
+						<button class="btn-danger">Cerrar Sesion</button>
+					</form>
+				</div>
 			</div>
 			
 			
