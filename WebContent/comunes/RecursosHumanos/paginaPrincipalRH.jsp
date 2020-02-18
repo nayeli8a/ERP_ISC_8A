@@ -17,19 +17,29 @@
 
 	    <!-- Nuestras hojas de estilo-->
 	    <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilos.css">
-
+		<script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
+		
 	</head>
-	<body>
+	<body onload="getHoraActual()">
 		<div class="contenedorPadre">
 
 
 			<div class="cabecera">
 				<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo3.jpg" alt="">
-				<div class="tituloCabecera"><h1>AGRONEGOCIOS</h1></div>
+				<div class="tituloCabecera">
+					<h1>AGRONEGOCIOS</h1>
+					<h2>Usuario: ${usuario.getNombre()}</h2>
+					<label id="fechaactual"></label>
+				</div>
 
 
 				<div class="logo">
 					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito.png" alt="">
+				</div>
+				<div class="cerrarsesion">
+					<form action="${pageContext.servletContext.contextPath}/General?op=RegresarInicio" method="post">
+						<button class="btn-danger">Ir a Inicio</button>
+					</form>
 				</div>
 			</div>
 

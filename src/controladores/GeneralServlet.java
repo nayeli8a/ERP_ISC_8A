@@ -39,6 +39,9 @@ public class GeneralServlet extends HttpServlet {
 		String url="";
 		
 		switch (op) {
+		case "RegresarInicio":
+			url = modelo.datos.Constantes.PAGINAPRINCIPAL;
+			break;
 		case "RegresarRH":
 				url=modelo.datos.Constantes.REGRESAR_RH;
 			break;
