@@ -37,8 +37,8 @@ if(session.getAttribute("usuario") != null)
 <center> <img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo3.jpg" alt="logo" height="180" width="980">
 
 </nav>
-<div class="alert alert-warning">
- <a href="#" class="alert-link d-flex justify-content-center">B I E N V E N I D O</a>
+<div class="alert alert-warning" style="background:#509a1f;">
+ <a href="#" class="alert-link d-flex justify-content-center" style="color: red;">B I E N V E N I D O</a>
 </div>
 
     <div class="container" style="margin-top:50px">

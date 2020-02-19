@@ -51,7 +51,7 @@ public class UsuarioServlet extends HttpServlet {
 					// creamos un usuario con sus datos para saber de que tipo es
 					System.out.println("Existe el usuario en la BD");
 					PrintWriter out = response.getWriter();
-					out.println("<tr><td><input type='button' name='Button' value='Search' onclick=\"searchRecord('j');\"></td></tr>");
+					out.println("<script>alert('');</script>");
 					if(u.getEstatus().equals("I"))
 					{
 						System.out.println("El usuario ha sido inhabilitado");
@@ -61,7 +61,7 @@ public class UsuarioServlet extends HttpServlet {
 						sesion = request.getSession(true);
 						sesion.setAttribute("usuario", u);
 						u = (Usuarios) sesion.getAttribute("usuario");
-						url="/comunes/Inicio/paginaPrincipal.jsp";
+						url=modelo.datos.Constantes.PAGINAPRINCIPAL;
 					}
 					
 				}else

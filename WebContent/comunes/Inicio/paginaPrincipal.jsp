@@ -43,27 +43,34 @@
 			
 			
 			<div class="contenido container">
-	            <a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/paginaPrincipalRH.jsp">
-					<div class="opcion">
-						<img src="${pageContext.servletContext.contextPath}/imagenes/campo5.jpg" alt="">
-						<div class="descripcion"><h2>Recursos Humanos</h2></div>
-					</div>
-	            </a>
-
-            	<a href="#">
-					<div class="opcion">
-						<img src="${pageContext.servletContext.contextPath}/imagenes/campo5.jpg" alt="">
-						<div class="descripcion"><h2>Ventas</h2></div>
-
-					</div>
-            	</a>
-
-	            <a href="#">
-					<div class="opcion">
-						<img src="${pageContext.servletContext.contextPath}/imagenes/campo5.jpg" alt="">
-						<div class="descripcion"><h2>Compras</h2></div>
-					</div>
-	            </a>
+	            <c:if test="${usuario.getidTipoUsuario() == 1}">
+	            	 <a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/paginaPrincipalRH.jsp">
+						<div class="opcion">
+							<img src="${pageContext.servletContext.contextPath}/imagenes/campo5.jpg" alt="">
+							<div class="descripcion"><h2>Recursos Humanos</h2></div>
+						</div>
+	            	</a>
+	            </c:if>
+	           
+				<c:if test="${usuario.getidTipoUsuario() == 2}">
+					<a href="#">
+						<div class="opcion">
+							<img src="${pageContext.servletContext.contextPath}/imagenes/campo5.jpg" alt="">
+							<div class="descripcion"><h2>Ventas</h2></div>
+	
+						</div>
+            		</a>
+				</c:if>
+            	
+				<c:if test="${usuario.getidTipoUsuario() == 3}">
+					<a href="#">
+						<div class="opcion">
+							<img src="${pageContext.servletContext.contextPath}/imagenes/campo5.jpg" alt="">
+							<div class="descripcion"><h2>Compras</h2></div>
+						</div>
+	            	</a>
+				</c:if>
+	            
 			</div>
 
 		</div>

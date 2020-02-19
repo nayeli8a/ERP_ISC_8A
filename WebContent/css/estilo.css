@@ -14,7 +14,7 @@
     width: 350px;
     margin-top: auto;
     margin-bottom: auto;
-    background: #FF5233;
+    background: #509a1f;
     position: relative;
     display: flex;
     justify-content: center;
@@ -41,7 +41,7 @@
     height: 150px;
     width: 150px;
     border-radius: 50%;
-    border: 4px solid orange;
+    border: 4px solid #59941f;
 }
 
 .form_container {
