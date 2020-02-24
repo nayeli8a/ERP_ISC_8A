@@ -93,5 +93,14 @@ function clonar() {
 	}
 
 
+function letras () {
+var charpos = document.forms[0].hola.value.search("[^A-Za-z]");
+if(document.forms[0].hola.value.length > 0 && charpos >= 0) {
+strError = "El campo solo permite letras ";
+alert(strError);
+
+}
+}
+
 
 

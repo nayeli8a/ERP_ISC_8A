@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
    
 </head>
-<body>
+<body >
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
 		<a class="btn btn-primary"href="${pageContext.servletContext.contextPath}/General?op=RegresarRH">Atras</a>
 	</nav>
@@ -32,10 +32,11 @@
 				<input type="text" class="form-control" id="nom_deducciones" name="nom_deducciones">
 				<br>
 				<label>Descripcion: </label>
-				<input type="text" class="form-control" id="descripcion" name="descripcion">
+				<input type="text" class="form-control" id="descripcion" name="descripcion" >
 				<br>
 				<label>Porcentaje: </label>
-				<input type="number" class="form-control" id="porcentaje" name="porcentaje">
+				<input type="number" class="form-control" id="porcentaje" name="porcentaje" min="1.0" max="100.0" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
+
 				<label for="Estatus">Estatus</label>
 		    		<select class="form-control" id="estatus" name = "estatus">
 		      			<option value="A">Activo</option>

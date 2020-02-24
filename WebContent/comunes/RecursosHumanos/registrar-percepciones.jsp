@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
    
 </head>
-<body>
+<body >
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
 		<a class="btn btn-primary"href="${pageContext.servletContext.contextPath}/General?op=RegresarRH">Atras</a>
 	</nav>
@@ -29,13 +29,13 @@
 		<form action="${pageContext.servletContext.contextPath}/Registrar?op=Percepciones" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
-				<input type="text" class="form-control"  name="nom_percepciones">
+				<input type="text" class="form-control"  name="nom_percepciones" >
 				<br>
 				<label>Descripcion: </label>
-				<input type="text" class="form-control"  name="descripcion">
+				<input type="text" class="form-control"  name="descripcion" >
 				<br>
 				<label>Dias a pagar: </label>
-				<input type="integer" class="form-control" name="diasPagar">
+				<input type="integer" class="form-control" name="diasPagar" min="1" max="30"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 				<label for="Estatus">Estatus</label>
 		    		<select class="form-control" name = "estatus">
 		      			<option value="A">Activo</option>

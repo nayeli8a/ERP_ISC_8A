@@ -43,7 +43,7 @@
 				<br>
 				
 				<label>Porcentaje :</label>
-				<input type="number" class="form-control" id="porcentaje" name="porcentaje" value="${datosdeducciones.getPorcentaje()}">
+				<input type="number" class="form-control" id="porcentaje" name="porcentaje" min="1.0" max="100.0"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="${datosdeducciones.getPorcentaje()}">
 				<br>
 				
 				

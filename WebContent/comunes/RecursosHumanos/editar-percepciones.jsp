@@ -44,7 +44,7 @@
 				<br>
 				
 				<label>Dias a pagar :</label>
-				<input type="number" class="form-control" id="diasPagar" name="diasPagar" value="${datospercepciones.getDiasPagar()}">
+				<input type="number" class="form-control" id="diasPagar" name="diasPagar" min="1" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"value="${datospercepciones.getDiasPagar()}">
 				<br>
 				
 				
