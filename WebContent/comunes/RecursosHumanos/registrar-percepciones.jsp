@@ -35,7 +35,7 @@
 				<input type="text" class="form-control"  name="descripcion" >
 				<br>
 				<label>Dias a pagar: </label>
-				<input type="integer" class="form-control" name="diasPagar" min="1" max="30"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
+				<input type="number" class="form-control" name="diasPagar" min="1" max="30"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 				<label for="Estatus">Estatus</label>
 		    		<select class="form-control" name = "estatus">
 		      			<option value="A">Activo</option>
