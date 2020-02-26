@@ -108,7 +108,7 @@ public class DepartamentosDAO {
 
 			ps.setString(1, d.getNombre());
 			ps.setString(2,d.getEstatus());
-			ps.setInt(3, d.getIdDepartamentos());
+			ps.setInt(3, d.getIdDepartamento());
 			ps.executeUpdate();
 			
 		} catch (Exception e) {

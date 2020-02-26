@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.beans.Departamentos;
 import modelo.datos.*;
 
 /**
@@ -106,7 +107,21 @@ public class RegistrarServlet extends HttpServlet {
 				}
 				url=modelo.datos.Constantes.REGRESAR_RH;
 			break;
-			
+			case "Departamentos":
+				//generamos el objeto a llenar
+				DepartamentosDAO dedao = new DepartamentosDAO();
+				String nom_departamentos = request.getParameter("nom_departamentos");
+				estatus = request.getParameter("estatus");
+				
+				//validamos que el estado no exista ya en la BD
+				//si el estado no existe en la bd, entonces lo agregamos
+				System.out.println(dedao.ValidarDepartamento(nom_departamentos));
+				if(!dedao.ValidarDepartamento(nom_departamentos))
+				{
+					dedao.insertarDepartamento(nom_departamentos, estatus);
+				}
+				url=modelo.datos.Constantes.REGRESAR_RH;
+			break;
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(url);

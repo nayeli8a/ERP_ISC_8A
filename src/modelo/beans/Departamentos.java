@@ -6,7 +6,7 @@ public class Departamentos {
 	private String nombre;
 	private String estatus;
 	
-	public int getIdDepartamentos() {
+	public int getIdDepartamento() {
 		return idDepartamento;
 	}
 	public void setIdDepartamento(int idDepartamento) {
