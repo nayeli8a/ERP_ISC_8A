@@ -35,7 +35,7 @@
 				<input type="text" readonly name="id" readonly required placeholder="id" value="${datosdepartamentos.getIdDepartamento()}">
 				<br>
 				<label>Nombre :</label>
-				<input type="text" class="form-control" id="nom_departamentos" name="nom_departamentos" value="${datosdepartamentos.getNombre()}">
+				<input type="text" class="form-control" id="nom_departamentos" name="nom_departamentos" required value="${datosdepartamentos.getNombre()}">
 				<br>
 				
 				<label for="Estatus">Estatus:</label>

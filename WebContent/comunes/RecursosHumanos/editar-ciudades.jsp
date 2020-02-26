@@ -34,7 +34,7 @@
 				<input type="text" readonly name="idCiudad" readonly required placeholder="idCiudad" value="${datosciudad.getIdCiudad()}">
 				
 				<label for="Estatus">Estado:</label>
-		    		<select class="form-control" id="idEstado" name = "idEstado">
+		    		<select class="form-control" id="idEstado" name = "idEstado" required>
 		      			<option value="${datosestado.getIdEstado()}" selected>${datosestado.getNombre()}</option>
 		      			<c:forEach var="dato" items="${datosestados}">
 		      				<option value="${dato.getIdEstado()}">${dato.getNombre()}</option>
@@ -43,7 +43,7 @@
 		    	<br>
 		    	
 				<label>Nombre Ciudad:</label>
-				<input type="text" class="form-control" style="text-transform:uppercase;" id="nom_ciudad" name="nom_ciudad" value="${datosciudad.getNombre()}">
+				<input type="text" class="form-control" style="text-transform:uppercase;" id="nom_ciudad" name="nom_ciudad" required value="${datosciudad.getNombre()}">
 				<br>
 				<label for="Estatus">Estatus:</label>
 		    		<select class="form-control" id="estatus" name = "estatus">

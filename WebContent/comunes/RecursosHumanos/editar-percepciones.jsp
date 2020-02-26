@@ -36,15 +36,15 @@
 				<input type="text" readonly name="idpercepcion" readonly required placeholder="idpercepcion" value="${datospercepciones.getIdPercepcion()}">
 				<br>
 				<label>Nombre :</label>
-				<input type="text" class="form-control" id="nom_percepciones" name="nom_percepciones" value="${datospercepciones.getNombre()}">
+				<input type="text" class="form-control" id="nom_percepciones" name="nom_percepciones" required value="${datospercepciones.getNombre()}">
 				<br>
 				
 				<label>Descripcion :</label>
-				<input type="text" class="form-control" id="descripcion" name="descripcion" value="${datospercepciones.getDescripcion()}">
+				<input type="text" class="form-control" id="descripcion" name="descripcion" required value="${datospercepciones.getDescripcion()}">
 				<br>
 				
 				<label>Dias a pagar :</label>
-				<input type="number" class="form-control" id="diasPagar" name="diasPagar" min="1" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"value="${datospercepciones.getDiasPagar()}">
+				<input type="number" class="form-control" id="diasPagar" name="diasPagar" min="1" required onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"value="${datospercepciones.getDiasPagar()}">
 				<br>
 				
 				

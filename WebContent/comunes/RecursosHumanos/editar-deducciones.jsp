@@ -35,15 +35,15 @@
 				<input type="text" readonly name="idDeduccion" readonly required placeholder="idDeduccion" value="${datosdeducciones.getIdDeduccion()}">
 				<br>
 				<label>Nombre :</label>
-				<input type="text" class="form-control" id="nom_deducciones" name="nom_deducciones" value="${datosdeducciones.getNombre()}">
+				<input type="text" class="form-control" id="nom_deducciones" name="nom_deducciones" required value="${datosdeducciones.getNombre()}">
 				<br>
 				
 				<label>Descripcion :</label>
-				<input type="text" class="form-control" id="descripcion" name="descripcion" value="${datosdeducciones.getDescripcion()}">
+				<input type="text" class="form-control" id="descripcion" name="descripcion"  required value="${datosdeducciones.getDescripcion()}">
 				<br>
 				
 				<label>Porcentaje :</label>
-				<input type="number" class="form-control" id="porcentaje" name="porcentaje" min="1.0" max="100.0"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="${datosdeducciones.getPorcentaje()}">
+				<input type="number" class="form-control" id="porcentaje" name="porcentaje" min="1.0" max="100.0" required onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" value="${datosdeducciones.getPorcentaje()}">
 				<br>
 				
 				
