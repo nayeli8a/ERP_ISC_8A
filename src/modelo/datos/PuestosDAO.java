@@ -6,16 +6,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.beans.Departamentos;
-import modelo.beans.Estado;
+import modelo.beans.Puestos;
 
-public class DepartamentosDAO {
-	public boolean ValidarDepartamento(String nom_departamento) {
+public class PuestosDAO {
+	public boolean ValidarDepartamento(String nom_puestos) {
 		boolean salida=false;
-		String sql = "SELECT nombre FROM Departamentos WHERE nombre=?";
+		String sql = "SELECT nombre FROM Puestos WHERE nombre=?";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
-			ps.setString(1, nom_departamento);
+			ps.setString(1, nom_puestos);
 			ResultSet rs = ps.executeQuery();
 			
 			if (rs.next()) {
@@ -35,9 +34,9 @@ public class DepartamentosDAO {
 		return salida;
 	}
 	
-	public void insertarDepartamento(String nom_departamento,String estatus)
+	public void insertarPuesto(String nom_puestos, float SalarioMinimo,float SalarioMaximo, String estatus)
 	{
-		String sql = "insert into Departamentos (Nombre,Estatus) values('"+nom_departamento+"','"+estatus+"')";
+		String sql = "insert into Puestos (Nombre,SalarioMinimo, SalarioMaximo, Estatus) values('"+nom_puestos+"','"+SalarioMinimo+"','"+SalarioMaximo+"','"+estatus+"')";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -47,20 +46,22 @@ public class DepartamentosDAO {
 		}
 	}
 	
-	public List<Departamentos> consultar()
+	public List<Puestos> consultar()
 	{
-		ArrayList<Departamentos> lista = new ArrayList<>();
-		String sql = "select * from Departamentos";
+		ArrayList<Puestos> lista = new ArrayList<>();
+		String sql = "select * from Puestos";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Departamentos d = new Departamentos();
-				d.setIdDepartamento(rs.getInt(1));
-				d.setNombre(rs.getString(2));
-				d.setEstatus(rs.getString(3));
-				lista.add(d);
+				Puestos p = new Puestos();
+				p.setIdPuesto(rs.getInt(1));
+				p.setNombre(rs.getString(2));
+				p.setSalarioMinimo(rs.getFloat(3));
+				p.setSalarioMaximo(rs.getFloat(4));
+				p.setEstatus(rs.getString(5));
+				lista.add(p);
 			}
 		} catch (SQLException e) {
 			System.out.println("Error: " + e.getMessage());
@@ -68,29 +69,31 @@ public class DepartamentosDAO {
 		return lista;
 	}
 	
-	public Departamentos consultaIndividual(int idDepartamento){
-		String sql="select * from Departamentos where idDepartamento=?";
-		Departamentos d = new Departamentos();
+	public Puestos consultaIndividual(int idPuesto){
+		String sql="select * from Puestos where idPuesto=?";
+		Puestos p = new Puestos();
 		try{
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
-			ps.setInt(1, idDepartamento);
+			ps.setInt(1, idPuesto);
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()){
-				d.setIdDepartamento(rs.getInt("idDepartamento"));
-				d.setNombre(rs.getString("nombre"));
-				d.setEstatus(rs.getString("estatus"));
+				p.setIdPuesto(rs.getInt("idPuesto"));
+				p.setNombre(rs.getString("nombre"));
+				p.setSalarioMinimo(rs.getFloat("SalarioMinimo"));
+				p.setSalarioMaximo(rs.getFloat("SalarioMaximo"));
+				p.setEstatus(rs.getString("estatus"));
 			}
 			ps.close();
 			rs.close();
 		}
 		catch(SQLException e){
-			System.out.println("Error DEPARTAMENTOSDAO:"+e.getMessage());
+			System.out.println("Error PUESTOSDAO:"+e.getMessage());
 		}
-		return d;
+		return p;
 	}
 	
 	public void eliminar(String id){
-		String sql = "execute sp_EliminarLogicamente 'Departamentos','"+id+"','idDepartamento'";
+		String sql = "execute sp_EliminarLogicamente 'Puestos','"+id+"','idPuestos'";
 		System.out.println(sql);
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -100,19 +103,24 @@ public class DepartamentosDAO {
 				System.out.println("Error: " + e.getMessage());
 			}
 	}
-	public void actualizar(Departamentos d)
+	public void actualizar(Puestos p)
 	{
-		String sql="update Departamentos set Nombre=?,Estatus=? where idDepartamento=?";
+		String sql="update Puestos set Nombre=?, SalarioMaximo=?, SalarioMinimo=?, Estatus=? where idPuesto=?";
 		try {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 
-			ps.setString(1, d.getNombre());
-			ps.setString(2,d.getEstatus());
-			ps.setInt(3, d.getIdDepartamentos());
+			ps.setString(1, p.getNombre());
+			ps.setFloat(2, p.getSalarioMinimo());
+			ps.setFloat(3, p.getSalarioMaximo());
+			ps.setString(4,p.getEstatus());	
+			ps.setInt(5, p.getIdPuesto());
 			ps.executeUpdate();
 			
 		} catch (Exception e) {
-			System.out.println("Error al actualizar el departamento"+e.getMessage());
+			System.out.println("Error al actualizar el puesto "+e.getMessage());
 		}
 	}
+
+
 }
+

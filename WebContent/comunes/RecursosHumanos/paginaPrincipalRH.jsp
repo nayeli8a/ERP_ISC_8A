@@ -48,7 +48,6 @@
 
 					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
 					<div class="descripcion"><h2>Estados</h2></div>
-					<a href="${pageContext.servletContext.contextPath}/comunes/RecursosHumanos/registrar-estados.jsp"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
 					<a href="${pageContext.servletContext.contextPath}/Estado?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
 				</div>
@@ -56,7 +55,6 @@
 				<div class="opcion">
 					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
 					<div class="descripcion"><h2>Ciudades</h2></div>
-					<a href="${pageContext.servletContext.contextPath}/Estado?op=ListarPCiudades"><button type="button" name="button" class="izquierda btn btn-secondary">Agregar</button></a>
 					<a href="${pageContext.servletContext.contextPath}/Ciudades?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
 				</div>
