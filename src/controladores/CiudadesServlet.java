@@ -45,9 +45,15 @@ public class CiudadesServlet extends HttpServlet {
 				switch(op)
 				{
 					case "Listar":
+						//CIUDADES
 						CiudadesDAO cdao = new CiudadesDAO();
 						List<Ciudades> datos = cdao.consultar();
 						request.setAttribute("datos", datos);
+						//ESTADOS
+						EstadoDAO edao = new EstadoDAO();
+						List<Estado> est = edao.consultar();
+						request.setAttribute("datosestados",est);
+						
 						url="/comunes/RecursosHumanos/consultar-ciudades.jsp";
 					break;
 					case "Editar":

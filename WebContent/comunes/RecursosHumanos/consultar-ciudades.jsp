@@ -42,7 +42,7 @@
 					<tr>
 						<th>ID</th>
 						<th>Nombre</th>
-						<th>idEstado</th>
+						<th>Estado</th>
 						<th>Estatus</th>
 					</tr>
 				</thead>
@@ -52,7 +52,13 @@
 							<tr>
 							<td>${dato.getIdCiudad()}</td>
 							<td>${dato.getNombre()}</td>
-							<td>${dato.getIdEstado()}</td>
+							<td>
+								<c:forEach var="estado" items="${datosestados}">
+									<c:if test="${dato.getIdEstado() eq estado.getIdEstado()}">
+										${estado.getNombre()}
+									</c:if>
+								</c:forEach>
+							</td>
 							<td>${dato.getEstatus()}</td>
 							</tr>
 						</c:if>
@@ -60,7 +66,13 @@
 							<tr>
 							<td>${dato.getIdCiudad()}</td>
 							<td>${dato.getNombre()}</td>
-							<td>${dato.getIdEstado()}</td>
+							<td>
+								<c:forEach var="estado" items="${datosestados}">
+									<c:if test="${dato.getIdEstado() eq estado.getIdEstado()}">
+										${estado.getNombre()}
+									</c:if>
+								</c:forEach>
+							</td>
 							<td>${dato.getEstatus()}</td>
 							<td>
 								<form action="Ciudades" method="post">
@@ -94,9 +106,10 @@
 	      <div class="modal-body" id="modal_div">
 	     	<form action="${pageContext.servletContext.contextPath}/Registrar?op=Ciudad" method="post">
 			<div class="form-group">
+			
 				<label for="Estatus">Estado:</label>
 		    		<select class="form-control" id="nom_estado" name = "nom_estado">
-		      			<c:forEach var="dato" items="${datos}">
+		      			<c:forEach var="dato" items="${datosestados}">
 		      				<option value="${dato.getNombre()}">${dato.getNombre()}</option>
 		      			</c:forEach>
 		    		</select>

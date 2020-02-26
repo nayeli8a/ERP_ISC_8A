@@ -122,6 +122,22 @@ public class RegistrarServlet extends HttpServlet {
 				}
 				url=modelo.datos.Constantes.REGRESAR_RH;
 			break;
+			case "Puestos":
+				//generamos el objeto a llenar
+				PuestosDAO pudao = new PuestosDAO();
+				String nom_puestos = request.getParameter("nom_puestos");
+				float salarioMinimo = Float.parseFloat(request.getParameter("salarioMinimo"));
+				float salarioMaximo=Float.parseFloat(request.getParameter("salarioMaximo"));
+				estatus = request.getParameter("estatus");
+				//validamos que el estado no exista ya en la BD
+				//si el estado no existe en la bd, entonces lo agregamos
+				System.out.println(pudao.ValidarPuesto(nom_puestos));
+				if(!pudao.ValidarPuesto(nom_puestos))
+				{
+					pudao.insertarPuesto(nom_puestos, salarioMinimo, salarioMaximo, estatus);
+				}
+				url=modelo.datos.Constantes.REGRESAR_RH;
+			break;
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(url);

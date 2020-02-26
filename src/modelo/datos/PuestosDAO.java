@@ -9,7 +9,7 @@ import java.util.List;
 import modelo.beans.Puestos;
 
 public class PuestosDAO {
-	public boolean ValidarDepartamento(String nom_puestos) {
+	public boolean ValidarPuesto(String nom_puestos) {
 		boolean salida=false;
 		String sql = "SELECT nombre FROM Puestos WHERE nombre=?";
 		try {
