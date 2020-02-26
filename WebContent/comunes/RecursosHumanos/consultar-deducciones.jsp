@@ -33,6 +33,7 @@
 			<input type="submit" name="op" value="Actualizar" class="btn btn-info">
 		</form>
 		<hr class="bg-info">
+		<button type="button" class="btn btn-success" id="agregar" data-toggle="modal" data-target="#modalRegistro" >Agregar</button>
 		<div class="table-responsive table-bordered table-striped">
 			<table class="table table-sm">
 				<thead class="thead-dark">
@@ -80,6 +81,50 @@
 			</table>
 		</div>
 	</div>
+		<!-- MODAL PARA REGISTRO -->
+	<div class="modal fade" id="modalRegistro">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
 	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">Registro de Deducciones</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body" id="modal_div">
+	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Deducciones" method="post">
+			<div class="form-group">
+				<label>Nombre: </label>
+				<input type="text" class="form-control" id="nom_deducciones" name="nom_deducciones" required >
+				<br>
+				<label>Descripcion: </label>
+				<input type="text" class="form-control" id="descripcion" name="descripcion" required >
+				<br>
+				<label>Porcentaje: </label>
+				<input type="number" class="form-control" id="porcentaje" required name="porcentaje" min="1.0" max="100.0" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
+
+				<label for="Estatus">Estatus</label>
+		    		<select class="form-control" id="estatus" name = "estatus">
+		      			<option value="A">Activo</option>
+		      			<option value="I">Inactivo</option>
+		    		</select>
+		    	<br>
+		    	<button type="submit" class="btn btn-primary">Registrar</button>
+			</div>
+		</form>
+	      	<% //Aqui va todo el cuerpo del modal, el cual contiene todo los datos necesarios para el cliente%> 
+	      	
+	      </div>
+			
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
 </body>
 </html>

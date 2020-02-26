@@ -33,6 +33,8 @@
 			<input type="submit" name="op" value="Actualizar" class="btn btn-info">
 		</form>
 		<hr class="bg-info">
+		<button type="button" class="btn btn-success" id="agregar" data-toggle="modal" data-target="#modalRegistro" >Agregar</button>
+		
 		<div class="table-responsive table-bordered table-striped">
 			<table class="table table-sm">
 				<thead class="thead-dark">
@@ -79,6 +81,49 @@
 			</table>
 		</div>
 	</div>
+	<!-- MODAL PARA REGISTRO -->
+	<div class="modal fade" id="modalRegistro">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
 	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">Registro de Percepciones</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body" id="modal_div">
+	  <form action="${pageContext.servletContext.contextPath}/Registrar?op=Percepciones" method="post">
+			<div class="form-group">
+				<label>Nombre: </label>
+				<input type="text" class="form-control"  name="nom_percepciones" required>
+				<br>
+				<label>Descripcion: </label>
+				<input type="text" class="form-control"  name="descripcion" required>
+				<br>
+				<label>Dias a pagar: </label>
+				<input type="number" class="form-control" name="diasPagar"  required min="1" max="30"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
+				<label for="Estatus">Estatus</label>
+		    		<select class="form-control" name = "estatus">
+		      			<option value="A">Activo</option>
+		      			<option value="I">Inactivo</option>
+		    		</select>
+		    	<br>
+		    	<button type="submit" class="btn btn-primary">Registrar</button>
+			</div>
+		</form>
+	      	<% //Aqui va todo el cuerpo del modal, el cual contiene todo los datos necesarios para el cliente%> 
+	      	
+	      </div>
+			
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
 </body>
 </html>
