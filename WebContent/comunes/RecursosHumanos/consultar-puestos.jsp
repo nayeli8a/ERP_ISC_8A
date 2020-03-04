@@ -97,7 +97,7 @@
 	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Puestos" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
-				<input type="text" class="form-control" id="nom_puestos" name="nom_puestos" required >
+				<input type="text" onkeypress="return soloLetras(event)" class="form-control" id="nom_puestos" name="nom_puestos" required >
 				<br>
 				<label>Salario Minimo: </label>
 				<input type="number" class="form-control" id="salarioMinimo" name="salarioMinimo" required  min="100.0"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" >

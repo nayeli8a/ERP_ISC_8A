@@ -97,7 +97,7 @@
 	  <form action="${pageContext.servletContext.contextPath}/Registrar?op=Percepciones" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
-				<input type="text" class="form-control"  name="nom_percepciones" required>
+				<input type="text" onkeypress="return soloLetras(event)" class="form-control"  name="nom_percepciones" required>
 				<br>
 				<label>Descripcion: </label>
 				<input type="text" class="form-control"  name="descripcion" required>

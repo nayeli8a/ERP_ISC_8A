@@ -116,7 +116,7 @@
 		    	<br>
 		    	
 				<label>Nombre Ciudad:</label>
-				<input type="text" class="form-control" style="text-transform:uppercase;" id="nom_ciudad" name="nom_ciudad" required>
+				<input type="text" onkeypress="return soloLetras(event)" class="form-control" style="text-transform:uppercase;" id="nom_ciudad" name="nom_ciudad" required>
 				<br>
 				<label for="Estatus">Estatus:</label>
 		    		<select class="form-control" id="estatus" name = "estatus">

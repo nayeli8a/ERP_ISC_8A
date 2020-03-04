@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
    
 </head>
-<body>
+<body onkeypress="return soloLetras(event)" >
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
 		<a class="btn btn-primary"href="${pageContext.servletContext.contextPath}/General?op=RegresarRH">Atras</a>
 	</nav>
@@ -34,11 +34,11 @@
 				<input type="text" readonly name="idestado" readonly required placeholder="idestado" value="${datosestado.getIdEstado()}">
 				<br>
 				<label>Nombre Estado:</label>
-				<input type="text" class="form-control" style="text-transform:uppercase;" id="nom_estado" name="nom_estado" required value="${datosestado.getNombre()}">
+				<input type="text" onkeypress="return soloLetras(event)" class="form-control" style="text-transform:uppercase;" id="nom_estado" name="nom_estado" required value="${datosestado.getNombre()}">
 				<br>
 				
 				<label>Siglas:</label>
-				<input type="text" class="form-control" style="text-transform:uppercase;" id="siglas" name="siglas" required value="${datosestado.getSiglas()}">
+				<input type="text"  onkeypress="return soloLetras(event)" class="form-control" style="text-transform:uppercase;" id="siglas" name="siglas" required value="${datosestado.getSiglas()}">
 				<br>
 				
 				<label for="Estatus">Estatus:</label>

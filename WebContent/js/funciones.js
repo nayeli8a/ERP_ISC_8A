@@ -15,33 +15,6 @@ function modificar() {
   return;
 }
 
-function mostrarSegunTipo(tipo,div)
-{
-	//solo el admin puede modificar datos en las rutinas
-	if(tipo=="A")
-	{
-			//debe mostrar los botones de editar y eliminar
-			document.getElementById(div).style.display='block';
-	}
-	else{
-			//solo muestra la informacion necesaria
-			document.getElementById(div).style.display='none';
-	}
-}
-
-function OcultarFormularioClientes(idtipomem,idfechaape,idfechapag)
-{
-	document.getElementById(idtipomem).style.display = 'none';
-	document.getElementById(idfechaape).style.display = 'none';
-	document.getElementById(idfechapag).style.display = 'none';
-}
-
-function MostrarFormularioClientes(idtipomem,idfechaape,idfechapag)
-{
-	document.getElementById(idtipomem).style.display = 'block';
-	document.getElementById(idfechaape).style.display = 'block';
-	document.getElementById(idfechapag).style.display = 'block';
-}
 
 function validarTelefono(cad)
 {
@@ -62,15 +35,7 @@ function pasarIdRutinaModal(idmodalimg,imgsrc)
 	document.getElementById(idmodalimg).src = imgsrc+""; 
 }
 
-function muestrasegunselect(idinput,precio)
-{
-	//alert(precio+"");
-	//$('#input_precio').text(precio+"");
-	document.getElementById(idinput).value = precio; 
-	document.getElementById(idinput).placeholder = "$ "+precio; 
-}
 
-///Aqui no funciona :(
 function buscar(){
 	$(document).ready(function(){
 		  $("#myInput").on("keyup", function() {
@@ -82,24 +47,26 @@ function buscar(){
 		});	
 }
 
-function clonar() {
-	  cantidad = 0;
-	  myForm = document.getElementsByTagName('form');
-	  //myForm = document.getElementById('nodo_producto')
-	  cant = myForm.length;
-	  clonForm = myForm[0].cloneNode(true);
-	  clonForm.id = "form" + cant;
-	  document.getElementById("contenedor").appendChild(clonForm);
-	}
+
+function soloLetras(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+   especiales = "8-37-39-46";
+
+   tecla_especial = false
+   for(var i in especiales){
+        if(key == especiales[i]){
+            tecla_especial = true;
+            break;
+        }
+    }
+
+    if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+    }
 
 
-function letras () {
-var charpos = document.forms[0].hola.value.search("[^A-Za-z]");
-if(document.forms[0].hola.value.length > 0 && charpos >= 0) {
-strError = "El campo solo permite letras ";
-alert(strError);
-
-}
 }
 
 

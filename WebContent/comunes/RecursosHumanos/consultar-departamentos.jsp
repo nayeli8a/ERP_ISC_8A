@@ -91,7 +91,7 @@
 	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Departamentos" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
-				<input type="text" class="form-control" id="nom_departamentos" name="nom_departamentos" required >
+				<input type="text" onkeypress="return soloLetras(event)" class="form-control" id="nom_departamentos" name="nom_departamentos" required >
 				<br>
 			
 				<label for="Estatus">Estatus</label>
