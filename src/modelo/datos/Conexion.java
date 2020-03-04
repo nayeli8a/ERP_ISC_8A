@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class Conexion {
 	//datos para conexion con la bd de SQLSERVER
 		String url = "jdbc:sqlserver://localhost:1433;database=ERP2020";
-		String user = "AdminERP2020";
-		String pass = "1234";
+		public static String user = "";
+		public static String pass = "";
 		
 		private Connection cn=null;
 		static Conexion conexion=null;

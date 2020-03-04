@@ -48,19 +48,21 @@ public class UsuarioServlet extends HttpServlet {
 				
 				if (u.getNombre() != null) {
 					// si existe el usuario en la base de datos
-					// creamos un usuario con sus datos para saber de que tipo es
+					// creamos un objeto usuario con sus datos para saber de que tipo es
 					System.out.println("Existe el usuario en la BD");
 					PrintWriter out = response.getWriter();
-					out.println("<script>alert('');</script>");
+					out.println("alert('');");
 					if(u.getEstatus().equals("I"))
 					{
 						System.out.println("El usuario ha sido inhabilitado");
-						out.print("<script>alert( 'Hello, world!' );</script>");
+						out.print("alert( 'El usuario ha sido inhabilitado, comuniquese con "
+								+ "el administrador.' );");
 					}else if(u.getEstatus().equals("A"))
 					{
 						sesion = request.getSession(true);
+						//hacemos que la sesion nunca expire con un -1
+						sesion.setMaxInactiveInterval(-1);
 						sesion.setAttribute("usuario", u);
-						u = (Usuarios) sesion.getAttribute("usuario");
 						url=modelo.datos.Constantes.PAGINAPRINCIPAL;
 					}
 					
