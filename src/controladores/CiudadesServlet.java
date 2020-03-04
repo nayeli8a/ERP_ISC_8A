@@ -54,7 +54,7 @@ public class CiudadesServlet extends HttpServlet {
 						List<Estado> est = edao.consultar();
 						request.setAttribute("datosestados",est);
 						
-						url="/comunes/RecursosHumanos/consultar-ciudades.jsp";
+						url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"ciudades.jsp";
 					break;
 					case "Editar":
 						cdao = new CiudadesDAO();
@@ -65,7 +65,7 @@ public class CiudadesServlet extends HttpServlet {
 						request.setAttribute("datosciudad", datosciudad);
 						request.setAttribute("datosestado",datosestado);
 						request.setAttribute("datosestados",datosestados);
-						url="/comunes/RecursosHumanos/editar-ciudades.jsp";
+						url=modelo.datos.Constantes.REGRESAR_RH_EDITAR+"ciudades.jsp";
 						break;
 					case "Eliminar":
 						cdao = new CiudadesDAO();

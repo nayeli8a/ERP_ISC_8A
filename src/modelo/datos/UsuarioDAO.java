@@ -16,6 +16,7 @@ public class UsuarioDAO {
 			//ingresamos los datos de nombre de usuario y contrasenia para los logins en la bd
 			Conexion.user=nom_usuario;
 			Conexion.pass=codigo;
+			System.out.println(nom_usuario+","+codigo+"···"+Conexion.user+","+Conexion.pass);
 			//ejecutamos la consulta a la bd, si el login es correcto, creamos un objeto usuario
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps.setString(1, nom_usuario);

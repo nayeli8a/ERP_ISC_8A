@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.beans.Ciudades;
 import modelo.beans.Departamentos;
+import modelo.beans.Estado;
 import modelo.datos.*;
 
 /**
@@ -55,7 +58,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					esdao.insertarEstado(nom_estado, siglas, estatus);
 				}
-				url=modelo.datos.Constantes.REGRESAR_RH;
+				url="Estado?op=Listar";
 			break;
 			
 			case "Ciudad":
@@ -69,7 +72,8 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					cdao.insertarCiudades(nom_ciudad,nom_estado, estatus);
 				}
-				url=modelo.datos.Constantes.REGRESAR_RH;
+				
+				url="Ciudades?op=Listar";
 				break;
 				
 			case "Deducciones":
@@ -88,7 +92,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					ddao.insertarDeducciones(nom_deducciones, descripcion, porcentaje, estatus);
 				}
-				url=modelo.datos.Constantes.REGRESAR_RH;
+				url="Deducciones?op=Listar";
 			break;
 			case "Percepciones":
 				//generamos el objeto a llenar
@@ -105,7 +109,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					pdao.insertarPercepciones(nom_percepciones, descripcion_percepciones, diasPagar, estatus);
 				}
-				url=modelo.datos.Constantes.REGRESAR_RH;
+				url="Percepciones?op=Listar";
 			break;
 			case "Departamentos":
 				//generamos el objeto a llenar
@@ -120,7 +124,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					dedao.insertarDepartamento(nom_departamentos, estatus);
 				}
-				url=modelo.datos.Constantes.REGRESAR_RH;
+				url="Departamentos?op=Listar";
 			break;
 			case "Puestos":
 				//generamos el objeto a llenar
@@ -134,9 +138,9 @@ public class RegistrarServlet extends HttpServlet {
 				System.out.println(pudao.ValidarPuesto(nom_puestos));
 				if(!pudao.ValidarPuesto(nom_puestos))
 				{
-					pudao.insertarPuesto(nom_puestos, salarioMinimo, salarioMaximo, estatus);
+					pudao.insertarPuesto(nom_puestos,salarioMinimo,salarioMaximo, estatus);
 				}
-				url=modelo.datos.Constantes.REGRESAR_RH;
+				url="Puestos?op=Listar";
 			break;
 		}
 		

@@ -49,13 +49,13 @@ public class DepartamentosServlet extends HttpServlet {
 								DepartamentosDAO dedao = new DepartamentosDAO();
 								List<Departamentos> datos = dedao.consultar();
 								request.setAttribute("datos", datos);
-								url="/comunes/RecursosHumanos/consultar-departamentos.jsp";
+								url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"departamentos.jsp";
 							break;
 							case "Editar":
 								dedao = new DepartamentosDAO();
 								Departamentos datosdepartamentos = dedao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
 								request.setAttribute("datosdepartamentos", datosdepartamentos);
-								url="/comunes/RecursosHumanos/editar-departamentos.jsp";
+								url=modelo.datos.Constantes.REGRESAR_RH_EDITAR+"departamentos.jsp";
 								break;
 							case "Eliminar":
 								dedao = new DepartamentosDAO();

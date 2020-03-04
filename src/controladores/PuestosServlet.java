@@ -49,13 +49,13 @@ public class PuestosServlet extends HttpServlet {
 				PuestosDAO pdao = new PuestosDAO();
 				List<Puestos> datos = pdao.consultar();
 				request.setAttribute("datos", datos);
-				url="/comunes/RecursosHumanos/consultar-puestos.jsp";
+				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"puestos.jsp";
 			break;
 			case "Editar":
 				pdao = new PuestosDAO();
 				Puestos datospuestos = pdao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
 				request.setAttribute("datospuestos", datospuestos);
-				url="/comunes/RecursosHumanos/editar-puestos.jsp";
+				url=modelo.datos.Constantes.REGRESAR_RH_EDITAR+"puestos.jsp";
 				break;
 			case "Eliminar":
 				pdao = new PuestosDAO();

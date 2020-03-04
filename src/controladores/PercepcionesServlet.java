@@ -49,13 +49,13 @@ public class PercepcionesServlet extends HttpServlet {
 				PercepcionesDAO pdao = new PercepcionesDAO();
 				List<Percepciones> datos = pdao.consultar();
 				request.setAttribute("datos", datos);
-				url="/comunes/RecursosHumanos/consultar-percepciones.jsp";
+				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"percepciones.jsp";
 			break;
 			case "Editar":
 				pdao = new PercepcionesDAO();
 				Percepciones datospercepciones = pdao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
 				request.setAttribute("datospercepciones", datospercepciones);
-				url="/comunes/RecursosHumanos/editar-percepciones.jsp";
+				url=modelo.datos.Constantes.REGRESAR_RH_EDITAR+"percepciones.jsp";
 				break;
 			case "Eliminar":
 				pdao = new PercepcionesDAO();

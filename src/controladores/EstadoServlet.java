@@ -49,7 +49,7 @@ public class EstadoServlet extends HttpServlet {
 				EstadoDAO esdao = new EstadoDAO();
 				List<Estado> datos = esdao.consultar();
 				request.setAttribute("datos", datos);
-				url="/comunes/RecursosHumanos/consultar-estados.jsp";
+				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"estados.jsp";
 			break;
 			case "ListarPCiudades":
 				esdao = new EstadoDAO();
@@ -66,7 +66,7 @@ public class EstadoServlet extends HttpServlet {
 				esdao = new EstadoDAO();
 				Estado datosestado = esdao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
 				request.setAttribute("datosestado", datosestado);
-				url="/comunes/RecursosHumanos/editar-estados.jsp";
+				url=modelo.datos.Constantes.REGRESAR_RH_EDITAR+"estados.jsp";
 				break;
 			case "Modificar":
 				Estado estado = new Estado();

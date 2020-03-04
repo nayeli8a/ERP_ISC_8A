@@ -50,7 +50,7 @@
 					<c:forEach var="dato" items="${datos}">
 						<c:if test="${dato.getEstatus() eq 'I'}">
 							<tr>
-							<td>${dato.getIdDeduccion()}</td>
+							<td>${dato.getIdPuesto()}</td>
 							<td>${dato.getNombre()}</td>
 							<td>${dato.getSalarioMinimo()}</td>
 							<td>${dato.getSalarioMaximo()}</td>
@@ -100,10 +100,10 @@
 				<input type="text" onkeypress="return soloLetras(event)" class="form-control" id="nom_puestos" name="nom_puestos" required >
 				<br>
 				<label>Salario Minimo: </label>
-				<input type="number" class="form-control" id="salarioMinimo" name="salarioMinimo" required  min="100.0"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" >
+				<input type="number" class="form-control" id="id_salarioMinimo" name="salarioMinimo" required  min="100.0"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" >
 				<br>
 				<label>Salario Maximo: </label>
-				<input type="number" class="form-control" id="salarioMaximo" required name="salarioMaximo" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
+				<input type="number" class="form-control" id="id_salarioMaximo" required name="salarioMaximo" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 
 				<label for="Estatus">Estatus</label>
 		    		<select class="form-control" id="estatus" name = "estatus">

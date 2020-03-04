@@ -51,13 +51,13 @@ public class DeduccionesServlet extends HttpServlet {
 						DeduccionesDAO ddao = new DeduccionesDAO();
 						List<Deducciones> datos = ddao.consultar();
 						request.setAttribute("datos", datos);
-						url="/comunes/RecursosHumanos/consultar-deducciones.jsp";
+						url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"deducciones.jsp";
 					break;
 					case "Editar":
 						ddao = new DeduccionesDAO();
 						Deducciones datosdeducciones = ddao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
 						request.setAttribute("datosdeducciones", datosdeducciones);
-						url="/comunes/RecursosHumanos/editar-deducciones.jsp";
+						url=modelo.datos.Constantes.REGRESAR_RH_EDITAR+"deducciones.jsp";
 						break;
 					case "Eliminar":
 						ddao = new DeduccionesDAO();
