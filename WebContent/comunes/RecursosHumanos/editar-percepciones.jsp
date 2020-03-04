@@ -19,7 +19,7 @@
 	
     <!-- Nuestras hojas de estilo-->
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
-   
+    <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
@@ -36,7 +36,7 @@
 				<input type="text" readonly name="idpercepcion" readonly required placeholder="idpercepcion" value="${datospercepciones.getIdPercepcion()}">
 				<br>
 				<label>Nombre :</label>
-				<input type="text" class="form-control" id="nom_percepciones" name="nom_percepciones" required value="${datospercepciones.getNombre()}">
+				<input type="text" onkeypress="return soloLetras(event)" class="form-control" id="nom_percepciones" name="nom_percepciones" required value="${datospercepciones.getNombre()}">
 				<br>
 				
 				<label>Descripcion :</label>

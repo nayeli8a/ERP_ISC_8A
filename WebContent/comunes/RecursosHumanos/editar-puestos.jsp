@@ -19,7 +19,7 @@
 	
     <!-- Nuestras hojas de estilo-->
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
-   
+    <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
@@ -36,7 +36,7 @@
 				<input type="text" readonly name="idPuesto" readonly required placeholder="idPuesto" value="${datospuestos.getIdPuesto()}">
 				<br>
 				<label>Nombre :</label>
-				<input type="text" class="form-control" id="nom_puestos" name="nom_puestos"  required value="${datospuestos.getNombre()}">
+				<input type="text" onkeypress="return soloLetras(event)" class="form-control" id="nom_puestos" name="nom_puestos"  required value="${datospuestos.getNombre()}">
 				<br>
 				
 				<label>Salario Minimo :</label>
