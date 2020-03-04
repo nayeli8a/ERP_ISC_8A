@@ -28,10 +28,11 @@
 	
 	
 	<div class="container" style="margin-top:100px">
+	 <h2>Buscador</h2>
+	  <p>Escribe la información a buscar</p>  
+	  <input class="form-control" id="myInput" type="text" placeholder="Buscador...">
+	  		  <script>javascript:buscar();</script>
 		<h2 align="center">Percepciones</h2>
-		<form action="Percepciones?op=Listar" method="post" >
-			<input type="submit" name="op" value="Actualizar" class="btn btn-info">
-		</form>
 		<hr class="bg-info">
 		<button type="button" class="btn btn-success" id="agregar" data-toggle="modal" data-target="#modalRegistro" >Agregar</button>
 		
