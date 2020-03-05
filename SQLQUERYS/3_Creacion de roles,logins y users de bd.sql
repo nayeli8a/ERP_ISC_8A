@@ -26,7 +26,7 @@ grant select,insert,update,delete on NominasDeducciones to RecursosHumanos
 grant select,insert,update,delete on Usuarios to RecursosHumanos
 grant select,insert,update,delete on TiposUsuarios to RecursosHumanos
 grant exec on sp_EliminarLogicamente to RecursosHumanos
-
+grant exec on sp_paginaciondinamica to RecursosHumanos
 
 -- Ventas
 grant select,insert,update,delete on OfertasAsociacion to Ventas
@@ -49,6 +49,7 @@ grant select,insert,update,delete on Mantenimientos to Ventas
 grant select,insert,update,delete on Usuarios to Ventas
 grant select,insert,update,delete on TiposUsuarios to Ventas
 grant exec on sp_EliminarLogicamente to Ventas
+grant exec on sp_paginaciondinamica to Ventas
 
 -- Compras
 grant select,insert,update,delete on Laboratorios to Compras
@@ -72,6 +73,7 @@ grant select,insert,update,delete on Pagos to Compras
 grant select,insert,update,delete on Usuarios to Compras
 grant select,insert,update,delete on TiposUsuarios to Compras
 grant exec on sp_EliminarLogicamente to Compras
+grant exec on sp_paginaciondinamica to Compras
 
 
 

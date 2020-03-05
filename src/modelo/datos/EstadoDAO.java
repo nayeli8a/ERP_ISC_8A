@@ -47,10 +47,10 @@ public class EstadoDAO {
 		}
 	}
 	
-	public List<Estado> consultar()
+	public List<Estado> consultar(String pagina)
 	{
 		ArrayList<Estado> lista = new ArrayList<>();
-		String sql = "select * from Estados";
+		String sql = "execute sp_paginaciondinamica 'Estados','nombre','"+pagina+"','5'";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);

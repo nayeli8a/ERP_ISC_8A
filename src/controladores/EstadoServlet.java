@@ -47,20 +47,22 @@ public class EstadoServlet extends HttpServlet {
 		{
 			case "Listar":
 				EstadoDAO esdao = new EstadoDAO();
-				List<Estado> datos = esdao.consultar();
+				String pagina = request.getParameter("pagina");
+				List<Estado> datos = esdao.consultar(pagina);
 				request.setAttribute("datos", datos);
+				request.setAttribute("pagina",pagina);
 				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"estados.jsp";
 			break;
 			case "ListarPCiudades":
 				esdao = new EstadoDAO();
-				datos = esdao.consultar();
+				datos = esdao.consultar("1");
 				request.setAttribute("datos", datos);
 				url="/comunes/RecursosHumanos/registrar-ciudades.jsp";
 			break;
 			case "Eliminar":
 				esdao = new EstadoDAO();
 				esdao.eliminar(request.getParameter("id"));
-				url="Estado?op=Listar";
+				url="Estado?op=Listar&pagina=1";
 				break;
 			case "Editar":
 				esdao = new EstadoDAO();
@@ -76,7 +78,7 @@ public class EstadoServlet extends HttpServlet {
 				estado.setEstatus(request.getParameter("estatus"));
 				esdao = new EstadoDAO();
 				esdao.actualizar(estado);
-				url="Estado?op=Listar";
+				url="Estado?op=Listar&pagina=1";
 				break;
 				
 		}

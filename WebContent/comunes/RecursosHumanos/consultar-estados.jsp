@@ -94,6 +94,7 @@
 	
 	      <!-- Modal body -->
 	      <div class="modal-body" id="modal_div">
+	      <% //Aqui va todo el cuerpo del modal, el cual contiene todo los datos necesarios para el cliente%>
 	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Estado" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
@@ -111,7 +112,7 @@
 		    	<button type="submit" class="btn btn-primary">Registrar</button>
 			</div>
 		</form>
-	      	<% //Aqui va todo el cuerpo del modal, el cual contiene todo los datos necesarios para el cliente%> 
+	      	 
 	      	
 	      </div>
 			
@@ -124,6 +125,25 @@
 	  </div>
 	</div>
 	
+	<% //Aqui tendremos la paginacion%>
+	<nav aria-label="paginacion estados">
+	  <ul class="pagination justify-content-center">
+	    <c:if test="${pagina eq 1}">
+	    	<li class="page-item disabled">
+		      <a class="page-link" href="${pageContext.servletContext.contextPath}/Estado?op=Listar&pagina=${pagina-1}">Previous</a>
+		    </li>
+	    </c:if>
+	    <c:if test="${pagina > 1}">
+	    	<li class="page-items">
+		      <a class="page-link" href="${pageContext.servletContext.contextPath}/Estado?op=Listar&pagina=${pagina-1}">Previous</a>
+		    </li>
+	    </c:if>
+	    <li class="page-item"><a class="page-link">Pagina ${pagina}</a></li>
+	    <li class="page-item">
+	      <a class="page-link" href="${pageContext.servletContext.contextPath}/Estado?op=Listar&pagina=${pagina+1}">Next</a>
+	    </li>
+	  </ul>
+	</nav>
 	
 	
 </body>

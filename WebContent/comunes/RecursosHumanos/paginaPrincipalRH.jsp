@@ -48,7 +48,7 @@
 
 					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
 					<div class="descripcion"><h2>Estados</h2></div>
-					<a href="${pageContext.servletContext.contextPath}/Estado?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+					<a href="${pageContext.servletContext.contextPath}/Estado?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
 				</div>
 

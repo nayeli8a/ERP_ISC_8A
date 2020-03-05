@@ -58,7 +58,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					esdao.insertarEstado(nom_estado, siglas, estatus);
 				}
-				url="Estado?op=Listar";
+				url="Estado?op=Listar&pagina=1";
 			break;
 			
 			case "Ciudad":
