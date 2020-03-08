@@ -51,7 +51,7 @@ public class CiudadesServlet extends HttpServlet {
 						request.setAttribute("datos", datos);
 						//ESTADOS
 						EstadoDAO edao = new EstadoDAO();
-						List<Estado> est = edao.consultar();
+						List<Estado> est = edao.consultar(null);
 						request.setAttribute("datosestados",est);
 						
 						url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"ciudades.jsp";
@@ -61,7 +61,7 @@ public class CiudadesServlet extends HttpServlet {
 						EstadoDAO esdao = new EstadoDAO();
 						Ciudades datosciudad = cdao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
 						Estado datosestado = esdao.consultaIndividual(datosciudad.getIdEstado());
-						List<Estado> datosestados = esdao.consultar();
+						List<Estado> datosestados = esdao.consultar(null);
 						request.setAttribute("datosciudad", datosciudad);
 						request.setAttribute("datosestado",datosestado);
 						request.setAttribute("datosestados",datosestados);

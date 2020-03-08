@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelo.beans.Deducciones;
+import modelo.beans.Estado;
 import modelo.beans.Puestos;
 import modelo.datos.DeduccionesDAO;
+import modelo.datos.EstadoDAO;
 import modelo.datos.PuestosDAO;
 
 /**
@@ -38,7 +40,7 @@ public class PuestosServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		// aqui va todo el codigo
-		System.out.println("##Dentro de DeduccionesServlet##");
+		System.out.println("##Dentro de PuestosServlet##");
 		String url = "index.jsp";
 		HttpSession sesion;
 		String op = request.getParameter("op");
@@ -47,8 +49,10 @@ public class PuestosServlet extends HttpServlet {
 		{
 			case "Listar":
 				PuestosDAO pdao = new PuestosDAO();
-				List<Puestos> datos = pdao.consultar();
+				String pagina = request.getParameter("pagina");
+				List<Puestos> datos = pdao.consultar(pagina);
 				request.setAttribute("datos", datos);
+				request.setAttribute("pagina",pagina);
 				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"puestos.jsp";
 			break;
 			case "Editar":
