@@ -50,7 +50,7 @@ function buscar(){
 
 function soloLetras(e){
    key = e.keyCode || e.which;
-   tecla = String.fromCharCode(key).toLowerCase();
+   tecla = String.fromCharCode(key);
    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
    especiales = "8-37-39-46";
 
@@ -66,8 +66,22 @@ function soloLetras(e){
         return false;
     }
 
-
 }
+
+
+function envia(obj){
+	if(
+	(parseInt(document.getElementById("salarioMinimo").value,10)<parseInt(document.getElementById("salarioMaximo").value,10))
+	&& !isNaN(parseInt(document.getElementById("salarioMinimo").value,10))
+	&& !isNaN(parseInt(document.getElementById("salarioMaximo").value,10))
+	){
+	 obj.submit();
+	 return true;
+	}else{
+	alert("El salario Maximo debe ser mayor al salario Minimo");
+	return false;
+	}
+	}
 
 
 

@@ -30,7 +30,7 @@
   <p class="bg-primary text-white">EDITAR PUESTOS</p>
 
 
-		<form action="${pageContext.servletContext.contextPath}/Puestos?op=Modificar" method="post">
+		<form action="${pageContext.servletContext.contextPath}/Puestos?op=Modificar"  onsubmit="return envia();" method="post">
 			<div class="form-group">
 				<label for="" class="letra" float: left>ID: </label>
 				<input type="text" readonly name="idPuesto" readonly required placeholder="idPuesto" value="${datospuestos.getIdPuesto()}">

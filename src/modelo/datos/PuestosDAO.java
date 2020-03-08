@@ -105,7 +105,7 @@ public class PuestosDAO {
 	}
 	public void actualizar(Puestos p)
 	{
-		String sql="update Puestos set Nombre=?, SalarioMaximo=?, SalarioMinimo=?, Estatus=? where idPuesto=?";
+		String sql="update Puestos set Nombre=?, SalarioMinimo=?, SalarioMaximo=?, Estatus=? where idPuesto=?";
 		try {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 
