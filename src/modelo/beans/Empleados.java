@@ -9,7 +9,7 @@ public class Empleados{
   private String nombre;
   private String apaterno;
   private String amaterno;
-  private char  sexo;
+  private String  sexo;
   private Date fechaContratacion;
   private Date fechaNacimiento;
   private float salario;
@@ -23,12 +23,26 @@ public class Empleados{
   private String codigoPostal;
   private String escolaridad;
   private float porcentajeComision;
-  private char estatus;
+  private String estatus;
   private int idDepartamento;
   private int idPuesto;
   private int idCiudad;
   private int idSucursal;
   
+  
+
+public String getSexo() {
+	return sexo;
+}
+public void setSexo(String sexo) {
+	this.sexo = sexo;
+}
+public String getEstatus() {
+	return estatus;
+}
+public void setEstatus(String estatus) {
+	this.estatus = estatus;
+}
 public int getIdEmpleado() {
 	return idEmpleado;
 }
@@ -53,12 +67,7 @@ public String getAmaterno() {
 public void setAmaterno(String amaterno) {
 	this.amaterno = amaterno;
 }
-public char getSexo() {
-	return sexo;
-}
-public void setSexo(char sexo) {
-	this.sexo = sexo;
-}
+
 public Date getFechaContratacion() {
 	return fechaContratacion;
 }
@@ -136,12 +145,6 @@ public float getPorcentajeComision() {
 }
 public void setPorcentajeComision(float porcentajeComision) {
 	this.porcentajeComision = porcentajeComision;
-}
-public char getEstatus() {
-	return estatus;
-}
-public void setEstatus(char estatus) {
-	this.estatus = estatus;
 }
 public int getIdDepartamento() {
 	return idDepartamento;

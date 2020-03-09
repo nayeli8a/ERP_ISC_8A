@@ -23,7 +23,7 @@ BEGIN
 	DECLARE @sql AS varchar(MAX)
 	--OBTENEMOS EL NOMBRE DE LA TABLA
     SELECT @ActualTableName = QUOTENAME( TABLE_NAME ) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = @nombretabla
-	SELECT @sql = 'SELECT * FROM '+@ActualTableName+' ORDER BY '+@orderby+' ASC OFFSET ('+@pagina+'+-1)* '+@cantreg+' ROWS FETCH NEXT '+@cantreg+' ROWS ONLY'
+	SELECT @sql = 'SELECT * FROM '+@ActualTableName+' ORDER BY '+@orderby+' DESC OFFSET ('+@pagina+'+-1)* '+@cantreg+' ROWS FETCH NEXT '+@cantreg+' ROWS ONLY'
 	EXEC(@SQL)
 END
 
