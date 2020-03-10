@@ -55,4 +55,78 @@ public class HorariosDAO {
 		}
 	}
   
+  public boolean validarHorarios(int idHorarios) {
+		boolean salida=false;
+		String sql = "SELECT idHorario FROM Horarios WHERE idHorarios=?";
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.setInt(1, idHorarios);
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				//si encuentra un horario con ese mismo id, marcamos que el horario ya existe
+				salida = true;
+			}else
+			{
+				salida = false;
+			}
+			
+			rs.close();
+			ps.close();
+			
+		} catch (SQLException e) {
+			System.out.println("Error al conectar con la BD " + e.getMessage());
+		}
+		return salida;
+	}
+  /*
+  public List<Horarios> consultar()
+	{
+		ArrayList<Horarios> lista = new ArrayList<>();
+		String sql = "select * from Horarios";
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Horarios h = new Horarios();
+				h.setIdHorario(rs.getIdHorario());
+				h.setDate(rs.getHoraInicio());
+				h.setDate(rs.getHoraFin());
+				h.setString(rs.getEstatus());
+				h.setInt(rs.getDias());
+				h.setInt(rs.getIdEmpleado())
+				lista.add(h);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
+	*/
+  
+  public Horarios consultaIndividual(int idHorario){
+		String sql="select * from Horarios where idHorario=?";
+		Horarios h = new Horarios();
+		try{
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.setInt(1, idHorario);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()){
+				h.setIdHorario(rs.getInt("idHorario"));
+				h.setHoraInicio(rs.getDate("horaInicio"));
+				h.setHoraFin(rs.getDate("horaFin"));
+				h.setDias(rs.getInt("dias"));
+				h.setEstatus(rs.getString("estatus"));
+				h.setIdEmpleado(rs.getInt("idEmpleado"));
+			}
+			ps.close();
+			rs.close();
+		}
+		catch(SQLException e){
+			System.out.println("Error ESDAO:"+e.getMessage());
+		}
+		return h;
+	}
+  
 }
