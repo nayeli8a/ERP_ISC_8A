@@ -46,33 +46,34 @@ public class UsuarioServlet extends HttpServlet {
 				String Password = request.getParameter("Password");
 				u = udao.ValidarUsuarios(Usuario,Password);
 				
-				if (u.getNombre() != null) {
-					// si existe el usuario en la base de datos
-					// creamos un objeto usuario con sus datos para saber de que tipo es
-					System.out.println("Existe el usuario en la BD");
-					PrintWriter out = response.getWriter();
-					out.println("alert('');");
-					if(u.getEstatus().equals("I"))
+				if(u!=null)
+				{
+					if (u.getNombre() != null) {
+						// si existe el usuario en la base de datos
+						// creamos un objeto usuario con sus datos para saber de que tipo es
+						System.out.println("Existe el usuario en la BD");
+						if(u.getEstatus().equals("I"))
+						{
+							System.out.println("El usuario ha sido inhabilitado");
+						}else if(u.getEstatus().equals("A"))
+						{
+							sesion = request.getSession(true);
+							//hacemos que la sesion nunca expire con un -1
+							sesion.setMaxInactiveInterval(-1);
+							
+							sesion.setAttribute("usuario", u);
+							url=modelo.datos.Constantes.PAGINAPRINCIPAL;
+						}
+						
+					}else
 					{
-						System.out.println("El usuario ha sido inhabilitado");
-						out.print("alert( 'El usuario ha sido inhabilitado, comuniquese con "
-								+ "el administrador.' );");
-					}else if(u.getEstatus().equals("A"))
-					{
-						sesion = request.getSession(true);
-						//hacemos que la sesion nunca expire con un -1
-						sesion.setMaxInactiveInterval(-1);
-						sesion.setAttribute("usuario", u);
-						url=modelo.datos.Constantes.PAGINAPRINCIPAL;
+						System.out.println("El usuario no existe, o la contraseña o el nombre de usuario estan mal");
 					}
-					
 				}else
 				{
-					System.out.println("El usuario no existe, o la contraseña o el nombre de usuario estan mal");
-					PrintWriter out = response.getWriter();
-					out.println("<tr><td><input type='button' name='Button' value='Search' onclick=\"searchRecord('j');\"></td></tr>");
-					
+					System.out.println("USUARIOSERVLET: Existe un error interno en la BD");
 				}
+				
 				
 			break;
 			

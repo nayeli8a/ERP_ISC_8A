@@ -19,10 +19,10 @@ public class Conexion {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				cn = DriverManager.getConnection(url,user,pass);
 			} catch (SQLException e) {
-				System.out.println("Error al conectar con la BD");
+				System.out.println("CONEXION: Error al conectar con la BD");
 				System.out.println(e.getMessage());
 			} catch (ClassNotFoundException e) {
-				System.out.println("Excepcion de Clase no encontrada");
+				System.out.println("CONEXION: Excepcion de Clase no encontrada");
 				e.printStackTrace();
 			}
 		}
@@ -48,7 +48,7 @@ public class Conexion {
 				cn.close();
 			}catch(SQLException e)
 			{
-				System.out.println("Error al cerrar la conexion con la BD");
+				System.out.println("CONEXION: Error al cerrar la conexion con la BD");
 				System.out.println(e.getMessage());
 			}
 		}

@@ -16,26 +16,28 @@ public class UsuarioDAO {
 			//ingresamos los datos de nombre de usuario y contrasenia para los logins en la bd
 			Conexion.user=nom_usuario;
 			Conexion.pass=codigo;
-			System.out.println(nom_usuario+","+codigo+"···"+Conexion.user+","+Conexion.pass);
-			//ejecutamos la consulta a la bd, si el login es correcto, creamos un objeto usuario
-			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
-			ps.setString(1, nom_usuario);
-			ps.setString(2, codigo);
-			ResultSet rs = ps.executeQuery();
-			
-			if (rs.next()) {
-				u.setNombre(rs.getString("nombre"));
-				u.setContrasenia(rs.getString("contrasenia"));
-				u.setEstatus(rs.getString("estatus"));
-				u.setidEmpleado(Integer.parseInt(rs.getString("idEmpleado")));
-				u.setidTipoUsuario(Integer.parseInt(rs.getString("idTipoUsuario")));
+			if(Conexion.getInstance().getCN() != null)
+			{
+				//ejecutamos la consulta a la bd, si el login es correcto, creamos un objeto usuario
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.setString(1, nom_usuario);
+				ps.setString(2, codigo);
+				ResultSet rs = ps.executeQuery();
+				
+				if (rs.next()) {
+					u.setNombre(rs.getString("nombre"));
+					u.setContrasenia(rs.getString("contrasenia"));
+					u.setEstatus(rs.getString("estatus"));
+					u.setidEmpleado(Integer.parseInt(rs.getString("idEmpleado")));
+					u.setidTipoUsuario(Integer.parseInt(rs.getString("idTipoUsuario")));
+				}
+				rs.close();
+				ps.close();
+				return u;
 			}
-			
-			rs.close();
-			ps.close();
 		} catch (SQLException e) {
-			System.out.println("Error al conectar con la BD " + e.getMessage());
+			System.out.println("UsuarioDAO: Error al conectar con la BD " + e.getMessage());
 		}
-		return u;
+		return null;
 	}
 }
