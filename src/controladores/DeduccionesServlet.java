@@ -49,8 +49,10 @@ public class DeduccionesServlet extends HttpServlet {
 				{
 					case "Listar":
 						DeduccionesDAO ddao = new DeduccionesDAO();
-						List<Deducciones> datos = ddao.consultar();
+						String pagina = request.getParameter("pagina");
+						List<Deducciones> datos = ddao.consultar(pagina);
 						request.setAttribute("datos", datos);
+						request.setAttribute("pagina",pagina);
 						url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"deducciones.jsp";
 					break;
 					case "Editar":

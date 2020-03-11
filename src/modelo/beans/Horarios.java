@@ -10,6 +10,7 @@ public class Horarios {
 	private String estatus;
 	private int dias;
 	private int idEmpleado;
+	
 	public int getIdHorario() {
 		return idHorario;
 	}
@@ -46,6 +47,6 @@ public class Horarios {
 	public void setIdEmpleado(int idEmpleado) {
 		this.idEmpleado = idEmpleado;
 	}
-	
-	
+
+
 }

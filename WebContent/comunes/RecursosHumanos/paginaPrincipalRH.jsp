@@ -54,28 +54,28 @@
 				<div class="opcion">
 					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
 					<div class="descripcion"><h2>Ciudades</h2></div>
-					<a href="${pageContext.servletContext.contextPath}/Ciudades?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+					<a href="${pageContext.servletContext.contextPath}/Ciudades?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
 				</div>
 
 				<div class="opcion">
 					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
 					<div class="descripcion"><h2>Deducciones</h2></div>
-					<a href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+					<a href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
 				</div>
 
 				<div class="opcion">
 					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
 					<div class="descripcion"><h2>Percepciones</h2></div>
-					<a href="${pageContext.servletContext.contextPath}/Percepciones?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+					<a href="${pageContext.servletContext.contextPath}/Percepciones?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
 				</div>
 				
 				<div class="opcion">
 					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
 					<div class="descripcion"><h2>Departamentos</h2></div>
-					<a href="${pageContext.servletContext.contextPath}/Departamentos?op=Listar"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+					<a href="${pageContext.servletContext.contextPath}/Departamentos?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
 				</div>
 				

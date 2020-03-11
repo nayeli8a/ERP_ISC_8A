@@ -58,9 +58,9 @@ public class CiudadesDAO {
 		}
 		return salida;
 	}
-	public List <Ciudades> consultar() {
+	public List <Ciudades> consultar(String pagina) {
 		ArrayList<Ciudades> lista = new ArrayList<>();
-		String sql = "select * from ciudades";
+		String sql = "execute sp_paginaciondinamica 'Ciudades','idCiudad','"+pagina+"','5'";
 		try {
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			rs = ps.executeQuery();

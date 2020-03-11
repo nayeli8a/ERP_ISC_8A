@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelo.beans.Deducciones;
+import modelo.beans.Departamentos;
 import modelo.beans.Percepciones;
 import modelo.datos.DeduccionesDAO;
+import modelo.datos.DepartamentosDAO;
 import modelo.datos.PercepcionesDAO;
 
 /**
@@ -47,8 +49,10 @@ public class PercepcionesServlet extends HttpServlet {
 		{
 			case "Listar":
 				PercepcionesDAO pdao = new PercepcionesDAO();
-				List<Percepciones> datos = pdao.consultar();
+			    String pagina = request.getParameter("pagina");
+				List<Percepciones> datos = pdao.consultar(pagina);
 				request.setAttribute("datos", datos);
+				request.setAttribute("pagina",pagina);
 				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"percepciones.jsp";
 			break;
 			case "Editar":

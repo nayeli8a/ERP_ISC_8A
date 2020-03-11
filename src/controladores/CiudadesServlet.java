@@ -47,11 +47,14 @@ public class CiudadesServlet extends HttpServlet {
 					case "Listar":
 						//CIUDADES
 						CiudadesDAO cdao = new CiudadesDAO();
-						List<Ciudades> datos = cdao.consultar();
+						String pagina = request.getParameter("pagina");
+						List<Ciudades> datos = cdao.consultar(pagina);
 						request.setAttribute("datos", datos);
+						request.setAttribute("pagina",pagina);
+						url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"estados.jsp";
 						//ESTADOS
 						EstadoDAO edao = new EstadoDAO();
-						List<Estado> est = edao.consultar(null);
+						List<Estado> est = edao.consultar();
 						request.setAttribute("datosestados",est);
 						
 						url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"ciudades.jsp";
