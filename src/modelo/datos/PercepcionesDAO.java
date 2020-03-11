@@ -49,10 +49,10 @@ public class PercepcionesDAO {
 		}
 	}
 	
-	public List<Percepciones> consultar()
+	public List<Percepciones> consultar(String pagina)
 	{
 		ArrayList<Percepciones> lista = new ArrayList<>();
-		String sql = "select * from Percepciones";
+		String sql = "execute sp_paginaciondinamica 'Percepciones','nombre','"+pagina+"','5'";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);

@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import modelo.beans.Deducciones;
 import modelo.beans.Departamentos;
+import modelo.datos.DeduccionesDAO;
 import modelo.datos.DepartamentosDAO;
 
 /**
@@ -47,8 +48,10 @@ public class DepartamentosServlet extends HttpServlet {
 						{
 							case "Listar":
 								DepartamentosDAO dedao = new DepartamentosDAO();
-								List<Departamentos> datos = dedao.consultar();
+							    String pagina = request.getParameter("pagina");
+								List<Departamentos> datos = dedao.consultar(pagina);
 								request.setAttribute("datos", datos);
+								request.setAttribute("pagina",pagina);
 								url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"departamentos.jsp";
 							break;
 							case "Editar":

@@ -69,6 +69,27 @@ public class EstadoDAO {
 		return lista;
 	}
 	
+	public List<Estado> consultar()
+	{
+		ArrayList<Estado> lista = new ArrayList<>();
+		String sql = "select * from estados";
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Estado es = new Estado();
+				es.setIdEstado(rs.getInt(1));
+				es.setNombre(rs.getString(2));
+				es.setSiglas(rs.getString(3));
+				es.setEstatus(rs.getString(4));
+				lista.add(es);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
 	public Estado consultaIndividual(int idEstado){
 		String sql="select * from Estados where idEstado=?";
 		Estado c = new Estado();

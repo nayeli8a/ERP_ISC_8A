@@ -55,7 +55,7 @@ public class EstadoServlet extends HttpServlet {
 			break;
 			case "ListarPCiudades":
 				esdao = new EstadoDAO();
-				datos = esdao.consultar("1");
+				datos = esdao.consultar();
 				request.setAttribute("datos", datos);
 				url="/comunes/RecursosHumanos/registrar-ciudades.jsp";
 			break;

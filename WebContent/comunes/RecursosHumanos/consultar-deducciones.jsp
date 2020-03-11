@@ -127,5 +127,25 @@
 	    </div>
 	  </div>
 	</div>
+	
+		<% //Aqui tendremos la paginacion%>
+	<nav aria-label="paginacion deducciones">
+	  <ul class="pagination justify-content-center">
+	    <c:if test="${pagina eq 1}">
+	    	<li class="page-item disabled">
+		      <a class="page-link" href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar&pagina=${pagina-1}">Previous</a>
+		    </li>
+	    </c:if>
+	    <c:if test="${pagina > 1}">
+	    	<li class="page-items">
+		      <a class="page-link" href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar&pagina=${pagina-1}">Previous</a>
+		    </li>
+	    </c:if>
+	    <li class="page-item"><a class="page-link">Pagina ${pagina}</a></li>
+	    <li class="page-item">
+	      <a class="page-link" href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar&pagina=${pagina+1}">Next</a>
+	    </li>
+	  </ul>
+	</nav>
 </body>
 </html>

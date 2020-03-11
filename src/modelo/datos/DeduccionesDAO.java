@@ -50,10 +50,10 @@ public class DeduccionesDAO {
 		}
 	}
 	
-	public List<Deducciones> consultar()
+	public List<Deducciones> consultar(String pagina)
 	{
 		ArrayList<Deducciones> lista = new ArrayList<>();
-		String sql = "select * from Deducciones";
+		String sql = "execute sp_paginaciondinamica 'Deducciones','nombre','"+pagina+"','5'";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
