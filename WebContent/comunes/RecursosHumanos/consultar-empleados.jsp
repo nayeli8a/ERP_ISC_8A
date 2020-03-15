@@ -20,6 +20,11 @@
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
     <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
     
+    <style>
+    	 .modal-body { max-height: calc(100vh - 200px); overflow-y: auto; } 
+	</style>
+
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
@@ -169,31 +174,167 @@
 	
 	      <!-- Modal body -->
 	      <div class="modal-body" id="modal_div">
-	      <% //Aqui va todo el cuerpo del modal, el cual contiene todo los datos necesarios para el cliente%>
-	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Estado" method="post">
-			<div class="form-group">
-				<label>Nombre: </label>
-				<input type="text" onkeypress="return soloLetras(event)" class="form-control" style="text-transform:uppercase;" id="nom_estado" name="nom_estado" required>
-				<br>
-				<label>Siglas: </label>
-				<input type="text" onkeypress="return soloLetras(event)" class="form-control" style="text-transform:uppercase;" id="siglas" name="siglas" required>
-				<br>
-				<label for="Estatus">Estatus</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
-		      			<option value="A">Activo</option>
-		      			<option value="I">Inactivo</option>
-		    		</select>
-		    	<br>
-		    	<button type="submit" class="btn btn-primary">Registrar</button>
-			</div>
-		</form>
-	      	 
-	      	
+	      <% //Aqui va todo el cuerpo del modal%>
+	      	<form action="#">
+			    <div class="container">
+			      <legend> Datos Generales: </legend>
+			      <div class="row">
+			        <div class="col-md-4" id="nombre">
+			          <div class="form-group">
+			            <input type="text" class="form-control" placeholder="Nombre(s)">
+			          </div>
+			        </div>
+			        <div class="col-md-4" id="apaterno">
+			          <div class="form-group">
+			            <input type="text" class="form-control" placeholder="Apellido Paterno">
+			          </div>
+			        </div>
+			        <div class="col-md-4" id="amaterno">
+			          <div class="form-group">
+			            <input type="text" class="form-control" placeholder="Apellido Materno">
+			          </div>
+			        </div>
+			      </div>
+			      <div class="row">
+			        <div class="col-md-6">
+			        	<label>Sexo:</label>
+			          <select class="form-control" id="sexo" name="sexo">
+			            <option value="M">Masculino</option>
+			            <option value="M">Femenino</option>
+			          </select>
+			        </div>
+			        <div class="col-md-6">
+			        	<label>Estado Civil:</label>
+			          <select class="form-control" id="estado-civil" name="estado-civil">
+			            <option value="Casado">Casado</option>
+			            <option value="Soltero">Soltero</option>
+			            <option value="Union Libre">Union Libre</option>
+			            <option value="Divorciado">Divorciado</option>
+			          </select>
+			        </div>
+			      </div>
+			      <br>
+			      <div class="row">
+			        <div class="col-md-6">
+			        	<label>Numero de Seguro Social:</label>
+			          <div class="form-group">
+			            <input type="text" name="nss" placeholder="NSS" value="" required class="form-control">
+			          </div>
+			        </div>
+			        <div class="col-md-6">
+			        	<label>Fecha de Nacimiento:</label>
+			          <div class="form-group">
+			            <input type="date" name="fecha-nacimiento" value="" required class="form-control">
+			          </div>
+			        </div>
+			      </div>
+
+			      <div class="row">
+			      	<div class="col-md-12">
+			      		<small>Domicilio del empleado:</small>
+			      	</div>
+			        <div class="col-md-4">
+			          <div class="form-group">
+			            <input type="text" name="direccion" placeholder="Direccion" value="" required class="form-control">
+			          </div>
+			        </div>
+			        <div class="col-md-4">
+			          <div class="form-group">
+			            <input type="text" name="colonia" placeholder="Colonia" value="" required class="form-control">
+			          </div>
+			        </div>
+			        <div class="col-md-4">
+			          <div class="form-group">
+			            <input type="text" name="codigo-postal" placeholder="Codigo Postal" value="" required class="form-control">
+			          </div>
+			        </div>
+			      </div>
+
+			      <div class="row">
+			      	<div class="col-md-4">
+				        <label for="Ciudad">Ciudad:</label>
+			    		<select class="form-control" id="ciudad" name = "ciudad">
+			      			<c:forEach var="dato" items="${datosciudades}">
+			      				<option value="${dato.getIdCiudad()}">${dato.getNombre()}</option>
+			      			</c:forEach>
+			    		</select>
+			        </div>
+			      </div>
+
+
+			      <legend> Datos del empleado: </legend>
+			      <div class="row">
+			        <div class="col-md-6">
+			        	<label>Fecha de Contratacion:</label>
+			          <div class="form-group">
+			            <input type="date" name="fecha-contratacion" value="" required class="form-control">
+			          </div>
+			        </div>
+
+			        <div class="col-md-6">
+			        	<label>Salario:</label>
+			          <div class="form-group">
+			            <input type="number" name="salario" value="" required class="form-control">
+			          </div>
+			        </div>
+			      </div>
+			      
+			      <div class="row">
+			      	<div class="col-md-3">
+			      		<label>Dias Vacaciones:</label>
+			          <div class="form-group">
+			            <input type="number" name="dias-vacaciones" value="" required class="form-control">
+			          </div>
+			      	</div>
+			      	<div class="col-md-3">
+			      		<label>Dias Permiso:</label>
+			          <div class="form-group">
+			            <input type="number" name="dias-permiso" value="" required class="form-control">
+			          </div>
+			      	</div>
+			      	<div class="col-md-3">
+			      		<label>% Comision:</label>
+			          <div class="form-group">
+			            <input type="number" name="porcentaje-comision" value="" required class="form-control">
+			          </div>
+			      	</div>
+			      </div>
+
+			      <div class="row">
+			      	<div class="col-md-4">
+				        <label for="Departamento">Departamento:</label>
+			    		<select class="form-control" id="departamento" name = "departamento">
+			      			<c:forEach var="dato" items="${datosdepartamentos}">
+			      				<option value="${dato.getIdDepartamento()}">${dato.getNombre()}</option>
+			      			</c:forEach>
+			    		</select>
+			        </div>
+			        <div class="col-md-4">
+				        <label for="Puesto">Puesto:</label>
+			    		<select class="form-control" id="puesto" name = "puesto">
+			      			<c:forEach var="dato" items="${datospuestos}">
+			      				<option value="${dato.getIdPuesto()}">${dato.getNombre()}</option>
+			      			</c:forEach>
+			    		</select>
+			        </div>
+			        <div class="col-md-4">
+				        <label for="Sucursal">Sucursal:</label>
+			    		<select class="form-control" id="sucursal" name = "sucursal">
+			      			<c:forEach var="dato" items="${datossucursales}">
+			      				<option value="${dato.getIdSucursal()}">${dato.getNombre()}</option>
+			      			</c:forEach>
+			    		</select>
+			        </div>
+			      </div>
+
+			    </div>
+			    <br>
+			    <button type="submit" class="btn btn-primary">Registrar</button>
+			  </form>
 	      </div>
 			
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
-	      	<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
 	      </div>
 	
 	    </div>
@@ -201,21 +342,21 @@
 	</div>
 	
 	<% //Aqui tendremos la paginacion%>
-	<nav aria-label="paginacion estados">
+	<nav aria-label="paginacion Empleados">
 	  <ul class="pagination justify-content-center">
 	    <c:if test="${pagina eq 1}">
 	    	<li class="page-item disabled">
-		      <a class="page-link" href="${pageContext.servletContext.contextPath}/Estado?op=Listar&pagina=${pagina-1}">Previous</a>
+		      <a class="page-link" href="${pageContext.servletContext.contextPath}/Empleados?op=Listar&pagina=${pagina-1}">Previous</a>
 		    </li>
 	    </c:if>
 	    <c:if test="${pagina > 1}">
 	    	<li class="page-items">
-		      <a class="page-link" href="${pageContext.servletContext.contextPath}/Estado?op=Listar&pagina=${pagina-1}">Previous</a>
+		      <a class="page-link" href="${pageContext.servletContext.contextPath}/Empleados?op=Listar&pagina=${pagina-1}">Previous</a>
 		    </li>
 	    </c:if>
 	    <li class="page-item"><a class="page-link">Pagina ${pagina}</a></li>
 	    <li class="page-item">
-	      <a class="page-link" href="${pageContext.servletContext.contextPath}/Estado?op=Listar&pagina=${pagina+1}">Next</a>
+	      <a class="page-link" href="${pageContext.servletContext.contextPath}/Empleados?op=Listar&pagina=${pagina+1}">Next</a>
 	    </li>
 	  </ul>
 	</nav>

@@ -14,10 +14,10 @@ public class EmpleadosDAO {
 	PreparedStatement ps;
 	ResultSet rs;
 	
-	public List<Empleados> consultar()
+	public List<Empleados> consultar(String pagina)
 	{
 		ArrayList<Empleados> lista = new ArrayList<>();
-		String sql = "select * from Empleados";
+		String sql = "execute sp_paginaciondinamica 'Empleados','idEmpleado','"+pagina+"','10'";
 		try {
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			rs = ps.executeQuery();

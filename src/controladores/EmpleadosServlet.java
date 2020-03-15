@@ -38,8 +38,11 @@ public class EmpleadosServlet extends HttpServlet {
 		
 		switch (op) {
 			case "Listar":
-				List<Empleados> datos = edao.consultar();
+				//obtenemos el valor de la pagina que vamos a mostrar
+				String pagina = request.getParameter("pagina");
+				List<Empleados> datos = edao.consultar(pagina);
 				request.setAttribute("datosempleados",datos);
+				request.setAttribute("pagina",pagina);
 				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"empleados.jsp";
 			break;
 		}
