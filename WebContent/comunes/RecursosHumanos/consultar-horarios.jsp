@@ -49,7 +49,7 @@
 					</tr>
 				</thead>
         <tbody id="myTable">
-					<c:forEach var="dato" items="${datos}">
+					<c:forEach var="dato" items="${datoshorarios}">
 						<c:if test="${dato.getEstatus() eq 'I'}">
 							<tr>
 							<td>${dato.getIdHorario()}</td>
@@ -99,45 +99,37 @@
 
       <!-- Modal body -->
       <div class="modal-body" id="modal_div">
+      <% //Aqui va todo el cuerpo del modal%>
       <form action="${pageContext.servletContext.contextPath}/Registrar?op=Horarios" method="post">
-    <div class="form-group">
-      <label>Hora de inicio: </label>
-      <input type="time"  class="form-control" min = "07:00" max = "10:00" required>
-      <br>
-      <label>Hora fin: </label>
-      <input type="time" class="form-control" min = "15:00" max = "18:00" required>
-      <br>
-      <label>Días: </label>
-      <br>
-      <label>LUNES</label>
-      <input type="radio" class="form-control">
-      
-      <label>MARTES</label>
-      <input type="radio" class="form-control">
-      
-      <label>MIÉRCOLES</label>
-      <input type="radio" class="form-control">
-      
-      <label>JUEVES</label>
-      <input type="radio" class="form-control">
-      
-      <label>VIERNES</label>
-      <input type="radio" class="form-control">
-      <br>
-      <label>ID Empleado: </label>
-      <input type="number" class="form-control" required>
-	  <br>
-      <label for="Estatus">Estatus</label>
+        <div class="form-group">
+          <label>Hora de inicio: </label>
+          <input type="time"  class="form-control" min = "07:00" max = "10:00" required>
+          <br>
+          <label>Hora fin: </label>
+          <input type="time" class="form-control" min = "15:00" max = "18:00" required>
+          <br>
+          <label>Días: </label>
+          <br>
+            <input type="checkbox" name="lunes" value="LU" />Lunes
+            <input type="checkbox" name="martes" value="MA" />Martes
+            <input type="checkbox" name="miercoles" value="MI" />Miercoles
+            <input type="checkbox" name="jueves" value="JU" />Jueves
+            <input type="checkbox" name="viernes" value="VI" />Viernes
+            <input type="checkbox" name="sabado" value="SA" />Sabado
+            <input type="checkbox" name="domingo" value="DO" />Domingo
+          <br>
+          <label>ID Empleado: </label>
+          <input type="number" class="form-control" required>
+    	    <br>
+          <label for="Estatus">Estatus</label>
           <select class="form-control" id="estatus" name = "estatus">
               <option value="A">Activo</option>
               <option value="I">Inactivo</option>
           </select>
-        <br>
-        <button type="submit" class="btn btn-primary">Registrar</button>
-    </div>
-  </form>
-        <% //Aqui va todo el cuerpo del modal, el cual contiene todo los datos necesarios para el cliente%>
-
+          <br>
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </div>
+      </form>
       </div>
 
       <!-- Modal footer -->

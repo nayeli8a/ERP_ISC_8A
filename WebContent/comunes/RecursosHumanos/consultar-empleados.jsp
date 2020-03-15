@@ -280,19 +280,19 @@
 			      </div>
 			      
 			      <div class="row">
-			      	<div class="col-md-3">
+			      	<div class="col-md-4">
 			      		<label>Dias Vacaciones:</label>
 			          <div class="form-group">
 			            <input type="number" name="dias-vacaciones" value="" required class="form-control">
 			          </div>
 			      	</div>
-			      	<div class="col-md-3">
+			      	<div class="col-md-4">
 			      		<label>Dias Permiso:</label>
 			          <div class="form-group">
 			            <input type="number" name="dias-permiso" value="" required class="form-control">
 			          </div>
 			      	</div>
-			      	<div class="col-md-3">
+			      	<div class="col-md-4">
 			      		<label>% Comision:</label>
 			          <div class="form-group">
 			            <input type="number" name="porcentaje-comision" value="" required class="form-control">

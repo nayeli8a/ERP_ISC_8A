@@ -80,7 +80,7 @@ public class HorariosDAO {
 		}
 		return salida;
 	}
-  /*
+  
   public List<Horarios> consultar()
 	{
 		ArrayList<Horarios> lista = new ArrayList<>();
@@ -91,12 +91,11 @@ public class HorariosDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Horarios h = new Horarios();
-				h.setIdHorario(rs.getIdHorario());
-				h.setDate(rs.getHoraInicio());
-				h.setDate(rs.getHoraFin());
-				h.setString(rs.getEstatus());
-				h.setInt(rs.getDias());
-				h.setInt(rs.getIdEmpleado())
+				h.setIdHorario(rs.getInt(1));
+				h.setHoraInicio(rs.getDate(2));
+				h.setHoraFin(rs.getDate(3));
+				h.setDias(rs.getString(4));
+				h.setIdEmpleado(rs.getInt(5));
 				lista.add(h);
 			}
 		} catch (SQLException e) {
@@ -104,7 +103,7 @@ public class HorariosDAO {
 		}
 		return lista;
 	}
-	*/
+	
   
   public Horarios consultaIndividual(int idHorario){
 		String sql="select * from Horarios where idHorario=?";

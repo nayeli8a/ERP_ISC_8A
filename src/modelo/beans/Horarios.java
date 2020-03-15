@@ -8,7 +8,7 @@ public class Horarios {
 	private Date horaInicio;
 	private Date horaFin;
 	private String estatus;
-	private int dias;
+	private String dias;
 	private int idEmpleado;
 	
 	public int getIdHorario() {
@@ -35,10 +35,10 @@ public class Horarios {
 	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
-	public int getDias() {
+	public String getDias() {
 		return dias;
 	}
-	public void setDias(int dias) {
+	public void setDias(String dias) {
 		this.dias = dias;
 	}
 	public int getIdEmpleado() {

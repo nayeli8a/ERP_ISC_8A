@@ -39,6 +39,7 @@ import modelo.datos.*;
 
     switch (op) {
 			case "Listar":
+				String pagina = request.getParameter("pagina");
 				List<Horarios> datos = hdao.consultar();
 				request.setAttribute("datoshorarios",datos);
 				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"horarios.jsp";
