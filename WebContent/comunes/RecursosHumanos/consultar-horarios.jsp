@@ -102,30 +102,30 @@
       <form action="${pageContext.servletContext.contextPath}/Registrar?op=Horarios" method="post">
     <div class="form-group">
       <label>Hora de inicio: </label>
-      <input type="time" min = "07:00" max = "10:00" required>
+      <input type="time"  class="form-control" min = "07:00" max = "10:00" required>
       <br>
       <label>Hora fin: </label>
-      <input type="time" min = "15:00" max = "18:00" required>
+      <input type="time" class="form-control" min = "15:00" max = "18:00" required>
       <br>
       <label>Días: </label>
       <br>
       <label>LUNES</label>
-      <input type="radio" >
+      <input type="radio" class="form-control">
       
       <label>MARTES</label>
-      <input type="radio" >
+      <input type="radio" class="form-control">
       
       <label>MIÉRCOLES</label>
-      <input type="radio" >
+      <input type="radio" class="form-control">
       
       <label>JUEVES</label>
-      <input type="radio" >
+      <input type="radio" class="form-control">
       
       <label>VIERNES</label>
-      <input type="radio" >
+      <input type="radio" class="form-control">
       <br>
       <label>ID Empleado: </label>
-      <input type="number" required>
+      <input type="number" class="form-control" required>
 	  <br>
       <label for="Estatus">Estatus</label>
           <select class="form-control" id="estatus" name = "estatus">
