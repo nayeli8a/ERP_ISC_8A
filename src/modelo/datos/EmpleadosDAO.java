@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+
+import org.apache.el.lang.ELArithmetic;
+
 import java.sql.Date;
 
 public class EmpleadosDAO {
@@ -53,5 +56,46 @@ public class EmpleadosDAO {
 			System.out.println("Error al consultar empleados: " + e.getMessage());
 		}
 		return lista;
+	}
+
+	public void insertar(Empleados e)
+	{
+		String sql = "insert into empleados (Nombre,Apaterno,Amaterno,"+
+		"Sexo,FechaContratacion,FechaNacimiento,Salario,nss,estadocivil,"+
+		"diasvacacionales,diaspermiso,fotografia,direccion,colonia,"+
+		"codigopostal,escolaridad,porcentajecomision,estatus,"+
+		"iddepartamento,idpuesto,idciudad,idsucursal) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement ps;
+		try {
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.setString(1,e.getNombre());
+			ps.setString(2, e.getApaterno());
+			ps.setString(3,e.getAmaterno());
+			ps.setString(4, e.getSexo());
+			ps.setDate(5, e.getFechaContratacion());
+			ps.setDate(6, e.getFechaNacimiento());
+			ps.setFloat(7, e.getSalario());
+			ps.setString(8,e.getNss());
+			ps.setString(9,e.getEstadoCivil());
+			ps.setInt(10, e.getDiasVacaciones());
+			ps.setInt(11, e.getDiasPermiso());
+			ps.setBinaryStream(12, e.getFotografia());
+			ps.setString(13, e.getDireccion());
+			ps.setString(14, e.getColonia());
+			ps.setString(15, e.getCodigoPostal());
+			ps.setString(16, e.getEscolaridad());
+			ps.setFloat(17, e.getPorcentajeComision());
+			ps.setString(18, e.getEstatus());
+			ps.setInt(19, e.getIdDepartamento());
+			ps.setInt(20, e.getIdPuesto());
+			ps.setInt(21, e.getIdCiudad());
+			ps.setInt(22, e.getIdSucursal());
+			ps.executeUpdate();
+			
+		} catch (SQLException ex) {
+			System.out.println("Error al insertar al empleado EMPLEADODAO: "+ex.getMessage());
+		}
+		
+		
 	}
 }

@@ -46,6 +46,31 @@ public class PuestosDAO {
 		}
 	}
 	
+	/*Este metodo se encarga de listar todos los elementos de los puestos para alguna interfaz de registro*/
+	public List<Puestos> consultar()
+	{
+		String sql = "select * from Puestos";
+		ArrayList<Puestos> lista = new ArrayList<>();
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Puestos p = new Puestos();
+				p.setIdPuesto(rs.getInt(1));
+				p.setNombre(rs.getString(2));
+				p.setSalarioMinimo(rs.getFloat(3));
+				p.setSalarioMaximo(rs.getFloat(4));
+				p.setEstatus(rs.getString(5));
+				lista.add(p);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
+	
+	/*Este metodo se encarga de listar lo 10 primeros puestos para cargarlos en una pagina html*/
 	public List<Puestos> consultar(String pagina)
 	{
 		ArrayList<Puestos> lista = new ArrayList<>();

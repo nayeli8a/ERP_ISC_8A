@@ -47,6 +47,27 @@ public class DepartamentosDAO {
 		}
 	}
 	
+	public List<Departamentos> consultar()
+	{
+		String sql = "select * from departamentos";
+		ArrayList<Departamentos> lista = new ArrayList<>();
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Departamentos d = new Departamentos();
+				d.setIdDepartamento(rs.getInt(1));
+				d.setNombre(rs.getString(2));
+				d.setEstatus(rs.getString(3));
+				lista.add(d);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
+	
 	public List<Departamentos> consultar(String pagina)
 	{
 		ArrayList<Departamentos> lista = new ArrayList<>();

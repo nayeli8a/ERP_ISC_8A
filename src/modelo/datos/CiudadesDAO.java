@@ -58,6 +58,31 @@ public class CiudadesDAO {
 		}
 		return salida;
 	}
+	
+	/*Este metodo se encarga de listar todos los objetos de ciudades para mostrarlos en una interfaz de registro*/
+	public List<Ciudades> consultar()
+	{
+		String sql = "select * from ciudades";
+		ArrayList<Ciudades> lista = new ArrayList<>();
+		try {
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Ciudades c = new Ciudades();
+				c.setIdCiudad(rs.getInt(1));
+				c.setNombre(rs.getString(2));
+				c.setIdEstado(rs.getInt(3));
+				c.setEstatus(rs.getString(4));
+			
+				lista.add(c);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
+	
+	/*Este metodo se encarga de listar los primeros 10 registros para mostrarlos en un html*/
 	public List <Ciudades> consultar(String pagina) {
 		ArrayList<Ciudades> lista = new ArrayList<>();
 		String sql = "execute sp_paginaciondinamica 'Ciudades','idCiudad','"+pagina+"','5'";
@@ -78,6 +103,7 @@ public class CiudadesDAO {
 		}
 		return lista;
 	}
+	
 	
 	public Ciudades consultaIndividual(int idCiudad){
 		String sql="select * from ciudades where idCiudad=?";

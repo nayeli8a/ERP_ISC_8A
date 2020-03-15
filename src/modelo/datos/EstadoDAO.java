@@ -40,7 +40,6 @@ public class EstadoDAO {
 		String sql = "insert into Estados (Nombre,Siglas,Estatus) values('"+nom_estado+"','"+siglas+"','"+estatus+"')";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
-			ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("Error al insertar el Estado en la BD: "+e.getMessage());

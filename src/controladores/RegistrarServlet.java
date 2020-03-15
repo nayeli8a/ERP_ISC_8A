@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,9 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import modelo.beans.Ciudades;
-import modelo.beans.Departamentos;
-import modelo.beans.Estado;
+import modelo.beans.*;
 import modelo.datos.*;
 
 /**
@@ -141,6 +140,35 @@ public class RegistrarServlet extends HttpServlet {
 					pudao.insertarPuesto(nom_puestos,salarioMinimo,salarioMaximo, estatus);
 				}
 				url="Puestos?op=Listar";
+			break;
+			case "Empleado":
+				Empleados e = new Empleados();
+				e.setNombre(request.getParameter("nombre"));
+				e.setApaterno(request.getParameter("apaterno"));
+				e.setAmaterno(request.getParameter("amaterno"));
+				e.setSexo(request.getParameter("sexo"));
+				e.setFechaContratacion(Date.valueOf(request.getParameter("fecha-contratacion")));
+				e.setFechaNacimiento(Date.valueOf(request.getParameter("fecha-nacimiento")));
+				e.setSalario(Integer.parseInt(request.getParameter("salario")));
+				e.setNss(request.getParameter("nss"));
+				e.setEstadoCivil(request.getParameter("estado-civil"));
+				e.setDiasVacaciones(Integer.parseInt(request.getParameter("dias-vacaciones")));
+				e.setDiasPermiso(Integer.parseInt(request.getParameter("dias-permiso")));
+				e.setFotografia(null);
+				e.setDireccion(request.getParameter("direccion"));
+				e.setColonia(request.getParameter("colonia"));
+				e.setCodigoPostal(request.getParameter("codigo-postal"));
+				e.setEscolaridad(request.getParameter("escolaridad"));
+				e.setPorcentajeComision(Float.parseFloat(request.getParameter("porcentaje-comision")));
+				e.setEstatus("A");
+				e.setIdDepartamento(Integer.parseInt(request.getParameter("departamento")));
+				e.setIdPuesto(Integer.parseInt(request.getParameter("puesto")));
+				e.setIdCiudad(Integer.parseInt(request.getParameter("ciudad")));
+				e.setIdSucursal(Integer.parseInt(request.getParameter("sucursal")));
+				
+				EmpleadosDAO emdao = new EmpleadosDAO();
+				emdao.insertar(e);
+				url = "Empleados?op=Listar&pagina=1";
 			break;
 		}
 		

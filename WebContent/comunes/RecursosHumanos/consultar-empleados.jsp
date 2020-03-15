@@ -175,23 +175,23 @@
 	      <!-- Modal body -->
 	      <div class="modal-body" id="modal_div">
 	      <% //Aqui va todo el cuerpo del modal%>
-	      	<form action="#">
+	      	<form action="${pageContext.servletContext.contextPath}/Registrar?op=Empleado" method="post">
 			    <div class="container">
 			      <legend> Datos Generales: </legend>
 			      <div class="row">
 			        <div class="col-md-4" id="nombre">
 			          <div class="form-group">
-			            <input type="text" class="form-control" placeholder="Nombre(s)">
+			            <input type="text" class="form-control" placeholder="Nombre(s)" name="nombre">
 			          </div>
 			        </div>
 			        <div class="col-md-4" id="apaterno">
 			          <div class="form-group">
-			            <input type="text" class="form-control" placeholder="Apellido Paterno">
+			            <input type="text" class="form-control" placeholder="Apellido Paterno" name="apaterno">
 			          </div>
 			        </div>
 			        <div class="col-md-4" id="amaterno">
 			          <div class="form-group">
-			            <input type="text" class="form-control" placeholder="Apellido Materno">
+			            <input type="text" class="form-control" placeholder="Apellido Materno" name="amaterno">
 			          </div>
 			        </div>
 			      </div>
@@ -258,6 +258,10 @@
 			      				<option value="${dato.getIdCiudad()}">${dato.getNombre()}</option>
 			      			</c:forEach>
 			    		</select>
+			        </div>
+			        <div class="col-md-4">
+				        <label for="Escolaridad">Escolaridad:</label>
+			    		<input type="text" name="escolaridad" placeholder="Escolaridad" value="" required class="form-control">
 			        </div>
 			      </div>
 

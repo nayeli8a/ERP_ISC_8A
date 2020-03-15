@@ -22,6 +22,7 @@ grant select,insert,update,delete on Nominas to RecursosHumanos
 grant select,insert,update,delete on NominasPercepciones to RecursosHumanos
 grant select,insert,update,delete on Deducciones to RecursosHumanos
 grant select,insert,update,delete on NominasDeducciones to RecursosHumanos
+grant select,insert,update,delete on Sucursales to RecursosHumanos
 
 grant select,insert,update,delete on Usuarios to RecursosHumanos
 grant select,insert,update,delete on TiposUsuarios to RecursosHumanos

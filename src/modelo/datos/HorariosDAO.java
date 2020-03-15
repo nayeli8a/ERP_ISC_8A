@@ -47,7 +47,7 @@ public class HorariosDAO {
 			ps.setDate(2,h.getHoraInicio());
 			ps.setDate(3,h.getHoraFin());
 			ps.setString(4, h.getEstatus());	
-			ps.setInt(5, h.getDias());
+			ps.setString(5, h.getDias());
 			ps.setInt(6,h.getIdEmpleado());
 			ps.executeUpdate();
 			
@@ -116,7 +116,7 @@ public class HorariosDAO {
 				h.setIdHorario(rs.getInt("idHorario"));
 				h.setHoraInicio(rs.getDate("horaInicio"));
 				h.setHoraFin(rs.getDate("horaFin"));
-				h.setDias(rs.getInt("dias"));
+				h.setDias(rs.getString("dias"));
 				h.setEstatus(rs.getString("estatus"));
 				h.setIdEmpleado(rs.getInt("idEmpleado"));
 			}
