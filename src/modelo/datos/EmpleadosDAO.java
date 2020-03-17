@@ -8,8 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.el.lang.ELArithmetic;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Date;
 
 public class EmpleadosDAO {
@@ -95,7 +101,35 @@ public class EmpleadosDAO {
 		} catch (SQLException ex) {
 			System.out.println("Error al insertar al empleado EMPLEADODAO: "+ex.getMessage());
 		}
-		
-		
 	}
+	
+	public void ListarImagen(int idEmpleado,HttpServletResponse response)
+    {
+        String sql = "select * from Empleados where idEmpleado = "+idEmpleado;
+        InputStream is = null;
+        OutputStream os = null;
+        BufferedInputStream bufferedInputStream = null;
+        BufferedOutputStream bufferedOutputStream = null;
+        response.setContentType("image/*");
+        
+        try {
+			os = response.getOutputStream();
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+	        rs = ps.executeQuery();
+	        if(rs.next())
+	        {
+	        	is = rs.getBinaryStream("fotografia");
+	        }
+	        bufferedInputStream = new BufferedInputStream(is);
+	        bufferedOutputStream = new BufferedOutputStream(os);
+	        int i=0;
+	        while((i=bufferedInputStream.read()) != -1)
+	        {
+	        	bufferedOutputStream.write(i);
+	        }
+		} catch (Exception e) {
+			System.out.println("error dentro de PersonaDAO: "+e.getMessage());
+		}
+    }
+	
 }

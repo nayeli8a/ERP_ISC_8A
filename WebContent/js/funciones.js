@@ -69,7 +69,8 @@ function soloLetras(e){
 }
 
 
-function envia(obj){
+function envia(obj)
+{
 	if(
 	(parseInt(document.getElementById("salarioMinimo").value,10)<parseInt(document.getElementById("salarioMaximo").value,10))
 	&& !isNaN(parseInt(document.getElementById("salarioMinimo").value,10))
@@ -81,7 +82,85 @@ function envia(obj){
 	alert("El salario Maximo debe ser mayor al salario Minimo");
 	return false;
 	}
-	}
+}
 
+//FUNCIONES PARA MOSTRAR VALORES EN INPUTS Y DIVS
+function getFecha(id)
+{
+	var now = new Date();
+
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+    document.getElementById(id).value = today;
+}
+
+function getHora(id)
+{
+	var date = new Date();
+	var currentTime = ("0"+date.getHours()).slice(-2) + ':' + ("0"+date.getMinutes()).slice(-2);
+	document.getElementById(id).value = currentTime;
+}
+
+
+function mostrarValor(idelemento,valor)
+{
+	document.getElementById(idelemento).value = valor+"";
+}
+
+function mostrarPlaceholder(idelemento,valor)
+{
+	document.getElementById(idelemento).placeholder = valor;
+}
+
+function mostrarImagen(idelemento,idimagen)
+{
+	document.getElementById(idelemento).src = 'IMGPersona?idfoto='+idimagen;
+}
+
+function rellenarEmpleado(id,nombre,apaterno,amaterno,sexo,
+	fcon,fnac,salario,nss,ecivil,dvac,dper,idfoto,direccion,
+	colonia,cp,escolaridad,porcom,estatus,iddep,idpue,idciu,idsuc)
+{
+	console.log({id,nombre,apaterno,amaterno,sexo,
+		fcon,fnac,salario,nss,ecivil,dvac,dper,idfoto,direccion,
+		colonia,cp,escolaridad,porcom,estatus,iddep,idpue,idciu,idsuc});
+	mostrarValor('edit_id',id);
+	mostrarValor('edit_nombre',nombre);
+	mostrarValor('edit_apaterno',apaterno);
+	mostrarValor('edit_amaterno',amaterno);
+	mostrarValor('edit_sexo',sexo);
+	mostrarValor('edit_fecha-contratacion',fcon);
+	mostrarValor('edit_fecha-nacimiento',fnac);
+	mostrarValor('edit_salario',salario)
+	mostrarValor('edit_nss',nss);
+	mostrarValor('edit_estado-civil',ecivil);
+	mostrarValor('edit_dias-vacaciones',dvac);
+	mostrarValor('edit_dias-permiso',dper);
+	mostrarImagen('edit_foto',idfoto);
+	mostrarValor('edit_direccion',direccion);
+	mostrarValor('edit_colonia',colonia);
+	mostrarValor('edit_codigo-postal',cp);
+	mostrarValor('edit_escolaridad',escolaridad);
+	mostrarValor('edit_porcentaje-comision',porcom);
+	mostrarValor('edit_departamento',iddep);
+	mostrarValor('edit_puesto',idpue);
+	mostrarValor('edit_ciudad',idciu);
+	mostrarValor('edit_sucursal',idsuc);
+}
+
+
+//FUNCIONES PARA OCULTAR/MOSTRAR DIV
+
+function OcultarDiv(idDiv)
+{
+	document.getElementById(idDiv).style.display = 'none';
+}
+
+function MostrarDiv(idDiv)
+{
+	document.getElementById(idDiv).style.display = 'block';
+}
 
 
