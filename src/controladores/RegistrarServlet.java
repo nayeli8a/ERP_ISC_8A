@@ -169,7 +169,21 @@ public class RegistrarServlet extends HttpServlet {
 				EmpleadosDAO emdao = new EmpleadosDAO();
 				emdao.insertar(e);
 				url = "Empleados?op=Listar&pagina=1";
+				
 			break;
+			case "Incapacidades" : 
+				Incapacidades in = new Incapacidades();
+				in.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
+				in.setFechaFin(Date.valueOf(request.getParameter("fechaFin")));
+				in.setEnfermedad(request.getParameter("enfermedad"));
+				in.setEvidencia(null);
+				in.setIdEmpleado(Integer.parseInt(request.getParameter("idEmpleado")));
+				in.setEstatus(request.getParameter("estatus"));
+				IncapacidadesDAO indao = new IncapacidadesDAO();
+				indao.insertarIncapacidades(in);
+				url = "Incapacidades?op=Listar&pagina=1";
+
+				
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(url);
