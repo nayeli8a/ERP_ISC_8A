@@ -18,6 +18,13 @@ public class Incapacidades {
 	public void setIdIncapacidad(int idIncapacidad) {
 		this.idIncapacidad = idIncapacidad;
 	}
+	
+	public int getIdIncapacidades() {
+		return idIncapacidad;
+	}
+	public void setIdIncapacidades(int idIncapacidad) {
+		this.idIncapacidad = idIncapacidad;
+	}
 	public Date getFechaInicio() {
 		return fechaInicio;
 	}

@@ -32,7 +32,7 @@
 	  <p>Escribe la información a buscar</p>  
 	  <input class="form-control" id="myInput" type="text" placeholder="Buscador...">
 	  		  <script>javascript:buscar();</script>
-		<h2 align="center">Deducciones</h2>
+		<h2 align="center">Incapacidades</h2>
 		<hr class="bg-info">
 		<button type="button" class="btn btn-success" id="agregar" data-toggle="modal" data-target="#modalRegistro" >Agregar</button>
 		<div class="table-responsive table-bordered table-striped">
@@ -73,8 +73,8 @@
 							<td>${dato.getEstatus()}</td>
 							<td>
 								<form action="Incapacidades" method="post">
-									<input type="hidden" name="id" value="${dato.getIdIncapacidades()}">
-									<div id="${dato.getIdIncapacidades()}">
+									<input type="hidden" name="id" value="${dato.getIdIncapacidad()}">
+									<div id="${dato.getIdIncapacidad()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
 										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
 									</div>
@@ -101,15 +101,31 @@
 	
 	      <!-- Modal body -->
 	      <div class="modal-body" id="modal_div">
-	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=incapacidades" method="post">
+	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Incapacidades" method="post">
 			<div class="form-group">
 				<label>Fecha Inicio: </label>
+				 <input type="date" name="fechaInicio" value="" required class="form-control" required>
+				
 				<br>
 				<label>Fecha Fin: </label>
+	    		<input type="date" name="fechaFin" value="" required class="form-control" required>
+				
 				<br>
 				<label>Enfermedad : </label>
 				<input type="text"  onkeypress="return soloLetras(event)" class="form-control" id="enfermedad" name="enfermedad" required >
+				
+				<br>
+				<label>Evidencia: </label>
 
+
+				<br>
+				<br>
+				<label>Id empleado : </label>
+			   <input type="text" class="form-control"  name="idEmpleado" required  >
+				
+
+
+				<br>
 				<label for="Estatus">Estatus</label>
 		    		<select class="form-control" id="estatus" name = "estatus">
 		      			<option value="A">Activo</option>
@@ -133,7 +149,7 @@
 	</div>
 	
 		<% //Aqui tendremos la paginacion%>
-	<nav aria-label="paginacion deducciones">
+	<nav aria-label="paginacion incapacidades">
 	  <ul class="pagination justify-content-center">
 	    <c:if test="${pagina eq 1}">
 	    	<li class="page-item disabled">

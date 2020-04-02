@@ -19,7 +19,7 @@ public class IncapacidadesDAO {
 	
 	public void insertarIncapacidades(Incapacidades in)
 	{
-		String sql = "insert into Incapacidades (fechaInicio, fechaFin, enfermedad, evidencia, idEmpleado, estatus,) values (?,?,?,?,?,?)";
+		String sql = "insert into Incapacidades (fechaInicio, fechaFin, enfermedad, evidencia, idEmpleado, estatus) values (?,?,?,?,?,?)";
 		PreparedStatement ps;
 		try {
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -36,6 +36,7 @@ public class IncapacidadesDAO {
 			System.out.println("Error al insertar la incapacidad en INDAO: "+ex.getMessage());
 		}
 	}
+	
 	public List<Incapacidades> consultar(String pagina)
 	{
 		ArrayList<Incapacidades> lista = new ArrayList<>();
@@ -52,7 +53,7 @@ public class IncapacidadesDAO {
 				in.setEnfermedad(rs.getString(4));
 				in.setEvidencia(rs.getBinaryStream(5));
 				in.setIdEmpleado(rs.getInt(6));
-				in.setEstatus(rs.getNString(7));
+				in.setEstatus(rs.getString(7));
 				lista.add(in);
 			}
 		} catch (SQLException e) {
@@ -74,7 +75,7 @@ public class IncapacidadesDAO {
 				in.setFechaFin(rs.getDate("fechaFin"));
 				in.setEnfermedad(rs.getString("enfermedad"));
 				in.setEvidencia(rs.getBinaryStream("evidencia"));
-				in.setIdEmpleado(rs.getInt("idEmpelado"));
+				in.setIdEmpleado(rs.getInt("idEmpleado"));
 				in.setEstatus(rs.getString("estatus"));
 			}
 			ps.close();
@@ -87,7 +88,7 @@ public class IncapacidadesDAO {
 	}
 	
 	public void eliminar(String id){
-		String sql = "execute sp_EliminarLogicamente 'Incapacidades','"+id+"','idIncapacidades'";
+		String sql = "execute sp_EliminarLogicamente 'Incapacidades','"+id+"','idIncapacidad'";
 		System.out.println(sql);
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -109,6 +110,7 @@ public class IncapacidadesDAO {
 			ps.setBinaryStream(4, in.getEvidencia());	
 			ps.setInt(5, in.getIdEmpleado());
 			ps.setString(6,in.getEstatus());
+			ps.setInt(7, in.getIdIncapacidad());
 			ps.executeUpdate();
 			
 		} catch (Exception e) {
