@@ -31,7 +31,8 @@
 	 <h2>Buscador</h2>
 	  <p>Escribe la información a buscar</p>  
 	  <input class="form-control" id="myInput" type="text" placeholder="Buscador...">
-	  		  <script>javascript:buscar();</script>
+	  <script>javascript:buscar();</script>
+	  
 		<h2 align="center">Estados</h2>
 		<hr class="bg-info">
 		<button type="button" class="btn btn-success" id="agregar" data-toggle="modal" data-target="#modalRegistro" >Agregar</button>

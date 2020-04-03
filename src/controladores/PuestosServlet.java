@@ -64,7 +64,7 @@ public class PuestosServlet extends HttpServlet {
 			case "Eliminar":
 				pdao = new PuestosDAO();
 				pdao.eliminar(request.getParameter("id"));
-				url = "Puestos?op=Listar";
+				url = "Puestos?op=Listar&pagina=1";
 				break;
 			case "Modificar":
 				Puestos puestos = new Puestos();
@@ -75,7 +75,7 @@ public class PuestosServlet extends HttpServlet {
 				puestos.setEstatus(request.getParameter("estatus"));
 				pdao = new PuestosDAO();
 				pdao.actualizar(puestos);
-				url="Puestos?op=Listar";
+				url="Puestos?op=Listar&pagina=1";
 				break;
 			
 		}

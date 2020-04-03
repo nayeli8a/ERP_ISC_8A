@@ -63,7 +63,7 @@ public class DepartamentosServlet extends HttpServlet {
 							case "Eliminar":
 								dedao = new DepartamentosDAO();
 								dedao.eliminar(request.getParameter("id"));
-								url = "Departamentos?op=Listar";
+								url = "Departamentos?op=Listar&pagina=1";
 								break;
 							case "Modificar":
 							   Departamentos departamentos = new Departamentos();
@@ -72,7 +72,7 @@ public class DepartamentosServlet extends HttpServlet {
 								departamentos.setEstatus(request.getParameter("estatus"));
 								dedao = new DepartamentosDAO();
 								dedao.actualizar(departamentos);
-								url="Departamentos?op=Listar";
+								url="Departamentos?op=Listar&pagina=1";
 								break;
 						}			
 						

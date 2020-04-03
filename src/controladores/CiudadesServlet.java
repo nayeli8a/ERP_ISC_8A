@@ -73,7 +73,7 @@ public class CiudadesServlet extends HttpServlet {
 					case "Eliminar":
 						cdao = new CiudadesDAO();
 						cdao.eliminar(request.getParameter("id"));
-						url = "Ciudades?op=Listar";
+						url = "Ciudades?op=Listar&pagina=1";
 						break;
 					case "Modificar":
 						Ciudades ciudades = new Ciudades();
@@ -83,7 +83,7 @@ public class CiudadesServlet extends HttpServlet {
 						ciudades.setIdCiudad(Integer.parseInt(request.getParameter("idCiudad")));
 						cdao = new CiudadesDAO();
 						cdao.actualizar(ciudades);
-						url="Ciudades?op=Listar";
+						url="Ciudades?op=Listar&pagina=1";
 						break;
 				}
 				

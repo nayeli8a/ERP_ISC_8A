@@ -72,7 +72,7 @@ public class RegistrarServlet extends HttpServlet {
 					cdao.insertarCiudades(nom_ciudad,nom_estado, estatus);
 				}
 				
-				url="Ciudades?op=Listar";
+				url="Ciudades?op=Listar&pagina=1";
 				break;
 				
 			case "Deducciones":
@@ -91,7 +91,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					ddao.insertarDeducciones(nom_deducciones, descripcion, porcentaje, estatus);
 				}
-				url="Deducciones?op=Listar";
+				url="Deducciones?op=Listar&pagina=1";
 			break;
 			case "Percepciones":
 				//generamos el objeto a llenar
@@ -108,7 +108,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					pdao.insertarPercepciones(nom_percepciones, descripcion_percepciones, diasPagar, estatus);
 				}
-				url="Percepciones?op=Listar";
+				url="Percepciones?op=Listar&pagina=1";
 			break;
 			case "Departamentos":
 				//generamos el objeto a llenar
@@ -123,7 +123,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					dedao.insertarDepartamento(nom_departamentos, estatus);
 				}
-				url="Departamentos?op=Listar";
+				url="Departamentos?op=Listar&pagina=1";
 			break;
 			case "Puestos":
 				//generamos el objeto a llenar
@@ -139,7 +139,7 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					pudao.insertarPuesto(nom_puestos,salarioMinimo,salarioMaximo, estatus);
 				}
-				url="Puestos?op=Listar";
+				url="Puestos?op=Listar&pagina=1";
 			break;
 			case "Empleado":
 				Empleados e = new Empleados();
@@ -149,7 +149,7 @@ public class RegistrarServlet extends HttpServlet {
 				e.setSexo(request.getParameter("sexo"));
 				e.setFechaContratacion(Date.valueOf(request.getParameter("fecha-contratacion")));
 				e.setFechaNacimiento(Date.valueOf(request.getParameter("fecha-nacimiento")));
-				e.setSalario(Integer.parseInt(request.getParameter("salario")));
+				e.setSalario(Float.parseFloat(request.getParameter("salario")));
 				e.setNss(request.getParameter("nss"));
 				e.setEstadoCivil(request.getParameter("estado-civil"));
 				e.setDiasVacaciones(Integer.parseInt(request.getParameter("dias-vacaciones")));

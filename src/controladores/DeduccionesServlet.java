@@ -64,7 +64,7 @@ public class DeduccionesServlet extends HttpServlet {
 					case "Eliminar":
 						ddao = new DeduccionesDAO();
 						ddao.eliminar(request.getParameter("id"));
-						url = "Deducciones?op=Listar";
+						url = "Deducciones?op=Listar&pagina=1";
 						break;
 					case "Modificar":
 						Deducciones deducciones = new Deducciones();
@@ -75,7 +75,7 @@ public class DeduccionesServlet extends HttpServlet {
 						deducciones.setEstatus(request.getParameter("estatus"));
 						ddao = new DeduccionesDAO();
 						ddao.actualizar(deducciones);
-						url="Deducciones?op=Listar";
+						url="Deducciones?op=Listar&pagina=1";
 						break;
 					
 				}

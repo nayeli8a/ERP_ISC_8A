@@ -103,6 +103,55 @@ public class EmpleadosDAO {
 		}
 	}
 	
+	public void Actualizar(Empleados e)
+	{
+		String sql = "UPDATE Empleados SET Nombre=?,Apaterno=?,Amaterno=?,Sexo=?,FechaContratacion=?,"
+				+ "FechaNacimiento=?,Salario=?,Nss=?,EstadoCivil=?,diasVacacionales=?,diasPermiso=?,"
+				+ "Fotografia="+null+",Direccion=?,Colonia=?,CodigoPostal=?,Escolaridad=?,"
+				+ "PorcentajeComision=?,idDepartamento=?,idPuesto=?,idCiudad=?,idSucursal=? "
+				+ "WHERE idEmpleado="+e.getIdEmpleado();
+		try {
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+
+			ps.setString(1, e.getNombre());
+			ps.setString(2,e.getApaterno());
+			ps.setString(3, e.getAmaterno());
+			ps.setString(4,e.getSexo());
+			ps.setDate(5, e.getFechaContratacion());
+			ps.setDate(6, e.getFechaNacimiento());
+			ps.setFloat(7, e.getSalario());
+			ps.setString(8, e.getNss());
+			ps.setString(9, e.getEstadoCivil());
+			ps.setInt(10,e.getDiasVacaciones());
+			ps.setInt(11, e.getDiasPermiso());
+			ps.setString(12, e.getDireccion());
+			ps.setString(13, e.getColonia());
+			ps.setString(14, e.getCodigoPostal());
+			ps.setString(15, e.getEscolaridad());
+			ps.setFloat(16, e.getPorcentajeComision());
+			ps.setInt(17, e.getIdDepartamento());
+			ps.setInt(18, e.getIdPuesto());
+			ps.setInt(19, e.getIdCiudad());
+			ps.setInt(20, e.getIdSucursal());
+			ps.executeUpdate();
+			
+		} catch (Exception ex) {
+			System.out.println("Error al actualizar al empleado"+ex.getMessage());
+		}
+	}
+	
+	public void Eliminar(int idEmpleado)
+	{
+		String sql = "execute sp_EliminarLogicamente 'Empleados','"+idEmpleado+"','idEmpleado'";
+		try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("Error: " + e.getMessage());
+			}
+	}
+	
 	public void ListarImagen(int idEmpleado,HttpServletResponse response)
     {
         String sql = "select * from Empleados where idEmpleado = "+idEmpleado;

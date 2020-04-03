@@ -61,7 +61,7 @@ public class IncapacidadesServlet extends HttpServlet {
 				case "Eliminar":
 					indao = new IncapacidadesDAO();
 					indao.eliminar(request.getParameter("id"));
-					url = "Incapacidades?op=Listar";
+					url = "Incapacidades?op=Listar&pagina=1";
 					break;
 				case "Modificar":
 					Incapacidades incapacidades = new Incapacidades();
@@ -73,7 +73,7 @@ public class IncapacidadesServlet extends HttpServlet {
 					incapacidades.setEstatus(request.getParameter("estatus"));
 					indao = new IncapacidadesDAO();
 					indao.actualizar(incapacidades);
-					url="Incapacidades?op=Listar";
+					url="Incapacidades?op=Listar&pagina=1";
 					break;
 						
 				}

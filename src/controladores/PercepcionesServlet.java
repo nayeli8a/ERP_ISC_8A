@@ -64,7 +64,7 @@ public class PercepcionesServlet extends HttpServlet {
 			case "Eliminar":
 				pdao = new PercepcionesDAO();
 				pdao.eliminar(request.getParameter("id"));
-				url = "Percepciones?op=Listar";
+				url = "Percepciones?op=Listar&pagina=1";
 				break;
 			case "Modificar":
 				Percepciones percepciones = new Percepciones();
@@ -75,7 +75,7 @@ public class PercepcionesServlet extends HttpServlet {
 				percepciones.setEstatus(request.getParameter("estatus"));
 				pdao = new PercepcionesDAO();
 				pdao.actualizar(percepciones);
-				url="Percepciones?op=Listar";
+				url="Percepciones?op=Listar&pagina=1";
 				break;
 			
 		}

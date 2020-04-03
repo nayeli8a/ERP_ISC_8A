@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -68,6 +69,41 @@ public class EmpleadosServlet extends HttpServlet {
 				request.setAttribute("pagina",pagina);
 				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"empleados.jsp";
 			break;
+			case "Editar":
+				e = new Empleados();
+				e.setIdEmpleado(Integer.parseInt(request.getParameter("edit_id")));
+				e.setNombre(request.getParameter("edit_nombre"));
+				e.setApaterno(request.getParameter("edit_apaterno"));
+				e.setAmaterno(request.getParameter("edit_amaterno"));
+				e.setSexo(request.getParameter("edit_sexo"));
+				e.setFechaContratacion(Date.valueOf(request.getParameter("edit_fecha-contratacion")));
+				e.setFechaNacimiento(Date.valueOf(request.getParameter("edit_fecha-nacimiento")));
+				e.setSalario(Float.parseFloat(request.getParameter("edit_salario")));
+				e.setNss(request.getParameter("edit_nss"));
+				e.setEstadoCivil(request.getParameter("edit_estado-civil"));
+				e.setDiasVacaciones(Integer.parseInt(request.getParameter("edit_dias-vacaciones")));
+				e.setDiasPermiso(Integer.parseInt(request.getParameter("edit_dias-permiso")));
+				e.setFotografia(null);
+				e.setDireccion(request.getParameter("edit_direccion"));
+				e.setColonia(request.getParameter("edit_colonia"));
+				e.setCodigoPostal(request.getParameter("edit_codigo-postal"));
+				e.setEscolaridad(request.getParameter("edit_escolaridad"));
+				e.setPorcentajeComision(Float.parseFloat(request.getParameter("edit_porcentaje-comision")));
+				e.setEstatus("A");
+				e.setIdDepartamento(Integer.parseInt(request.getParameter("edit_departamento")));
+				e.setIdPuesto(Integer.parseInt(request.getParameter("edit_puesto")));
+				e.setIdCiudad(Integer.parseInt(request.getParameter("edit_ciudad")));
+				e.setIdSucursal(Integer.parseInt(request.getParameter("edit_sucursal")));
+				
+				edao.Actualizar(e);
+				url = "Empleados?op=Listar&pagina=1";
+				break;
+			case "Eliminar":
+				int id = Integer.parseInt(request.getParameter("id"));
+				edao.Eliminar(id);
+				url = "Empleados?op=Listar&pagina=1";
+				break;
+				
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(url);

@@ -36,6 +36,8 @@
 	 <h2>Buscador</h2>
 	  <p>Escribe la información a buscar</p>  
 	  <input class="form-control" id="myInput" type="text" placeholder="Buscador...">
+	  <script>javascript:buscar();</script>
+	  
 		<h2 align="center">Empleados</h2>
 		<hr class="bg-info">
 		<button type="button" class="btn btn-success" id="agregar" data-toggle="modal" data-target="#modalRegistro" >Agregar</button>
@@ -61,10 +63,10 @@
 						<th>CP</th>
 						<th>Escolaridad</th>
 						<th>%Comision</th>
-						<th>IdDepartamento</th>
-						<th>idPuesto</th>
-						<th>idCiudad</th>
-						<th>idSucursal</th>
+						<th>Departamento</th>
+						<th>Puesto</th>
+						<th>Ciudad</th>
+						<th>Sucursal</th>
 						<th>Horario</th>
 						<th>Nomina</th>
 						<th>Pedidos</th>
@@ -97,10 +99,26 @@
 							<td>${dato.getCodigoPostal()}</td>
 							<td>${dato.getEscolaridad()}</td>
 							<td>${dato.getPorcentajeComision()}</td>
-							<td>${dato.getIdDepartamento()}</td>
-							<td>${dato.getIdPuesto()}</td>
-							<td>${dato.getIdCiudad()}</td>
-							<td>${dato.getIdSucursal()}</td>
+							<c:forEach var="datosd" items="${datosdepartamentos}">
+								<c:if test="${datosd.getIdDepartamento() eq dato.getIdDepartamento() }">
+									<td>${datosd.getNombre()}</td>
+								</c:if>
+							</c:forEach>
+							<c:forEach var="datosp" items="${datospuestos}">
+								<c:if test="${datosp.getIdPuesto() eq dato.getIdPuesto() }">
+									<td>${datosp.getNombre()}</td>
+								</c:if>
+							</c:forEach>
+							<c:forEach var="datosc" items="${datosciudades}">
+								<c:if test="${datosc.getIdCiudad() eq dato.getIdCiudad() }">
+									<td>${datosc.getNombre()}</td>
+								</c:if>
+							</c:forEach>
+							<c:forEach var="datoss" items="${datossucursales}">
+								<c:if test="${datoss.getIdSucursal() eq dato.getIdSucursal() }">
+									<td>${datoss.getNombre()}</td>
+								</c:if>
+							</c:forEach>
 							<td><button>VER</button></td>
 							<td><button>VER</button></td>
 							<td><button>VER</button></td>
@@ -130,10 +148,26 @@
 							<td>${dato.getCodigoPostal()}</td>
 							<td>${dato.getEscolaridad()}</td>
 							<td>${dato.getPorcentajeComision()}</td>
-							<td>${dato.getIdDepartamento()}</td>
-							<td>${dato.getIdPuesto()}</td>
-							<td>${dato.getIdCiudad()}</td>
-							<td>${dato.getIdSucursal()}</td>
+							<c:forEach var="datosd" items="${datosdepartamentos}">
+								<c:if test="${datosd.getIdDepartamento() eq dato.getIdDepartamento() }">
+									<td>${datosd.getNombre()}</td>
+								</c:if>
+							</c:forEach>
+							<c:forEach var="datosp" items="${datospuestos}">
+								<c:if test="${datosp.getIdPuesto() eq dato.getIdPuesto() }">
+									<td>${datosp.getNombre()}</td>
+								</c:if>
+							</c:forEach>
+							<c:forEach var="datosc" items="${datosciudades}">
+								<c:if test="${datosc.getIdCiudad() eq dato.getIdCiudad() }">
+									<td>${datosc.getNombre()}</td>
+								</c:if>
+							</c:forEach>
+							<c:forEach var="datoss" items="${datossucursales}">
+								<c:if test="${datoss.getIdSucursal() eq dato.getIdSucursal() }">
+									<td>${datoss.getNombre()}</td>
+								</c:if>
+							</c:forEach>
 							<td><button>VER</button></td>
 							<td><button>VER</button></td>
 							<td><button>VER</button></td>
@@ -372,7 +406,7 @@
 	      <!-- Modal body -->
 	      <div class="modal-body" id="modal_div">
 	      <% //Aqui va todo el cuerpo del modal%>
-	      	<form action="${pageContext.servletContext.contextPath}/Empleado?op=Editar" method="post">
+	      	<form action="${pageContext.servletContext.contextPath}/Empleados?op=Editar" method="post">
 			    <div class="container">
 			      <legend> Datos Generales: </legend>
 			      <div class="row">
@@ -400,7 +434,7 @@
 			        	<label>Sexo:</label>
 			          <select class="form-control" id="edit_sexo" name="edit_sexo">
 			            <option value="M">Masculino</option>
-			            <option value="M">Femenino</option>
+			            <option value="F">Femenino</option>
 			          </select>
 			        </div>
 			        <div class="col-md-6">
