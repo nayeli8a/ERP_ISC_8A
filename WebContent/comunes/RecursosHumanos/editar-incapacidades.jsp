@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
     <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
 </head>
-<body onkeypress="return soloLetras(event)" >
+<body >
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
 		<a class="btn btn-primary"href="${pageContext.servletContext.contextPath}/General?op=RegresarRH">Atras</a>
 	</nav>
@@ -41,7 +41,7 @@
 				
 				<br>
 				<label>Enfermedad : </label>
-				<input type="text"  onkeypress="return soloLetras(event)" class="form-control" id="enfermedad" name="enfermedad"  value="${datosIncapacidades.getEnfermedad()}"required >
+				<input type="text"  onkeypress="return soloLetras(event)" class="form-control" id="enfermedad" name="enfermedad" style="text-transform:uppercase;"  value="${datosIncapacidades.getEnfermedad()}"required >
 				
 				<br>
 				<label>Evidencia: </label>
@@ -50,7 +50,7 @@
 				<br>
 				<br>
 				<label>Id empleado : </label>
-			   <input type="text" class="form-control"  name="idEmpleado" value="${datosIncapacidades.getIdEmpleado()}" required  >
+			   <input type="number" class="form-control"  name="idEmpleado" value="${datosIncapacidades.getIdEmpleado()}" required  >
 			
 
 				<br>

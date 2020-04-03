@@ -112,7 +112,7 @@
 				
 				<br>
 				<label>Enfermedad : </label>
-				<input type="text"  onkeypress="return soloLetras(event)" class="form-control" id="enfermedad" name="enfermedad" required >
+				<input type="text"  onkeypress="return soloLetras(event)" class="form-control" id="enfermedad" name="enfermedad" style="text-transform:uppercase;"  required >
 				
 				<br>
 				<label>Evidencia: </label>
@@ -121,7 +121,7 @@
 				<br>
 				<br>
 				<label>Id empleado : </label>
-			   <input type="text" class="form-control"  name="idEmpleado" required  >
+			   <input type="number" class="form-control"  name="idEmpleado" required  >
 				
 
 

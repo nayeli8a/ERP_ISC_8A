@@ -50,8 +50,8 @@ function buscar(){
 
 function soloLetras(e){
    key = e.keyCode || e.which;
-   tecla = String.fromCharCode(key);
-   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+   tecla = String.fromCharCode(key).toUpperCase();
+   letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
    especiales = "8-37-39-46";
 
    tecla_especial = false
