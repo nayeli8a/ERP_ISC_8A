@@ -1,4 +1,4 @@
-select * from Usuario;
+select * from Usuarios;
 select * from TiposUsuarios;
 select * from Empleados;
 select * from Departamentos;

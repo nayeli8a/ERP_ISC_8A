@@ -8,6 +8,7 @@
 
 <title>Consultar Horarios</title>
 
+
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
@@ -103,10 +104,10 @@
       <form action="${pageContext.servletContext.contextPath}/Registrar?op=Horarios" method="post">
         <div class="form-group">
           <label>Hora de inicio: </label>
-          <input type="time"  class="form-control" min = "07:00" max = "10:00" required>
+          <input type="time" min ="07:00"  max="10:00" class="form-control" required>
           <br>
           <label>Hora fin: </label>
-          <input type="time" class="form-control" min = "15:00" max = "18:00" required>
+          <input type="time" min ="15:00"  max="18:00"  class="form-control" required>
           <br>
           <label>Días: </label>
           <br>

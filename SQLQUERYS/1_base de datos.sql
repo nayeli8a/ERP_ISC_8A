@@ -228,7 +228,7 @@ constraint NominasEmpleados_FK foreign key (idEmpleado) references Empleados(idE
 constraint NominasFormaPago_FK foreign key (idFormaPago) references FormasPago(idFormaPago)
 );
 
-create table UsuarioS(
+create table Usuarios(
 	nombre varchar(30) not null, 
 	contrasenia varchar(20),
 	estatus char,
@@ -416,7 +416,8 @@ estatus char
 CONSTRAINT Productos_PK PRIMARY KEY(idProducto),
 CONSTRAINT Laboratorio_FK FOREIGN KEY(idLaboratorio) REFERENCES Laboratorios(idLaboratorio),
 CONSTRAINT Categorias_FK FOREIGN KEY(idCategorias) REFERENCES Categorias(idCategorias),
-)
+);
+
 CREATE TABLE Ofertas(
 	idOferta INTEGER IDENTITY(1,1) NOT NULL,
 	nombre VARCHAR(50),

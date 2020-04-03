@@ -34,33 +34,21 @@
 				<input type="text" readonly name="idhorario" readonly required placeholder="idhorario" value="${datoshorarios.getIdHorario()}">
 				<br>
 				<label>Hora Inicio:</label>
-				<input type="time" class="form-control"  required value="${datoshorarios.getHoraInicio()}">
+				<input type="time" class="form-control"  min ="07:00"  max="10:00" required value="${datoshorarios.getHoraInicio()}">
 				<br>
-				
+
 				<label>Hora fin:</label>
-				<input type="time"  class="form-control"   required value="${datoshorarios.getHoraFin()}">
+				<input type="time"  class="form-control"  min ="15:00"  max="18:00" required value="${datoshorarios.getHoraFin()}">
 				<br>
 
 				<label>Días: </label>
-			      <br>
-			      <label>LUNES</label>
-			      <input type="radio" class="form-control" >
-			      
-			      <label>MARTES</label>
-			      <input type="radio" class="form-control">
-			      
-			      <label>MIÉRCOLES</label>
-			      <input type="radio" class="form-control">
-			      
-			      <label>JUEVES</label>
-			      <input type="radio" class="form-control">
-			      
-			      <label>VIERNES</label>
-			      <input type="radio" class="form-control">
-			      <br>
-			      <label>ID Empleado: </label>
-			      <input type="number" class="form-control" required value="${datoshorarios.getIdEmpleado()}">
-				  <br>
+				<input type="checkbox" name="lunes" value="LU" />Lunes
+				<input type="checkbox" name="martes" value="MA" />Martes
+				<input type="checkbox" name="miercoles" value="MI" />Miercoles
+				<input type="checkbox" name="jueves" value="JU" />Jueves
+				<input type="checkbox" name="viernes" value="VI" />Viernes
+				<input type="checkbox" name="sabado" value="SA" />Sabado
+				<input type="checkbox" name="domingo" value="DO" />Domingo
 
 				<label for="Estatus">Estatus:</label>
 		    		<select class="form-control" id="estatus" name ="estatus">
