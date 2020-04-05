@@ -1,4 +1,5 @@
 use ERP2020
+use master
 --CREACION DE ROLES
 create role RecursosHumanos authorization dbo
 create role Ventas authorization dbo

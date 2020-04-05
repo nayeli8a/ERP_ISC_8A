@@ -1,3 +1,5 @@
+use ERP2020
+
 select * from Usuarios;
 select * from TiposUsuarios;
 select * from Empleados;
@@ -6,6 +8,7 @@ select * from Puestos;
 select * from Estados;
 select * from Ciudades; 
 select * from Sucursales; 
+select * from horarios;
 
 -- DATOS NECESARIOS ANTES DE CREAR EMPLEADOS EN LA BD
 insert into Estados values('Michoacan', 'Mich', 'A');

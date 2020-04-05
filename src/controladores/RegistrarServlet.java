@@ -171,6 +171,28 @@ public class RegistrarServlet extends HttpServlet {
 				url = "Empleados?op=Listar&pagina=1";
 				
 			break;
+			
+			case "Horarios":
+				//generamos el objeto a llenar
+				HorariosDAO hrDAO = new HorariosDAO();
+				
+				Date horaInicio = Date.valueOf(request.getParameter("horaInicio"));
+				Date horaFin = Date.valueOf(request.getParameter("horaFin"));
+				estatus = request.getParameter("estatus");
+				String dias = request.getParameter("dias");
+				int idEmpleado = Integer.parseInt(request.getParameter("empleado"));
+				System.out.println("hola");
+				//validamos que el horario no exista ya en la BD
+				//si el estado no existe en la bd, entonces lo agregamos
+				System.out.println(hrDAO.validarHorarios(idEmpleado));
+				if(!hrDAO.validarHorarios(idEmpleado))
+				{
+					hrDAO.insertarHorarios(horaInicio, horaFin, dias, estatus);
+					
+				}
+				url="Horarios?op=Listar&pagina=1";
+				
+				break;
 			case "Incapacidades" : 
 				Incapacidades in = new Incapacidades();
 				in.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
