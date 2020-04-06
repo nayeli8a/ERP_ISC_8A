@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.beans.Horarios;
-
+import modelo.beans.Empleados;
 
 public class HorariosDAO {
 
@@ -24,7 +24,7 @@ public class HorariosDAO {
 			System.out.println("Error al insertar el Estado en la BD: "+e.getMessage());
 		}
   }
-  
+
   public void eliminar(String id){
 		String sql = "execute sp_EliminarLogicamente 'Horarios','"+id+"','idHorario'";
 		System.out.println(sql);
@@ -36,7 +36,7 @@ public class HorariosDAO {
 				System.out.println("Error: " + e.getMessage());
 			}
 	}
-  
+
   public void actualizar(Horarios h)
 	{
 		String sql="update Horarios set horaInicio=?,horaFin=?,dias=?, Estatus=? where idHorario=?";
@@ -46,16 +46,16 @@ public class HorariosDAO {
 			ps.setInt(1, h.getIdHorario());
 			ps.setDate(2,h.getHoraInicio());
 			ps.setDate(3,h.getHoraFin());
-			ps.setString(4, h.getEstatus());	
+			ps.setString(4, h.getEstatus());
 			ps.setString(5, h.getDias());
 			ps.setInt(6,h.getIdEmpleado());
 			ps.executeUpdate();
-			
+
 		} catch (Exception e) {
 			System.out.println("Error al actualizar el horario"+e.getMessage());
 		}
 	}
-  
+
   public boolean validarHorarios(int idHorarios) {
 		boolean salida=false;
 		String sql = "SELECT idHorario FROM Horarios WHERE idHorarios=?";
@@ -63,7 +63,7 @@ public class HorariosDAO {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps.setInt(1, idHorarios);
 			ResultSet rs = ps.executeQuery();
-			
+
 			if (rs.next()) {
 				//si encuentra un horario con ese mismo id, marcamos que el horario ya existe
 				salida = true;
@@ -71,16 +71,16 @@ public class HorariosDAO {
 			{
 				salida = false;
 			}
-			
+
 			rs.close();
 			ps.close();
-			
+
 		} catch (SQLException e) {
 			System.out.println("Error al conectar con la BD " + e.getMessage());
 		}
 		return salida;
 	}
-  
+
   public List<Horarios> consultar()
 	{
 		ArrayList<Horarios> lista = new ArrayList<>();
@@ -103,8 +103,8 @@ public class HorariosDAO {
 		}
 		return lista;
 	}
-	
-  
+
+
   public Horarios consultaIndividual(int idHorario){
 		String sql="select * from Horarios where idHorario=?";
 		Horarios h = new Horarios();
@@ -128,5 +128,5 @@ public class HorariosDAO {
 		}
 		return h;
 	}
-  
+
 }

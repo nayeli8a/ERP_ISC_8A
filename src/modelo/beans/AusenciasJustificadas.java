@@ -11,6 +11,8 @@ public class AusenciasJustificadas{
   private String tipo;
   private int idEmpleadoS;
   private int idEmpleadoA;
+  private String estatus;
+
 public int getIdAusencia() {
 	return idAusencia;
 }
@@ -53,6 +55,13 @@ public int getIdEmpleadoA() {
 public void setIdEmpleadoA(int idEmpleadoA) {
 	this.idEmpleadoA = idEmpleadoA;
 }
-  
-  
+
+public String getEstatus() {
+  return estatus;
+}
+public void setEstatus(String estatus) {
+  this.estatus = estatus;
+}
+
+
 }
