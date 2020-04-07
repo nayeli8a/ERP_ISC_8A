@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,9 +14,9 @@ import modelo.beans.Empleados;
 public class HorariosDAO {
 
 
-  public void insertarHorarios(Date horaInicio, Date horaFin, String dias, String estatus)
+  public void insertarHorarios(int idEmpleado, String horaInicio, String horaFin, String dias, String estatus)
   {
-	  String sql = "insert into Horarios (horaInicio,horaFin,dias,estatus) values('"+horaInicio+"','"+horaFin+"','"+dias+"','"+estatus+"')";
+	  String sql = "insert into Horarios (idEmpleado,horaInicio,horaFin,dias,estatus) values("+idEmpleado+",'"+horaInicio+"','"+horaFin+"','"+dias+"','"+estatus+"')";
     try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -56,35 +57,31 @@ public class HorariosDAO {
 		}
 	}
 
-  public boolean validarHorarios(int idHorarios) {
-		boolean salida=false;
-		String sql = "SELECT idHorario FROM Horarios WHERE idHorarios=?";
+  public int validarNSSEmpleado(String nssempleado) {
+		int idEmpleado=-1;
+		String sql = "SELECT idEmpleado FROM Empleados WHERE nss=?";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
-			ps.setInt(1, idHorarios);
+			ps.setString(1, nssempleado);
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				//si encuentra un horario con ese mismo id, marcamos que el horario ya existe
-				salida = true;
-			}else
-			{
-				salida = false;
+				//si encuentra el nombre de un empleado, si existe el empleado
+				idEmpleado = rs.getInt(1) ;
 			}
-
 			rs.close();
 			ps.close();
 
 		} catch (SQLException e) {
 			System.out.println("Error al conectar con la BD " + e.getMessage());
 		}
-		return salida;
+		return idEmpleado;
 	}
 
-  public List<Horarios> consultar()
+  public List<Horarios> consultar(String pagina)
 	{
 		ArrayList<Horarios> lista = new ArrayList<>();
-		String sql = "select * from Horarios";
+		String sql = "execute sp_paginaciondinamica 'Horarios','idEmpleado','"+pagina+"','10'";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);

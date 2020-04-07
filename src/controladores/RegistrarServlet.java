@@ -2,6 +2,7 @@ package controladores;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -173,23 +174,41 @@ public class RegistrarServlet extends HttpServlet {
 			break;
 			
 			case "Horarios":
-				//generamos el objeto a llenar
+				//variable para los errores
+				String error = "";
+				String mensaje="";
+				
+				//generamos el objeto que nos permitira insertar,actualizar,eliminar
 				HorariosDAO hrDAO = new HorariosDAO();
 				
-				Date horaInicio = Date.valueOf(request.getParameter("horaInicio"));
-				Date horaFin = Date.valueOf(request.getParameter("horaFin"));
-				estatus = request.getParameter("estatus");
-				String dias = request.getParameter("dias");
-				int idEmpleado = Integer.parseInt(request.getParameter("empleado"));
-				System.out.println("hola");
-				//validamos que el horario no exista ya en la BD
-				//si el estado no existe en la bd, entonces lo agregamos
-				System.out.println(hrDAO.validarHorarios(idEmpleado));
-				if(!hrDAO.validarHorarios(idEmpleado))
+				String horaInicio = request.getParameter("horaInicio");
+				String horaFin = request.getParameter("horaFin");
+				String nssempleado = request.getParameter("nssempleado");
+				//para la parte de los dias, concatenaremos todos los dias separandolos por ";"
+				String dias="";
+					dias += (request.getParameter("lunes")== null)?"":request.getParameter("lunes")+";";
+					dias += (request.getParameter("martes")== null)?"":request.getParameter("martes")+";";
+					dias += (request.getParameter("miercoles")== null)?"":request.getParameter("miercoles")+";";
+					dias += (request.getParameter("jueves")== null)?"":request.getParameter("jueves")+";";
+					dias += (request.getParameter("viernes")== null)?"":request.getParameter("viernes")+";";
+					dias += (request.getParameter("sabado")== null)?"":request.getParameter("sabado")+";";
+					dias += (request.getParameter("domingo")== null)?"":request.getParameter("domingo")+";";
+				estatus = "A";
+				System.out.println(dias+"||"+horaInicio+"||"+horaFin);
+				//validamos que el empleado con el nss dado si existe
+				
+				int idEmpleado = hrDAO.validarNSSEmpleado(nssempleado);
+				if(idEmpleado != -1)
 				{
-					hrDAO.insertarHorarios(horaInicio, horaFin, dias, estatus);
-					
+					hrDAO.insertarHorarios(idEmpleado,horaInicio, horaFin, dias, estatus);
+					mensaje = "El Horario ha sido insertado con exito para el NSS: "+nssempleado;
+					request.setAttribute("Mensajes",mensaje);
+				}else
+				{
+					error = "El NSS del empleado no es valido, inserta uno valido.";
+					request.setAttribute("Errores",error);
 				}
+				
 				url="Horarios?op=Listar&pagina=1";
 				
 				break;

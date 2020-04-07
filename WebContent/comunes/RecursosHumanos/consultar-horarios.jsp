@@ -23,6 +23,21 @@
 
 </head>
 <body>
+	<c:if test="${not empty Errores }">
+		<script>
+		window.addEventListener("load",function(){
+			alert("${Errores}");
+			})
+		</script>
+	</c:if>
+	<c:if test="${not empty Mensajes }">
+		<script>
+		window.addEventListener("load",function(){
+			alert("${Mensajes}");
+			})
+		</script>
+	</c:if>
+	
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
 		<a class="btn btn-primary"href="${pageContext.servletContext.contextPath}/General?op=RegresarRH">Atras</a>
 	</nav>
@@ -38,51 +53,49 @@
 		<button type="button" class="btn btn-success" id="agregar" data-toggle="modal" data-target="#modalRegistro" >Agregar</button>
 		<div class="table-responsive table-bordered table-striped">
       <table class="table table-sm">
-				<thead class="thead-dark">
-
-					<tr>
-						<th>ID Horario</th>
-						<th>Hora Inicio</th>
-						<th>Hora Fin</th>
-						<th>Días</th>
-            <th>id Empleado</th>
-            <th>Estatus</th>
-					</tr>
-				</thead>
+		<thead class="thead-dark">
+			<tr>
+				<th>ID Horario</th>
+				<th>Hora Inicio</th>
+				<th>Hora Fin</th>
+				<th>Días</th>
+	            <th>id Empleado</th>
+	            <th>Estatus</th>
+			</tr>
+		</thead>
         <tbody id="myTable">
-					<c:forEach var="dato" items="${datoshorarios}">
-						<c:if test="${dato.getEstatus() eq 'I'}">
-							<tr>
-							<td>${dato.getIdHorario()}</td>
-							<td>${dato.getHoraInicio()}</td>
-							<td>${dato.getHoraFin()}</td>
-							<td>${dato.getDias()}</td>
-              <td>${dato.getIdEmpleado()}</td>
-							<td>${dato.getEstatus()}</td>
-							</tr>
-						</c:if>
-						<c:if test="${dato.getEstatus() eq 'A'}">
-							<tr>
-                <td>${dato.getIdHorario()}</td>
-  							<td>${dato.getHoraInicio()}</td>
-  							<td>${dato.getHoraFin()}</td>
-  							<td>${dato.getDias()}</td>
-                <td>${dato.getIdEmpleado()}</td>
-  							<td>${dato.getEstatus()}</td>
-							<td>
-								<form action="Horarios" method="post">
-									<input type="hidden" name="id" value="${dato.getIdHorario()}">
-									<div id="${dato.getIdHorario()}">
-										<input type="submit" class="btn btn-warning" name="op" value="Editar">
-										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
-									</div>
-								</form>
-							</td>
-							</tr>
-						</c:if>
-
-					</c:forEach>
-				</tbody>
+			<c:forEach var="dato" items="${datos}">
+				<c:if test="${dato.getEstatus() eq 'I'}">
+					<tr>
+					<td>${dato.getIdHorario()}</td>
+					<td>${dato.getHoraInicio()}</td>
+					<td>${dato.getHoraFin()}</td>
+					<td>${dato.getDias()}</td>
+	              	<td>${dato.getIdEmpleado()}</td>
+					<td>${dato.getEstatus()}</td>
+					</tr>
+				</c:if>
+				<c:if test="${dato.getEstatus() eq 'A'}">
+					<tr>
+	                <td>${dato.getIdHorario()}</td>
+					<td>${dato.getHoraInicio()}</td>
+					<td>${dato.getHoraFin()}</td>
+					<td>${dato.getDias()}</td>
+	                <td>${dato.getIdEmpleado()}</td>
+					<td>${dato.getEstatus()}</td>
+					<td>
+						<form action="Horarios" method="post">
+							<input type="hidden" name="id" value="${dato.getIdHorario()}">
+							<div id="${dato.getIdHorario()}">
+								<input type="submit" class="btn btn-warning" name="op" value="Editar">
+								<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
+							</div>
+						</form>
+					</td>
+					</tr>
+			 	</c:if>
+			</c:forEach>
+		</tbody>
       </table>
     </div>
   </div>
@@ -103,11 +116,14 @@
       <% //Aqui va todo el cuerpo del modal%>
       <form action="${pageContext.servletContext.contextPath}/Registrar?op=Horarios" method="post">
         <div class="form-group">
+          <label>NSS Empleado: </label>
+          <input type="text" name="nssempleado" class="form-control" required>
+          <br>
           <label>Hora de inicio: </label>
-          <input type="time" min ="07:00"  max="10:00" class="form-control" required>
+          <input type="time" name="horaInicio" class="form-control" required>
           <br>
           <label>Hora fin: </label>
-          <input type="time" min ="15:00"  max="18:00"  class="form-control" required>
+          <input type="time" name="horaFin" class="form-control" required>
           <br>
           <label>Días: </label>
           <br>
@@ -118,15 +134,6 @@
             <input type="checkbox" name="viernes" value="VI" />Viernes
             <input type="checkbox" name="sabado" value="SA" />Sabado
             <input type="checkbox" name="domingo" value="DO" />Domingo
-          <br>
-          <label>ID Empleado: </label>
-          <input type="number" class="form-control" required>
-    	    <br>
-          <label for="Estatus">Estatus</label>
-          <select class="form-control" id="estatus" name = "estatus">
-              <option value="A">Activo</option>
-              <option value="I">Inactivo</option>
-          </select>
           <br>
           <button type="submit" class="btn btn-primary">Registrar</button>
         </div>
