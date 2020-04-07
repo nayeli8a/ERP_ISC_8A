@@ -52,7 +52,7 @@ public class AusenciasJustificadasDAO {
 				ausJus.setFechaSolicitud(rs.getDate(2));
 				ausJus.setFechaInicio(rs.getDate(3));
         ausJus.setFechaFin(rs.getDate(4));
-				ausJus.setString(rs.getString(5));
+				ausJus.setTipo(rs.getString(5));
 				ausJus.setIdEmpleadoS(rs.getInt(6));
         ausJus.setIdEmpleadoA(rs.getInt(7));
 				ausJus.setEstatus(rs.getString(8));
@@ -66,7 +66,7 @@ public class AusenciasJustificadasDAO {
 
   public AusenciasJustificadas consultaIndividual(int idAusencia){
 		String sql="select * from AusenciaJustificada where idAusencia=?";
-		AusenciaJustificada ausJus = new AusenciasJustificadas();
+		AusenciasJustificadas ausJus = new AusenciasJustificadas();
 		try{
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 			ps.setInt(1, idAusencia);

@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.beans.*;
-import modelo.datos.*;
+import modelo.beans.Horarios;
+import modelo.datos.HorariosDAO;
+
 
 /**
  * Servlet implementation class EmpleadosServlet
@@ -38,13 +39,24 @@ import modelo.datos.*;
 
 
     switch (op) {
-			case "Listar":
-				String pagina = request.getParameter("pagina");
-				List<Horarios> datos = hdao.consultar(pagina);
-				request.setAttribute("datos",datos);
-				request.setAttribute("pagina",pagina);
-				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"horarios.jsp";
-			break;
+    case "Listar":
+		String pagina = request.getParameter("pagina");
+		List<Horarios> datos = hdao.consultar(pagina);
+		request.setAttribute("datos", datos);
+		request.setAttribute("pagina",pagina);
+		url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"horarios.jsp";
+	break;
+	case "Editar":
+		Horarios datoshorarios = hdao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
+		request.setAttribute("datoshorarios", datoshorarios);
+		url=modelo.datos.Constantes.REGRESAR_RH_EDITAR+"horarios.jsp";
+		break;
+	case "Eliminar":
+		hdao.eliminar(request.getParameter("id"));
+		url = "Horarios?op=Listar&pagina=1";
+		break;
+	case "Modificar":
+		break;
 		}
 
     RequestDispatcher rd = request.getRequestDispatcher(url);

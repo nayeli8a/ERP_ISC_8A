@@ -81,7 +81,8 @@ public class HorariosDAO {
   public List<Horarios> consultar(String pagina)
 	{
 		ArrayList<Horarios> lista = new ArrayList<>();
-		String sql = "execute sp_paginaciondinamica 'Horarios','idEmpleado','"+pagina+"','10'";
+		String sql = "execute sp_paginaciondinamica 'Horarios','idEmpleado','"+pagina+"','5'";
+
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -93,6 +94,8 @@ public class HorariosDAO {
 				h.setHoraFin(rs.getDate(3));
 				h.setDias(rs.getString(4));
 				h.setIdEmpleado(rs.getInt(5));
+				h.setEstatus(rs.getString(6));
+
 				lista.add(h);
 			}
 		} catch (SQLException e) {
