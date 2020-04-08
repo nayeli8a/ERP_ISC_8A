@@ -15,27 +15,38 @@ import modelo.beans.Incapacidades;
 
 
 public class IncapacidadesDAO {
-	
-	
-	public void insertarIncapacidades(Incapacidades in)
-	{
-		String sql = "insert into Incapacidades (fechaInicio, fechaFin, enfermedad, evidencia, idEmpleado, estatus) values (?,?,?,?,?,?)";
-		PreparedStatement ps;
-		try {
-			ps = Conexion.getInstance().getCN().prepareStatement(sql);
-			ps.setDate(1,in.getFechaInicio());
-			ps.setDate(2, in.getFechaFin());
-			ps.setString(3,in.getEnfermedad());
-			ps.setBinaryStream(4, in.getEvidencia());
-			ps.setInt(5, in.getIdEmpleado());
-			ps.setString(6, in.getEstatus());
-		
-			ps.executeUpdate();
-			
-		} catch (SQLException ex) {
-			System.out.println("Error al insertar la incapacidad en INDAO: "+ex.getMessage());
+	  public int validarNSSEmpleado(String nssempleado) {
+			int idEmpleado=-1;
+			String sql = "SELECT idEmpleado FROM Empleados WHERE nss=?";
+			try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.setString(1, nssempleado);
+				ResultSet rs = ps.executeQuery();
+
+				if (rs.next()) {
+					//si encuentra el nombre de un empleado, si existe el empleado
+					idEmpleado = rs.getInt(1) ;
+				}
+				rs.close();
+				ps.close();
+
+			} catch (SQLException e) {
+				System.out.println("Error al conectar con la BD " + e.getMessage());
+			}
+			return idEmpleado;
 		}
-	}
+	
+	  public void insertarIncapacidades(Date fechaInicio, Date fechaFin, String enfermedad, String evidencia, int idEmpleado, String estatus)
+	  {
+		  String sql = "insert into Incapacidades values('"+fechaInicio+"','"+fechaFin+"','"+enfermedad+"',null,"+idEmpleado+",'"+estatus+"')";
+	    try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("Error al insertar la incapacidad en la BD: "+e.getMessage());
+			}
+	  }
 	
 	public List<Incapacidades> consultar(String pagina)
 	{

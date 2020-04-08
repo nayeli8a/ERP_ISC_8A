@@ -31,7 +31,8 @@
 		<form action="${pageContext.servletContext.contextPath}/Incapacidades?op=Modificar" method="post">
 			<div class="form-group">
 				<label for="" class="letra" float: left>ID: </label>
-				<input type="text" readonly name="idincapacidad" readonly required placeholder="idincapacidad" value="${datosIncapacidades.getIdIncapacidad()}">
+				<input type="text" readonly name="idIncapacidad" readonly required placeholder="idincapacidad" value="${datosIncapacidades.getIdIncapacidad()}">
+				<br>
 					<label>Fecha Inicio: </label>
 				 <input type="date" name="fechaInicio" value="${datosIncapacidades.getFechaInicio()}" required class="form-control" required>
 				

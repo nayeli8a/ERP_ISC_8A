@@ -22,6 +22,20 @@
    
 </head>
 <body>
+	<c:if test="${not empty Errores }">
+		<script>
+		window.addEventListener("load",function(){
+			alert("${Errores}");
+			})
+		</script>
+	</c:if>
+	<c:if test="${not empty Mensajes }">
+		<script>
+		window.addEventListener("load",function(){
+			alert("${Mensajes}");
+			})
+		</script>
+	</c:if>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
 		<a class="btn btn-primary"href="${pageContext.servletContext.contextPath}/General?op=RegresarRH">Atras</a>
 	</nav>
@@ -103,39 +117,28 @@
 	      <div class="modal-body" id="modal_div">
 	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Incapacidades" method="post">
 			<div class="form-group">
-				<label>Fecha Inicio: </label>
-				 <input type="date" name="fechaInicio" value="" required class="form-control" required>
-				
-				<br>
-				<label>Fecha Fin: </label>
-	    		<input type="date" name="fechaFin" value="" required class="form-control" required>
-				
-				<br>
-				<label>Enfermedad : </label>
-				<input type="text"  onkeypress="return soloLetras(event)" class="form-control" id="enfermedad" name="enfermedad" style="text-transform:uppercase;"  required >
-				
-				<br>
-				<label>Evidencia: </label>
-
-
-				<br>
-				<br>
-				<label>Id empleado : </label>
-			   <input type="number" class="form-control"  name="idEmpleado" required  >
-				
-
-
-				<br>
-				<label for="Estatus">Estatus</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
-		      			<option value="A">Activo</option>
-		      			<option value="I">Inactivo</option>
-		    		</select>
-		    	<br>
-		    	<button type="submit" class="btn btn-primary">Registrar</button>
+			 <div class="row">
+        <div class="col-sm">
+          <label>NSS Empleado: </label>
+          <input type="text" name="nssempleado" class="form-control" required="">
+          
+          <label>Enfermedad: </label>
+          <input type="text" name="enfermedad" onkeypress="return soloLetras(event)" class="form-control" required="">
+          
+        </div>
+        <div class="col-sm">
+          <label>Fecha inicio: </label>
+          <input type="date" name="fechaInicio" class="form-control" required="">
+          
+          <label>Fecha fin: </label>
+          <input type="date" name="fechaFin" class="form-control" required="">
+          <br>
+        </div>
+      </div>
 			</div>
+		 <button type="submit" class="btn btn-primary">Registrar</button>
+			
 		</form>
-	      	<% //Aqui va todo el cuerpo del modal, el cual contiene todo los datos necesarios para el cliente%> 
 	      	
 	      </div>
 			

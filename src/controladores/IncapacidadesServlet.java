@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelo.beans.Incapacidades;
+import modelo.beans.Puestos;
 import modelo.datos.IncapacidadesDAO;
+import modelo.datos.PuestosDAO;
 
 /**
  * Servlet implementation class IncapacidadesServlet
@@ -64,16 +66,19 @@ public class IncapacidadesServlet extends HttpServlet {
 					url = "Incapacidades?op=Listar&pagina=1";
 					break;
 				case "Modificar":
-					Incapacidades incapacidades = new Incapacidades();
-					incapacidades.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
-					incapacidades.setFechaFin(Date.valueOf(request.getParameter("fechaFin")));
-					incapacidades.setEnfermedad(request.getParameter("enfermedad"));
-					incapacidades.setEvidencia(null);
-					incapacidades.setIdEmpleado(Integer.parseInt(request.getParameter("idEmpleado")));
-					incapacidades.setEstatus(request.getParameter("estatus"));
-					indao = new IncapacidadesDAO();
-					indao.actualizar(incapacidades);
+					Incapacidades in = new Incapacidades();
+					in.setIdIncapacidad(Integer.parseInt(request.getParameter("idIncapacidad")));
+					in.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
+					in.setFechaFin(Date.valueOf(request.getParameter("fechaFin")));
+					in.setEnfermedad(request.getParameter("enfermedad"));
+					in.setEvidencia(null);
+					in.setIdEmpleado(Integer.parseInt(request.getParameter("idEmpleado")));
+					in.setEstatus(request.getParameter("estatus"));
+				    indao = new IncapacidadesDAO();
+					indao.actualizar(in);
 					url="Incapacidades?op=Listar&pagina=1";
+					
+		
 					break;
 						
 				}

@@ -41,7 +41,9 @@ public class RegistrarServlet extends HttpServlet {
 		System.out.println("##Dentro de RegistrarServlet##");
 		String op = request.getParameter("op");
 		String url = "index.jsp";
-		
+		String error = "";
+		String mensaje="";
+		String nssempleado;
 		switch(op)
 		{
 			case "Estado":
@@ -175,15 +177,15 @@ public class RegistrarServlet extends HttpServlet {
 			
 			case "Horarios":
 				//variable para los errores
-				String error = "";
-				String mensaje="";
+				error = "";
+				mensaje="";
 				
 				//generamos el objeto que nos permitira insertar,actualizar,eliminar
 				HorariosDAO hrDAO = new HorariosDAO();
 				
 				String horaInicio = request.getParameter("horaInicio");
 				String horaFin = request.getParameter("horaFin");
-				String nssempleado = request.getParameter("nssempleado");
+				nssempleado = request.getParameter("nssempleado");
 				//para la parte de los dias, concatenaremos todos los dias separandolos por ";"
 				String dias="";
 					dias += (request.getParameter("lunes")== null)?"":request.getParameter("lunes")+";";
@@ -213,16 +215,29 @@ public class RegistrarServlet extends HttpServlet {
 				
 				break;
 			case "Incapacidades" : 
-				Incapacidades in = new Incapacidades();
-				in.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
-				in.setFechaFin(Date.valueOf(request.getParameter("fechaFin")));
-				in.setEnfermedad(request.getParameter("enfermedad"));
-				in.setEvidencia(null);
-				in.setIdEmpleado(Integer.parseInt(request.getParameter("idEmpleado")));
-				in.setEstatus(request.getParameter("estatus"));
+				error = "";
+				mensaje="";
 				IncapacidadesDAO indao = new IncapacidadesDAO();
-				indao.insertarIncapacidades(in);
-				url = "Incapacidades?op=Listar&pagina=1";
+				Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
+				Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
+				nssempleado= request.getParameter("nssempleado");
+				String enfermedad =request.getParameter("enfermedad");
+			
+				
+				estatus = "A";
+				//validamos que el empleado con el nss dado si existe
+				idEmpleado = indao.validarNSSEmpleado(nssempleado);
+				if(idEmpleado != -1)
+				{
+					indao.insertarIncapacidades(fechaInicio, fechaFin, enfermedad, null,idEmpleado, estatus);
+					mensaje = "Incapacidad registarda con exito para el NSS: "+nssempleado;
+					request.setAttribute("Mensajes",mensaje);
+				}else
+				{
+					error = "El NSS del empleado no es valido, inserta uno valido.";
+					request.setAttribute("Errores",error);
+				}
+		
 
 				
 		}
