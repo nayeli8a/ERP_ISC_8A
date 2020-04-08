@@ -56,6 +56,7 @@ import modelo.datos.HorariosDAO;
 		url = "Horarios?op=Listar&pagina=1";
 		break;
 	case "Modificar":
+		//obtener los valores del jsp editar,almacenarlos y actualizar el horario del id 
 		break;
 		}
 

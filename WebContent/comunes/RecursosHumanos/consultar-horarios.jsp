@@ -20,7 +20,21 @@
     <!-- Nuestras hojas de estilo-->
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
     <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
-
+	
+	<style> .largerCheckbox 
+    { 
+            width: 20px; 
+            height: 20px; 
+      			
+    } 
+    .checkbox-inline
+    {	
+      		width: 100px; 
+          height: 40px;
+      		text-align:center;
+    }
+  </style>
+	
 </head>
 <body>
 	<c:if test="${not empty Errores }">
@@ -114,39 +128,60 @@
       <!-- Modal body -->
       <div class="modal-body" id="modal_div">
       <% //Aqui va todo el cuerpo del modal%>
-      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Horarios" method="post">
-        <div class="form-group">
+      <div class="container">
+    <form action="${pageContext.servletContext.contextPath}/Registrar?op=Horarios" method="post">
+      
+      <div class="row">
+        <div class="col-sm">
           <label>NSS Empleado: </label>
-          <input type="text" name="nssempleado" class="form-control" required>
-          <br>
-          <label>Hora de inicio: </label>
-          <input type="time" name="horaInicio" class="form-control" required>
-          <br>
-          <label>Hora fin: </label>
-          <input type="time" name="horaFin" class="form-control" required>
-          <br>
-          <label>Días: </label>
-          <br>
-            <input type="checkbox" name="lunes" value="LU" />Lunes
-            <input type="checkbox" name="martes" value="MA" />Martes
-            <input type="checkbox" name="miercoles" value="MI" />Miercoles
-            <input type="checkbox" name="jueves" value="JU" />Jueves
-            <input type="checkbox" name="viernes" value="VI" />Viernes
-            <input type="checkbox" name="sabado" value="SA" />Sabado
-            <input type="checkbox" name="domingo" value="DO" />Domingo
-          <br>
-          <button type="submit" class="btn btn-primary">Registrar</button>
+          <input type="text" name="nssempleado" class="form-control" required="">
+          
         </div>
-      </form>
+        <div class="col-sm">
+          <label>Hora de inicio: </label>
+          <input type="time" name="horaInicio" class="form-control" required="">
+          
+          <label>Hora fin: </label>
+          <input type="time" name="horaFin" class="form-control" required="">
+          
+        </div>
       </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-      </div>
-
-    </div>
-  </div>
+     <br>
+     
+      <div class="row" style="border-style:double; text-align:center;">
+      	<label>Días: </label>
+     	<br>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="" class="largerCheckbox">Lunes </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="" class="largerCheckbox">Martes</label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="" class="largerCheckbox">Miercoles</label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="" class="largerCheckbox">Jueves</label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="" class="largerCheckbox">Viernes</label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="" class="largerCheckbox">Sabado</label>
+        <label class="checkbox-inline">
+          <input type="checkbox" value="" class="largerCheckbox">Domingo</label>
+        <br> Selecciona los días que el empleado debe laborar 
+        </div>
+        <br>
+        <br>
+        <div style="text-align:center;">
+        	<button type="submit" class="btn btn-primary">Registrar Horario</button>
+        </div>
+    </form>
+   </div>
+   </div>
+   <!-- Modal footer -->
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+	      </div>
+	
+	    </div>
+	  </div>
 </div>
 
 <% //Aqui tendremos la paginacion%>

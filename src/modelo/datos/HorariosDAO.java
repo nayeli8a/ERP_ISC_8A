@@ -124,7 +124,7 @@ public class HorariosDAO {
 			rs.close();
 		}
 		catch(SQLException e){
-			System.out.println("Error ESDAO:"+e.getMessage());
+			System.out.println("Error HorariosDAO:"+e.getMessage());
 		}
 		return h;
 	}
