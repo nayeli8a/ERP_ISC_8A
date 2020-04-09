@@ -35,6 +35,30 @@ public class IncapacidadesDAO {
 			}
 			return idEmpleado;
 		}
+	  
+	  
+	  public String obtenernss(int idEmpleado){
+		  String nssempleado=null;
+		  String sql = "SELECT nss FROM Empleados WHERE idEmpleado=?";
+			try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.setInt(1, idEmpleado);
+				ResultSet rs = ps.executeQuery();
+
+				if (rs.next()) {
+					//si encuentra el nombre de un empleado, si existe el empleado
+					nssempleado = rs.getString(1) ;
+				}
+				rs.close();
+				ps.close();
+
+			} catch (SQLException e) {
+				System.out.println("Error al conectar con la BD " + e.getMessage());
+			}
+		  
+		  
+		  return nssempleado;
+	  }
 	
 	  public void insertarIncapacidades(Date fechaInicio, Date fechaFin, String enfermedad, String evidencia, int idEmpleado, String estatus)
 	  {
@@ -109,12 +133,12 @@ public class IncapacidadesDAO {
 				System.out.println("Error: " + e.getMessage());
 			}
 	}
-	public void actualizar(Incapacidades in)
+	public void actualizar(Date fechaInicio, Date fechaFin, String enfermedad, String evidencia, int idEmpleado, String estatus)
 	{
 		String sql="update Incapacidades set FechaInicio=?,FechaFin=?,Enfermedad=?, Evidencia=?, idEmpleado=?, Estatus=? where idIncapacidad=?";
 		try {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
-
+			Incapacidades in = new Incapacidades();
 			ps.setDate(1, in.getFechaInicio());
 			ps.setDate(2,in.getFechaFin());
 			ps.setString(3,in.getEnfermedad());

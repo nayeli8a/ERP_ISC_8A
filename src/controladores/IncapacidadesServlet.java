@@ -66,17 +66,31 @@ public class IncapacidadesServlet extends HttpServlet {
 					url = "Incapacidades?op=Listar&pagina=1";
 					break;
 				case "Modificar":
-					Incapacidades in = new Incapacidades();
-					in.setIdIncapacidad(Integer.parseInt(request.getParameter("idIncapacidad")));
-					in.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
-					in.setFechaFin(Date.valueOf(request.getParameter("fechaFin")));
-					in.setEnfermedad(request.getParameter("enfermedad"));
-					in.setEvidencia(null);
-					in.setIdEmpleado(Integer.parseInt(request.getParameter("idEmpleado")));
-					in.setEstatus(request.getParameter("estatus"));
+					String error = "";
+					String mensaje="";
 				    indao = new IncapacidadesDAO();
-					indao.actualizar(in);
-					url="Incapacidades?op=Listar&pagina=1";
+				   
+					Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
+					Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
+					String enfermedad =request.getParameter("enfermedad");
+					String estatus = request.getParameter("estatus");
+					int idEmpleado=Integer.parseInt(request.getParameter("idEmpleado"));
+					String nssempleado=  indao.obtenernss(idEmpleado);
+
+					//validamos que el empleado con el nss dado si existe
+					idEmpleado = indao.validarNSSEmpleado(nssempleado);
+					if(idEmpleado != -1)
+					{
+						indao.actualizar(fechaInicio, fechaFin, enfermedad, null,idEmpleado, estatus);
+						mensaje = "Incapacidad modificada con exito para el NSS: "+nssempleado;
+						request.setAttribute("Mensajes",mensaje);
+						url="Incapacidades?op=Listar&pagina=1";
+					}else
+					{
+						error = "El NSS del empleado no es valido, inserta uno valido.";
+						request.setAttribute("Errores",error);
+					}
+			
 					
 		
 					break;
