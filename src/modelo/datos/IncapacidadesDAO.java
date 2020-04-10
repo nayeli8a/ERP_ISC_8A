@@ -37,28 +37,6 @@ public class IncapacidadesDAO {
 		}
 	  
 	  
-	  public String obtenernss(int idEmpleado){
-		  String nssempleado=null;
-		  String sql = "SELECT nss FROM Empleados WHERE idEmpleado=?";
-			try {
-				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
-				ps.setInt(1, idEmpleado);
-				ResultSet rs = ps.executeQuery();
-
-				if (rs.next()) {
-					//si encuentra el nombre de un empleado, si existe el empleado
-					nssempleado = rs.getString(1) ;
-				}
-				rs.close();
-				ps.close();
-
-			} catch (SQLException e) {
-				System.out.println("Error al conectar con la BD " + e.getMessage());
-			}
-		  
-		  
-		  return nssempleado;
-	  }
 	
 	  public void insertarIncapacidades(Date fechaInicio, Date fechaFin, String enfermedad, String evidencia, int idEmpleado, String estatus)
 	  {
@@ -75,7 +53,7 @@ public class IncapacidadesDAO {
 	public List<Incapacidades> consultar(String pagina)
 	{
 		ArrayList<Incapacidades> lista = new ArrayList<>();
-		String sql = "execute sp_paginaciondinamica 'Incapacidades','enfermedad','"+pagina+"','5'";
+		String sql = "execute sp_paginaciondinamica 'Incapacidades_empleados','idIncapacidad','"+pagina+"','5'";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -88,8 +66,11 @@ public class IncapacidadesDAO {
 				in.setEnfermedad(rs.getString(4));
 				in.setEvidencia(rs.getBinaryStream(5));
 				in.setIdEmpleado(rs.getInt(6));
+				in.setNss(rs.getString(6));
 				in.setEstatus(rs.getString(7));
 				lista.add(in);
+				
+			
 			}
 		} catch (SQLException e) {
 			System.out.println("Error: " + e.getMessage());
@@ -98,7 +79,7 @@ public class IncapacidadesDAO {
 	}
 
 	public Incapacidades consultaIndividual(int idIncapacidad){
-		String sql="select * from Incapacidades where idIncapacidad=?";
+		String sql="select * from  Incapacidades_empleados where idIncapacidad=?";
 		Incapacidades in = new Incapacidades();
 		try{
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
@@ -111,7 +92,9 @@ public class IncapacidadesDAO {
 				in.setEnfermedad(rs.getString("enfermedad"));
 				in.setEvidencia(rs.getBinaryStream("evidencia"));
 				in.setIdEmpleado(rs.getInt("idEmpleado"));
+				in.setNss(rs.getString("nssempleado"));
 				in.setEstatus(rs.getString("estatus"));
+
 			}
 			ps.close();
 			rs.close();

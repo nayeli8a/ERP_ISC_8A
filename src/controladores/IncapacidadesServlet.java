@@ -75,7 +75,7 @@ public class IncapacidadesServlet extends HttpServlet {
 					String enfermedad =request.getParameter("enfermedad");
 					String estatus = request.getParameter("estatus");
 					int idEmpleado=Integer.parseInt(request.getParameter("idEmpleado"));
-					String nssempleado=  indao.obtenernss(idEmpleado);
+					String nssempleado=  request.getParameter("nss");
 
 					//validamos que el empleado con el nss dado si existe
 					idEmpleado = indao.validarNSSEmpleado(nssempleado);

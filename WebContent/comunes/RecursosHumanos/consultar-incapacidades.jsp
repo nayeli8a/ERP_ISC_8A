@@ -60,6 +60,7 @@
 						<th>Enfermedad</th>
 						<th>Evidencia</th>
 						<th>ID empleado</th>
+						<th>NSS empleado</th>
 						<th>Estatus</th>
 					</tr>
 				</thead>
@@ -73,6 +74,7 @@
 							<td>${dato.getEnfermedad()}</td>
 							<td>${dato.getEvidencia()}</td>
 							<td>${dato.getIdEmpleado()}</td>
+							<td>${dato.getNss()}</td>
 							<td>${dato.getEstatus()}</td>
 							</tr>
 						</c:if>
@@ -84,6 +86,7 @@
 							<td>${dato.getEnfermedad()}</td>
 							<td>${dato.getEvidencia()}</td>
 							<td>${dato.getIdEmpleado()}</td>
+							<td>${dato.getNss()}</td>
 							<td>${dato.getEstatus()}</td>
 							<td>
 								<form action="Incapacidades" method="post">

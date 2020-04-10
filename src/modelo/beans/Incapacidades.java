@@ -11,7 +11,16 @@ public class Incapacidades {
 	private InputStream evidencia;
 	private int idEmpleado;
 	private String estatus;
+	private String nss;
 	
+	
+	
+	public String getNss() {
+		return nss;
+	}
+	public void setNss(String nss) {
+		this.nss = nss;
+	}
 	public int getIdIncapacidad() {
 		return idIncapacidad;
 	}
