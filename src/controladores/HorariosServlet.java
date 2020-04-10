@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -36,7 +37,9 @@ import modelo.datos.HorariosDAO;
     //HORARIOS
 		Horarios h = new Horarios();
 		HorariosDAO hdao = new HorariosDAO();
-
+	//Variables para los mensajes y errores
+		String mensaje="";
+		String error="";
 
     switch (op) {
     case "Listar":
@@ -57,6 +60,31 @@ import modelo.datos.HorariosDAO;
 		break;
 	case "Modificar":
 		//obtener los valores del jsp editar,almacenarlos y actualizar el horario del id 
+		//variable para los errores
+		error = "";
+		mensaje="";
+		
+		Horarios hrio = new Horarios();
+		
+		hrio.setHoraInicio(Date.valueOf(request.getParameter("horaInicio")));
+		hrio.setHoraFin(Date.valueOf(request.getParameter("horaFin")));
+		hrio.setIdHorario(Integer.parseInt(request.getParameter("idhorario")));
+		//para la parte de los dias, concatenaremos todos los dias separandolos por ";"
+		String dias="";
+			dias += (request.getParameter("lunes")== null)?"":request.getParameter("lunes")+";";
+			dias += (request.getParameter("martes")== null)?"":request.getParameter("martes")+";";
+			dias += (request.getParameter("miercoles")== null)?"":request.getParameter("miercoles")+";";
+			dias += (request.getParameter("jueves")== null)?"":request.getParameter("jueves")+";";
+			dias += (request.getParameter("viernes")== null)?"":request.getParameter("viernes")+";";
+			dias += (request.getParameter("sabado")== null)?"":request.getParameter("sabado")+";";
+			dias += (request.getParameter("domingo")== null)?"":request.getParameter("domingo")+";";
+		hrio.setDias(dias);
+		hrio.setEstatus(request.getParameter("estatus"));
+		
+		//llamamos al DAO para actualizar el horario
+		hdao.actualizar(hrio);
+		
+		url = "Horarios?op=Listar&pagina=1";
 		break;
 		}
 

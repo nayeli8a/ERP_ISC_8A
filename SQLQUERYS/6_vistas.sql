@@ -1,4 +1,4 @@
-//creamos una nueva vista para anexar el nss a incapacidades
+-- creamos una nueva vista para anexar el nss a incapacidades
 CREATE VIEW Incapacidades_empleados
 AS  
     SELECT
@@ -15,5 +15,5 @@ GO
 
 select * from Incapacidades_empleados;
 
-//Otorgamos permiso a RH para que pueda ver la vista
+--Otorgamos permiso a RH para que pueda ver la vista
 grant select,insert,update,delete on Incapacidades_empleados to RecursosHumanos

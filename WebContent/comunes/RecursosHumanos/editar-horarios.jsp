@@ -35,11 +35,11 @@
 				<input type="text" name="idhorario" readonly required placeholder="idhorario" value="${datoshorarios.getIdHorario()}">
 				<br>
 				<label>Hora Inicio:</label>
-				<input type="text" class="form-control" required value="${datoshorarios.getHoraInicio()}">
+				<input type="text" name="horaInicio" class="form-control" required value="${datoshorarios.getHoraInicio()}">
 				<br>
 
 				<label>Hora fin:</label>
-				<input type="text"  class="form-control" required value="${datoshorarios.getHoraFin()}">
+				<input type="text" name="horaFin" class="form-control" required value="${datoshorarios.getHoraFin()}">
 				<br>
 
 				<label>Días: </label>
@@ -52,45 +52,45 @@
 				</c:if>
 				
 				<c:if test="${fn:contains(datoshorarios.getDias(),'MA')}">
-					<input type="checkbox" name="lunes" value="LU" checked/>Martes
+					<input type="checkbox" name="martes" value="MA" checked/>Martes
 				</c:if>
 				<c:if test="${!fn:contains(datoshorarios.getDias(),'MA')}">
-					<input type="checkbox" name="lunes" value="LU" />Martes
+					<input type="checkbox" name="martes" value="MA" />Martes
 				</c:if>
 				
 				<c:if test="${fn:contains(datoshorarios.getDias(),'MI')}">
-					<input type="checkbox" name="lunes" value="LU" checked/>Miercoles
+					<input type="checkbox" name="miercoles" value="MI" checked/>Miercoles
 				</c:if>
 				<c:if test="${!fn:contains(datoshorarios.getDias(),'MI')}">
-					<input type="checkbox" name="lunes" value="LU"/>Miercoles
+					<input type="checkbox" name="miercoles" value="MI"/>Miercoles
 				</c:if>
 				
 				<c:if test="${fn:contains(datoshorarios.getDias(),'JU')}">
-					<input type="checkbox" name="lunes" value="LU" checked/>Jueves
+					<input type="checkbox" name="jueves" value="JU" checked/>Jueves
 				</c:if>
 				<c:if test="${!fn:contains(datoshorarios.getDias(),'JU')}">
-					<input type="checkbox" name="lunes" value="LU" />Jueves
+					<input type="checkbox" name="jueves" value="JU" />Jueves
 				</c:if>
 				
 				<c:if test="${fn:contains(datoshorarios.getDias(),'VI')}">
-					<input type="checkbox" name="lunes" value="LU" checked/>Viernes
+					<input type="checkbox" name="viernes" value="VI" checked/>Viernes
 				</c:if>
 				<c:if test="${!fn:contains(datoshorarios.getDias(),'VI')}">
-					<input type="checkbox" name="lunes" value="LU" />Viernes
+					<input type="checkbox" name="viernes" value="VI" />Viernes
 				</c:if>
 				
 				<c:if test="${fn:contains(datoshorarios.getDias(),'SA')}">
-					<input type="checkbox" name="lunes" value="LU" checked/>Sabado
+					<input type="checkbox" name="sabado" value="SA" checked/>Sabado
 				</c:if>
 				<c:if test="${!fn:contains(datoshorarios.getDias(),'SA')}">
-					<input type="checkbox" name="lunes" value="LU"/>Sabado
+					<input type="checkbox" name="sabado" value="SA"/>Sabado
 				</c:if>
 				
 				<c:if test="${fn:contains(datoshorarios.getDias(),'DO')}">
-					<input type="checkbox" name="lunes" value="LU" checked/>Domingo
+					<input type="checkbox" name="domingo" value="DO" checked/>Domingo
 				</c:if>
 				<c:if test="${!fn:contains(datoshorarios.getDias(),'DO')}">
-					<input type="checkbox" name="lunes" value="LU" />Domingo
+					<input type="checkbox" name="domingo" value="DO" />Domingo
 				</c:if>
 				<br>
 				<label for="Estatus">Estatus:</label>

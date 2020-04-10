@@ -15,7 +15,8 @@ import modelo.beans.Incapacidades;
 
 
 public class IncapacidadesDAO {
-	  public int validarNSSEmpleado(String nssempleado) {
+	  
+	public int validarNSSEmpleado(String nssempleado) {
 			int idEmpleado=-1;
 			String sql = "SELECT idEmpleado FROM Empleados WHERE nss=?";
 			try {
@@ -53,7 +54,7 @@ public class IncapacidadesDAO {
 	public List<Incapacidades> consultar(String pagina)
 	{
 		ArrayList<Incapacidades> lista = new ArrayList<>();
-		String sql = "execute sp_paginaciondinamica 'Incapacidades_empleados','idIncapacidad','"+pagina+"','5'";
+		String sql = "execute sp_paginaciondinamica 'Incapacidades_empleados','idIncapacidad','"+pagina+"','10'";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -66,8 +67,8 @@ public class IncapacidadesDAO {
 				in.setEnfermedad(rs.getString(4));
 				in.setEvidencia(rs.getBinaryStream(5));
 				in.setIdEmpleado(rs.getInt(6));
-				in.setNss(rs.getString(6));
-				in.setEstatus(rs.getString(7));
+				in.setNss(rs.getString(7));
+				in.setEstatus(rs.getString(8));
 				lista.add(in);
 				
 			

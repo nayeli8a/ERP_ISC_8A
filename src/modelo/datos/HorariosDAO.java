@@ -44,16 +44,15 @@ public class HorariosDAO {
 		try {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 
-			ps.setInt(1, h.getIdHorario());
-			ps.setDate(2,h.getHoraInicio());
-			ps.setDate(3,h.getHoraFin());
+			ps.setInt(5, h.getIdHorario());
+			ps.setDate(1,h.getHoraInicio());
+			ps.setDate(2,h.getHoraFin());
+			ps.setString(3, h.getDias());
 			ps.setString(4, h.getEstatus());
-			ps.setString(5, h.getDias());
-			ps.setInt(6,h.getIdEmpleado());
 			ps.executeUpdate();
 
 		} catch (Exception e) {
-			System.out.println("Error al actualizar el horario"+e.getMessage());
+			System.out.println("Error al actualizar el horario: "+e.getMessage());
 		}
 	}
 

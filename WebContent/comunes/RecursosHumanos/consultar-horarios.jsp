@@ -152,19 +152,19 @@
       	<label>Días: </label>
      	<br>
         <label class="checkbox-inline">
-          <input type="checkbox" value="" class="largerCheckbox">Lunes </label>
+          <input type="checkbox" value="LU" name="lunes" class="largerCheckbox">Lunes </label>
         <label class="checkbox-inline">
-          <input type="checkbox" value="" class="largerCheckbox">Martes</label>
+          <input type="checkbox" value="MA" name="martes" class="largerCheckbox">Martes</label>
         <label class="checkbox-inline">
-          <input type="checkbox" value="" class="largerCheckbox">Miercoles</label>
+          <input type="checkbox" value="MI" name="miercoles" class="largerCheckbox">Miercoles</label>
         <label class="checkbox-inline">
-          <input type="checkbox" value="" class="largerCheckbox">Jueves</label>
+          <input type="checkbox" value="JU" name="jueves" class="largerCheckbox">Jueves</label>
         <label class="checkbox-inline">
-          <input type="checkbox" value="" class="largerCheckbox">Viernes</label>
+          <input type="checkbox" value="VI" name="viernes" class="largerCheckbox">Viernes</label>
         <label class="checkbox-inline">
-          <input type="checkbox" value="" class="largerCheckbox">Sabado</label>
+          <input type="checkbox" value="SA" name="sabado" class="largerCheckbox">Sabado</label>
         <label class="checkbox-inline">
-          <input type="checkbox" value="" class="largerCheckbox">Domingo</label>
+          <input type="checkbox" value="DO" name="domingo" class="largerCheckbox">Domingo</label>
         <br> Selecciona los días que el empleado debe laborar 
         </div>
         <br>
