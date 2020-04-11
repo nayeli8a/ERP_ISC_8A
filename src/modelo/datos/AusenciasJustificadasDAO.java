@@ -16,6 +16,27 @@ import modelo.beans.AusenciasJustificadas;
 
 public class AusenciasJustificadasDAO {
 
+  public int validarNSSEmpleado(String nssempleado) {
+			int idEmpleado=-1;
+			String sql = "SELECT idEmpleado FROM Empleados WHERE nss=?";
+			try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.setString(1, nssempleado);
+				ResultSet rs = ps.executeQuery();
+
+				if (rs.next()) {
+					//si encuentra el nombre de un empleado, si existe el empleado
+					idEmpleado = rs.getInt(1) ;
+				}
+				rs.close();
+				ps.close();
+
+			} catch (SQLException e) {
+				System.out.println("Error al conectar con la BD " + e.getMessage());
+			}
+			return idEmpleado;
+		}
+
 
   public void insertarAusenciasJustificadas(AusenciasJustificadas ausJus)
 	{

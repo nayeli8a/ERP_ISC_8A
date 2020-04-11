@@ -21,7 +21,7 @@ import modelo.datos.*;
 @WebServlet("/Registrar")
 public class RegistrarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,7 +36,7 @@ public class RegistrarServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+
 		// aqui va todo el codigo
 		System.out.println("##Dentro de RegistrarServlet##");
 		String op = request.getParameter("op");
@@ -49,11 +49,11 @@ public class RegistrarServlet extends HttpServlet {
 			case "Estado":
 				//generamos el objeto a llenar
 				EstadoDAO esdao = new EstadoDAO();
-				
+
 				String nom_estado = request.getParameter("nom_estado");
 				String siglas = request.getParameter("siglas");
 				String estatus = request.getParameter("estatus");
-				
+
 				//validamos que el estado no exista ya en la BD
 				//si el estado no existe en la bd, entonces lo agregamos
 				if(!esdao.ValidarEstado(nom_estado))
@@ -62,11 +62,11 @@ public class RegistrarServlet extends HttpServlet {
 				}
 				url="Estado?op=Listar&pagina=1";
 			break;
-			
+
 			case "Ciudad":
 				//generamos el objeto a llenar
 				CiudadesDAO cdao = new CiudadesDAO();
-				
+
 				String nom_ciudad = request.getParameter("nom_ciudad");
 				nom_estado = request.getParameter("nom_estado");
 				estatus = request.getParameter("estatus");
@@ -74,19 +74,19 @@ public class RegistrarServlet extends HttpServlet {
 				{
 					cdao.insertarCiudades(nom_ciudad,nom_estado, estatus);
 				}
-				
+
 				url="Ciudades?op=Listar&pagina=1";
 				break;
-				
+
 			case "Deducciones":
 				//generamos el objeto a llenar
 				DeduccionesDAO ddao = new DeduccionesDAO();
-				
+
 				String nom_deducciones = request.getParameter("nom_deducciones");
 				String descripcion = request.getParameter("descripcion");
 				float porcentaje = 	Float.parseFloat(request.getParameter("porcentaje"));
 				estatus = request.getParameter("estatus");
-				
+
 				//validamos que el estado no exista ya en la BD
 				//si el estado no existe en la bd, entonces lo agregamos
 				System.out.println(ddao.ValidarDeducciones(nom_deducciones));
@@ -103,7 +103,7 @@ public class RegistrarServlet extends HttpServlet {
 				String descripcion_percepciones = request.getParameter("descripcion");
 				int diasPagar = Integer.parseInt(request.getParameter("diasPagar"));
 				estatus = request.getParameter("estatus");
-				
+
 				//validamos que el estado no exista ya en la BD
 				//si el estado no existe en la bd, entonces lo agregamos
 				System.out.println(pdao.ValidarPercepciones(nom_percepciones));
@@ -118,7 +118,7 @@ public class RegistrarServlet extends HttpServlet {
 				DepartamentosDAO dedao = new DepartamentosDAO();
 				String nom_departamentos = request.getParameter("nom_departamentos");
 				estatus = request.getParameter("estatus");
-				
+
 				//validamos que el estado no exista ya en la BD
 				//si el estado no existe en la bd, entonces lo agregamos
 				System.out.println(dedao.ValidarDepartamento(nom_departamentos));
@@ -168,21 +168,21 @@ public class RegistrarServlet extends HttpServlet {
 				e.setIdPuesto(Integer.parseInt(request.getParameter("puesto")));
 				e.setIdCiudad(Integer.parseInt(request.getParameter("ciudad")));
 				e.setIdSucursal(Integer.parseInt(request.getParameter("sucursal")));
-				
+
 				EmpleadosDAO emdao = new EmpleadosDAO();
 				emdao.insertar(e);
 				url = "Empleados?op=Listar&pagina=1";
-				
+
 			break;
-			
+
 			case "Horarios":
 				//variable para los errores
 				error = "";
 				mensaje="";
-				
+
 				//generamos el objeto que nos permitira insertar,actualizar,eliminar
 				HorariosDAO hrDAO = new HorariosDAO();
-				
+
 				String horaInicio = request.getParameter("horaInicio");
 				String horaFin = request.getParameter("horaFin");
 				nssempleado = request.getParameter("nssempleado");
@@ -198,7 +198,7 @@ public class RegistrarServlet extends HttpServlet {
 				estatus = "A";
 				System.out.println(dias+"||"+horaInicio+"||"+horaFin);
 				//validamos que el empleado con el nss dado si existe
-				
+
 				int idEmpleado = hrDAO.validarNSSEmpleado(nssempleado);
 				if(idEmpleado != -1)
 				{
@@ -210,11 +210,11 @@ public class RegistrarServlet extends HttpServlet {
 					error = "El NSS del empleado no es valido, inserta uno valido.";
 					request.setAttribute("Errores",error);
 				}
-				
+
 				url="Horarios?op=Listar&pagina=1";
-				
+
 				break;
-			case "Incapacidades" : 
+			case "Incapacidades" :
 				error = "";
 				mensaje="";
 				IncapacidadesDAO indao = new IncapacidadesDAO();
@@ -229,7 +229,7 @@ public class RegistrarServlet extends HttpServlet {
 					indao.insertarIncapacidades(fechaInicio, fechaFin, enfermedad, null,idEmpleado, estatus);
 					mensaje = "Incapacidad registrada con exito para el NSS: "+nssempleado;
 					request.setAttribute("Mensajes",mensaje);
-					
+
 				}else
 				{
 					error = "El NSS del empleado no es valido, inserta uno valido.";
@@ -237,11 +237,37 @@ public class RegistrarServlet extends HttpServlet {
 				}
 				url="Incapacidades?op=Listar&pagina=1";
 				break;
-		
 
-				
+				case "AusenciasJustificadas" :
+					error = "";
+					mensaje="";
+					AusenciasJustificadasDAO ausJusdao = new AusenciasJustificadasDAO();
+
+					Date fechaSolicitud = (Date.valueOf(request.getParameter("fechaSolicitud")));
+					Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
+					Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
+					nssempleado= request.getParameter("nssempleado");
+					String tipo =request.getParameter("tipo");
+				    estatus = "A";
+					idEmpleado = indao.validarNSSEmpleado(nssempleado);
+					if(idEmpleado != -1)
+					{
+						ausJusdao.insertarAusenciasJustificadas(fechaSolicitud,fechaInicio, fechaFin, tipo,idEmpleadoS,idEmpleadoA, estatus);
+						mensaje = "AusenciaJustificada registrada con exito para el NSS: "+nssempleado;
+						request.setAttribute("Mensajes",mensaje);
+
+					}else
+					{
+						error = "El NSS del empleado no es valido, inserta uno valido.";
+						request.setAttribute("Errores",error);
+					}
+					url="AusenciasJustificadas?op=Listar&pagina=1";
+					break;
+
+
+
 		}
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
 	}

@@ -12,6 +12,16 @@ public class AusenciasJustificadas{
   private int idEmpleadoS;
   private int idEmpleadoA;
   private String estatus;
+  private String nss;
+
+
+
+	public String getNss() {
+		return nss;
+	}
+	public void setNss(String nss) {
+		this.nss = nss;
+	}
 
 public int getIdAusencia() {
 	return idAusencia;
