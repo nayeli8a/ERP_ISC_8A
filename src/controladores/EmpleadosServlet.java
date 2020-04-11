@@ -69,6 +69,31 @@ public class EmpleadosServlet extends HttpServlet {
 				request.setAttribute("pagina",pagina);
 				url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"empleados.jsp";
 			break;
+			case "VerIndividual":
+				//Este caso me servira para mostrar los distintos elementos que conforman al empleado
+				String opcion = request.getParameter("opcion");
+				String nssempleado = request.getParameter("Vernss");
+				switch(opcion)
+				{
+					case "Horario":
+						Horarios hrio = new Horarios();
+						List<Horarios> datosh = null;
+						HorariosDAO hdao = new HorariosDAO();
+						int idEmpleado = hdao.validarNSSEmpleado(nssempleado);
+						hrio = hdao.consultaIndividual(idEmpleado+"");
+						datosh.add(hrio);
+						request.setAttribute("datos",datosh);
+						request.setAttribute("pagina",1);
+						url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"horarios.jsp";
+						break;
+					case "Nomina":
+					break;
+					case "Pedido":
+					break;
+					case "Incapacidades":
+					break;
+				}
+				break;
 			case "Editar":
 				e = new Empleados();
 				e.setIdEmpleado(Integer.parseInt(request.getParameter("edit_id")));

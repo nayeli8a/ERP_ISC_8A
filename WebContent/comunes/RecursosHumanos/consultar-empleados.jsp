@@ -79,6 +79,9 @@
 						<th>Acciones</th>
 					</tr>
 				</thead>
+				
+				<form id="formVER" onsubmit="this.action=get_action();" action="" method="post">
+				<input type="hidden" name="VERnss" value="${dato.getNss()}">
 				<tbody id="myTable">
 					<c:forEach var="dato" items="${datosempleados}">
 						<c:if test="${dato.getEstatus() eq 'I'}">
@@ -119,15 +122,15 @@
 									<td>${datoss.getNombre()}</td>
 								</c:if>
 							</c:forEach>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
+							<td><button formaction="${pageContext.servletContext.contextPath}/Empleados?op=VerIndividual&opcion=Horario" formmethod="post" type="submit">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Nomina">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Pedidos">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Incapacidades">VER</button></td>
+							<td><button type="submit" name ="opcion" value="HistorialPuestos">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Ventas">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Visitas">VER</button></td>
+							<td><button type="submit" name ="opcion" value="AusenciasJustificadas">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Documentacion">VER</button></td>
 							</tr>
 						</c:if>
 						<c:if test="${dato.getEstatus() eq 'A'}">
@@ -168,15 +171,15 @@
 									<td>${datoss.getNombre()}</td>
 								</c:if>
 							</c:forEach>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
-							<td><button>VER</button></td>
+							<td><button id="btnhorario" formaction="${pageContext.servletContext.contextPath}/Empleados?op=VerIndividual&opcion=Horario" type="submit">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Nomina">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Pedidos">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Incapacidades">VER</button></td>
+							<td><button type="submit" name ="opcion" value="HistorialPuestos">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Ventas">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Visitas">VER</button></td>
+							<td><button type="submit" name ="opcion" value="AusenciasJustificadas">VER</button></td>
+							<td><button type="submit" name ="opcion" value="Documentacion">VER</button></td>
 							<td>
 								<form action="Empleados" method="post">
 									<input type="hidden" name="id" value="${dato.getIdEmpleado()}">
@@ -202,6 +205,7 @@
 						
 					</c:forEach>
 				</tbody>
+				</form>
 			</table>
 		</div>
 	</div>
@@ -610,4 +614,10 @@
 	
 	
 </body>
+<script>
+    function get_action() { // inside script tags
+    	var formaction = document.getElementById("btnhorario").attr("formaction");
+    	return form_action;
+    }
+</script>
 </html>
