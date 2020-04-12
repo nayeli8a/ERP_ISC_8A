@@ -9,6 +9,9 @@ AS
 		I.evidencia,
 		I.idEmpleado,
 		E.nss,
+		E.nombre,
+		E.apaterno,
+		E.amaterno, 
 		I.estatus
     FROM Empleados AS E INNER JOIN Incapacidades AS I On I.idEmpleado = E.idEmpleado
 GO
@@ -17,3 +20,4 @@ select * from Incapacidades_empleados;
 
 --Otorgamos permiso a RH para que pueda ver la vista
 grant select,insert,update,delete on Incapacidades_empleados to RecursosHumanos
+

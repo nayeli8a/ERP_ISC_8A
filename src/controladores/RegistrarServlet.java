@@ -242,22 +242,21 @@ public class RegistrarServlet extends HttpServlet {
 					error = "";
 					mensaje="";
 					AusenciasJustificadasDAO ausJusdao = new AusenciasJustificadasDAO();
-
 					Date fechaSolicitud = (Date.valueOf(request.getParameter("fechaSolicitud")));
-					Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
-					Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
+					fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
+					fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
 					nssempleado= request.getParameter("nssempleado");
 					String tipo =request.getParameter("tipo");
 				    estatus = "A";
-					idEmpleado = indao.validarNSSEmpleado(nssempleado);
-					if(idEmpleado != -1)
+				//	idEmpleado = indao.validarNSSEmpleado(nssempleado);
+				//	if(idEmpleado != -1)
 					{
-						ausJusdao.insertarAusenciasJustificadas(fechaSolicitud,fechaInicio, fechaFin, tipo,idEmpleadoS,idEmpleadoA, estatus);
+				//		ausJusdao.insertarAusenciasJustificadas(fechaSolicitud,fechaInicio, fechaFin, tipo,idEmpleadoS,idEmpleadoA, estatus);
 						mensaje = "AusenciaJustificada registrada con exito para el NSS: "+nssempleado;
 						request.setAttribute("Mensajes",mensaje);
 
-					}else
-					{
+				//	}else
+					//{
 						error = "El NSS del empleado no es valido, inserta uno valido.";
 						request.setAttribute("Errores",error);
 					}

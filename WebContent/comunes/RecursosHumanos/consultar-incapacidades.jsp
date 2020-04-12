@@ -54,12 +54,10 @@
 				<thead class="thead-dark">
 
 					<tr>
-						<th>ID</th>
 						<th>Fecha Inicio</th>
 						<th>Fecha Fin</th>
 						<th>Enfermedad</th>
 						<th>Evidencia</th>
-						<th>ID empleado</th>
 						<th>NSS empleado</th>
 						<th>Estatus</th>
 					</tr>
@@ -68,24 +66,20 @@
 					<c:forEach var="dato" items="${datos}">
 						<c:if test="${dato.getEstatus() eq 'I'}">
 							<tr>
-							<td>${dato.getIdIncapacidad()}</td>
 							<td>${dato.getFechaInicio()}</td>
 							<td>${dato.getFechaFin()}</td>
 							<td>${dato.getEnfermedad()}</td>
 							<td>${dato.getEvidencia()}</td>
-							<td>${dato.getIdEmpleado()}</td>
 							<td>${dato.getNss()}</td>
 							<td>${dato.getEstatus()}</td>
 							</tr>
 						</c:if>
 						<c:if test="${dato.getEstatus() eq 'A'}">
 							<tr>
-							<td>${dato.getIdIncapacidad()}</td>
 							<td>${dato.getFechaInicio()}</td>
 							<td>${dato.getFechaFin()}</td>
 							<td>${dato.getEnfermedad()}</td>
 							<td>${dato.getEvidencia()}</td>
-							<td>${dato.getIdEmpleado()}</td>
 							<td>${dato.getNss()}</td>
 							<td>${dato.getEstatus()}</td>
 							<td>

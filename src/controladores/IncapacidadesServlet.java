@@ -69,16 +69,13 @@ public class IncapacidadesServlet extends HttpServlet {
 					String error = "";
 					String mensaje="";
 				    indao = new IncapacidadesDAO();
-				   
-					Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
+				    Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
 					Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
 					String enfermedad =request.getParameter("enfermedad");
 					String estatus = request.getParameter("estatus");
-					int idEmpleado=Integer.parseInt(request.getParameter("idEmpleado"));
-					String nssempleado=  request.getParameter("nss");
-
+					String nssempleado= request.getParameter("Nss");
 					//validamos que el empleado con el nss dado si existe
-					idEmpleado = indao.validarNSSEmpleado(nssempleado);
+					int idEmpleado = indao.validarNSSEmpleado(nssempleado);
 					if(idEmpleado != -1)
 					{
 						indao.actualizar(fechaInicio, fechaFin, enfermedad, null,idEmpleado, estatus);

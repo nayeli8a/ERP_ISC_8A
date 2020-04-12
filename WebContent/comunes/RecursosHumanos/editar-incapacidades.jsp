@@ -21,6 +21,20 @@
     <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
 </head>
 <body >
+<c:if test="${not empty Errores }">
+		<script>
+		window.addEventListener("load",function(){
+			alert("${Errores}");
+			})
+		</script>
+	</c:if>
+	<c:if test="${not empty Mensajes }">
+		<script>
+		window.addEventListener("load",function(){
+			alert("${Mensajes}");
+			})
+		</script>
+	</c:if>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
 		<a class="btn btn-primary"href="${pageContext.servletContext.contextPath}/General?op=RegresarRH">Atras</a>
 	</nav>
@@ -29,22 +43,30 @@
 
 		<form action="${pageContext.servletContext.contextPath}/Incapacidades?op=Modificar" method="post">
 			<div class="form-group">
-		
-				<label >ID incapacidad: </label>
-				<input type="text" readonly name="idIncapacidad" readonly required value="${datosIncapacidades.getIdIncapacidad()}">
-				<br>
-				      <legend> Datos del empleado: </legend>
+	
+				    <legend> Datos del empleado: </legend>
 			      <div class="row">
-			        <div class="col-md-6">
+			     
+			        <div class="col-md-2" >
 			          <div class="form-group">
-			            <label>Id empleado : </label>
-			     <input type="number"  name="idEmpleado" class="form-control"value="${datosIncapacidades.getIdEmpleado()}" required  >
+			     <input type="texto"  name="nombre" class="form-control" value="${datosIncapacidades.getNombre()}" readonly  >
 			          </div>
 			        </div>
-			        <div class="col-md-6" >
+			         <div class="col-md-2" >
+			          <div class="form-group">
+			     <input type="texto"  name="apaterno" class="form-control" value="${datosIncapacidades.getApaterno()}" readonly  >
+			          </div>
+			        </div>
+			         <div class="col-md-2" >
+			          <div class="form-group">
+			     <input type="texto"  name="amaterno" class="form-control" value="${datosIncapacidades.getAmaterno()}" readonly  >
+			          </div>
+			        </div>
+			         <div class="col-md-2" >
 			          <div class="form-group">
 			            <label>NSS : </label>
-			     <input type="number"  name="nssempleado" class="form-control" value="${datosIncapacidades.getIdEmpleado()}" required  >
+			     <input type="texto"  name="Nss" class="form-control" value="${datosIncapacidades.getNss()}" required  >
+				
 			          </div>
 			        </div>
 			      </div>

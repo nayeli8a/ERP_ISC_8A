@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.sql.Date;
 
 public class Incapacidades {
+	//datos de la incapacidad 
 	private int idIncapacidad;
 	private Date fechaInicio;
 	private Date fechaFin;
@@ -11,10 +12,32 @@ public class Incapacidades {
 	private InputStream evidencia;
 	private int idEmpleado;
 	private String estatus;
+	//datos del empleado 
 	private String nss;
+	private String nombre;
+	private String apaterno;
+	private String amaterno;
 	
 	
 	
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApaterno() {
+		return apaterno;
+	}
+	public void setApaterno(String apaterno) {
+		this.apaterno = apaterno;
+	}
+	public String getAmaterno() {
+		return amaterno;
+	}
+	public void setAmaterno(String amaterno) {
+		this.amaterno = amaterno;
+	}
 	public String getNss() {
 		return nss;
 	}

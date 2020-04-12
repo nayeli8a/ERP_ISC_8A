@@ -36,7 +36,7 @@ public class IncapacidadesDAO {
 			}
 			return idEmpleado;
 		}
-	  
+
 	  
 	
 	  public void insertarIncapacidades(Date fechaInicio, Date fechaFin, String enfermedad, String evidencia, int idEmpleado, String estatus)
@@ -68,7 +68,11 @@ public class IncapacidadesDAO {
 				in.setEvidencia(rs.getBinaryStream(5));
 				in.setIdEmpleado(rs.getInt(6));
 				in.setNss(rs.getString(7));
-				in.setEstatus(rs.getString(8));
+				in.setNombre(rs.getString(8));
+				in.setApaterno(rs.getString(9));
+				in.setAmaterno(rs.getString(10));
+				in.setEstatus(rs.getString(11));
+			
 				lista.add(in);
 				
 			
@@ -93,7 +97,10 @@ public class IncapacidadesDAO {
 				in.setEnfermedad(rs.getString("enfermedad"));
 				in.setEvidencia(rs.getBinaryStream("evidencia"));
 				in.setIdEmpleado(rs.getInt("idEmpleado"));
-				in.setNss(rs.getString("nssempleado"));
+				in.setNss(rs.getString("nss"));
+				in.setNombre(rs.getString("nombre"));
+				in.setAmaterno(rs.getString("amaterno"));
+				in.setApaterno(rs.getString("apaterno"));
 				in.setEstatus(rs.getString("estatus"));
 
 			}
@@ -130,6 +137,7 @@ public class IncapacidadesDAO {
 			ps.setInt(5, in.getIdEmpleado());
 			ps.setString(6,in.getEstatus());
 			ps.setInt(7, in.getIdIncapacidad());
+			
 			ps.executeUpdate();
 			
 		} catch (Exception e) {

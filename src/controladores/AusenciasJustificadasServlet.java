@@ -79,19 +79,19 @@ public class AusenciasJustificadasServlet extends HttpServlet {
     					String tipo =request.getParameter("tipo");
     					String estatus = request.getParameter("estatus");
     					int idEmpleadoS=Integer.parseInt(request.getParameter("idEmpleadoS"));
-              int idEmpleadoA=Integer.parseInt(request.getParameter("idEmpleadoA"));
+    					int idEmpleadoA=Integer.parseInt(request.getParameter("idEmpleadoA"));
     					String nssempleado=  request.getParameter("nss");
 
     					//validamos que el empleado con el nss dado si existe
-    					idEmpleado = ausJusdao.validarNSSEmpleado(nssempleado);
-    					if(idEmpleado != -1)
+    				//	idEmpleado = ausJusdao.validarNSSEmpleado(nssempleado);
+    				//	if(idEmpleado != -1)
     					{
-    						ausJusdao.actualizar(fechaSolicitud,fechaInicio, fechaFin, tipo,idEmpleadoS,idEmpleadoA, estatus);
+    				//		ausJusdao.actualizar(fechaSolicitud,fechaInicio, fechaFin, tipo,idEmpleadoS,idEmpleadoA, estatus);
     						mensaje = "AusenciasJustificadas modificada con exito para el NSS: "+nssempleado;
     						request.setAttribute("Mensajes",mensaje);
     						url="AusenciasJustificadas?op=Listar&pagina=1";
-    					}else
-    					{
+    				//	}else
+    				//	{
     						error = "El NSS del empleado no es valido, inserta uno valido.";
     						request.setAttribute("Errores",error);
     					}
