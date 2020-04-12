@@ -27,6 +27,21 @@
 
 </head>
 <body>
+	<c:if test="${not empty Errores }">
+		<script>
+		window.addEventListener("load",function(){
+			alert("${Errores}");
+			})
+		</script>
+	</c:if>
+	<c:if test="${not empty Mensajes }">
+		<script>
+		window.addEventListener("load",function(){
+			alert("${Mensajes}");
+			})
+		</script>
+	</c:if>
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
 		<a class="btn btn-primary"href="${pageContext.servletContext.contextPath}/General?op=RegresarRH">Atras</a>
 	</nav>
@@ -80,11 +95,12 @@
 					</tr>
 				</thead>
 				
-				<form id="formVER" onsubmit="this.action=get_action();" action="" method="post">
-				<input type="hidden" name="VERnss" value="${dato.getNss()}">
+				<form id="formVER" action="" method="post">
+				
 				<tbody id="myTable">
 					<c:forEach var="dato" items="${datosempleados}">
 						<c:if test="${dato.getEstatus() eq 'I'}">
+						<input type="hidden" name="VERnss" value="${dato.getNss()}">
 							<tr>
 							<td>${dato.getIdEmpleado()}</td>
 							<td>${dato.getNombre()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
@@ -122,7 +138,7 @@
 									<td>${datoss.getNombre()}</td>
 								</c:if>
 							</c:forEach>
-							<td><button formaction="${pageContext.servletContext.contextPath}/Empleados?op=VerIndividual&opcion=Horario" formmethod="post" type="submit">VER</button></td>
+							<td><button id="btnhorario${dato.getIdEmpleado()}" onclick="get_action('btnhorario${dato.getIdEmpleado()}')" formaction="${pageContext.servletContext.contextPath}/Empleados?op=VerIndividual&opcion=Horario" type="submit">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Nomina">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Pedidos">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Incapacidades">VER</button></td>
@@ -134,6 +150,7 @@
 							</tr>
 						</c:if>
 						<c:if test="${dato.getEstatus() eq 'A'}">
+						<input type="hidden" name="VERnss" value="${dato.getNss()}">
 							<tr>
 							<td>${dato.getIdEmpleado()}</td>
 							<td>${dato.getNombre()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
@@ -171,7 +188,7 @@
 									<td>${datoss.getNombre()}</td>
 								</c:if>
 							</c:forEach>
-							<td><button id="btnhorario" formaction="${pageContext.servletContext.contextPath}/Empleados?op=VerIndividual&opcion=Horario" type="submit">VER</button></td>
+							<td><button id="btnhorario${dato.getIdEmpleado()}" onclick="get_action('btnhorario${dato.getIdEmpleado()}','${dato.getNss()}')" formaction="${pageContext.servletContext.contextPath}/Empleados?op=VerIndividual&opcion=Horario" type="submit">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Nomina">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Pedidos">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Incapacidades">VER</button></td>
@@ -615,9 +632,12 @@
 	
 </body>
 <script>
-    function get_action() { // inside script tags
-    	var formaction = document.getElementById("btnhorario").attr("formaction");
-    	return form_action;
+    function get_action(idbtn,nss) { 
+    	var btn = document.getElementById(idbtn);
+    	var valor = btn.getAttribute("formaction");
+    	valor +="&nss="+nss;
+    	document.getElementById("formVER").setAttribute('action',valor);
+    	document.forms["formVER"].submit();
     }
 </script>
 </html>

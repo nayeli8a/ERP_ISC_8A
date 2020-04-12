@@ -2,6 +2,7 @@ package controladores;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -46,6 +47,9 @@ public class EmpleadosServlet extends HttpServlet {
 		//CIUDADES
 		CiudadesDAO cdao = new CiudadesDAO();
 		
+		String error="";
+		String mensaje="";
+		
 		switch (op) {
 			case "Listar":
 				//obtenemos el valor de la pagina que vamos a mostrar
@@ -71,19 +75,30 @@ public class EmpleadosServlet extends HttpServlet {
 			break;
 			case "VerIndividual":
 				//Este caso me servira para mostrar los distintos elementos que conforman al empleado
+				
+				//obtenemos la opcion segun lo que queremos ver
 				String opcion = request.getParameter("opcion");
-				String nssempleado = request.getParameter("Vernss");
+				//obtenemos el nss del empleado seleccionado
+				String nssempleado = request.getParameter("nss");
 				switch(opcion)
 				{
 					case "Horario":
 						Horarios hrio = new Horarios();
-						List<Horarios> datosh = null;
+						List<Horarios> datosh = new ArrayList<Horarios>();
 						HorariosDAO hdao = new HorariosDAO();
 						int idEmpleado = hdao.validarNSSEmpleado(nssempleado);
+							
 						hrio = hdao.consultaIndividual(idEmpleado+"");
-						datosh.add(hrio);
-						request.setAttribute("datos",datosh);
-						request.setAttribute("pagina",1);
+						if(hrio.getIdEmpleado() == 0)
+						{
+							error="Este empleado no tiene Horario asignado";
+							request.setAttribute("Errores",error);
+						}else
+						{
+							datosh.add(hrio);
+							request.setAttribute("datos",datosh);
+							request.setAttribute("pagina",1);
+						}
 						url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"horarios.jsp";
 						break;
 					case "Nomina":
