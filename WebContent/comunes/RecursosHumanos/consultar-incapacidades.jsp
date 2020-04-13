@@ -112,28 +112,28 @@
 	
 	      <!-- Modal body -->
 	      <div class="modal-body" id="modal_div">
-	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Incapacidades" method="post">
+	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Incapacidades" onsubmit="return validarFechas();" method="post">
 			<div class="form-group">
 			 <div class="row">
         <div class="col-sm">
           <label>NSS Empleado: </label>
-          <input type="text" name="nssempleado" class="form-control" required="">
+          <input type="text" name="nssempleado" class="form-control" required>
           
           <label>Enfermedad: </label>
-          <input type="text" name="enfermedad" onkeypress="return soloLetras(event)" class="form-control" required="">
+          <input type="text" name="enfermedad" onkeypress="return soloLetras(event)" class="form-control" required>
           
         </div>
         <div class="col-sm">
           <label>Fecha inicio: </label>
-          <input type="date" name="fechaInicio" class="form-control" required="">
+          <input type="date"  name="fechaInicio"  id="fechaInicio" class="form-control" required>
           
           <label>Fecha fin: </label>
-          <input type="date" name="fechaFin" class="form-control" required="">
+          <input type="date" name="fechaFin" id ="fechaFin" class="form-control" required>
           <br>
         </div>
       </div>
 			</div>
-		 <button type="submit" class="btn btn-primary">Registrar</button>
+		 <button type="submit"   class="btn btn-primary">Registrar</button>
 			
 		</form>
 	      	

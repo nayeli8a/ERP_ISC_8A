@@ -164,3 +164,21 @@ function MostrarDiv(idDiv)
 }
 
 
+
+function validarFechas()
+{
+   var hoy = new Date();
+   var plazo = new Date()+10;
+   var fechaInicio = document.getElementById("fechaInicio").value;
+   var fechaFin = document.getElementById("fechaFin").value;
+
+   if(Date.parse(fechaInicio)<=Date.parse(hoy) || Date.parse(fechaInicio)>=Date.parse(plazo) && Date.parse(fechaInicio)< Date.parse(fechaFin) ) {
+	   return true;
+	 
+} else {
+	alert("fechas incorrectas");
+	return false; 
+	
+
+}
+}
