@@ -128,20 +128,22 @@ public class HorariosDAO {
 		return h;
 	}
   
-  public Horarios consultaIndividual(String idEmpleado){
-		String sql="select * from Horarios where idEmpleado=?";
-		Horarios h = new Horarios();
+  public List<Horarios> consultaIndividual(String idEmpleado){
+	  	ArrayList<Horarios> lista = new ArrayList<>();
+	  	String sql="select * from Horarios where idEmpleado=?";
 		try{
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 			ps.setInt(1,Integer.parseInt(idEmpleado));
 			ResultSet rs=ps.executeQuery();
-			if(rs.next()){
+			while(rs.next()){
+				Horarios h = new Horarios();
 				h.setIdHorario(rs.getInt("idHorario"));
 				h.setHoraInicio(rs.getDate("horaInicio"));
 				h.setHoraFin(rs.getDate("horaFin"));
 				h.setDias(rs.getString("dias"));
 				h.setEstatus(rs.getString("estatus"));
 				h.setIdEmpleado(rs.getInt("idEmpleado"));
+				lista.add(h);
 			}
 			ps.close();
 			rs.close();
@@ -149,7 +151,7 @@ public class HorariosDAO {
 		catch(SQLException e){
 			System.out.println("Error HorariosDAO:"+e.getMessage());
 		}
-		return h;
+		return lista;
 	}
 
 }

@@ -138,7 +138,16 @@
 									<td>${datoss.getNombre()}</td>
 								</c:if>
 							</c:forEach>
-							<td><button id="btnhorario${dato.getIdEmpleado()}" onclick="get_action('btnhorario${dato.getIdEmpleado()}')" formaction="${pageContext.servletContext.contextPath}/Empleados?op=VerIndividual&opcion=Horario" type="submit">VER</button></td>
+							<td>
+								<input
+									type="button"
+									name="VERhorarios"
+									id="btnhorario${dato.getIdEmpleado()}" 
+									onclick="get_action('btnhorario${dato.getIdEmpleado()}','${dato.getNss()}')" 
+									formaction="Horario&${dato.getNss()}"
+									value="VER"
+								> 
+							</td>
 							<td><button type="submit" name ="opcion" value="Nomina">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Pedidos">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Incapacidades">VER</button></td>
@@ -188,7 +197,16 @@
 									<td>${datoss.getNombre()}</td>
 								</c:if>
 							</c:forEach>
-							<td><button id="btnhorario${dato.getIdEmpleado()}" onclick="get_action('btnhorario${dato.getIdEmpleado()}','${dato.getNss()}')" formaction="${pageContext.servletContext.contextPath}/Empleados?op=VerIndividual&opcion=Horario" type="submit">VER</button></td>
+							<td>
+								<input
+									type="button"
+									name="VERhorarios"
+									id="btnhorario${dato.getIdEmpleado()}" 
+									onclick="get_action('btnhorario${dato.getIdEmpleado()}','${dato.getNss()}')" 
+									formaction="Horario&${dato.getNss()}"
+									value="VER"
+								> 
+							</td>
 							<td><button type="submit" name ="opcion" value="Nomina">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Pedidos">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Incapacidades">VER</button></td>
@@ -607,8 +625,10 @@
 	    </div>
 	  </div>
 	</div>
-
-
+	
+	<!-- MODAL PARA VER LOS DISTINTOS ELEMENTOS -->
+	<span id="res"></span>
+	
 	<% //Aqui tendremos la paginacion%>
 	<nav aria-label="paginacion Empleados">
 	  <ul class="pagination justify-content-center">
@@ -631,13 +651,26 @@
 	
 	
 </body>
+
+
 <script>
     function get_action(idbtn,nss) { 
+    	//obtendremos el boton que fue accionado para tomar sus datos necesarios
     	var btn = document.getElementById(idbtn);
+    	//tomamos los valores en su atributo formaction
     	var valor = btn.getAttribute("formaction");
-    	valor +="&nss="+nss;
-    	document.getElementById("formVER").setAttribute('action',valor);
-    	document.forms["formVER"].submit();
+    	
+    	//document.getElementById("formVER").setAttribute('action',valor);
+    	//document.forms["formVER"].submit();
+		$.ajax({
+			type:'POST',
+			data:{op:'AJAX',datos:valor},
+			url:'Empleados',
+			success: function(res){
+				$('#res').html(res);
+				$('#modalVER').modal('show');
+			}
+		});
     }
 </script>
 </html>

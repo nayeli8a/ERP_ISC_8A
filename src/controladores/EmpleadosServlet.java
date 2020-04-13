@@ -1,9 +1,11 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -88,7 +90,7 @@ public class EmpleadosServlet extends HttpServlet {
 						HorariosDAO hdao = new HorariosDAO();
 						int idEmpleado = hdao.validarNSSEmpleado(nssempleado);
 							
-						hrio = hdao.consultaIndividual(idEmpleado+"");
+						hrio = hdao.consultaIndividual(idEmpleado);
 						if(hrio.getIdEmpleado() == 0)
 						{
 							error="Este empleado no tiene Horario asignado";
@@ -152,7 +154,103 @@ public class EmpleadosServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String op = request.getParameter("op");
+		String[] array = new String[2];
+		int i=0;
+		
+		//revisamos si la peticion es AJAX o no
+		if(op.equals("AJAX"))
+		{
+			//ponemos el modo de respuestas en text/html para poder mandar objetos html
+			response.setContentType("text/html");
+			op="";//dejamos la op en vacio para que si envian de un form no AJAX 
+			String datos = request.getParameter("datos");//tomamos los datos necesarios para mostrar
+			String ContenidoModal="";
+			String CuerpoModal="";
+			System.out.println(datos);
+			StringTokenizer st = new StringTokenizer(datos,"&");
+			while(st.hasMoreTokens())
+			{
+				array[i] = st.nextToken();
+				i++;
+			}
+			
+			switch(array[0])
+			{
+				case "Horario":
+					HorariosDAO hdao = new HorariosDAO();
+					
+					int idEmpleado = hdao.validarNSSEmpleado(array[1]);
+					System.out.println(array[1]+" || "+idEmpleado);
+					List<Horarios> datosh  = hdao.consultaIndividual(idEmpleado+"");
+					String aux="";
+					System.out.println("size: "+datosh.size());
+					for (int j = 0; j < datosh.size(); j++) {
+						aux += 	"				<tr>"
+								+"				<td>"+datosh.get(j).getIdHorario()+"</td>"
+								+"				<td>"+datosh.get(j).getHoraInicio()+"</td>"
+								+"				<td>"+datosh.get(j).getHoraFin()+"</td>"
+								+"				<td>"+datosh.get(j).getDias()+"</td>"
+								+"              <td>"+datosh.get(j).getIdEmpleado()+"</td>"
+								+"				<td>"+datosh.get(j).getEstatus()+"</td>"
+								+"				</tr>";
+					}
+					System.out.println("aux: "+aux);
+					ContenidoModal = ""
+							+"<div class=\"table-responsive table-bordered table-striped\">"
+						    +"  <table class=\"table table-sm\">"
+						    +"	<thead class=\"thead-dark\">"
+						    +"		<tr>"
+							+"			<th>ID Horario</th>"
+							+"			<th>Hora Inicio</th>"
+							+"			<th>Hora Fin</th>"
+							+"			<th>Días</th>"
+							+"           <th>id Empleado</th>"
+							+"            <th>Estatus</th>"
+							+"		</tr>"
+							+"	</thead>"
+						    +"   <tbody id=\"myTable\">"
+							+aux+""
+							+"	</tbody>"
+						    +" </table>"
+						    +"</div>";
+					
+					CuerpoModal=""
+							+ "<div class=\"modal fade\" id=\"modalVER\">"
+								+"<div class=\"modal-dialog modal-lg\">"
+								  +"<div class=\"modal-content\">"
+								      
+								  	+"<!-- Modal Header -->"
+								      +"<div class=\"modal-header\">"
+								      	+"<h4 class=\"modal-title\">Ver Elemento</h4>"
+								      	+"<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>"
+								      +"</div>"
+								      	
+									+"<!-- Modal body -->"
+									+"<div class=\"modal-body\" id=\"modal_div\">"
+										+ContenidoModal+""
+									+"</div>"
+								
+									+"<!-- Modal footer -->"
+									+"<div class=\"modal-footer\">"
+									+"</div>"
+									
+									+"</div>"
+								+"</div>"
+							+"</div>";
+					
+					response.getWriter().write(CuerpoModal);
+				break;
+			}
+			
+			
+		}else
+		{
+			doGet(request, response);
+		}	
+		
+		
+		
 	}
 
 }
