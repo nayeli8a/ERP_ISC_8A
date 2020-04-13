@@ -262,8 +262,10 @@ public class RegistrarServlet extends HttpServlet {
 					}
 					url="AusenciasJustificadas?op=Listar&pagina=1";
 					break;
-
-
+					
+				case "Nomina":
+					url="Nominas?op=Listar&pagina=1";
+					break;
 
 		}
 
