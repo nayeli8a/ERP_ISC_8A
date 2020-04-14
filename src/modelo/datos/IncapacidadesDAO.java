@@ -2,7 +2,6 @@ package modelo.datos;
 
 
 
-import java.io.InputStream;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.beans.Empleados;
 import modelo.beans.Incapacidades;
 
 
@@ -124,11 +122,12 @@ public class IncapacidadesDAO {
 				System.out.println("Error: " + e.getMessage());
 			}
 	}
-	public void actualizar(Date fechaInicio, Date fechaFin, String enfermedad, String evidencia, int idEmpleado, String estatus)
+	public void actualizar(Incapacidades incapacidad)
 	{
 		String sql="update Incapacidades set FechaInicio=?,FechaFin=?,Enfermedad=?, Evidencia=?, idEmpleado=?, Estatus=? where idIncapacidad=?";
 		try {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+		
 			Incapacidades in = new Incapacidades();
 			ps.setDate(1, in.getFechaInicio());
 			ps.setDate(2,in.getFechaFin());
@@ -144,5 +143,7 @@ public class IncapacidadesDAO {
 			System.out.println("Error al actualizar la incapacidad"+e.getMessage());
 		}
 	}
+	
+	
+	}
 
-}

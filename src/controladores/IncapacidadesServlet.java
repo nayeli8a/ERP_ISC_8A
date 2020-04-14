@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelo.beans.Incapacidades;
-import modelo.beans.Puestos;
 import modelo.datos.IncapacidadesDAO;
-import modelo.datos.PuestosDAO;
 
 /**
  * Servlet implementation class IncapacidadesServlet
@@ -66,30 +64,26 @@ public class IncapacidadesServlet extends HttpServlet {
 					url = "Incapacidades?op=Listar&pagina=1";
 					break;
 				case "Modificar":
-					String error = "";
-					String mensaje="";
 				    indao = new IncapacidadesDAO();
-				    Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
-					Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
-					String enfermedad =request.getParameter("enfermedad");
-					String estatus = request.getParameter("estatus");
-					String nssempleado= request.getParameter("Nss");
-					//validamos que el empleado con el nss dado si existe
-					int idEmpleado = indao.validarNSSEmpleado(nssempleado);
-					if(idEmpleado != -1)
-					{
-						indao.actualizar(fechaInicio, fechaFin, enfermedad, null,idEmpleado, estatus);
-						mensaje = "Incapacidad modificada con exito para el NSS: "+nssempleado;
-						request.setAttribute("Mensajes",mensaje);
-						url="Incapacidades?op=Listar&pagina=1";
-					}else
-					{
-						error = "El NSS del empleado no es valido, inserta uno valido.";
-						request.setAttribute("Errores",error);
-					}
-			
+					Incapacidades in = new Incapacidades ();
+					in.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
+					in.setFechaFin(Date.valueOf(request.getParameter("fechaFin")));
+					in.setEnfermedad(request.getParameter("enfermedad"));
+					in.setEvidencia(null);
+					in.setIdEmpleado(Integer.valueOf(request.getParameter("idEmpleado")));
+					in.setEstatus(request.getParameter("estatus"));
+					in.setIdIncapacidad(Integer.valueOf(request.getParameter("idIncapacidad")));
+					indao.actualizar(in);
+					url = "Incapacidades?op=Listar&pagina=1";
+					System.out.println("##modificar##");
+					System.out.println(in.getFechaInicio());
+					System.out.println(in.getFechaFin());
+					System.out.println(in.getEnfermedad());
+					System.out.println(in.getEvidencia());
+					System.out.println(in.getIdEmpleado());
+					System.out.println(in.getEstatus());
+					System.out.println(in.getIdIncapacidad());
 					
-		
 					break;
 						
 				}
