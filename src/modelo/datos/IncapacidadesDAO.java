@@ -127,15 +127,14 @@ public class IncapacidadesDAO {
 		String sql="update Incapacidades set FechaInicio=?,FechaFin=?,Enfermedad=?, Evidencia=?, idEmpleado=?, Estatus=? where idIncapacidad=?";
 		try {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
-		
-			Incapacidades in = new Incapacidades();
-			ps.setDate(1, in.getFechaInicio());
-			ps.setDate(2,in.getFechaFin());
-			ps.setString(3,in.getEnfermedad());
-			ps.setBinaryStream(4, in.getEvidencia());	
-			ps.setInt(5, in.getIdEmpleado());
-			ps.setString(6,in.getEstatus());
-			ps.setInt(7, in.getIdIncapacidad());
+	
+			ps.setDate(1, incapacidad.getFechaInicio());
+			ps.setDate(2,incapacidad.getFechaFin());
+			ps.setString(3,incapacidad.getEnfermedad());
+			ps.setBinaryStream(4, incapacidad.getEvidencia());	
+			ps.setInt(5, incapacidad.getIdEmpleado());
+			ps.setString(6,incapacidad.getEstatus());
+			ps.setInt(7,incapacidad.getIdIncapacidad());
 			
 			ps.executeUpdate();
 			

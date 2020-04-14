@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import modelo.beans.Incapacidades;
+import modelo.datos.Constantes;
 import modelo.datos.IncapacidadesDAO;
 
 /**
@@ -34,12 +35,9 @@ public class IncapacidadesServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-				response.getWriter().append("Served at: ").append(request.getContextPath());
 				// aqui va todo el codigo
 				System.out.println("##Dentro de IncapacidadesServlet##");
-				String url = "index.jsp";
-				HttpSession sesion;
+				String url = Constantes.PAGINAPRINCIPAL;
 				String op = request.getParameter("op");
 				
 				switch(op)
