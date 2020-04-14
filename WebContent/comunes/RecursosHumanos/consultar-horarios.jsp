@@ -73,7 +73,7 @@
 				<th>Hora Inicio</th>
 				<th>Hora Fin</th>
 				<th>Días</th>
-	            <th>id Empleado</th>
+	            <th>NSS</th>
 	            <th>Estatus</th>
 			</tr>
 		</thead>
@@ -85,7 +85,7 @@
 					<td>${dato.getHoraInicio()}</td>
 					<td>${dato.getHoraFin()}</td>
 					<td>${dato.getDias()}</td>
-	              	<td>${dato.getIdEmpleado()}</td>
+	              	<td>${dato.getNss()}</td>
 					<td>${dato.getEstatus()}</td>
 					</tr>
 				</c:if>
@@ -95,7 +95,7 @@
 					<td>${dato.getHoraInicio()}</td>
 					<td>${dato.getHoraFin()}</td>
 					<td>${dato.getDias()}</td>
-	                <td>${dato.getIdEmpleado()}</td>
+	                <td>${dato.getNss()}</td>
 					<td>${dato.getEstatus()}</td>
 					<td>
 						<form action="Horarios" method="post">

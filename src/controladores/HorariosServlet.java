@@ -1,7 +1,7 @@
 package controladores;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import modelo.beans.Horarios;
 import modelo.datos.HorariosDAO;
@@ -65,9 +64,8 @@ import modelo.datos.HorariosDAO;
 		mensaje="";
 		
 		Horarios hrio = new Horarios();
-		
-		hrio.setHoraInicio(Date.valueOf(request.getParameter("horaInicio")));
-		hrio.setHoraFin(Date.valueOf(request.getParameter("horaFin")));
+		hrio.setHoraInicio(String.valueOf(request.getParameter("horaInicio")));
+		hrio.setHoraFin(String.valueOf(request.getParameter("horaFin")));
 		hrio.setIdHorario(Integer.parseInt(request.getParameter("idhorario")));
 		//para la parte de los dias, concatenaremos todos los dias separandolos por ";"
 		String dias="";

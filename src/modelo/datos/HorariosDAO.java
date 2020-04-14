@@ -1,6 +1,5 @@
 package modelo.datos;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,8 +44,8 @@ public class HorariosDAO {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 
 			ps.setInt(5, h.getIdHorario());
-			ps.setDate(1,h.getHoraInicio());
-			ps.setDate(2,h.getHoraFin());
+			ps.setString(1,h.getHoraInicio());
+			ps.setString(2,h.getHoraFin());
 			ps.setString(3, h.getDias());
 			ps.setString(4, h.getEstatus());
 			ps.executeUpdate();
@@ -80,8 +79,7 @@ public class HorariosDAO {
   public List<Horarios> consultar(String pagina)
 	{
 		ArrayList<Horarios> lista = new ArrayList<>();
-		String sql = "execute sp_paginaciondinamica 'Horarios','idEmpleado','"+pagina+"','5'";
-
+		String sql = "execute sp_paginaciondinamica 'Horarios_empleados','idEmpleado','"+pagina+"','5'";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -89,11 +87,16 @@ public class HorariosDAO {
 			while (rs.next()) {
 				Horarios h = new Horarios();
 				h.setIdHorario(rs.getInt(1));
-				h.setHoraInicio(rs.getDate(2));
-				h.setHoraFin(rs.getDate(3));
+				h.setHoraInicio(rs.getString(2));
+				h.setHoraFin(rs.getString(3));
 				h.setDias(rs.getString(4));
 				h.setIdEmpleado(rs.getInt(5));
-				h.setEstatus(rs.getString(6));
+				h.setNss(rs.getString(6));
+				h.setNombre(rs.getString(7));
+				h.setApaterno(rs.getString(8));
+				h.setAmaterno(rs.getString(9));
+				h.setEstatus(rs.getString(10));
+			
 
 				lista.add(h);
 			}
@@ -105,19 +108,24 @@ public class HorariosDAO {
 
 
   public Horarios consultaIndividual(int idHorario){
-		String sql="select * from Horarios where idHorario=?";
+		String sql="select * from Horarios_empleados where idHorario=?";
 		Horarios h = new Horarios();
 		try{
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 			ps.setInt(1, idHorario);
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()){
-				h.setIdHorario(rs.getInt("idHorario"));
-				h.setHoraInicio(rs.getDate("horaInicio"));
-				h.setHoraFin(rs.getDate("horaFin"));
+				h.setIdHorario(rs.getInt("idhorario"));
+				h.setHoraInicio(rs.getString("horaInicio"));
+				h.setHoraFin(rs.getString("horaFin"));
 				h.setDias(rs.getString("dias"));
+				h.setIdEmpleado(rs.getInt("idempleado"));
+				h.setNss(rs.getString("nss"));
+				h.setNombre(rs.getString("nombre"));
+				h.setAmaterno(rs.getString("amaterno"));
+				h.setApaterno(rs.getString("apaterno"));
 				h.setEstatus(rs.getString("estatus"));
-				h.setIdEmpleado(rs.getInt("idEmpleado"));
+
 			}
 			ps.close();
 			rs.close();
@@ -138,8 +146,8 @@ public class HorariosDAO {
 			while(rs.next()){
 				Horarios h = new Horarios();
 				h.setIdHorario(rs.getInt("idHorario"));
-				h.setHoraInicio(rs.getDate("horaInicio"));
-				h.setHoraFin(rs.getDate("horaFin"));
+				h.setHoraInicio(rs.getString("horaInicio"));
+				h.setHoraFin(rs.getString("horaFin"));
 				h.setDias(rs.getString("dias"));
 				h.setEstatus(rs.getString("estatus"));
 				h.setIdEmpleado(rs.getInt("idEmpleado"));
