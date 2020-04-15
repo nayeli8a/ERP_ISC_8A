@@ -111,6 +111,12 @@
 				
 				<div class="opcion">
 					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Formas de Pago</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/FormasPago?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				</div>
+				
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
 					<div class="descripcion"><h2>Nominas</h2></div>
 					<a href="${pageContext.servletContext.contextPath}/Nominas?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 				</div>

@@ -266,6 +266,18 @@ public class RegistrarServlet extends HttpServlet {
 				case "Nomina":
 					url="Nominas?op=Listar&pagina=1";
 					break;
+				case "FormasPago":
+					FormasPagoDAO pagodao = new FormasPagoDAO();
+
+					String nombre = request.getParameter("nombre");
+				    estatus = ("A");
+					if(!pagodao.ValidarFormaPago(nombre))
+					{
+						pagodao.insertarFormaPago(nombre, estatus);
+					}
+					url="FormasPago?op=Listar&pagina=1";
+					break;
+					
 
 		}
 

@@ -73,14 +73,7 @@ public class IncapacidadesServlet extends HttpServlet {
 					in.setIdIncapacidad(Integer.valueOf(request.getParameter("idIncapacidad")));
 					indao.actualizar(in);
 					url = "Incapacidades?op=Listar&pagina=1";
-					System.out.println("##modificar##");
-					System.out.println(in.getFechaInicio());
-					System.out.println(in.getFechaFin());
-					System.out.println(in.getEnfermedad());
-					System.out.println(in.getEvidencia());
-					System.out.println(in.getIdEmpleado());
-					System.out.println(in.getEstatus());
-					System.out.println(in.getIdIncapacidad());
+
 					
 					break;
 						
