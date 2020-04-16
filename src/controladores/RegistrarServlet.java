@@ -34,8 +34,6 @@ public class RegistrarServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		// aqui va todo el codigo
 		System.out.println("##Dentro de RegistrarServlet##");
@@ -264,6 +262,24 @@ public class RegistrarServlet extends HttpServlet {
 					break;
 					
 				case "Nomina":
+					NominasDAO ndao = new NominasDAO();
+					HorariosDAO hdao = new HorariosDAO();//para sacar el idEmpleado con el nss, por flojera jaja
+					Nominas n = new Nominas();
+					n.setIdEmpleado(hdao.validarNSSEmpleado(request.getParameter("nss")));
+					n.setIdFormaPago(Integer.parseInt(request.getParameter("idformapago")));
+					
+					n.setFechaPago(Date.valueOf(request.getParameter("fechapago")));
+					n.setTotalP(Float.valueOf(request.getParameter("totalp")));
+					n.setTotalD(Float.valueOf(request.getParameter("totald")));
+					n.setCantidadNeta(Float.valueOf(request.getParameter("cantidadneta")));
+					n.setDiasTrabajados(Integer.parseInt(request.getParameter("diast")));
+					n.setFaltas(Integer.parseInt(request.getParameter("faltas")));
+					n.setFechaInicio(Date.valueOf(request.getParameter("fechainicio")));
+					n.setFechaFin(Date.valueOf(request.getParameter("fechafin")));
+					
+					ndao.Insertar(n.getFechaPago(),n.getTotalP(),n.getTotalD(),
+							n.getCantidadNeta(),n.getDiasTrabajados(),n.getFaltas(),n.getFechaInicio(),
+							n.getFechaFin(),n.getIdEmpleado(),n.getIdFormaPago());
 					url="Nominas?op=Listar&pagina=1";
 					break;
 				case "FormasPago":
@@ -274,6 +290,12 @@ public class RegistrarServlet extends HttpServlet {
 					if(!pagodao.ValidarFormaPago(nombre))
 					{
 						pagodao.insertarFormaPago(nombre, estatus);
+						mensaje = "Forma de Pago insertada con exito";
+						request.setAttribute("Mensajes",mensaje);
+					}else
+					{
+						error="Esta forma de pago ya habia sido registrada";
+						request.setAttribute("Errores",error);
 					}
 					url="FormasPago?op=Listar&pagina=1";
 					break;

@@ -21,6 +21,10 @@ select * from Incapacidades_empleados;
 --Otorgamos permiso a RH para que pueda ver la vista
 grant select,insert,update,delete on Incapacidades_empleados to RecursosHumanos
 
+
+--/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 -- creamos una nueva vista para anexar el nss y los datos del empleado en horarios 
 CREATE VIEW Horarios_empleados
 AS  
@@ -52,3 +56,27 @@ ALTER TABLE Horarios alter column horaInicio datetime;
 ALTER TABLE Horarios alter column horaFin datetime;
 ALTER TABLE Horarios alter column horaFin time;
 ALTER TABLE Horarios alter column horaInicio time;
+
+
+--/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+-- creamos una nueva vista para anexar el nss y los datos del empleado en horarios 
+CREATE VIEW Nominas_empleados
+AS  
+   select 
+	n.idNomina,n.fechaPago,n.totalP,n.totalD,n.cantidadNeta,n.diasTrabajados,n.faltas,n.fechaInicio,n.fechaFin,n.idEmpleado,f.nombre as FormaPago,n.estatus,
+	e.nss,e.nombre,e.apaterno,e.amaterno
+	from Nominas n 
+	join Empleados e on e.idEmpleado = n.idEmpleado 
+	join FormasPago f on n.idFormaPago = f.idFormaPago;
+GO
+
+select * from Nominas_empleados;
+
+--Otorgamos permiso a RH para que pueda ver la vista
+grant select,insert,update,delete on Nominas_empleados to RecursosHumanos
+
+
+--/////////////////////////////////////////////////////////////////////////////////////////////////////

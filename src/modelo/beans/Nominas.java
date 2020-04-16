@@ -3,6 +3,7 @@ package modelo.beans;
 import java.sql.Date;
 
 public class Nominas {
+	//NOMINAS
 	int idNomina;
 	Date fechaPago;
 	float totalP;
@@ -12,9 +13,63 @@ public class Nominas {
 	int faltas;
 	Date fechaInicio;
 	Date fechaFin;
-	int idEmpleado;
-	int idFormaPago;
+	String estatus;
 	
+	//EMPLEADOS
+	int idEmpleado;
+	String nss;
+	String NombreEmpleado;
+	String Apaterno;
+	String Amaterno;
+	
+	//FORMAS DE PAGO
+	int idFormaPago;
+	String FormaPago;
+	
+	
+	
+	public int getIdEmpleado() {
+		return idEmpleado;
+	}
+	public void setIdEmpleado(int idEmpleado) {
+		this.idEmpleado = idEmpleado;
+	}
+	public String getNss() {
+		return nss;
+	}
+	public void setNss(String nss) {
+		this.nss = nss;
+	}
+	public String getNombreEmpleado() {
+		return NombreEmpleado;
+	}
+	public void setNombreEmpleado(String nombreEmpleado) {
+		NombreEmpleado = nombreEmpleado;
+	}
+	public String getApaterno() {
+		return Apaterno;
+	}
+	public void setApaterno(String apaterno) {
+		Apaterno = apaterno;
+	}
+	public String getAmaterno() {
+		return Amaterno;
+	}
+	public void setAmaterno(String amaterno) {
+		Amaterno = amaterno;
+	}
+	public String getFormaPago() {
+		return FormaPago;
+	}
+	public void setFormaPago(String formaPago) {
+		FormaPago = formaPago;
+	}
+	public String getEstatus() {
+		return estatus;
+	}
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
+	}
 	public int getIdNomina() {
 		return idNomina;
 	}
@@ -68,12 +123,6 @@ public class Nominas {
 	}
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
-	}
-	public int getIdEmpleado() {
-		return idEmpleado;
-	}
-	public void setIdEmpleado(int idEmpleado) {
-		this.idEmpleado = idEmpleado;
 	}
 	public int getIdFormaPago() {
 		return idFormaPago;

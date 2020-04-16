@@ -77,8 +77,9 @@
 				<th>Faltas</th>
 				<th>Fecha Inicio</th>
 				<th>Fecha Fin</th>
-				<th>Nombre Empleado</th>
 				<th>Forma Pago</th>
+				<th>Nombre Empleado</th>
+				<th>Acciones</th>
 			</tr>
 		</thead>
         <tbody id="myTable">
@@ -93,15 +94,25 @@
 					<td>${dato.getFaltas()}</td>
 					<td>${dato.getFechaInicio()}</td>
 					<td>${dato.getFechaFin()}</td>
-					<td>${dato.getNombreEmpleado()}</td>
 					<td>${dato.getFormaPago()}</td>
+					<td>${dato.getNombreEmpleado()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
+					
 					</tr>
 				</c:if>
 				<c:if test="${dato.getEstatus() eq 'A'}">
 					<tr>
-	                <td>${dato.getValor()}</td>
+	                <td>${dato.getFechaPago()}</td>
+					<td>${dato.getTotalP()}</td>
+					<td>${dato.getTotalD()}</td>
+					<td>${dato.getCantidadNeta()}</td>
+					<td>${dato.getDiasTrabajados()}</td>
+					<td>${dato.getFaltas()}</td>
+					<td>${dato.getFechaInicio()}</td>
+					<td>${dato.getFechaFin()}</td>
+					<td>${dato.getFormaPago()}</td>
+					<td>${dato.getNombreEmpleado()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
 					<td>
-						<form action="Nombre_Tabla" method="post">
+						<form action="${pageContext.servletContext.contextPath}/Nominas" method="post">
 							<input type="hidden" name="id" value="${dato.getIdNomina()}">
 							<div id="${dato.getIdNomina()}">
 								<input type="submit" class="btn btn-warning" name="op" value="Editar">
@@ -137,7 +148,7 @@
 		    <div class="row">
 		      <div class="col-md-4">
 		        <label>Nss Empleado</label>
-		        <input name="nssEmpleado" type="number" required>
+		        <input name="nss" type="text" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Faltas Acumuladas</label>
@@ -145,15 +156,17 @@
 		      </div>
 		      <div class="col-md-4">
 		        <label>Dias Trabajados</label>
-		        <input name="diasTrabajados" type="number" required>
+		        <input name="diast" type="number" required>
 		      </div>
 		    </div>
 		    <br>
 		    <div class="row">
 	    	  <div class="col-md-3">
 		        <label>Forma de Pago</label>
-		        <select id="formaPago" name="formaPago" required>
-		          <option value="${dato.getIdFormaPago()}">${dato.getNombre()}</option>
+		        <select id="idformapago" name="idformapago" required>
+		        <c:forEach var="dato" items="${datospagos}">
+		        	<option value="${dato.getIdFormaPago()}">${dato.getNombre()}</option>
+		        </c:forEach>
 		        </select>
 		      </div>
 		    </div>
@@ -162,15 +175,15 @@
 		    <div class="row">
 		      <div class="col-md-4">
 		        <label>Fecha de Pago</label>
-		        <input name="fechaPago" type="date" required>
+		        <input name="fechapago" type="date" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Fecha de Inicio</label>
-		        <input name="fechaInicio" type="date" required>
+		        <input name="fechainicio" type="date" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Fecha Final</label>
-		        <input name="fechaFin" type="date" required>
+		        <input name="fechafin" type="date" required>
 		      </div>
 		    </div>
 		    <br>
@@ -178,15 +191,15 @@
 		    <div class="row">
 		      <div class="col-md-4">
 		        <label>Total Pagado</label>
-		        <input name="totalP" type="number" required>
+		        <input name="totalp" type="number" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Total Deducido</label>
-		        <input name="totalD" type="number" required>
+		        <input name="totald" type="number" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Cantidad Neta</label>
-		        <input name="cantidadNeta" type="number" required>
+		        <input name="cantidadneta" type="number" required>
 		      </div>
 		    </div>
 		    <br>
