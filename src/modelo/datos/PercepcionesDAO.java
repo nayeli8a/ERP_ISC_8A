@@ -71,6 +71,30 @@ public class PercepcionesDAO {
 		}
 		return lista;
 	}
+	
+	public List<Percepciones> consultar()
+	{
+		ArrayList<Percepciones> lista = new ArrayList<>();
+		String sql = "select * from Percepciones";
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Percepciones p = new Percepciones();
+				p.setIdPercepcion(rs.getInt(1));
+				p.setNombre(rs.getString(2));
+				p.setDescripcion(rs.getString(3));
+				p.setDiasPagar(rs.getInt(4));
+				p.setEstatus(rs.getString(5));
+				lista.add(p);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
+	
 	public void eliminar(String id){
 		String sql = "execute sp_EliminarLogicamente 'Percepciones','"+id+"','idPercepcion'";
 		System.out.println(sql);

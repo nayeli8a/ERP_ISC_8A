@@ -34,7 +34,10 @@ public class NominasServlet extends HttpServlet {
 		NominasDAO nomDAO = new NominasDAO();
 		//FORMASPAGO DAO
 		FormasPagoDAO fpdao = new FormasPagoDAO();
-		
+		//PERCEPCIONES DAO
+		PercepcionesDAO pdao = new PercepcionesDAO();
+		//DEDUCCIONES DAO
+		DeduccionesDAO ddao = new DeduccionesDAO();
 		
 		switch(op)
 		{
@@ -42,8 +45,12 @@ public class NominasServlet extends HttpServlet {
 				pagina = request.getParameter("pagina");
 				List<Nominas> datos = nomDAO.Consultar(pagina);
 				List<FormasPago> datospagos = fpdao.consultar();
+				List<Percepciones> datosperc = pdao.consultar();
+				List<Deducciones> datosded = ddao.consultar();
 				request.setAttribute("datos",datos);
 				request.setAttribute("datospagos",datospagos);
+				request.setAttribute("datosdeducciones",datosded);
+				request.setAttribute("datospercepciones",datosperc);
 				request.setAttribute("pagina",pagina);
 				url = Constantes.REGRESAR_RH_CONSULTA+"nominas.jsp";
 				break;

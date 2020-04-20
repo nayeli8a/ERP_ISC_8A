@@ -73,6 +73,29 @@ public class DeduccionesDAO {
 		return lista;
 	}
 	
+	public List<Deducciones> consultar()
+	{
+		ArrayList<Deducciones> lista = new ArrayList<>();
+		String sql = "select * from Deducciones";
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Deducciones d = new Deducciones();
+				d.setIdDeduccion(rs.getInt(1));
+				d.setNombre(rs.getString(2));
+				d.setDescripcion(rs.getString(3));
+				d.setPorcentaje(rs.getFloat(4));
+				d.setEstatus(rs.getString(5));
+				lista.add(d);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
+	
 	public Deducciones consultaIndividual(int idDeduccion){
 		String sql="select * from Deducciones where idDeduccion=?";
 		Deducciones d = new Deducciones();

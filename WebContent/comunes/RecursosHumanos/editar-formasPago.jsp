@@ -26,6 +26,7 @@
 	href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
 <script type="text/javascript"
 	src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
+	<link rel="icon" type="image/png" href="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito_32x.ico">
 </head>
 <body onkeypress="return soloLetras(event)">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"

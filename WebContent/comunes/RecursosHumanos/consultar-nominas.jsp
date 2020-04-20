@@ -21,19 +21,90 @@
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
     <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
 	
-	<style> .largerCheckbox 
-    { 
-            width: 20px; 
-            height: 20px; 
-      			
-    } 
-    .checkbox-inline
-    {	
-      		width: 100px; 
-          height: 40px;
-      		text-align:center;
-    }
-  </style>
+	<link rel="icon" type="image/png" href="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito_32x.ico">
+	
+    <style>
+    	 .modal-body { max-height: calc(100vh - 200px); overflow-y: auto; } 
+	</style>
+	
+	<script type="text/javascript">
+	//FUNCIONES PARA CLONAR Y ELIMINAR ELEMENTOS DEL HTML
+	var numd = 1;
+	var nump = 1;
+	var elementosd=1;//contador para evitar que se eliminen todos los nodos 
+	var elementosp=1;
+	
+	//si DoP es 1 es una deducion
+	function clonar(DoP,iddondeclonar,idelementoclonar,select,input)
+	{
+		if(DoP==1)
+		{
+			var elemento = document.getElementById(idelementoclonar+numd);
+			var clon = elemento.cloneNode(true);
+			numd=numd+1;
+			clon.setAttribute("id",idelementoclonar+numd);
+			clon.setAttribute("name",idelementoclonar+numd);
+			//ponemos el clon en la pagina html
+			document.getElementById(iddondeclonar).appendChild(clon);
+			
+			var selects = document.getElementById(idelementoclonar+numd).getElementsByTagName('select');
+			selects[0].setAttribute("id",select+numd);
+			selects[0].setAttribute("name",select+numd);
+			var inputs = document.getElementById(idelementoclonar+numd).getElementsByTagName('input');
+			inputs[0].setAttribute("id",input+numd);
+			inputs[0].setAttribute("name",input+numd);
+			var btns = document.getElementById(idelementoclonar+numd).getElementsByTagName('button');
+			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+numd+"');");
+			btns[0].setAttribute("style","visibility:visible;");
+			elementosd++;
+		}else
+		{
+			var elemento = document.getElementById(idelementoclonar+nump);
+			var clon = elemento.cloneNode(true);
+			nump=nump+1;
+			clon.setAttribute("id",idelementoclonar+nump);
+			clon.setAttribute("name",idelementoclonar+nump);
+			//ponemos el clon en la pagina html
+			document.getElementById(iddondeclonar).appendChild(clon);
+			
+			var selects = document.getElementById(idelementoclonar+nump).getElementsByTagName('select');
+			selects[0].setAttribute("id",select+nump);
+			selects[0].setAttribute("name",select+nump);
+			var inputs = document.getElementById(idelementoclonar+nump).getElementsByTagName('input');
+			inputs[0].setAttribute("id",input+nump);
+			inputs[0].setAttribute("name",input+nump);
+			var btns = document.getElementById(idelementoclonar+nump).getElementsByTagName('button');
+			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+nump+"');");	
+			btns[0].setAttribute("style","visibility:visible;");
+			elementosp++;
+		}
+		
+	}
+	
+	//si DoP es 1 es una deducion
+	function quitar(DoP,idelemento)
+	{
+		if(DoP==1)
+		{
+			if(elementosd>1)
+			{
+				var elem = document.getElementById(idelemento);
+				elementosd--;
+				numd--;
+			    return elem.parentNode.removeChild(elem);
+			}
+		}else
+		{
+			if(elementosp>1)
+			{
+				var elem = document.getElementById(idelemento);
+				elementosp--;
+				nump--;
+			    return elem.parentNode.removeChild(elem);
+			}		
+		}
+	}
+	</script>
 	
 </head>
 <body>
@@ -64,7 +135,9 @@
 	  		  <script>javascript:buscar();</script>
 		<h2 align="center">Nominas</h2>
 		<hr class="bg-info">
-		<button type="button" class="btn btn-success" id="agregar" data-toggle="modal" data-target="#modalRegistro" >Agregar</button>
+		<button type="button" style="width:40px;" id="agregar" data-toggle="modal" data-target="#modalRegistro" >
+			<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/plus.png" style="max-width:100%;">
+		</button>
 		<div class="table-responsive table-bordered table-striped">
       <table class="table table-sm">
 		<thead class="thead-dark">
@@ -148,15 +221,15 @@
 		    <div class="row">
 		      <div class="col-md-4">
 		        <label>Nss Empleado</label>
-		        <input name="nss" type="text" required>
+		        <input name="nss" type="text" style="width:100px;" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Faltas Acumuladas</label>
-		        <input name="faltas" type="number" required>
+		        <input name="faltas" type="number" style="width:100px;" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Dias Trabajados</label>
-		        <input name="diast" type="number" required>
+		        <input name="diast" type="number" style="width:100px;" required>
 		      </div>
 		    </div>
 		    <br>
@@ -185,6 +258,78 @@
 		        <label>Fecha Final</label>
 		        <input name="fechafin" type="date" required>
 		      </div>
+		    </div>
+		    <br>
+		    <label>Percepciones de esta Nomina:</label>
+		    <div class="row">
+		    	<div class="col-md-2">
+		    		<button type="button" onclick="clonar(2,'percepciones','percepcion-contenido-','select-p-','input-p-')"style="width:40px;" id="agregar-percepcion">
+						<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/plus.png" style="max-width:100%;">
+					</button>
+		    	</div>
+		    	<div class="col-md-10">
+		    		<div style="border-style:solid;border-width:thin;">
+		    		<span id="percepciones" name="percepciones">
+         				  
+         				  <!-- AQUI EMPIEZA UNA SOLA PERCEPCION -->
+         				  <div id="percepcion-contenido-1">
+         				  	 <hr style="width:80%;">
+					          <div class="col">
+					            
+				              <label>Percepcion:</label>
+				              <select id="select-p-1" name="select-p-1">
+				              <c:forEach var="dato" items="${datospercepciones}">
+				              	<option value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
+				              </c:forEach>
+				              </select>
+				              <label>Importe:</label>
+				              <input id="input-p-1" name="input-p-1" type="number">
+				              <button type="button" style="visibility:hidden;" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
+					            
+					          </div>
+					          <hr style="width:80%;">
+         				  </div>
+				          <!-- AQUI TERMINA UNA SOLA PERCEPCION -->
+				          
+		    		</span>
+		    		</div>
+		    	</div>
+		    </div>
+		    <br>
+		    <label>Deducciones:</label>
+		    <div class="row">
+		    	<div class="col-md-2">
+		    		<button type="button" onclick="clonar(1,'deducciones','deduccion-contenido-','select-d-','input-d-')" style="width:40px;" id="agregar-deduccion">
+						<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/plus.png" style="max-width:100%;">
+					</button>
+		    	</div>
+		    	<div class="col-md-10">
+					<div style="border-style:solid;border-width:thin;">
+		    		<span id="deducciones" name="deducciones">
+         				  
+         				  <!-- AQUI EMPIEZA UNA SOLA DEDUCCION -->
+         				  <div id="deduccion-contenido-1">
+         				  	 <hr style="width:80%;">
+					          <div class="col">
+					            
+				              <label>Deduccion:</label>
+				              <select id="select-d-1" name="select-d-1">
+				              <c:forEach var="dato" items="${datosdeducciones}">
+				              	<option value="${dato.getIdDeduccion()}">${dato.getNombre()}</option>
+				              </c:forEach>
+				              </select>
+				              <label>Porcentaje:</label>
+				              <input id="input-d-1" name="input-d-1" type="number" style="width:60px;">
+				              <button type="button" style="visibility:hidden;" onclick="quitar(1,'deduccion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
+					            
+					          </div>
+					          <hr style="width:80%;">
+         				  </div>
+				          <!-- AQUI TERMINA UNA SOLA PERCEPCION -->
+				          
+		    		</span>
+		    		</div>
+		    	</div>
 		    </div>
 		    <br>
 		    <label><b>Totales:</b></label>
