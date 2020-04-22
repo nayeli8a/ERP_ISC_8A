@@ -45,6 +45,7 @@ public class NominasDAO {
 				n.setFaltas(rs.getInt(7));
 				n.setFechaInicio(rs.getDate(8));
 				n.setFechaFin(rs.getDate(9));
+				n.setIdEmpleado(rs.getInt(10));
 				n.setFormaPago(rs.getString(11));
 				n.setEstatus(rs.getString(12));
 				n.setNss(rs.getString(13));
@@ -68,6 +69,7 @@ public class NominasDAO {
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
+				n.setIdEmpleado(rs.getInt(10));
 				n.setIdNomina(rs.getInt(1));
 				n.setFechaPago(rs.getDate(2));
 				n.setTotalP(rs.getFloat(3));
@@ -125,6 +127,24 @@ public class NominasDAO {
 		} catch (Exception e) {
 			System.out.println("Error al actualizar la nomina: "+e.getMessage());
 		}
+	}
+	
+	public int NominaEmpleado(int idEmpleado)
+	{
+		String sql = "select idNomina from Nominas where idEmpleado = "+idEmpleado;
+		int idNomina = -1;
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				idNomina = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error al consultar la nomina de un empleado: " + e.getMessage());
+		}
+		return idNomina;
 	}
 	
 }

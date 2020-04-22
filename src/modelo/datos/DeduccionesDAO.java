@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.beans.Deducciones;
-import modelo.beans.Estado;
+import modelo.beans.*;
+import modelo.beans.*;
 
 public class DeduccionesDAO {
 	
@@ -69,6 +69,28 @@ public class DeduccionesDAO {
 			}
 		} catch (SQLException e) {
 			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
+	
+	public List<NominasDeducciones> DeduccionesEmpleado(int idNomina)
+	{
+		ArrayList<NominasDeducciones> lista = new ArrayList<>();
+		String sql = "select * from NominasDeducciones where idNomina = "+idNomina;
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				NominasDeducciones d = new NominasDeducciones();
+				d.setIdDeduccion(rs.getInt(2));
+				d.setIdNomina(rs.getInt(1));
+				d.setImporte(rs.getFloat(3));
+				d.setEstatus(rs.getString(4));
+				lista.add(d);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error en Metodo DeduccionesEmpleado: " + e.getMessage());
 		}
 		return lista;
 	}

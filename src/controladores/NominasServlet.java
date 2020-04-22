@@ -85,6 +85,23 @@ public class NominasServlet extends HttpServlet {
 				Nominas n = new Nominas();
 				n = nomDAO.ConsultaIndividual(id+"");
 				datospagos = fpdao.consultar();
+				
+				//obtenemos un objeto de las percepciones del empleado con el idNomina
+				List<NominasPercepciones> percepciones = pdao.PercepcionesEmpleado(Integer.parseInt(id));
+				
+				//obtenemos un objeto de las deducciones del empleado con el idNomina
+				List<NominasDeducciones> deducciones = ddao.DeduccionesEmpleado(Integer.parseInt(id));
+				
+				//obtenemos las deducciones y las percepciones
+				List<Deducciones> datosdeducciones = ddao.consultar();
+				List<Percepciones> datospercepciones = pdao.consultar();
+				
+				
+				
+				request.setAttribute("percepciones",percepciones);
+				request.setAttribute("deducciones",deducciones);
+				request.setAttribute("datosdeducciones",datosdeducciones);
+				request.setAttribute("datospercepciones",datospercepciones);
 				request.setAttribute("datosnomina",n);
 				request.setAttribute("datospagos",datospagos);
 				url = Constantes.REGRESAR_RH_EDITAR+"nominas.jsp";

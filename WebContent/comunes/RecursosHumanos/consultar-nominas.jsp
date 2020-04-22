@@ -29,10 +29,10 @@
 	
 	<script type="text/javascript">
 	//FUNCIONES PARA CLONAR Y ELIMINAR ELEMENTOS DEL HTML
-	var numd = 1;
-	var nump = 1;
-	var elementosd=1;//contador para evitar que se eliminen todos los nodos 
-	var elementosp=1;
+	var numd = 1;//para numerar las deducciones
+	var nump = 1;//para numerar las percepciones
+	var elementosd=1;//contador de deducciones para evitar que se eliminen todos los nodos 
+	var elementosp=1;//contador de percepciones
 	
 	//si DoP es 1 es una deducion
 	function clonar(DoP,iddondeclonar,idelementoclonar,select,input)
@@ -103,6 +103,17 @@
 			    return elem.parentNode.removeChild(elem);
 			}		
 		}
+	}
+	
+	//funcion para tomar las variables globales de cuantas percepciones 
+	//y deducciones hay y activar el form agregar
+	function agregar_nomina()
+	{
+		//tomamos el action del form y le contatenamos dos parametros mas
+		var form = document.getElementById("registrar-nomina");	
+    	form.setAttribute("action",form.getAttribute("action")+"&deducciones="+elementosd);
+    	form.setAttribute("action",form.getAttribute("action")+"&percepciones="+elementosp);
+		document.getElementById("registrar-nomina").submit();
 	}
 	</script>
 	
@@ -215,20 +226,23 @@
       <!-- Modal body -->
       <div class="modal-body" id="modal_div">
       <% //Aqui va todo el cuerpo del modal%>
-      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Nomina" method="post">
+      <form id="registrar-nomina" action="${pageContext.servletContext.contextPath}/Registrar?op=Nomina" method="post">
       	<div class="container" style="border-style:solid;">
 		    <label><b>Datos Empleado:</b></label>
 		    <div class="row">
 		      <div class="col-md-4">
 		        <label>Nss Empleado</label>
+		        <br>
 		        <input name="nss" type="text" style="width:100px;" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Faltas Acumuladas</label>
+		        <br>
 		        <input name="faltas" type="number" style="width:100px;" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Dias Trabajados</label>
+		        <br>
 		        <input name="diast" type="number" style="width:100px;" required>
 		      </div>
 		    </div>
@@ -248,14 +262,17 @@
 		    <div class="row">
 		      <div class="col-md-4">
 		        <label>Fecha de Pago</label>
+		        <br>
 		        <input name="fechapago" type="date" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Fecha de Inicio</label>
+		        <br>
 		        <input name="fechainicio" type="date" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Fecha Final</label>
+		        <br>
 		        <input name="fechafin" type="date" required>
 		      </div>
 		    </div>
@@ -282,6 +299,7 @@
 				              	<option value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
 				              </c:forEach>
 				              </select>
+				              <br>
 				              <label>Importe:</label>
 				              <input id="input-p-1" name="input-p-1" type="number">
 				              <button type="button" style="visibility:hidden;" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
@@ -318,8 +336,8 @@
 				              	<option value="${dato.getIdDeduccion()}">${dato.getNombre()}</option>
 				              </c:forEach>
 				              </select>
-				              <label>Porcentaje:</label>
-				              <input id="input-d-1" name="input-d-1" type="number" style="width:60px;">
+				              <label>Importe:</label>
+				              <input id="input-d-1" name="input-d-1" type="number">
 				              <button type="button" style="visibility:hidden;" onclick="quitar(1,'deduccion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
 					            
 					          </div>
@@ -349,7 +367,7 @@
 		    </div>
 		    <br>
 		    <div align="center">
-		      <button type="submit" class="btn btn-primary">Registrar</button>
+		      <button type="button" onclick="agregar_nomina()" class="btn btn-primary">Registrar</button>
 		    </div>
 		    <br>
 		  </div>

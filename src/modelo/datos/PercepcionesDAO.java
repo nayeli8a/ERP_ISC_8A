@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.beans.Deducciones;
+import modelo.beans.NominasPercepciones;
 import modelo.beans.Percepciones;
 
 public class PercepcionesDAO {
@@ -91,6 +92,28 @@ public class PercepcionesDAO {
 			}
 		} catch (SQLException e) {
 			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
+	
+	public List<NominasPercepciones> PercepcionesEmpleado(int idNomina)
+	{
+		ArrayList<NominasPercepciones> lista = new ArrayList<>();
+		String sql = "select * from NominasPercepciones where idNomina = "+idNomina;
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				NominasPercepciones p = new NominasPercepciones();
+				p.setIdPercepcion(rs.getInt(2));
+				p.setIdNomina(rs.getInt(1));
+				p.setImporte(rs.getFloat(3));
+				p.setEstatus(rs.getString(4));
+				lista.add(p);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error en Metodo PercepcionesEmpleado: " + e.getMessage());
 		}
 		return lista;
 	}

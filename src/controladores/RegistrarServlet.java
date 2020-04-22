@@ -265,21 +265,60 @@ public class RegistrarServlet extends HttpServlet {
 					NominasDAO ndao = new NominasDAO();
 					HorariosDAO hdao = new HorariosDAO();//para sacar el idEmpleado con el nss, por flojera jaja
 					Nominas n = new Nominas();
-					n.setIdEmpleado(hdao.validarNSSEmpleado(request.getParameter("nss")));
-					n.setIdFormaPago(Integer.parseInt(request.getParameter("idformapago")));
+					NominasDeduccionesDAO nddao = new NominasDeduccionesDAO();
+					NominasPercepcionesDAO npdao = new NominasPercepcionesDAO();
 					
-					n.setFechaPago(Date.valueOf(request.getParameter("fechapago")));
-					n.setTotalP(Float.valueOf(request.getParameter("totalp")));
-					n.setTotalD(Float.valueOf(request.getParameter("totald")));
-					n.setCantidadNeta(Float.valueOf(request.getParameter("cantidadneta")));
-					n.setDiasTrabajados(Integer.parseInt(request.getParameter("diast")));
-					n.setFaltas(Integer.parseInt(request.getParameter("faltas")));
-					n.setFechaInicio(Date.valueOf(request.getParameter("fechainicio")));
-					n.setFechaFin(Date.valueOf(request.getParameter("fechafin")));
+					int idempleado = hdao.validarNSSEmpleado(request.getParameter("nss"));
+					if(idempleado!=-1)
+					{
+						//existe
+						n.setIdEmpleado(idempleado);
+						n.setIdFormaPago(Integer.parseInt(request.getParameter("idformapago")));
+						
+						n.setFechaPago(Date.valueOf(request.getParameter("fechapago")));
+						n.setTotalP(Float.valueOf(request.getParameter("totalp")));
+						n.setTotalD(Float.valueOf(request.getParameter("totald")));
+						n.setCantidadNeta(Float.valueOf(request.getParameter("cantidadneta")));
+						n.setDiasTrabajados(Integer.parseInt(request.getParameter("diast")));
+						n.setFaltas(Integer.parseInt(request.getParameter("faltas")));
+						n.setFechaInicio(Date.valueOf(request.getParameter("fechainicio")));
+						n.setFechaFin(Date.valueOf(request.getParameter("fechafin")));
+						
+						ndao.Insertar(n.getFechaPago(),n.getTotalP(),n.getTotalD(),
+								n.getCantidadNeta(),n.getDiasTrabajados(),n.getFaltas(),n.getFechaInicio(),
+								n.getFechaFin(),n.getIdEmpleado(),n.getIdFormaPago());
+						
+						//ahora insertamos las percepciones a la nueva nomina
+						int cantidadpercepciones = Integer.parseInt(request.getParameter("percepciones"));
+						
+						for (int i = 0; i < cantidadpercepciones; i++) {
+							int idPercepcion = Integer.parseInt(request.getParameter("select-p-"+(i+1)));
+							int idNomina = ndao.NominaEmpleado(idempleado);
+							float importe = Float.parseFloat(request.getParameter("input-p-"+(i+1)));
+							//System.out.println(idPercepcion+" || "+idNomina+" || "+importe);
+							npdao.Insertar(idNomina,idPercepcion,importe);
+						}
+						
+						//ahora insertamos las deducciones a la nueva nomina
+						int cantidaddeducciones = Integer.parseInt(request.getParameter("deducciones"));
+						for (int i = 0; i < cantidaddeducciones; i++) {
+							int idDeduccion = Integer.parseInt(request.getParameter("select-d-"+(i+1)));
+							int idNomina = ndao.NominaEmpleado(idempleado);
+							float importe = Float.parseFloat(request.getParameter("input-d-"+(i+1)));
+							//System.out.println(idDeduccion+" || "+idNomina+" || "+importe);
+							nddao.Insertar(idNomina,idDeduccion,importe);
+						}
+						
+						
+						mensaje = "La nomina ha ido registrada con exito";
+						request.setAttribute("Mensajes",mensaje);
+					}else
+					{
+						//no existe, regresamos 
+						error="El NSS ingresado no corresponde a \\n ningun empleado,\\n Porfavor ingrese uno valido";
+						request.setAttribute("Errores",error);
+					}
 					
-					ndao.Insertar(n.getFechaPago(),n.getTotalP(),n.getTotalD(),
-							n.getCantidadNeta(),n.getDiasTrabajados(),n.getFaltas(),n.getFechaInicio(),
-							n.getFechaFin(),n.getIdEmpleado(),n.getIdFormaPago());
 					url="Nominas?op=Listar&pagina=1";
 					break;
 				case "FormasPago":
