@@ -265,17 +265,17 @@
 			      <div class="row">
 			        <div class="col-md-4" id="nombre">
 			          <div class="form-group">
-			            <input type="text" class="form-control" placeholder="Nombre(s)" name="nombre">
+			            <input type="text" class="form-control" placeholder="Nombre(s)" name="nombre" onkeypress="return soloLetras(event)" >
 			          </div>
 			        </div>
 			        <div class="col-md-4" id="apaterno">
 			          <div class="form-group">
-			            <input type="text" class="form-control" placeholder="Apellido Paterno" name="apaterno">
+			            <input type="text" class="form-control" placeholder="Apellido Paterno" name="apaterno" onkeypress="return soloLetras(event)" >
 			          </div>
 			        </div>
 			        <div class="col-md-4" id="amaterno">
 			          <div class="form-group">
-			            <input type="text" class="form-control" placeholder="Apellido Materno" name="amaterno">
+			            <input type="text" class="form-control" placeholder="Apellido Materno" name="amaterno" onkeypress="return soloLetras(event)" >
 			          </div>
 			        </div>
 			      </div>
@@ -292,8 +292,7 @@
 			          <select class="form-control" id="estado-civil" name="estado-civil">
 			            <option value="Casado">Casado</option>
 			            <option value="Soltero">Soltero</option>
-			            <option value="Union Libre">Union Libre</option>
-			            <option value="Divorciado">Divorciado</option>
+			           
 			          </select>
 			        </div>
 			      </div>
@@ -329,7 +328,7 @@
 			        </div>
 			        <div class="col-md-4">
 			          <div class="form-group">
-			            <input type="text" name="codigo-postal" placeholder="Codigo Postal" value="" required class="form-control">
+			            <input type="text" name="codigo-postal" placeholder="Codigo Postal" value="" required class="form-control"onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 			          </div>
 			        </div>
 			      </div>
@@ -345,7 +344,7 @@
 			        </div>
 			        <div class="col-md-4">
 				        <label for="Escolaridad">Escolaridad:</label>
-			    		<input type="text" name="escolaridad" placeholder="Escolaridad" value="" required class="form-control">
+			    		<input type="text" name="escolaridad" placeholder="Escolaridad" value="" required class="form-control" onkeypress="return soloLetras(event)" >
 			        </div>
 			      </div>
 
@@ -363,7 +362,7 @@
 			        <div class="col-md-6">
 			        	<label>Salario:</label>
 			          <div class="form-group">
-			            <input type="number" name="salario" value="" required class="form-control">
+			            <input type="number" name="salario" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 			          </div>
 			        </div>
 			      </div>
@@ -372,19 +371,19 @@
 			      	<div class="col-md-4">
 			      		<label>Dias Vacaciones:</label>
 			          <div class="form-group">
-			            <input type="number" name="dias-vacaciones" value="" required class="form-control">
+			            <input type="number" name="dias-vacaciones" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 			          </div>
 			      	</div>
 			      	<div class="col-md-4">
 			      		<label>Dias Permiso:</label>
 			          <div class="form-group">
-			            <input type="number" name="dias-permiso" value="" required class="form-control">
+			            <input type="number" name="dias-permiso" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"> 
 			          </div>
 			      	</div>
 			      	<div class="col-md-4">
 			      		<label>% Comision:</label>
 			          <div class="form-group">
-			            <input type="number" name="porcentaje-comision" value="" required class="form-control">
+			            <input type="number" name="porcentaje-comision" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 			          </div>
 			      	</div>
 			      </div>
@@ -452,19 +451,19 @@
 			        <div class="col-md-4">
 			          <div class="form-group">
 			            <input type="text" id="edit_nombre" class="form-control" placeholder="Nombre(s)" 
-			            name="edit_nombre">
+			            name="edit_nombre" onkeypress="return soloLetras(event)">
 			          </div>
 			        </div>
 			        <div class="col-md-4" >
 			          <div class="form-group">
 			            <input type="text" id="edit_apaterno" class="form-control" placeholder="Apellido Paterno" 
-			            name="edit_apaterno">
+			            name="edit_apaterno" onkeypress="return soloLetras(event)">
 			          </div>
 			        </div>
 			        <div class="col-md-4" >
 			          <div class="form-group">
 			            <input type="text" id="edit_amaterno" class="form-control" placeholder="Apellido Materno" 
-			            name="edit_amaterno">
+			            name="edit_amaterno" onkeypress="return soloLetras(event)">
 			          </div>
 			        </div>
 			      </div>
@@ -481,8 +480,7 @@
 			          <select class="form-control" id="edit_estado-civil" name="edit_estado-civil">
 			            <option value="Casado">Casado</option>
 			            <option value="Soltero">Soltero</option>
-			            <option value="Union Libre">Union Libre</option>
-			            <option value="Divorciado">Divorciado</option>
+			           
 			          </select>
 			        </div>
 			      </div>
@@ -521,7 +519,7 @@
 			        <div class="col-md-4">
 			          <div class="form-group">
 			            <input type="text" id="edit_codigo-postal" name="edit_codigo-postal" placeholder="Codigo Postal" value="" required 
-			            class="form-control">
+			            class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 			          </div>
 			        </div>
 			      </div>
@@ -537,7 +535,7 @@
 			        </div>
 			        <div class="col-md-4">
 				        <label for="Escolaridad">Escolaridad:</label>
-			    		<input type="text" id="edit_escolaridad" name="edit_escolaridad" placeholder="Escolaridad" value="" required class="form-control">
+			    		<input type="text" id="edit_escolaridad" name="edit_escolaridad" placeholder="Escolaridad" value="" required class="form-control" onkeypress="return soloLetras(event)">
 			        </div>
 			      </div>
 
@@ -559,7 +557,7 @@
 			        <div class="col-md-4">
 			        	<label>Salario:</label>
 			          <div class="form-group">
-			            <input type="number" id="edit_salario" name="edit_salario" value="" required class="form-control">
+			            <input type="number" id="edit_salario" name="edit_salario" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 			          </div>
 			        </div>
 			      </div>
@@ -568,19 +566,19 @@
 			      	<div class="col-md-4">
 			      		<label>Dias Vacaciones:</label>
 			          <div class="form-group">
-			            <input type="number" id="edit_dias-vacaciones" name="edit_dias-vacaciones" value="" required class="form-control">
+			            <input type="number" id="edit_dias-vacaciones" name="edit_dias-vacaciones" value="" required class="form-control"onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 			          </div>
 			      	</div>
 			      	<div class="col-md-4">
 			      		<label>Dias Permiso:</label>
 			          <div class="form-group">
-			            <input type="number" id="edit_dias-permiso" name="edit_dias-permiso" value="" required class="form-control">
+			            <input type="number" id="edit_dias-permiso" name="edit_dias-permiso" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 			          </div>
 			      	</div>
 			      	<div class="col-md-4">
 			      		<label>% Comision:</label>
 			          <div class="form-group">
-			            <input type="number" id="edit_porcentaje-comision" name="edit_porcentaje-comision" value="" required class="form-control">
+			            <input type="number" id="edit_porcentaje-comision" name="edit_porcentaje-comision" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 			          </div>
 			      	</div>
 			      </div>

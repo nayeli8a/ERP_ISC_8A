@@ -65,7 +65,7 @@ public class DepartamentosServlet extends HttpServlet {
 								break;
 							case "Modificar":
 							   Departamentos departamentos = new Departamentos();
-							    departamentos.setIdDepartamento(Integer.parseInt(request.getParameter("idDepartamento")));
+							    departamentos.setIdDepartamento(Integer.parseInt(request.getParameter("id")));
 							    departamentos.setNombre(request.getParameter("nom_departamentos"));
 								departamentos.setEstatus(request.getParameter("estatus"));
 								dedao = new DepartamentosDAO();
