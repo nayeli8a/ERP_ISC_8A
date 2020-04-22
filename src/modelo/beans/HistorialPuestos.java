@@ -5,16 +5,16 @@ import java.sql.Date;
 
 
 public class HistorialPuestos{
-
+/////
   private Date fechaInicio;
   private Date fechaFin;
   private float salario;
-
+/////
   private int idEmpleado;
   private String nss;
-
+////
   private int idPuesto;
-
+////
   private int idDepartamento;
 
 public Date getFechaInicio() {
