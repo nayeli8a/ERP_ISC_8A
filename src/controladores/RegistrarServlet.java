@@ -349,17 +349,18 @@ public class RegistrarServlet extends HttpServlet {
 					case "DocumentacionEmpleado" :
 						error = "";
 						mensaje="";
-						DocumentacionEmpleadoDAO dedao = new DocumentacionEmpleadoDAO();
+						DocumentacionEmpleadoDAO dcedao = new DocumentacionEmpleadoDAO();
+						
 						String nombreDocumento = request.getParameter("nombreDocumento");
 						Date fechaEntrega = (Date.valueOf(request.getParameter("fechaEntrega")));
 						//InputStream documento = (InputStream.valueOf(request.getParameter("documento")));
 						nssempleado = request.getParameter("nssempleado");
 
 					    estatus = "A";
-						idEmpleado = indao.validarNSSEmpleado(nssempleado);
+						idEmpleado = dcedao.validarNSSEmpleado(nssempleado);
 						if(idEmpleado != -1)
 						{
-							dedao.insertarDocumentacionEmpleado(nombreDocumento, fechaEntrega, null,idEmpleado, estatus);
+							dcedao.insertarDocumentacionEmpleado(nombreDocumento, fechaEntrega,idEmpleado, estatus);
 							mensaje = "Documentacion Empleado registrada con exito para el NSS: "+nssempleado;
 							request.setAttribute("Mensajes",mensaje);
 
