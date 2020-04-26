@@ -3,7 +3,7 @@ package modelo.beans;
 import java.sql.Date;
 
 public class AusenciasJustificadas{
-
+//Ausencias
   private int idAusencia;
   private Date fechaSolicitud;
   private Date fechaInicio;
@@ -11,18 +11,93 @@ public class AusenciasJustificadas{
   private String tipo;
   private int idEmpleadoS;
   private int idEmpleadoA;
-  private String estatus;
-  private String nss;
+  private String estatusAusencias;
 
+private String estatus;
+  
+  //EmpleadoAusente
+  private String NSSA;
+  private int diasPermiso;
+  private int diasVacaciones;
+  private String nombreA;
+  private String apaternoA;
+  private String amaternoA;
+	
+  
+  //EmpleadoS
+  private String NSSS;
+  private String nombreS;
+  private String apaternS;
+  private String amaternoS;
+	
+  public String getEstatusAusencias() {
+	return estatusAusencias;
+}
+public void setEstatusAusencias(String estatusAusencias) {
+	this.estatusAusencias = estatusAusencias;
+}
+  
 
-
-	public String getNss() {
-		return nss;
-	}
-	public void setNss(String nss) {
-		this.nss = nss;
-	}
-
+public String getNSSA() {
+	return NSSA;
+}
+public void setNSSA(String nSSA) {
+	NSSA = nSSA;
+}
+public int getDiasPermiso() {
+	return diasPermiso;
+}
+public void setDiasPermiso(int diasPermiso) {
+	this.diasPermiso = diasPermiso;
+}
+public int getDiasVacaciones() {
+	return diasVacaciones;
+}
+public void setDiasVacaciones(int diasVacaciones) {
+	this.diasVacaciones = diasVacaciones;
+}
+public String getNombreA() {
+	return nombreA;
+}
+public void setNombreA(String nombreA) {
+	this.nombreA = nombreA;
+}
+public String getApaternoA() {
+	return apaternoA;
+}
+public void setApaternoA(String apaternoA) {
+	this.apaternoA = apaternoA;
+}
+public String getAmaternoA() {
+	return amaternoA;
+}
+public void setAmaternoA(String amaternoA) {
+	this.amaternoA = amaternoA;
+}
+public String getNSSS() {
+	return NSSS;
+}
+public void setNSSS(String nSSS) {
+	NSSS = nSSS;
+}
+public String getNombreS() {
+	return nombreS;
+}
+public void setNombreS(String nombreS) {
+	this.nombreS = nombreS;
+}
+public String getApaternS() {
+	return apaternS;
+}
+public void setApaternS(String apaternS) {
+	this.apaternS = apaternS;
+}
+public String getAmaternoS() {
+	return amaternoS;
+}
+public void setAmaternoS(String amaternoS) {
+	this.amaternoS = amaternoS;
+}
 public int getIdAusencia() {
 	return idAusencia;
 }

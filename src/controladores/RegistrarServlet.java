@@ -239,23 +239,31 @@ public class RegistrarServlet extends HttpServlet {
 				case "AusenciasJustificadas" :
 					error = "";
 					mensaje="";
+					int idEmpleadoA;
+					int idEmpleadoS;
 					AusenciasJustificadasDAO ausJusdao = new AusenciasJustificadasDAO();
-					Date fechaSolicitud = (Date.valueOf(request.getParameter("fechaSolicitud")));
 					fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
 					fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
-					nssempleado= request.getParameter("nssempleado");
 					String tipo =request.getParameter("tipo");
-				    estatus = "A";
-				//	idEmpleado = indao.validarNSSEmpleado(nssempleado);
-				//	if(idEmpleado != -1)
+					String nombreA=request.getParameter("nombreA");
+					String aMaternoA=request.getParameter("aMaternoA");
+					String aPaternoA=request.getParameter("aPaternoA");
+					String nombreS=request.getParameter("nombreS");
+					String aMaternoS=request.getParameter("aMaternoS");
+					String aPaternoS=request.getParameter("aPaternoS");
+				    idEmpleadoA = ausJusdao.validarNombre(nombreA, aPaternoA, aMaternoA);
+				    idEmpleadoS = ausJusdao.validarNombre(nombreS, aPaternoS, aMaternoS);
+
+				    
+				    if(idEmpleadoA != -1 || idEmpleadoS!= -1)
 					{
-				//		ausJusdao.insertarAusenciasJustificadas(fechaSolicitud,fechaInicio, fechaFin, tipo,idEmpleadoS,idEmpleadoA, estatus);
-						mensaje = "AusenciaJustificada registrada con exito para el NSS: "+nssempleado;
+				    	ausJusdao.insertarAusenciasJustificadas(fechaInicio, fechaFin, tipo,idEmpleadoS,idEmpleadoA);
+						mensaje = "AusenciaJustificada registrada";
 						request.setAttribute("Mensajes",mensaje);
 
-				//	}else
-					//{
-						error = "El NSS del empleado no es valido, inserta uno valido.";
+					}else
+					{
+						error = "Empleado no encontrado";
 						request.setAttribute("Errores",error);
 					}
 					url="AusenciasJustificadas?op=Listar&pagina=1";
