@@ -268,21 +268,21 @@ public class RegistrarServlet extends HttpServlet {
 					}
 					url="AusenciasJustificadas?op=Listar&pagina=1";
 					break;
-					
+
 				case "Nomina":
 					NominasDAO ndao = new NominasDAO();
 					HorariosDAO hdao = new HorariosDAO();//para sacar el idEmpleado con el nss, por flojera jaja
 					Nominas n = new Nominas();
 					NominasDeduccionesDAO nddao = new NominasDeduccionesDAO();
 					NominasPercepcionesDAO npdao = new NominasPercepcionesDAO();
-					
+
 					int idempleado = hdao.validarNSSEmpleado(request.getParameter("nss"));
 					if(idempleado!=-1)
 					{
 						//existe
 						n.setIdEmpleado(idempleado);
 						n.setIdFormaPago(Integer.parseInt(request.getParameter("idformapago")));
-						
+
 						n.setFechaPago(Date.valueOf(request.getParameter("fechapago")));
 						n.setTotalP(Float.valueOf(request.getParameter("totalp")));
 						n.setTotalD(Float.valueOf(request.getParameter("totald")));
@@ -291,14 +291,14 @@ public class RegistrarServlet extends HttpServlet {
 						n.setFaltas(Integer.parseInt(request.getParameter("faltas")));
 						n.setFechaInicio(Date.valueOf(request.getParameter("fechainicio")));
 						n.setFechaFin(Date.valueOf(request.getParameter("fechafin")));
-						
+
 						ndao.Insertar(n.getFechaPago(),n.getTotalP(),n.getTotalD(),
 								n.getCantidadNeta(),n.getDiasTrabajados(),n.getFaltas(),n.getFechaInicio(),
 								n.getFechaFin(),n.getIdEmpleado(),n.getIdFormaPago());
-						
+
 						//ahora insertamos las percepciones a la nueva nomina
 						int cantidadpercepciones = Integer.parseInt(request.getParameter("percepciones"));
-						
+
 						for (int i = 0; i < cantidadpercepciones; i++) {
 							int idPercepcion = Integer.parseInt(request.getParameter("select-p-"+(i+1)));
 							int idNomina = ndao.NominaEmpleado(idempleado);
@@ -306,7 +306,7 @@ public class RegistrarServlet extends HttpServlet {
 							//System.out.println(idPercepcion+" || "+idNomina+" || "+importe);
 							npdao.Insertar(idNomina,idPercepcion,importe);
 						}
-						
+
 						//ahora insertamos las deducciones a la nueva nomina
 						int cantidaddeducciones = Integer.parseInt(request.getParameter("deducciones"));
 						for (int i = 0; i < cantidaddeducciones; i++) {
@@ -316,17 +316,17 @@ public class RegistrarServlet extends HttpServlet {
 							//System.out.println(idDeduccion+" || "+idNomina+" || "+importe);
 							nddao.Insertar(idNomina,idDeduccion,importe);
 						}
-						
-						
+
+
 						mensaje = "La nomina ha ido registrada con exito";
 						request.setAttribute("Mensajes",mensaje);
 					}else
 					{
-						//no existe, regresamos 
+						//no existe, regresamos
 						error="El NSS ingresado no corresponde a \\n ningun empleado,\\n Porfavor ingrese uno valido";
 						request.setAttribute("Errores",error);
 					}
-					
+
 					url="Nominas?op=Listar&pagina=1";
 					break;
 				case "FormasPago":
@@ -346,7 +346,32 @@ public class RegistrarServlet extends HttpServlet {
 					}
 					url="FormasPago?op=Listar&pagina=1";
 					break;
-					
+					case "DocumentacionEmpleado" :
+						error = "";
+						mensaje="";
+						DocumentacionEmpleadoDAO dcedao = new DocumentacionEmpleadoDAO();
+						
+						String nombreDocumento = request.getParameter("nombreDocumento");
+						Date fechaEntrega = (Date.valueOf(request.getParameter("fechaEntrega")));
+						//InputStream documento = (InputStream.valueOf(request.getParameter("documento")));
+						nssempleado = request.getParameter("nssempleado");
+
+					    estatus = "A";
+						idEmpleado = dcedao.validarNSSEmpleado(nssempleado);
+						if(idEmpleado != -1)
+						{
+							dcedao.insertarDocumentacionEmpleado(nombreDocumento, fechaEntrega,idEmpleado, estatus);
+							mensaje = "Documentacion Empleado registrada con exito para el NSS: "+nssempleado;
+							request.setAttribute("Mensajes",mensaje);
+
+						}else
+						{
+							error = "El NSS del empleado no es valido, inserta uno valido.";
+							request.setAttribute("Errores",error);
+						}
+						url="DocumentacionEmpleado?op=Listar&pagina=1";
+						break;
+
 
 		}
 

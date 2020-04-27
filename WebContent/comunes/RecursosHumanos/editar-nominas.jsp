@@ -24,18 +24,41 @@
 	<script>
 	var nump=1;
 	var numd=1;
-		function ponervalores(select,input,PoD)
+		function ponervalores(select,input,last,PoD)
 		{
 			if(PoD == 1)
 			{
-				document.getElementById(select).name = select+nump;
-				document.getElementById(input).name = input+nump;
+				//aqui modificamos a las percepciones
+				document.getElementById(select).name = select+""+nump;
+				document.getElementById(input).name = input+""+nump;
+				document.getElementById(last).name = last+""+nump;
+				document.getElementById(select).id = select+""+nump;
+				document.getElementById(input).id = input+""+nump;
+				document.getElementById(last).id = last+""+nump;
+				nump = nump+1;
 			}else
 			{
-				document.getElementById(select).name = select+numd;
-				document.getElementById(input).name = input+numd;
+				//aqui modificamos a las deducciones
+				document.getElementById(select).name = select+""+numd;
+				document.getElementById(input).name = input+""+numd;
+				document.getElementById(last).name = last+""+numd;
+				document.getElementById(select).id = select+""+numd;
+				document.getElementById(input).id = input+""+numd;
+				document.getElementById(last).id = last+""+numd;
+				numd = numd+1;
 			}
 			
+		}
+		
+		//funcion para tomar las variables globales de cuantas percepciones 
+		//y deducciones hay y activar el form editar
+		function editar_nomina()
+		{
+			//tomamos el action del form y le contatenamos dos parametros mas
+			var form = document.getElementById("editar-nomina");	
+	    	form.setAttribute("action",form.getAttribute("action")+"&deducciones="+numd);
+	    	form.setAttribute("action",form.getAttribute("action")+"&percepciones="+nump);
+			form.submit();
 		}
 	</script>
 
@@ -45,10 +68,10 @@
 		<a class="btn btn-primary"href="${pageContext.servletContext.contextPath}/General?op=RegresarRH">Atras</a>
 	</nav>
 	<div  class="card bg-light" style="margin-top:100px">
-	<p class="bg-primary text-white">EDITAR NOMINA</p>
+	<p class="bg-primary text-white">EDITAR NOMINA</p> 
 	
 		<div class="container">
-			<form action="${pageContext.servletContext.contextPath}/Nominas?op=Modificar" method="post">
+			<form id="editar-nomina" action="${pageContext.servletContext.contextPath}/Nominas?op=Modificar" method="post">
 			<div class="form-group">
 			<input type="hidden" name="id" value="${datosnomina.getIdNomina()}">
 			    <legend> Datos del empleado: </legend>
@@ -148,20 +171,30 @@
 		              <c:forEach var="dato" items="${datospercepciones}">
 		              
 	              		<c:if test="${dato.getIdPercepcion() eq per.getIdPercepcion()}">
-	              			<option value="${per.getIdPercepcion()}">
+	              			<option selected value="${dato.getIdPercepcion()}">
 	              			${dato.getNombre()}
 	              			</option>
 	              		</c:if>
-		              	
+	              		<c:if test="${dato.getIdPercepcion() != per.getIdPercepcion()}">
+	              			<option value="${dato.getIdPercepcion()}">
+	              			${dato.getNombre()}
+	              			</option>
+	              		</c:if>
 		              </c:forEach>
 		              </select>
 		              
 		              <label>Importe:</label>
 		              <br>
-		              <input id="input-p-" name="input-p-" type="number" value="${per.getImporte()}" onload="ponervalores('input-p-','select-p-',1)">
-			          <hr style="width:80%;">
-			          </div>
+		              <input id="input-p-" name="input-p-" type="number" value="${per.getImporte()}">
+		              
+		              <!-- Este input servira para guardar el valor anterior de la percepcion -->
+		              <input type="hidden" id="last-p-" name="last-p-" value="${per.getIdPercepcion()}">
 			          
+			          <hr style="width:80%;">
+			          	<script type="text/javascript">
+			          		ponervalores('input-p-','select-p-','last-p-',1);
+			          	</script>
+			          </div>
 			    </c:forEach>
 			    <br>
 					    
@@ -173,23 +206,33 @@
 			            
 		              <label>Deduccion:</label>
 		              <br>
-		              <select id="select-p-" name="select-p-">
+		              <select id="select-d-" name="select-d-">
 		              <c:forEach var="dato" items="${datosdeducciones}">
 		              	
 	              		<c:if test="${dato.getIdDeduccion() eq ded.getIdDeduccion()}">
-	              			<option value="${ded.getIdDeduccion()}">
+	              			<option selected value="${dato.getIdDeduccion()}">
 	              			${dato.getNombre()}
 	              			</option>
 	              		</c:if>
-		              	
+	              		<c:if test="${dato.getIdDeduccion() != ded.getIdDeduccion()}">
+	              			<option value="${dato.getIdDeduccion()}">
+	              			${dato.getNombre()}
+	              			</option>
+	              		</c:if>
 		              </c:forEach>
 		              </select>
 		              <label>Importe:</label>
 		              <br>
-		              <input id="input-p-" name="input-p-" type="number" value="${ded.getImporte()}" onload="ponervalores('input-d-','select-d-',2)">
-			           
-			          </div>
+		              <input id="input-d-" name="input-d-" type="number" value="${ded.getImporte()}" >
+		              
+		              <!-- Este input servira para guardar el valor anterior de la deduccion -->
+		              <input type="hidden" id="last-d-" name="last-d-" value="${ded.getIdDeduccion()}">
+		              
 			          <hr style="width:80%;">
+			          	<script type="text/javascript">
+			          		ponervalores('input-d-','select-d-','last-d-',2);
+			          	</script>
+			          </div>
 			    </c:forEach>
 			    <br>
 					    
@@ -214,7 +257,7 @@
 			    <br>
 			    
 			    <div style="text-align: center;">
-				  <button type="submit" class="btn btn-primary">Editar</button>
+				  <button type="button" onclick="editar_nomina()" class="btn btn-primary">Editar</button>
 				</div>
 				
 			  </div>
