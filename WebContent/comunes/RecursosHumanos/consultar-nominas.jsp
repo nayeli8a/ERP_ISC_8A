@@ -198,7 +198,11 @@
 					<td>
 						<form action="${pageContext.servletContext.contextPath}/Nominas" method="post">
 							<input type="hidden" name="id" value="${dato.getIdNomina()}">
+							<input type="hidden" name="idEmpleado" value="${dato.getIdEmpleado()}">
 							<div id="${dato.getIdNomina()}">
+								<button type="submit" name="op" value="Imprimir">
+									<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/print.png" style="max-width:100%;">
+								</button>
 								<input type="submit" class="btn btn-warning" name="op" value="Editar">
 								<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
 							</div>

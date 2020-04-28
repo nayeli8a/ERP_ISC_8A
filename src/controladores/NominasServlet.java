@@ -1,18 +1,32 @@
 package controladores;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.istack.internal.logging.Logger;
+
+import jdk.nashorn.internal.runtime.Context;
 import modelo.beans.*;
 import modelo.datos.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 @WebServlet("/Nominas")
 public class NominasServlet extends HttpServlet {
@@ -137,6 +151,29 @@ public class NominasServlet extends HttpServlet {
 				request.setAttribute("datosnomina",n);
 				request.setAttribute("datospagos",datospagos);
 				url = Constantes.REGRESAR_RH_EDITAR+"nominas.jsp";
+				break;
+			case "Imprimir":
+				int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
+				idNomina = Integer.parseInt(request.getParameter("id"));
+				
+				JasperReport reporte ;//generamos el objeto para el reporte
+				
+				//obtenemos el contexto y la ruta del reporte 
+				ServletContext context = request.getServletContext();
+				String path = context.getRealPath("/WEB-INF/reportes/Reporte de Nomina.jasper");
+				
+				try {
+					HashMap map = new HashMap();
+					map.put("idEmpleado",idEmpleado);
+					map.put("idNomina",idNomina);
+					reporte = (JasperReport)JRLoader.loadObjectFromFile(path);
+					JasperPrint jprint = JasperFillManager.fillReport(path,map,Conexion.getInstance().getCN());
+					JasperViewer viewer = new JasperViewer(jprint,false);
+					viewer.setVisible(true);
+				} catch (JRException e) {
+					System.out.println("Error al generar el reporte "+e.getLocalizedMessage());
+				}
+				
 				break;
 		}
 		
