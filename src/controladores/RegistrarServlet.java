@@ -244,15 +244,11 @@ public class RegistrarServlet extends HttpServlet {
 					AusenciasJustificadasDAO ausJusdao = new AusenciasJustificadasDAO();
 					fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
 					fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
-					String tipo =request.getParameter("tipo");
-					String nombreA=request.getParameter("nombreA");
-					String aMaternoA=request.getParameter("aMaternoA");
-					String aPaternoA=request.getParameter("aPaternoA");
-					String nombreS=request.getParameter("nombreS");
-					String aMaternoS=request.getParameter("aMaternoS");
-					String aPaternoS=request.getParameter("aPaternoS");
-				    idEmpleadoA = ausJusdao.validarNombre(nombreA, aPaternoA, aMaternoA);
-				    idEmpleadoS = ausJusdao.validarNombre(nombreS, aPaternoS, aMaternoS);
+					String tipo = request.getParameter("tipo");
+					String nssausente = request.getParameter("nss-ausente");
+					String nsssustituto = request.getParameter("nss-sustituto");
+				    idEmpleadoA = ausJusdao.validarNombre(nssausente);
+				    idEmpleadoS = ausJusdao.validarNombre(nsssustituto);
 
 				    
 				    if(idEmpleadoA != -1 || idEmpleadoS!= -1)
@@ -284,11 +280,11 @@ public class RegistrarServlet extends HttpServlet {
 						n.setIdFormaPago(Integer.parseInt(request.getParameter("idformapago")));
 
 						n.setFechaPago(Date.valueOf(request.getParameter("fechapago")));
-						n.setTotalP(Float.valueOf(request.getParameter("totalp")));
-						n.setTotalD(Float.valueOf(request.getParameter("totald")));
-						n.setCantidadNeta(Float.valueOf(request.getParameter("cantidadneta")));
-						n.setDiasTrabajados(Integer.parseInt(request.getParameter("diast")));
-						n.setFaltas(Integer.parseInt(request.getParameter("faltas")));
+						n.setTotalP(0);
+						n.setTotalD(0);
+						n.setCantidadNeta(0);
+						n.setDiasTrabajados(0);
+						n.setFaltas(0);
 						n.setFechaInicio(Date.valueOf(request.getParameter("fechainicio")));
 						n.setFechaFin(Date.valueOf(request.getParameter("fechafin")));
 
@@ -298,25 +294,31 @@ public class RegistrarServlet extends HttpServlet {
 
 						//ahora insertamos las percepciones a la nueva nomina
 						int cantidadpercepciones = Integer.parseInt(request.getParameter("percepciones"));
-
+						float importetotalp=0;
+						
 						for (int i = 0; i < cantidadpercepciones; i++) {
 							int idPercepcion = Integer.parseInt(request.getParameter("select-p-"+(i+1)));
 							int idNomina = ndao.NominaEmpleado(idempleado);
 							float importe = Float.parseFloat(request.getParameter("input-p-"+(i+1)));
 							//System.out.println(idPercepcion+" || "+idNomina+" || "+importe);
+							importetotalp+=importe;
 							npdao.Insertar(idNomina,idPercepcion,importe);
 						}
 
 						//ahora insertamos las deducciones a la nueva nomina
 						int cantidaddeducciones = Integer.parseInt(request.getParameter("deducciones"));
+						float importetotald=0;
+						
 						for (int i = 0; i < cantidaddeducciones; i++) {
 							int idDeduccion = Integer.parseInt(request.getParameter("select-d-"+(i+1)));
 							int idNomina = ndao.NominaEmpleado(idempleado);
 							float importe = Float.parseFloat(request.getParameter("input-d-"+(i+1)));
 							//System.out.println(idDeduccion+" || "+idNomina+" || "+importe);
+							importetotald+=importe;
 							nddao.Insertar(idNomina,idDeduccion,importe);
 						}
-
+						
+						
 
 						mensaje = "La nomina ha ido registrada con exito";
 						request.setAttribute("Mensajes",mensaje);

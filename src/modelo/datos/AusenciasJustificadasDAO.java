@@ -34,18 +34,14 @@ public class AusenciasJustificadasDAO {
 			return idEmpleado;
 		}
 
-  public int validarNombre(String nombre, String apaterno, String amaterno) {
+  public int validarNombre(String nss ) {
 		int idEmpleado=-1;
-		String sql = "SELECT idEmpleado FROM Empleados WHERE nombre=? and apaterno=? and amaterno=? ";
+		String sql = "SELECT idEmpleado FROM Empleados WHERE nss = ?";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
-			ps.setString(1, nombre);
-			ps.setString(2, apaterno);
-			ps.setString(3, amaterno);
+			ps.setString(1, nss);
 
-			
 			ResultSet rs = ps.executeQuery();
-
 			if (rs.next()) {
 				//si encuentra el nombre de un empleado, si existe el empleado
 				idEmpleado = rs.getInt(1) ;
@@ -159,6 +155,26 @@ public class AusenciasJustificadasDAO {
 			System.out.println("Error al actualizar la AusenciaJustificada"+e.getMessage());
 		}
 	}
+  
+  	public List<String> nssEmpleado(String nombre,String apaterno,String amaterno)
+  	{
+  		String sql = "select nss from Empleados where nombre like '%"+nombre+"%' "
+  				+ "and apaterno like '%"+apaterno+"%' and amaterno like '%"+amaterno+"%'";
+  		ArrayList<String> lista = new ArrayList<>();
+  		
+  		try {
+  			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next()){
+				lista.add(rs.getString(1));
+			}
+			ps.close();
+			rs.close();
+		} catch (Exception e) {
+			System.out.println("Error al obtener el nss del empleado AusenciaJustificada: "+e.getMessage());
+		}
+  		return lista;
+  	}
 
 
 }

@@ -27,6 +27,33 @@
 <script type="text/javascript"
 	src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
 <link rel="icon" type="image/png" href="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito_32x.ico">
+
+
+<script type="text/javascript">
+		//este metodo sirve para obtener datos necesarios del empleado para el 
+		//registro de la nomina de manera AJAX
+	    function buscar_nss_ajax() { 
+	    	var nombre = document.getElementById("find-nombre").value;
+	    	var apaterno = document.getElementById("find-apaterno").value;
+	    	var amaterno = document.getElementById("find-amaterno").value
+	    	if(nombre.length > 3 && apaterno.length > 3 && amaterno.length > 3)
+	    	{
+	    		$.ajax({
+	    			type:'POST',
+	    			data:{op:'BuscarNSS',nombre:nombre,apaterno:apaterno,amaterno:amaterno},
+	    			url:'AJAX',
+	    			success: function(res){
+	    				$("#find_nss").html(res);
+	    			}
+	    		});
+	    	}else
+	    	{
+	    		alert("Inserte un nombre valido");
+	    	}
+			
+	    }
+	</script>
+
 </head>
 <body>
 	<c:if test="${not empty Errores }">
@@ -69,7 +96,7 @@
 					<tr>
 						<th>Fecha Inicio</th>
 						<th>Fecha Fin</th>
-						<th>Enfermedad</th>
+						<th>Motivo</th>
 						<th>Evidencia</th>
 						<th>NSS empleado</th>
 						<th>Estatus</th>
@@ -128,6 +155,46 @@
 
 				<!-- Modal body -->
 				<div class="modal-body" id="modal_div">
+					<%//aqui empieza el cuerpo del modal %>
+					<div class="container" style="border: dotted">
+						<div class="row">
+							<div class="col-md-12" style="text-align: center">
+								<label><b>Buscar el NSS de los empleados</b></label>
+							</div>
+							
+							<div class="col-md-6" style="text-align: center">
+								<label>Nombre</label>
+								<br>
+								<input type="text" style="width:100%" id="find-nombre">
+							</div>
+							<div class="col-md-3" style="text-align: center">
+								<label>A. Paterno</label>
+								<br>
+								<input type="text" style="width:100%" id="find-apaterno">
+							</div>
+							<div class="col-md-3" style="text-align: center">
+								<label>A. Materno</label>
+								<br>
+								<input type="text" style="width:100%" id="find-amaterno">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-12" style="text-align:center">
+								<button type="button" onclick="buscar_nss_ajax()" class="btn btn-primary">Buscar</button>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-12" style="text-align:center">
+								<label>NSS Empleado</label>
+								<br>
+								<span id="find_nss"></span>
+							</div>
+						</div>
+						<br>
+					</div>
+				
 					<form
 						action="${pageContext.servletContext.contextPath}/Registrar?op=Incapacidades"
 						onsubmit="return validarFechas();" method="post">

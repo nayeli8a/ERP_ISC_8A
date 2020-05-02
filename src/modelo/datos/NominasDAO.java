@@ -147,4 +147,23 @@ public class NominasDAO {
 		return idNomina;
 	}
 	
+	public float SalarioEmpleado(String nss)
+	{
+		String sql = "select salario from Empleados where nss = ?";
+		float salario=0;
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.setString(1,nss);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next())
+			{
+				salario = rs.getFloat(1);
+			}
+		} catch (Exception e) {
+			System.out.println("Error al obtener el salario del empleado con nss: " + e.getMessage());
+		}
+		return salario;
+	}
+	
 }

@@ -53,6 +53,7 @@
 			var inputs = document.getElementById(idelementoclonar+numd).getElementsByTagName('input');
 			inputs[0].setAttribute("id",input+numd);
 			inputs[0].setAttribute("name",input+numd);
+			inputs[0].value = "";
 			var btns = document.getElementById(idelementoclonar+numd).getElementsByTagName('button');
 			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+numd+"');");
 			btns[0].setAttribute("style","visibility:visible;");
@@ -70,9 +71,12 @@
 			var selects = document.getElementById(idelementoclonar+nump).getElementsByTagName('select');
 			selects[0].setAttribute("id",select+nump);
 			selects[0].setAttribute("name",select+nump);
+			selects[0].removeAttribute("disabled");
 			var inputs = document.getElementById(idelementoclonar+nump).getElementsByTagName('input');
 			inputs[0].setAttribute("id",input+nump);
 			inputs[0].setAttribute("name",input+nump);
+			inputs[0].removeAttribute("readonly");
+			inputs[0].value = "";
 			var btns = document.getElementById(idelementoclonar+nump).getElementsByTagName('button');
 			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+nump+"');");	
 			btns[0].setAttribute("style","visibility:visible;");
@@ -115,6 +119,31 @@
     	form.setAttribute("action",form.getAttribute("action")+"&percepciones="+elementosp);
 		document.getElementById("registrar-nomina").submit();
 	}
+	
+	//este metodo sirve para obtener datos necesarios del empleado para el 
+	//registro de la nomina de manera AJAX
+    function get_action() { 
+    	var valor = document.getElementById("buscar-nss").value
+    	document.getElementById("registro-nss").value = valor;
+    	if(valor.length > 10 && valor.length < 12)
+    	{
+    		$.ajax({
+    			type:'POST',
+    			data:{op:'AJAX',dato:valor},
+    			url:'Nominas',
+    			success: function(res){
+    				$('#modalPedirNss').modal('hide');
+    				$("#input-p-1").val(res);
+    				$('#modalRegistro').modal('show');
+    			}
+    		});
+    	}else
+    	{
+    		alert("El NSS debe ser de 11 digitos");
+    	}
+		
+    }
+	
 	</script>
 	
 </head>
@@ -146,7 +175,7 @@
 	  		  <script>javascript:buscar();</script>
 		<h2 align="center">Nominas</h2>
 		<hr class="bg-info">
-		<button type="button" style="width:40px;" id="agregar" data-toggle="modal" data-target="#modalRegistro" >
+		<button type="button" style="width:40px;" id="agregar" data-toggle="modal" data-target="#modalPedirNss" >
 			<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/plus.png" style="max-width:100%;">
 		</button>
 		<div class="table-responsive table-bordered table-striped">
@@ -234,25 +263,12 @@
       	<div class="container" style="border-style:solid;">
 		    <label><b>Datos Empleado:</b></label>
 		    <div class="row">
-		      <div class="col-md-4">
+		      <div class="col-md-8" style="text-align: center">
 		        <label>Nss Empleado</label>
 		        <br>
-		        <input name="nss" type="text" style="width:100px;" required>
+		        <input name="nss" id="registro-nss" type="text" style="width:200px;" readonly required>
 		      </div>
 		      <div class="col-md-4">
-		        <label>Faltas Acumuladas</label>
-		        <br>
-		        <input name="faltas" type="number" style="width:100px;" required>
-		      </div>
-		      <div class="col-md-4">
-		        <label>Dias Trabajados</label>
-		        <br>
-		        <input name="diast" type="number" style="width:100px;" required>
-		      </div>
-		    </div>
-		    <br>
-		    <div class="row">
-	    	  <div class="col-md-3">
 		        <label>Forma de Pago</label>
 		        <select id="idformapago" name="idformapago" required>
 		        <c:forEach var="dato" items="${datospagos}">
@@ -298,14 +314,14 @@
 					          <div class="col">
 					            
 				              <label>Percepcion:</label>
-				              <select id="select-p-1" name="select-p-1">
+				              <select id="select-p-1" name="select-p-1" disabled>
 				              <c:forEach var="dato" items="${datospercepciones}">
 				              	<option value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
 				              </c:forEach>
 				              </select>
 				              <br>
 				              <label>Importe:</label>
-				              <input id="input-p-1" name="input-p-1" type="number">
+				              <input id="input-p-1" pattern=".{11,11}" required name="input-p-1" type="number" value="" readonly>
 				              <button type="button" style="visibility:hidden;" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
 					            
 					          </div>
@@ -354,22 +370,6 @@
 		    	</div>
 		    </div>
 		    <br>
-		    <label><b>Totales:</b></label>
-		    <div class="row">
-		      <div class="col-md-4">
-		        <label>Total Pagado</label>
-		        <input name="totalp" type="number" required>
-		      </div>
-		      <div class="col-md-4">
-		        <label>Total Deducido</label>
-		        <input name="totald" type="number" required>
-		      </div>
-		      <div class="col-md-4">
-		        <label>Cantidad Neta</label>
-		        <input name="cantidadneta" type="number" required>
-		      </div>
-		    </div>
-		    <br>
 		    <div align="center">
 		      <button type="button" onclick="agregar_nomina()" class="btn btn-primary">Registrar</button>
 		    </div>
@@ -385,6 +385,42 @@
 	    </div>
 	  </div>
 </div>
+
+<!-- MODAL PARA OBTENER NSS -->
+<div class="modal fade" id="modalPedirNss">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Registro de Nominas</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="modal_div">
+      <% //Aqui va todo el cuerpo del modal%>
+      	<div class="row">
+	      	<div class="col-md-12" style="text-align: center">
+	      	<label><b>Ingresa el Nss del empleado para continuar</b></label>
+	      		<br>
+		        <label>Nss Empleado</label>
+		        <br>
+		        <input id="buscar-nss" type="text" style="width:200px;" required>
+		        <br>
+		        <br>
+		        <button type="button" onclick="get_action()" class="btn btn-primary">Continuar</button>
+		     </div>
+	      </div>
+      </div>
+   <!-- Modal footer -->
+	      <div class="modal-footer">
+	      	<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+	      </div>
+	    </div>
+	  </div>
+</div>
+
 
 <% //Aqui tendremos la paginacion%>
 	<nav aria-label="paginacion Nominas">

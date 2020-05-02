@@ -29,6 +29,32 @@
 <link rel="icon" type="image/png"
 	href="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito_32x.ico">
 
+
+	<script type="text/javascript">
+		//este metodo sirve para obtener datos necesarios del empleado para el 
+		//registro de la nomina de manera AJAX
+	    function buscar_nss_ajax() { 
+	    	var nombre = document.getElementById("find-nombre").value;
+	    	var apaterno = document.getElementById("find-apaterno").value;
+	    	var amaterno = document.getElementById("find-amaterno").value
+	    	if(nombre.length > 3 && apaterno.length > 3 && amaterno.length > 3)
+	    	{
+	    		$.ajax({
+	    			type:'POST',
+	    			data:{op:'BuscarNSS',nombre:nombre,apaterno:apaterno,amaterno:amaterno},
+	    			url:'AJAX',
+	    			success: function(res){
+	    				$("#find_nss").html(res);
+	    			}
+	    		});
+	    	}else
+	    	{
+	    		alert("Inserte un nombre valido");
+	    	}
+			
+	    }
+	</script>
+
 </head>
 
 <body>
@@ -140,34 +166,56 @@
 
 				<!-- Modal body -->
 				<div class="modal-body" id="modal_div">
-					<%
-						//Aqui va todo el cuerpo del modal
-					%>
+					<%//Aqui va todo el cuerpo del modal%>
+					<div class="container" style="border: dotted">
+						<div class="row">
+							<div class="col-md-12" style="text-align: center">
+								<label><b>Buscar el NSS de los empleados</b></label>
+							</div>
+							
+							<div class="col-md-6" style="text-align: center">
+								<label>Nombre</label>
+								<br>
+								<input type="text" style="width:100%" id="find-nombre">
+							</div>
+							<div class="col-md-3" style="text-align: center">
+								<label>A. Paterno</label>
+								<br>
+								<input type="text" style="width:100%" id="find-apaterno">
+							</div>
+							<div class="col-md-3" style="text-align: center">
+								<label>A. Materno</label>
+								<br>
+								<input type="text" style="width:100%" id="find-amaterno">
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-12" style="text-align:center">
+								<button type="button" onclick="buscar_nss_ajax()" class="btn btn-primary">Buscar</button>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-12" style="text-align:center">
+								<label>NSS Empleado</label>
+								<br>
+								<span id="find_nss"></span>
+							</div>
+						</div>
+						<br>
+					</div>
+					
 					<form
 						action="${pageContext.servletContext.contextPath}/Registrar?op=AusenciasJustificadas"
 						method="post">
 						<div class="container">
 							<legend> Datos Generales del Ausente: </legend>
 							<div class="row">
-								<div class="col-md-4" id="nombreA">
-									<div class="form-group">
-										<input type="text" class="form-control"
-											placeholder="Nombre(s)" name="nombreA"
-											onkeypress="return soloLetras(event)">
-									</div>
-								</div>
-								<div class="col-md-4" id="aPaternoA">
-									<div class="form-group">
-										<input type="text" class="form-control"
-											placeholder="Apellido Paterno" name="ApaternoA"
-											onkeypress="return soloLetras(event)">
-									</div>
-								</div>
 								<div class="col-md-4" id="aMaternoA">
 									<div class="form-group">
 										<input type="text" class="form-control"
-											placeholder="Apellido Materno" name="AmaternoA"
-											onkeypress="return soloLetras(event)">
+											placeholder="NSS del Ausente" name="nss-ausente">
 									</div>
 								</div>
 							</div>
@@ -209,27 +257,12 @@
 									</select>
 								</div>
 							</div>
-							<legend> Datos Generales del Supervisor: </legend>
+							<legend> Datos Generales del Sustitito: </legend>
 							<div class="row">
 								<div class="col-md-4" id="nombreS">
 									<div class="form-group">
 										<input type="text" class="form-control"
-											placeholder="Nombre(s)" name="nombreS"
-											onkeypress="return soloLetras(event)">
-									</div>
-								</div>
-								<div class="col-md-4" id="apaterno">
-									<div class="form-group">
-										<input type="text" class="form-control"
-											placeholder="Apellido Paterno" name="aPaternoS"
-											onkeypress="return soloLetras(event)">
-									</div>
-								</div>
-								<div class="col-md-4" id="aMaternoS">
-									<div class="form-group">
-										<input type="text" class="form-control"
-											placeholder="Apellido Materno" name="aMaternos"
-											onkeypress="return soloLetras(event)">
+											placeholder="NSS del Supervisor" name="nss-sustituto">
 									</div>
 								</div>
 							</div>

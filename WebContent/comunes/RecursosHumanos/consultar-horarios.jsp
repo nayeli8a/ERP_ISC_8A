@@ -35,6 +35,32 @@
     }
   </style>
 	
+	<script type="text/javascript">
+		//este metodo sirve para obtener datos necesarios del empleado para el 
+		//registro de la nomina de manera AJAX
+	    function buscar_nss_ajax() { 
+	    	var nombre = document.getElementById("find-nombre").value;
+	    	var apaterno = document.getElementById("find-apaterno").value;
+	    	var amaterno = document.getElementById("find-amaterno").value
+	    	if(nombre.length > 3 && apaterno.length > 3 && amaterno.length > 3)
+	    	{
+	    		$.ajax({
+	    			type:'POST',
+	    			data:{op:'BuscarNSS',nombre:nombre,apaterno:apaterno,amaterno:amaterno},
+	    			url:'AJAX',
+	    			success: function(res){
+	    				$("#find_nss").html(res);
+	    			}
+	    		});
+	    	}else
+	    	{
+	    		alert("Inserte un nombre valido");
+	    	}
+			
+	    }
+	</script>
+	
+	
 </head>
 <body>
 	<c:if test="${not empty Errores }">
@@ -128,52 +154,91 @@
       <!-- Modal body -->
       <div class="modal-body" id="modal_div">
       <% //Aqui va todo el cuerpo del modal%>
+      <div class="container" style="border: dotted">
+			<div class="row">
+				<div class="col-md-12" style="text-align: center">
+					<label><b>Buscar el NSS de los empleados</b></label>
+				</div>
+				
+				<div class="col-md-6" style="text-align: center">
+					<label>Nombre</label>
+					<br>
+					<input type="text" style="width:100%" id="find-nombre">
+				</div>
+				<div class="col-md-3" style="text-align: center">
+					<label>A. Paterno</label>
+					<br>
+					<input type="text" style="width:100%" id="find-apaterno">
+				</div>
+				<div class="col-md-3" style="text-align: center">
+					<label>A. Materno</label>
+					<br>
+					<input type="text" style="width:100%" id="find-amaterno">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12" style="text-align:center">
+					<button type="button" onclick="buscar_nss_ajax()" class="btn btn-primary">Buscar</button>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12" style="text-align:center">
+					<label>NSS Empleado</label>
+					<br>
+					<span id="find_nss"></span>
+				</div>
+			</div>
+			<br>
+		</div>
+		
       <div class="container">
-    <form action="${pageContext.servletContext.contextPath}/Registrar?op=Horarios" method="post">
-      
-      <div class="row">
-        <div class="col-sm">
-          <label>NSS Empleado: </label>
-          <input type="text" name="nssempleado" class="form-control" required="">
-          
-        </div>
-        <div class="col-sm">
-          <label>Hora de inicio: </label>
-          <input type="time" name="horaInicio" class="form-control" required="">
-          
-          <label>Hora fin: </label>
-          <input type="time" name="horaFin" class="form-control" required="">
-          
-        </div>
-      </div>
-     <br>
-     
-      <div class="row" style="border-style:double; text-align:center;">
-      	<label>Días: </label>
-     	<br>
-        <label class="checkbox-inline">
-          <input type="checkbox" value="LU" name="lunes" class="largerCheckbox">Lunes </label>
-        <label class="checkbox-inline">
-          <input type="checkbox" value="MA" name="martes" class="largerCheckbox">Martes</label>
-        <label class="checkbox-inline">
-          <input type="checkbox" value="MI" name="miercoles" class="largerCheckbox">Miercoles</label>
-        <label class="checkbox-inline">
-          <input type="checkbox" value="JU" name="jueves" class="largerCheckbox">Jueves</label>
-        <label class="checkbox-inline">
-          <input type="checkbox" value="VI" name="viernes" class="largerCheckbox">Viernes</label>
-        <label class="checkbox-inline">
-          <input type="checkbox" value="SA" name="sabado" class="largerCheckbox">Sabado</label>
-        <label class="checkbox-inline">
-          <input type="checkbox" value="DO" name="domingo" class="largerCheckbox">Domingo</label>
-        <br> Selecciona los días que el empleado debe laborar 
-        </div>
-        <br>
-        <br>
-        <div style="text-align:center;">
-        	<button type="submit" class="btn btn-primary">Registrar Horario</button>
-        </div>
-    </form>
-   </div>
+		   <form action="${pageContext.servletContext.contextPath}/Registrar?op=Horarios" method="post">
+		     
+		     <div class="row">
+		       <div class="col-sm">
+		         <label>NSS Empleado: </label>
+		         <input type="text" name="nssempleado" class="form-control" required="">
+		         
+		       </div>
+		       <div class="col-sm">
+		         <label>Hora de inicio: </label>
+		         <input type="time" name="horaInicio" class="form-control" required="">
+		         
+		         <label>Hora fin: </label>
+		         <input type="time" name="horaFin" class="form-control" required="">
+		         
+		       </div>
+		     </div>
+		    <br>
+		    
+		     <div class="row" style="border-style:double; text-align:center;">
+		     	<label>Días: </label>
+		    	<br>
+		       <label class="checkbox-inline">
+		         <input type="checkbox" value="LU" name="lunes" class="largerCheckbox">Lunes </label>
+		       <label class="checkbox-inline">
+		         <input type="checkbox" value="MA" name="martes" class="largerCheckbox">Martes</label>
+		       <label class="checkbox-inline">
+		         <input type="checkbox" value="MI" name="miercoles" class="largerCheckbox">Miercoles</label>
+		       <label class="checkbox-inline">
+		         <input type="checkbox" value="JU" name="jueves" class="largerCheckbox">Jueves</label>
+		       <label class="checkbox-inline">
+		         <input type="checkbox" value="VI" name="viernes" class="largerCheckbox">Viernes</label>
+		       <label class="checkbox-inline">
+		         <input type="checkbox" value="SA" name="sabado" class="largerCheckbox">Sabado</label>
+		       <label class="checkbox-inline">
+		         <input type="checkbox" value="DO" name="domingo" class="largerCheckbox">Domingo</label>
+		       <br> Selecciona los días que el empleado debe laborar 
+		       </div>
+		       <br>
+		       <br>
+		       <div style="text-align:center;">
+		       	<button type="submit" class="btn btn-primary">Registrar Horario</button>
+		       </div>
+		   </form>
+   	</div>
    </div>
    <!-- Modal footer -->
 	      <div class="modal-footer">
