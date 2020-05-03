@@ -30,30 +30,6 @@
 	href="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito_32x.ico">
 
 
-	<script type="text/javascript">
-		//este metodo sirve para obtener datos necesarios del empleado para el 
-		//registro de la nomina de manera AJAX
-	    function buscar_nss_ajax() { 
-	    	var nombre = document.getElementById("find-nombre").value;
-	    	var apaterno = document.getElementById("find-apaterno").value;
-	    	var amaterno = document.getElementById("find-amaterno").value
-	    	if(nombre.length > 3 && apaterno.length > 3 && amaterno.length > 3)
-	    	{
-	    		$.ajax({
-	    			type:'POST',
-	    			data:{op:'BuscarNSS',nombre:nombre,apaterno:apaterno,amaterno:amaterno},
-	    			url:'AJAX',
-	    			success: function(res){
-	    				$("#find_nss").html(res);
-	    			}
-	    		});
-	    	}else
-	    	{
-	    		alert("Inserte un nombre valido");
-	    	}
-			
-	    }
-	</script>
 
 </head>
 
@@ -165,7 +141,7 @@
 				</div>
 
 				<!-- Modal body -->
-				<div class="modal-body" id="modal_div">
+				<div class="modal-body" id="modal_div" > 
 					<%//Aqui va todo el cuerpo del modal%>
 					<div class="container" style="border: dotted">
 						<div class="row">
@@ -208,25 +184,24 @@
 					
 					<form
 						action="${pageContext.servletContext.contextPath}/Registrar?op=AusenciasJustificadas"
-						method="post">
+						 onsubmit="return validarFechasAusencias();"  method="post">
 						<div class="container">
-							<legend> Datos Generales del Ausente: </legend>
+							<legend> Dato del Ausente: </legend>
 							<div class="row">
-								<div class="col-md-4" id="aMaternoA">
+								<div class="col-md-4" id="nssAusente">
 									<div class="form-group">
 										<input type="text" class="form-control"
-											placeholder="NSS del Ausente" name="nss-ausente">
+											placeholder="NSS del Ausente" name="nssAusente" required >
 									</div>
 								</div>
 							</div>
 
 							<legend> Datos de la Ausencia: </legend>
 							<div class="row">
-								<input type="hidden" name="id" value="">
 								<div class="col-md-6">
 									<label>Fecha de Solicitud</label>
 									<div class="form-group">
-										<input type="date" name="fechaSolicitud" value="<?php echo date('Y-n-j'); ?>" required
+										<input type="date" name="fechaSolicitud" id ="fechaSolicitud" value="" readonly
 											class="form-control">
 									</div>
 								</div>
@@ -234,7 +209,7 @@
 								<div class="col-md-6">
 									<label>Fecha Inicio</label>
 									<div class="form-group">
-										<input type="date" name="fechaInicio" value="" required
+										<input type="date" name="fechaInicio" id ="fechaInicio" value="" onchange="restar(this.value);" required
 											class="form-control">
 									</div>
 								</div>
@@ -244,7 +219,7 @@
 								<div class="col-md-4">
 									<label>Fecha Fin</label>
 									<div class="form-group">
-										<input type="date" name="fechaFin" value="" required
+										<input type="date" name="fechaFin" id="fechaFin" value=""  onchange="restar(this.value);" required
 											class="form-control">
 									</div>
 								</div>
@@ -252,17 +227,23 @@
 									<label>Tipo:</label> 
 									<select
 										class="form-control" id="tipo" name="tipo">
-										<option value="v">Vacaciones</option>
-										<option value="p">Permiso</option>
+										<option value="V">Vacaciones</option>
+										<option value="P">Permiso</option>
 									</select>
 								</div>
 							</div>
-							<legend> Datos Generales del Sustitito: </legend>
+							<legend> Dato del Jefe: </legend>
 							<div class="row">
 								<div class="col-md-4" id="nombreS">
 									<div class="form-group">
 										<input type="text" class="form-control"
-											placeholder="NSS del Supervisor" name="nss-sustituto">
+											placeholder="NSS del Supervisor" name="nssJefe" required>
+									</div>
+								</div>
+								<div class="col-md-4" id="dias">
+									<label>Dias descanso</label>
+									<div class="form-group" id="dias">
+										<input type="number" class="form-control" name="dias" value="">
 									</div>
 								</div>
 							</div>

@@ -189,4 +189,72 @@ function clonar(iddondeclonar,idelementoclonar)
 	document.getElementById(iddondeclonar).appendChild(idelementoclonar);
 }
 
+function buscar_nss_ajax() { 
+	var nombre = document.getElementById("find-nombre").value;
+	var apaterno = document.getElementById("find-apaterno").value;
+	var amaterno = document.getElementById("find-amaterno").value
+	if(nombre.length > 3 && apaterno.length > 3 && amaterno.length > 3)
+	{
+		$.ajax({
+			type:'POST',
+			data:{op:'BuscarNSS',nombre:nombre,apaterno:apaterno,amaterno:amaterno},
+			url:'AJAX',
+			success: function(res){
+				$("#find_nss").html(res);
+			}
+		});
+	}else
+	{
+		alert("Inserte un nombre valido");
+	}
+	
+}
+
+window.onload = function(){
+	  var fecha = new Date(); //Fecha actual
+	  var mes = fecha.getMonth()+1; //obteniendo mes
+	  var dia = fecha.getDate(); //obteniendo dia
+	  var ano = fecha.getFullYear(); //obteniendo año
+	  if(dia<10)
+	    dia='0'+dia; //agrega cero si el menor de 10
+	  if(mes<10)
+	    mes='0'+mes //agrega cero si el menor de 10
+	  document.getElementById('fechaSolicitud').value=ano+"-"+mes+"-"+dia;
+	}
+
+
+function validarFechasAusencias()
+{
+   var fechaHoy=   document.getElementById("fechaSolicitud").value;
+   var fechaInicio = document.getElementById("fechaInicio").value;
+   var fechaFin = document.getElementById("fechaFin").value;
+
+   if(Date.parse(fechaInicio)>Date.parse(fechaHoy) && Date.parse(fechaInicio)< Date.parse(fechaFin) ) {
+	 return true;
+	 
+} else {
+	alert("Por favor seleccione un rango de fechas correcto");
+	return false; 
+	
+
+}
+}
+
+function restar (valor) {
+	   var fechaInicio = document.getElementById("fechaInicio").value;
+	   var fechaFin = document.getElementById("fechaFin").value;
+	   var aux=0;
+	   var dias=0;
+	   var aux= Date.parse(fechaFin)- Date.parse(fechaInicio);  //regresa el valor en milisegundos
+	   aux=(aux/24);
+	   aux=(aux/60);
+	   aux=(aux/60);
+	   aux=(aux/1000);
+	   var dias=aux;
+	   document.getElementById('dias').innerHTML= dias;
+
+  
+}
+
+
 

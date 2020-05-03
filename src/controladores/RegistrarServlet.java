@@ -236,32 +236,78 @@ public class RegistrarServlet extends HttpServlet {
 				url="Incapacidades?op=Listar&pagina=1";
 				break;
 
-				case "AusenciasJustificadas" :
-					error = "";
-					mensaje="";
-					int idEmpleadoA;
-					int idEmpleadoS;
+				case "AusenciasJustificadas":
+					int idEmpleadoAusente;
+					int idEmpleadoJefe;
 					AusenciasJustificadasDAO ausJusdao = new AusenciasJustificadasDAO();
 					fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
 					fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
 					String tipo = request.getParameter("tipo");
-					String nssausente = request.getParameter("nss-ausente");
-					String nsssustituto = request.getParameter("nss-sustituto");
-				    idEmpleadoA = ausJusdao.validarNombre(nssausente);
-				    idEmpleadoS = ausJusdao.validarNombre(nsssustituto);
+					String nssAusente = request.getParameter("nssAusente");
+					String nssJefe = request.getParameter("nssJefe");
+					//obtenemos los ID
+				    idEmpleadoAusente = ausJusdao.validarNSSEmpleado(nssAusente);
+				    idEmpleadoJefe = ausJusdao.validarNSSEmpleado(nssJefe);
+				    //Obtenemos los dias disponibles de permiso 
+				    int diasVacaciones= ausJusdao.validarVacaciones(idEmpleadoAusente);
+				    int diasPermiso= ausJusdao.validarPermiso(idEmpleadoAusente);
+				    //calculamos los dias de permiso
+				    int calDias =(Integer.valueOf(request.getParameter("dias"))); 
+					System.out.println("dias calculados " + calDias);
+					System.out.println("EMPLEADO AUSENTE "+idEmpleadoAusente);
+					System.out.println("JEFE "+idEmpleadoJefe);
+					System.out.println("DIAS VACACIONES "+diasVacaciones);
+					System.out.println("DIAS PERMISO "+diasPermiso);
+					System.out.println(tipo);
 
-				    
-				    if(idEmpleadoA != -1 || idEmpleadoS!= -1)
-					{
-				    	ausJusdao.insertarAusenciasJustificadas(fechaInicio, fechaFin, tipo,idEmpleadoS,idEmpleadoA);
-						mensaje = "AusenciaJustificada registrada";
-						request.setAttribute("Mensajes",mensaje);
+			if (idEmpleadoAusente != -1 && idEmpleadoJefe != -1) // Existen los
+																	// empleados
+			{
+				if (idEmpleadoAusente != idEmpleadoJefe) // Son diferentes
+				{
+					if ("V".equals(tipo)) { // vacaciones
+						if (calDias <= diasVacaciones) {
+							ausJusdao.insertarAusenciasJustificadas(fechaInicio, fechaFin, tipo, idEmpleadoAusente,
+									idEmpleadoJefe);
+							mensaje = "Ausencia Justificada registrada con exito";
+							request.setAttribute("Mensajes", mensaje);
 
-					}else
-					{
-						error = "Empleado no encontrado";
-						request.setAttribute("Errores",error);
+						} else {
+							error = "El empleado solo cuenta con " + diasVacaciones + " dias de vacaiones";
+							request.setAttribute("Errores", error);
+						}
+
 					}
+					
+					if ("P".equals(tipo)) {// permiso
+						if (calDias <= diasPermiso) {
+							ausJusdao.insertarAusenciasJustificadas(fechaInicio, fechaFin, tipo, idEmpleadoAusente,
+									idEmpleadoJefe);
+							mensaje = "Ausencia Justificada registrada con exito";
+							request.setAttribute("Mensajes", mensaje);
+						}
+
+						else {
+							error = "El empleado solo cuenta con " + diasPermiso + "dias de permiso";
+							request.setAttribute("Errores", error);
+						}
+
+					
+				} 
+			}
+
+					else {
+						error = "El usuario que autoriza no puede ser el mismo que el ausente";
+						request.setAttribute("Errores", error);
+
+					}
+
+				} else {
+					error = "Empleado no encontrado";
+					request.setAttribute("Errores", error);
+				}
+			
+
 					url="AusenciasJustificadas?op=Listar&pagina=1";
 					break;
 

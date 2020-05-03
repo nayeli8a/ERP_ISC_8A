@@ -12,7 +12,48 @@ import java.util.List;
 import modelo.beans.AusenciasJustificadas;
 
 public class AusenciasJustificadasDAO {
+	
+	  public int validarVacaciones(int idEmpleado) {
+			int vacaciones = 0;
+			String sql = "SELECT diasVacacionales FROM Empleados WHERE idEmpleado=?";
+			try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.setInt(1, idEmpleado);
+				ResultSet rs = ps.executeQuery();
 
+				if (rs.next()) {
+					//si encuentra el nombre de un empleado, si existe el empleado
+					vacaciones = rs.getInt(1) ;
+				}
+				rs.close();
+				ps.close();
+
+			} catch (SQLException e) {
+				System.out.println("Error al conectar con la BD " + e.getMessage());
+			}
+			return vacaciones;
+		}
+
+	  public int validarPermiso(int idEmpleado) {
+			int permiso = 0;
+			String sql = "SELECT diasPermiso FROM Empleados WHERE idEmpleado=?";
+			try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.setInt(1, idEmpleado);
+				ResultSet rs = ps.executeQuery();
+
+				if (rs.next()) {
+					//si encuentra el nombre de un empleado, si existe el empleado
+					permiso = rs.getInt(1) ;
+				}
+				rs.close();
+				ps.close();
+
+			} catch (SQLException e) {
+				System.out.println("Error al conectar con la BD " + e.getMessage());
+			}
+			return permiso;
+		}
   public int validarNSSEmpleado(String nssempleado) {
 			int idEmpleado=-1;
 			String sql = "SELECT idEmpleado FROM Empleados WHERE nss=?";
