@@ -90,7 +90,37 @@ public class AusenciasJustificadasServlet extends HttpServlet {
 
 
       	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      		doGet(request, response);
+      		
+      		String op = request.getParameter("op");
+      		if(op.equals("AJAX"))
+      		{
+      			//ponemos el modo de respuestas en text/html para poder mandar objetos html
+    			response.setContentType("text/html");
+    			op="";//dejamos la op en vacio para que si envian de un form no AJAX 
+      			
+      			int idAusencia = Integer.parseInt(request.getParameter("Ausencia"));
+      			int AoR = Integer.parseInt(request.getParameter("AOR"));
+      			AusenciasJustificadasDAO ajdao = new AusenciasJustificadasDAO();
+      			
+      			
+      			//AoR es si fue aceptada=1 o rechazada=2
+      			if(AoR == 1)
+      			{
+      				//vamos a las ausencias y aceptamos la ausencia con idAusencia
+      				ajdao.actualizarIndividual(idAusencia,"A");
+      				response.getWriter().write("status-"+idAusencia);
+      				response.getWriter().write("style=\"background-color: green;\"");
+      			}else if(AoR==2)
+      			{
+      				//vamos a las ausencias y rechazamos la ausencia con idAusencia
+      				ajdao.actualizarIndividual(idAusencia,"R");
+      				response.getWriter().write("status-1"+idAusencia);
+      			}
+      			
+      		}else
+      		{
+      			doGet(request, response);
+      		}
       		
       	}
 

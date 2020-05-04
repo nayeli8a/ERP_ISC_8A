@@ -241,6 +241,10 @@ public class EmpleadosServlet extends HttpServlet {
 					
 					response.getWriter().write(CuerpoModal);
 				break;
+				
+				case "":
+					
+				break;
 			}
 			
 			

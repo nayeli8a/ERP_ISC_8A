@@ -81,3 +81,4 @@ GO
 -----Dar permiso
 grant select,insert,update,delete on Ausencia_empleados to RecursosHumanos
 
+select * from Ausencia_empleados;

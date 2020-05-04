@@ -210,6 +210,76 @@ public class AusenciasJustificadasDAO {
 		}
 	}
   
+  public void actualizarIndividual(int idAusencia,String status)
+  {
+	  if(status.equals("A"))
+	  {
+		//buscamos los dias de descanso a restar
+		  String aux = "select DiasDescanso,tipo,nssAusente from Ausencia_empleados where idAusencia = ? ";
+		  int diasDescanso=0;
+		  String tipo="";
+		  String nssausente="";
+		  try{
+			  	PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(aux);
+				ps.setInt(1, idAusencia);
+				ResultSet rs=ps.executeQuery();
+				if(rs.next()){
+					diasDescanso = rs.getInt(1);
+					tipo = rs.getString(2);
+					nssausente = rs.getString(3);
+				}
+				
+				//buscamos al empleado con el nssausente y le restamos los dias segun tipo
+				if(tipo.equals("V"))
+				{
+					aux = "update Empleados set diasVacacionales = diasVacacionales-? where nss = ?";
+					ps = Conexion.getInstance().getCN().prepareStatement(aux);
+					ps.setInt(1,diasDescanso);
+					ps.setString(2, nssausente);
+					ps.executeUpdate();
+					ps.close();
+				}else if(tipo.equals("P"))
+				{
+					aux = "update Empleados set diasPermiso = diasPermiso-? where nss = ?";
+					ps = Conexion.getInstance().getCN().prepareStatement(aux);
+					ps.setInt(1,diasDescanso);
+					ps.setString(2, nssausente);
+					ps.executeUpdate();
+					ps.close();
+				}
+				
+				String sql = "update AusenciaJustificada set estatusAusencia=? where idAusencia=?";
+				  try {
+						ps = Conexion.getInstance().getCN().prepareStatement(sql);
+						ps.setString(1,status);
+						ps.setInt(2,idAusencia);
+						ps.executeUpdate();
+					} catch (Exception e) {
+						System.out.println("Error al actualizar la el estatusAusencia "+e.getMessage());
+					}
+				
+				
+		  } catch(Exception e)
+		  {
+			  System.out.println("Error al actualizar la AusenciaJustificadaIndividual "+e.getMessage());
+		  }
+		  
+		  
+	  }else if(status.equals("R"))
+	  {
+		  String sql = "update AusenciaJustificada set estatusAusencia=? where idAusencia=?";
+		  try {
+				PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.setString(1,status);
+				ps.setInt(2,idAusencia);
+				ps.executeUpdate();
+			} catch (Exception e) {
+				System.out.println("Error al actualizar la AusenciaJustificadaIndividual "+e.getMessage());
+			}
+	  }
+	  
+  }
+  
   	public List<String> nssEmpleado(String nombre,String apaterno,String amaterno)
   	{
   		String sql = "select nss from Empleados where nombre like '%"+nombre+"%' "

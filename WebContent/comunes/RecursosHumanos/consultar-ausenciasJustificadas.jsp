@@ -29,7 +29,27 @@
 <link rel="icon" type="image/png"
 	href="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito_32x.ico">
 
-
+<script type="text/javascript">
+function modificarAusencia(AoR,idAusencia) { 
+	
+	$.ajax({
+		type:'POST',
+		data:{op:'AJAX',AOR:AoR,Ausencia:idAusencia},
+		url:'AusenciasJustificadas',
+		success: 
+			function(res){
+				if(AOR == "1")
+				{
+					$(res).style("style=\"background-color: green;\"");
+				}else
+				{
+					$(res).style("style=\"background-color: red;\"");
+				}
+				
+			}
+	});
+}
+</script>
 
 </head>
 
@@ -80,6 +100,7 @@
 						<th>Nombre del Autorizador</th>
 						<th>Estatus ausencia </th>
 						<th>Opciones</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody id="myTable">
@@ -105,7 +126,9 @@
 								<td>${dato.getFechaFin()}</td>
 								<td>${dato.getDiasDescanso()}</td>
 								<td>${dato.getNombreJefe()}</td>
-								<td><input type="submit" class="btn btn-danger btn-lg" name="op" value="Rechazada"></td>
+								<td>
+									<div id="status-${dato.getIdAusencia()}" style="background-color: red;"><b><label>Rechazada<label></label></b></div>
+								</td>
 								
 								<td>
 									<form action="AusenciasJustificadas" method="post">
@@ -117,7 +140,10 @@
 										</div>
 									</form>
 								</td>
-								
+								<td>
+									<button type="button" onclick="modificarAusencia(1,${dato.getIdAusencia()})">Aceptar</button>
+									<button type="button" onclick="modificarAusencia(2,${dato.getIdAusencia()})">Rechazar</button>
+								</td>
 							
 							</tr>
 						</c:if>
@@ -130,7 +156,9 @@
 								<td>${dato.getFechaFin()}</td>
 								<td>${dato.getDiasDescanso()}</td>
 								<td>${dato.getNombreJefe()}</td>
-								<td><input type="submit" class="btn btn-success btn-lg" name="op" value="Aceptada"></td>
+								<td>
+									<div id="status-${dato.getIdAusencia()}" style="background-color: green;"><b><label>Aceptada<label></label></b></div>
+								</td>
 								
 								<td>
 									<form action="AusenciasJustificadas" method="post">
@@ -142,7 +170,7 @@
 										</div>
 									</form>
 								</td>
-								
+								<td></td>
 							
 							</tr>
 						</c:if>
@@ -155,7 +183,9 @@
 								<td>${dato.getFechaFin()}</td>
 								<td>${dato.getDiasDescanso()}</td>
 								<td>${dato.getNombreJefe()}</td>
-								<td><input type="submit" class="btn btn-warning btn-lg"" name="op" value="Pendiente"></td>
+								<td>
+									<div id="status-${dato.getIdAusencia()}" style="background-color: orange;"><b><label>Pendiente<label></label></b></div>
+								</td>
 								
 								<td>
 									<form action="AusenciasJustificadas" method="post">
@@ -168,7 +198,10 @@
 										</div>
 									</form>
 								</td>
-								
+								<td>
+									<button type="button" onclick="modificarAusencia(1,${dato.getIdAusencia()})">Aceptar</button>
+									<button type="button" onclick="modificarAusencia(2,${dato.getIdAusencia()})">Rechazar</button>
+								</td>
 							
 							</tr>
 						</c:if>
