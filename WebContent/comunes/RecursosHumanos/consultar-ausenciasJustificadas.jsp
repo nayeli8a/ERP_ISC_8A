@@ -72,43 +72,91 @@
 				<thead class="thead-dark">
 
 					<tr>
-						<th>ID</th>
+						<th>Nombre del Interesado</th>
 						<th>Fecha Solicitud</th>
 						<th>Fecha Inicio</th>
 						<th>Fecha Fin</th>
-						<th>Tipo</th>
-						<th>ID empleadoS</th>
-						<th>ID empleadoA</th>
-						<th>Estatus Ausencia</th>
-						<th>Estatus</th>
+						<th>Dias de descanso</th>
+						<th>Nombre del Autorizador</th>
+						<th>Estatus ausencia </th>
+						<th>Opciones</th>
 					</tr>
 				</thead>
 				<tbody id="myTable">
 					<c:forEach var="dato" items="${datos}">
 						<c:if test="${dato.getEstatus() eq 'I'}">
+						
 							<tr>
-								<td>${dato.getIdAusencia()}</td>
+								<td>${dato.getNombreAusente()}</td>
 								<td>${dato.getFechaSolicitud()}</td>
 								<td>${dato.getFechaInicio()}</td>
 								<td>${dato.getFechaFin()}</td>
-								<td>${dato.getTipo()}</td>
-								<td>${dato.getIdEmpleadoS()}</td>
-								<td>${dato.getIdEmpleadoA()}</td>
-								<td>${dato.getEstatusAusencias()}</td>
-								<td>${dato.getEstatus()}</td>
+								<td>${dato.getDiasDescanso()}</td>
+								<td>${dato.getNombreJefe()}</td>
+							
 							</tr>
 						</c:if>
-						<c:if test="${dato.getEstatus() eq 'A'}">
+						<c:if test="${dato.getEstatusAusencia() eq 'R'}">
+						
 							<tr>
-								<td>${dato.getIdAusencia()}</td>
+								<td>${dato.getNombreAusente()}</td>
 								<td>${dato.getFechaSolicitud()}</td>
 								<td>${dato.getFechaInicio()}</td>
 								<td>${dato.getFechaFin()}</td>
-								<td>${dato.getTipo()}</td>
-								<td>${dato.getIdEmpleadoS()}</td>
-								<td>${dato.getIdEmpleadoA()}</td>
-								<td>${dato.getEstatusAusencias()}</td>
-								<td>${dato.getEstatus()}</td>
+								<td>${dato.getDiasDescanso()}</td>
+								<td>${dato.getNombreJefe()}</td>
+								<td><input type="submit" class="btn btn-danger btn-lg" name="op" value="Rechazada"></td>
+								
+								<td>
+									<form action="AusenciasJustificadas" method="post">
+										<input type="hidden" name="id" value="${dato.getIdAusencia()}">
+										<div id="${dato.getIdAusencia()}">
+											<input type="submit" 
+												class="btn btn-danger" name="op" value="Eliminar"
+												onclick="javascript:eliminar()">
+										</div>
+									</form>
+								</td>
+								
+							
+							</tr>
+						</c:if>
+						<c:if test="${dato.getEstatusAusencia() eq 'A'}">
+						
+							<tr>
+								<td>${dato.getNombreAusente()}</td>
+								<td>${dato.getFechaSolicitud()}</td>
+								<td>${dato.getFechaInicio()}</td>
+								<td>${dato.getFechaFin()}</td>
+								<td>${dato.getDiasDescanso()}</td>
+								<td>${dato.getNombreJefe()}</td>
+								<td><input type="submit" class="btn btn-success btn-lg" name="op" value="Aceptada"></td>
+								
+								<td>
+									<form action="AusenciasJustificadas" method="post">
+										<input type="hidden" name="id" value="${dato.getIdAusencia()}">
+										<div id="${dato.getIdAusencia()}">
+											<input type="submit" 
+												class="btn btn-danger" name="op" value="Eliminar"
+												onclick="javascript:eliminar()">
+										</div>
+									</form>
+								</td>
+								
+							
+							</tr>
+						</c:if>
+							<c:if test="${dato.getEstatusAusencia() eq 'P'}">
+						
+							<tr>
+								<td>${dato.getNombreAusente()}</td>
+								<td>${dato.getFechaSolicitud()}</td>
+								<td>${dato.getFechaInicio()}</td>
+								<td>${dato.getFechaFin()}</td>
+								<td>${dato.getDiasDescanso()}</td>
+								<td>${dato.getNombreJefe()}</td>
+								<td><input type="submit" class="btn btn-warning btn-lg"" name="op" value="Pendiente"></td>
+								
 								<td>
 									<form action="AusenciasJustificadas" method="post">
 										<input type="hidden" name="id" value="${dato.getIdAusencia()}">
@@ -120,6 +168,8 @@
 										</div>
 									</form>
 								</td>
+								
+							
 							</tr>
 						</c:if>
 
@@ -231,6 +281,12 @@
 										<option value="P">Permiso</option>
 									</select>
 								</div>
+									<div class="col-md-4" >
+									<label>Dias descanso:</label>
+									<div class="form-group" >
+										<input type="text" class="form-control" name="dias" id="dias" value="" readonly>
+									</div>
+								</div>
 							</div>
 							<legend> Dato del Jefe: </legend>
 							<div class="row">
@@ -240,12 +296,7 @@
 											placeholder="NSS del Supervisor" name="nssJefe" required>
 									</div>
 								</div>
-								<div class="col-md-4" id="dias">
-									<label>Dias descanso</label>
-									<div class="form-group" id="dias">
-										<input type="number" class="form-control" name="dias" value="">
-									</div>
-								</div>
+							
 							</div>
 
 						</div>

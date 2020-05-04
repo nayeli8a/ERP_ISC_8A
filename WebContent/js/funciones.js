@@ -243,15 +243,14 @@ function validarFechasAusencias()
 function restar (valor) {
 	   var fechaInicio = document.getElementById("fechaInicio").value;
 	   var fechaFin = document.getElementById("fechaFin").value;
-	   var aux=0;
-	   var dias=0;
 	   var aux= Date.parse(fechaFin)- Date.parse(fechaInicio);  //regresa el valor en milisegundos
-	   aux=(aux/24);
-	   aux=(aux/60);
-	   aux=(aux/60);
-	   aux=(aux/1000);
-	   var dias=aux;
-	   document.getElementById('dias').innerHTML= dias;
+	   aux=(aux/24);//dias
+	   aux=(aux/60);//minutos
+	   aux=(aux/60);//segundos
+	   aux=(aux/1000);//milisegundos
+	   var dias=aux; //dias (INT)
+	   var valor= document.getElementById("dias");
+	   valor.setAttribute("value",dias);
 
   
 }

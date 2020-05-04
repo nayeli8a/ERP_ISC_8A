@@ -26,9 +26,8 @@ BEGIN
 				begin 
 				---Si los dias que pide el empleado son menores o igual a sus dias de vacaciones, entonces se registra la ausencia con estatus pendiente
 					insert AusenciaJustificada values(@fechaSolicitud,@fechaInicio,@fechaFin,@tipo,@idEmpleadoS,@idEmpleadoA,'A','P');
-					---- Despues de insertar, se modifica en la tabla de empleados los dias de vacaciones que le quedan
-					set @diasRestantes=@diasVacaciones-@dias;
-					update empleados set diasVacacionales = @diasRestantes where idEmpleado= @idEmpleadoS;
+				
+					
 				end 
 		end 
 		-----permiso
@@ -39,9 +38,7 @@ BEGIN
 				begin 
 				---Si los dias que pide el empleado son menores o igual a sus dias de permiso, entonces se registra la ausencia con estatus pendiente
 					insert AusenciaJustificada values(@fechaSolicitud,@fechaInicio,@fechaFin,@tipo,@idEmpleadoS,@idEmpleadoA,'A','P');
-					---- Despues de insertar, se modifica en la tabla de empleados los dias de vacaciones que le quedan
-					set @diasRestantes=@diasPermiso-@dias;
-					update empleados set diasPermiso = @diasRestantes where idEmpleado= @idEmpleadoS;
+					
 				end 
 		end 
 
@@ -57,5 +54,30 @@ EXEC sp_Agregar_Ausencia_Justificada '20-05-2020','24-05-2020','v',2,1
 -----Permisos
 grant exec on sp_Agregar_Ausencia_Justificada to RecursosHumanos
 
-select * from Empleados;
-select* from AusenciaJustificada
+
+-----Se agrego una vista 
+CREATE VIEW Ausencia_empleados
+AS  
+    SELECT
+        A.idAusencia,
+        A.fechaSolicitud,
+		A.fechaInicio,
+		A.fechaFin,
+		A.tipo,
+		A.estatus,
+		A.estatusAusencia,
+		DiasDescanso=(DATEDIFF ( DD, A.fechaInicio , A.fechaFin )),
+		nssAusente = E.nss,
+		NombreAusente= (Concat(E.nombre, '   ', E.apaterno,'   ', E.amaterno)),
+		nssJefe=EJEFE.nss,
+		NombreJefe=(Concat(EJEFE.nombre,'   ', EJEFE.apaterno,'   ',EJEFE.amaterno))
+	 
+    FROM Empleados AS E INNER JOIN AusenciaJustificada AS A On A.idEmpleadoS = E.idEmpleado
+	INNER JOIN EMPLEADOS AS EJEFE ON A.idEmpleadoA=EJEFE.idEmpleado
+	
+
+GO
+
+-----Dar permiso
+grant select,insert,update,delete on Ausencia_empleados to RecursosHumanos
+

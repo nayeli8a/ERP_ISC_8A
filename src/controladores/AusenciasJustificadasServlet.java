@@ -57,9 +57,9 @@ public class AusenciasJustificadasServlet extends HttpServlet {
 	            	url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"ausenciasJustificadas.jsp";
 	            break;
 	          	case "Editar":
-	        	  ausJusdao = new AusenciasJustificadasDAO();
-					AusenciasJustificadas datosaj = ausJusdao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
-					request.setAttribute("datos", datosaj);
+	          		ausJusdao = new AusenciasJustificadasDAO();
+					AusenciasJustificadas datosAusencia = ausJusdao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
+					request.setAttribute("datosAusencia", datosAusencia);
 					url=modelo.datos.Constantes.REGRESAR_RH_EDITAR+"ausenciasJustificadas.jsp";
 				break;
 				case "Eliminar":
@@ -72,8 +72,7 @@ public class AusenciasJustificadasServlet extends HttpServlet {
 					String mensaje="";
 		
 					ausJusdao = new AusenciasJustificadasDAO();
-		
-				  	Date fechaSolicitud = (Date.valueOf(request.getParameter("fechaSolicitud")));
+					Date fechaSolicitud = (Date.valueOf(request.getParameter("fechaSolicitud")));
 					Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
 					Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
 					String tipo =request.getParameter("tipo");
@@ -82,19 +81,6 @@ public class AusenciasJustificadasServlet extends HttpServlet {
 					int idEmpleadoA=Integer.parseInt(request.getParameter("idEmpleadoA"));
 					String nssempleado=  request.getParameter("nss");
 		
-					//validamos que el empleado con el nss dado si existe
-				//	idEmpleado = ausJusdao.validarNSSEmpleado(nssempleado);
-				//	if(idEmpleado != -1)
-					{
-				//		ausJusdao.actualizar(fechaSolicitud,fechaInicio, fechaFin, tipo,idEmpleadoS,idEmpleadoA, estatus);
-						mensaje = "AusenciasJustificadas modificada con exito para el NSS: "+nssempleado;
-						request.setAttribute("Mensajes",mensaje);
-						url="AusenciasJustificadas?op=Listar&pagina=1";
-				//	}else
-				//	{
-						error = "El NSS del empleado no es valido, inserta uno valido.";
-						request.setAttribute("Errores",error);
-					}
 				break;
             }
 

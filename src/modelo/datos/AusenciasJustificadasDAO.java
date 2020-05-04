@@ -114,22 +114,30 @@ public class AusenciasJustificadasDAO {
   public List<AusenciasJustificadas> consultar(String pagina)
 	{
 		ArrayList<AusenciasJustificadas> lista = new ArrayList<>();
-		String sql = "execute sp_paginaciondinamica 'AusenciaJustificada','tipo','"+pagina+"','5'";
+		String sql = "execute sp_paginaciondinamica 'Ausencia_empleados','tipo','"+pagina+"','5'";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
+				  
 				AusenciasJustificadas ausJus = new AusenciasJustificadas();
 				ausJus.setIdAusencia(rs.getInt(1));
 				ausJus.setFechaSolicitud(rs.getDate(2));
 				ausJus.setFechaInicio(rs.getDate(3));
 				ausJus.setFechaFin(rs.getDate(4));
 				ausJus.setTipo(rs.getString(5));
-				ausJus.setIdEmpleadoS(rs.getInt(6));
-				ausJus.setIdEmpleadoA(rs.getInt(7));
-				ausJus.setEstatus(rs.getString(8));
+				ausJus.setEstatus(rs.getString(6));
+				ausJus.setEstatusAusencia(rs.getString(7));
+				ausJus.setDiasDescanso(rs.getInt(8));
+				ausJus.setNssAusente(rs.getString(9));
+				ausJus.setNombreAusente(rs.getString(10));
+				ausJus.setNssJefe(rs.getString(11));
+				ausJus.setNombreJefe(rs.getString(12));
+
 				lista.add(ausJus);
+				
+			
 			}
 		} catch (SQLException e) {
 			System.out.println("Error: " + e.getMessage());
@@ -138,7 +146,7 @@ public class AusenciasJustificadasDAO {
 	}
 
   public AusenciasJustificadas consultaIndividual(int idAusencia){
-		String sql="select * from AusenciaJustificada where idAusencia=?";
+		String sql="select * from Ausencia_empleados where idAusencia=?";
 		AusenciasJustificadas ausJus = new AusenciasJustificadas();
 		try{
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
@@ -150,9 +158,14 @@ public class AusenciasJustificadasDAO {
 				ausJus.setFechaInicio(rs.getDate("fechaInicio"));
 				ausJus.setFechaFin(rs.getDate("fechaFin"));
 				ausJus.setTipo(rs.getString("tipo"));
-				ausJus.setIdEmpleadoS(rs.getInt("idEmpleadoS"));
-				ausJus.setIdEmpleadoA(rs.getInt("idEmpleadoA"));
 				ausJus.setEstatus(rs.getString("estatus"));
+				ausJus.setEstatusAusencia(rs.getString("estatusAusencia"));
+				ausJus.setDiasDescanso(rs.getInt("diasDescanso"));
+				ausJus.setNssAusente(rs.getString("nssAusente"));
+				ausJus.setNombreAusente(rs.getString("nombreAusente"));
+				ausJus.setNssJefe(rs.getString("nssJefe"));
+				ausJus.setNombreJefe(rs.getString("nombreJefe"));
+			
 			}
 			ps.close();
 			rs.close();
@@ -186,8 +199,8 @@ public class AusenciasJustificadasDAO {
       ps.setDate(2, ausJus.getFechaInicio());
 			ps.setDate(3,ausJus.getFechaFin());
 			ps.setString(4,ausJus.getTipo());
-			ps.setInt(5, ausJus.getIdEmpleadoS());
-			ps.setInt(5, ausJus.getIdEmpleadoA());
+		//	ps.setInt(5, ausJus.getIdEmpleadoS());
+		//	ps.setInt(5, ausJus.getIdEmpleadoA());
 			ps.setString(6,ausJus.getEstatus());
 			ps.setInt(7, ausJus.getIdAusencia());
 			ps.executeUpdate();
