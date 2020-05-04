@@ -31,21 +31,25 @@
 
 <script type="text/javascript">
 function modificarAusencia(AoR,idAusencia) { 
-	
+	var aux = AoR;
 	$.ajax({
 		type:'POST',
 		data:{op:'AJAX',AOR:AoR,Ausencia:idAusencia},
 		url:'AusenciasJustificadas',
 		success: 
 			function(res){
-				if(AOR == "1")
+				if(aux == 1)
 				{
-					$(res).style("style=\"background-color: green;\"");
+				  var x = document.getElementById(res);
+				  x.setAttribute("style","background-color:green;");
+				  x.querySelector(".texto").innerHTML = "Aceptada";
 				}else
 				{
-					$(res).style("style=\"background-color: red;\"");
+				  var x = document.getElementById(res);
+				  x.setAttribute("style","background-color:red;");
+				  x.querySelector(".texto").innerHTML = "Rechazada";
 				}
-				
+			  
 			}
 	});
 }
@@ -127,7 +131,9 @@ function modificarAusencia(AoR,idAusencia) {
 								<td>${dato.getDiasDescanso()}</td>
 								<td>${dato.getNombreJefe()}</td>
 								<td>
-									<div id="status-${dato.getIdAusencia()}" style="background-color: red;"><b><label>Rechazada<label></label></b></div>
+									<div id="status-${dato.getIdAusencia()}" style="background-color: red;">
+									<h4 class="texto">Rechazada</h4>
+									</div>
 								</td>
 								
 								<td>
@@ -157,7 +163,9 @@ function modificarAusencia(AoR,idAusencia) {
 								<td>${dato.getDiasDescanso()}</td>
 								<td>${dato.getNombreJefe()}</td>
 								<td>
-									<div id="status-${dato.getIdAusencia()}" style="background-color: green;"><b><label>Aceptada<label></label></b></div>
+									<div id="status-${dato.getIdAusencia()}" style="background-color: green;">
+									<h4 class="texto">Aceptada</h4>
+									</div>
 								</td>
 								
 								<td>
@@ -184,7 +192,9 @@ function modificarAusencia(AoR,idAusencia) {
 								<td>${dato.getDiasDescanso()}</td>
 								<td>${dato.getNombreJefe()}</td>
 								<td>
-									<div id="status-${dato.getIdAusencia()}" style="background-color: orange;"><b><label>Pendiente<label></label></b></div>
+									<div id="status-${dato.getIdAusencia()}" style="background-color: orange;">
+									<h4 class="texto">Pendiente</h4>
+									</div>
 								</td>
 								
 								<td>

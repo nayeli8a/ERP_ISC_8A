@@ -109,12 +109,11 @@ public class AusenciasJustificadasServlet extends HttpServlet {
       				//vamos a las ausencias y aceptamos la ausencia con idAusencia
       				ajdao.actualizarIndividual(idAusencia,"A");
       				response.getWriter().write("status-"+idAusencia);
-      				response.getWriter().write("style=\"background-color: green;\"");
       			}else if(AoR==2)
       			{
       				//vamos a las ausencias y rechazamos la ausencia con idAusencia
       				ajdao.actualizarIndividual(idAusencia,"R");
-      				response.getWriter().write("status-1"+idAusencia);
+      				response.getWriter().write("status-"+idAusencia);
       			}
       			
       		}else
