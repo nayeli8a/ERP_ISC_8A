@@ -125,7 +125,7 @@
     function get_action() { 
     	var valor = document.getElementById("buscar-nss").value
     	document.getElementById("registro-nss").value = valor;
-    	if(valor.length > 10 && valor.length < 12)
+    	if(valor.length > 9 && valor.length < 11)
     	{
     		$.ajax({
     			type:'POST',
@@ -139,7 +139,7 @@
     		});
     	}else
     	{
-    		alert("El NSS debe ser de 11 digitos");
+    		alert("El NSS debe ser de 10 digitos");
     	}
 		
     }
@@ -400,6 +400,45 @@
       <!-- Modal body -->
       <div class="modal-body" id="modal_div">
       <% //Aqui va todo el cuerpo del modal%>
+      <div class="container" style="border: dotted">
+			<div class="row">
+				<div class="col-md-12" style="text-align: center">
+					<label><b>Buscar el NSS de los empleados</b></label>
+				</div>
+				
+				<div class="col-md-6" style="text-align: center">
+					<label>Nombre</label>
+					<br>
+					<input type="text" style="width:100%" id="find-nombre">
+				</div>
+				<div class="col-md-3" style="text-align: center">
+					<label>A. Paterno</label>
+					<br>
+					<input type="text" style="width:100%" id="find-apaterno">
+				</div>
+				<div class="col-md-3" style="text-align: center">
+					<label>A. Materno</label>
+					<br>
+					<input type="text" style="width:100%" id="find-amaterno">
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12" style="text-align:center">
+					<button type="button" onclick="buscar_nss_ajax()" class="btn btn-primary">Buscar</button>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12" style="text-align:center">
+					<label>NSS Empleado</label>
+					<br>
+					<span id="find_nss"></span>
+				</div>
+			</div>
+			<br>
+		</div>
+      
       	<div class="row">
 	      	<div class="col-md-12" style="text-align: center">
 	      	<label><b>Ingresa el Nss del empleado para continuar</b></label>
