@@ -27,7 +27,8 @@
 	href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
 <script type="text/javascript"
 	src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
-	<link rel="icon" type="image/png" href="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito_32x.ico">
+<link rel="icon" type="image/png"
+	href="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito_32x.ico">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
@@ -37,7 +38,7 @@
 	</nav>
 	<div class="card bg-light" style="margin-top: 100px">
 
-		<p class="bg-primary text-white">EDICION DE HORARIOS </p>
+		<p class="bg-primary text-white">EDICION DE HORARIOS</p>
 
 		<form
 			action="${pageContext.servletContext.contextPath}/Horarios?op=Modificar"
@@ -46,29 +47,13 @@
 
 				<legend> Datos del empleado: </legend>
 				<div class="row">
-
 					<div class="col-md-2">
+
 						<div class="form-group">
-							<input type="texto" name="nombre" class="form-control"
-								value="${datoshorarios.getNombre()}" readonly>
+							<label>Nombre : </label> <input type="texto" name="nombre"
+								class="form-control" value="${datoshorarios.getNombreEmpleado()}" readonly>
 						</div>
 					</div>
-					<div class="col-md-2">
-						<div class="form-group">
-							<input type="texto" name="apaterno" class="form-control"
-								value="${datoshorarios.getApaterno()}" readonly>
-						</div>
-					</div>
-					<div class="col-md-2">
-						<div class="form-group">
-							<input type="texto" name="amaterno" class="form-control"
-								value="${datoshorarios.getAmaterno()}" readonly>
-						</div>
-					</div>
-
-				</div>
-				<div class="row">
-
 					<div class="col-md-2">
 
 						<div class="form-group">
@@ -76,6 +61,7 @@
 								class="form-control" value="${datoshorarios.getNss()}" readonly>
 						</div>
 					</div>
+
 					<div class="col-md-2">
 						<div class="form-group">
 							<label>Empleado: </label> <input type="number" name="idEmpleado"
@@ -84,6 +70,7 @@
 						</div>
 					</div>
 				</div>
+
 
 				<legend> Horario: </legend>
 

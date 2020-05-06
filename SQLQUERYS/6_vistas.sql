@@ -35,9 +35,7 @@ AS
 		H.dias,
 		H.idEmpleado,
 		E.nss,
-		E.nombre,
-		E.apaterno,
-		E.amaterno, 
+		NombreEmpleado= (Concat(E.nombre, '  ', E.apaterno,'  ', E.amaterno)),
 		H.estatus
     FROM Empleados AS E INNER JOIN Horarios  AS H On H.idEmpleado = E.idEmpleado
 GO

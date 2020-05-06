@@ -12,12 +12,13 @@ public class Horarios {
 	private int idEmpleado;
 	//datos del empleado
 	private String nss;
-	private String nombre;
-	private String apaterno;
-	private String amaterno;
-	
-	
-	
+	private String NombreEmpleado;
+	public int getIdHorario() {
+		return idHorario;
+	}
+	public void setIdHorario(int idHorario) {
+		this.idHorario = idHorario;
+	}
 	public String getHoraInicio() {
 		return horaInicio;
 	}
@@ -30,38 +31,6 @@ public class Horarios {
 	public void setHoraFin(String horaFin) {
 		this.horaFin = horaFin;
 	}
-	public String getNss() {
-		return nss;
-	}
-	public void setNss(String nss) {
-		this.nss = nss;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getApaterno() {
-		return apaterno;
-	}
-	public void setApaterno(String apaterno) {
-		this.apaterno = apaterno;
-	}
-	public String getAmaterno() {
-		return amaterno;
-	}
-	public void setAmaterno(String amaterno) {
-		this.amaterno = amaterno;
-	}
-	public int getIdHorario() {
-		return idHorario;
-	}
-	public void setIdHorario(int idHorario) {
-		this.idHorario = idHorario;
-	}
-
-	
 	public String getEstatus() {
 		return estatus;
 	}
@@ -80,6 +49,22 @@ public class Horarios {
 	public void setIdEmpleado(int idEmpleado) {
 		this.idEmpleado = idEmpleado;
 	}
+	public String getNss() {
+		return nss;
+	}
+	public void setNss(String nss) {
+		this.nss = nss;
+	}
+	public String getNombreEmpleado() {
+		return NombreEmpleado;
+	}
+	public void setNombreEmpleado(String nombreEmpleado) {
+		NombreEmpleado = nombreEmpleado;
+	}
+
+	
+	
+
 
 
 }

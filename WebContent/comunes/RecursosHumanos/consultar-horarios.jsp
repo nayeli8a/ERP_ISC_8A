@@ -34,31 +34,7 @@
       		text-align:center;
     }
   </style>
-	
-	<script type="text/javascript">
-		//este metodo sirve para obtener datos necesarios del empleado para el 
-		//registro de la nomina de manera AJAX
-	    function buscar_nss_ajax() { 
-	    	var nombre = document.getElementById("find-nombre").value;
-	    	var apaterno = document.getElementById("find-apaterno").value;
-	    	var amaterno = document.getElementById("find-amaterno").value
-	    	if(nombre.length > 3 && apaterno.length > 3 && amaterno.length > 3)
-	    	{
-	    		$.ajax({
-	    			type:'POST',
-	    			data:{op:'BuscarNSS',nombre:nombre,apaterno:apaterno,amaterno:amaterno},
-	    			url:'AJAX',
-	    			success: function(res){
-	    				$("#find_nss").html(res);
-	    			}
-	    		});
-	    	}else
-	    	{
-	    		alert("Inserte un nombre valido");
-	    	}
-			
-	    }
-	</script>
+
 	
 	
 </head>
@@ -99,6 +75,7 @@
 				<th>Hora Inicio</th>
 				<th>Hora Fin</th>
 				<th>Días</th>
+				<th>Empleado</th>
 	            <th>NSS</th>
 	            <th>Estatus</th>
 			</tr>
@@ -111,7 +88,8 @@
 					<td>${dato.getHoraInicio()}</td>
 					<td>${dato.getHoraFin()}</td>
 					<td>${dato.getDias()}</td>
-	              	<td>${dato.getNss()}</td>
+					<td>${dato.getNombreEmpleado()}</td>
+					<td>${dato.getNss()}</td>
 					<td>${dato.getEstatus()}</td>
 					</tr>
 				</c:if>
@@ -121,7 +99,8 @@
 					<td>${dato.getHoraInicio()}</td>
 					<td>${dato.getHoraFin()}</td>
 					<td>${dato.getDias()}</td>
-	                <td>${dato.getNss()}</td>
+					<td>${dato.getNombreEmpleado()}</td>
+					<td>${dato.getNss()}</td>
 					<td>${dato.getEstatus()}</td>
 					<td>
 						<form action="Horarios" method="post">

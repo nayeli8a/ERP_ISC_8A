@@ -92,10 +92,8 @@ public class HorariosDAO {
 				h.setDias(rs.getString(4));
 				h.setIdEmpleado(rs.getInt(5));
 				h.setNss(rs.getString(6));
-				h.setNombre(rs.getString(7));
-				h.setApaterno(rs.getString(8));
-				h.setAmaterno(rs.getString(9));
-				h.setEstatus(rs.getString(10));
+				h.setNombreEmpleado(rs.getString(7));
+				h.setEstatus(rs.getString(8));
 			
 
 				lista.add(h);
@@ -121,9 +119,7 @@ public class HorariosDAO {
 				h.setDias(rs.getString("dias"));
 				h.setIdEmpleado(rs.getInt("idempleado"));
 				h.setNss(rs.getString("nss"));
-				h.setNombre(rs.getString("nombre"));
-				h.setAmaterno(rs.getString("amaterno"));
-				h.setApaterno(rs.getString("apaterno"));
+				h.setNombreEmpleado(rs.getString("nombreEmpleado"));
 				h.setEstatus(rs.getString("estatus"));
 
 			}
@@ -131,7 +127,7 @@ public class HorariosDAO {
 			rs.close();
 		}
 		catch(SQLException e){
-			System.out.println("Error HorariosDAO:"+e.getMessage());
+			System.out.println("Error Horarios DAO:"+e.getMessage());
 		}
 		return h;
 	}
