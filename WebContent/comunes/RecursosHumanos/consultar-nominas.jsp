@@ -35,7 +35,7 @@
 	var elementosp=1;//contador de percepciones
 	
 	//si DoP es 1 es una deducion
-	function clonar(DoP,iddondeclonar,idelementoclonar,select,input)
+	function clonar(DoP,iddondeclonar,idelementoclonar,select)
 	{
 		if(DoP==1)
 		{
@@ -50,10 +50,6 @@
 			var selects = document.getElementById(idelementoclonar+numd).getElementsByTagName('select');
 			selects[0].setAttribute("id",select+numd);
 			selects[0].setAttribute("name",select+numd);
-			var inputs = document.getElementById(idelementoclonar+numd).getElementsByTagName('input');
-			inputs[0].setAttribute("id",input+numd);
-			inputs[0].setAttribute("name",input+numd);
-			inputs[0].value = "";
 			var btns = document.getElementById(idelementoclonar+numd).getElementsByTagName('button');
 			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+numd+"');");
 			btns[0].setAttribute("style","visibility:visible;");
@@ -72,11 +68,6 @@
 			selects[0].setAttribute("id",select+nump);
 			selects[0].setAttribute("name",select+nump);
 			selects[0].removeAttribute("disabled");
-			var inputs = document.getElementById(idelementoclonar+nump).getElementsByTagName('input');
-			inputs[0].setAttribute("id",input+nump);
-			inputs[0].setAttribute("name",input+nump);
-			inputs[0].removeAttribute("readonly");
-			inputs[0].value = "";
 			var btns = document.getElementById(idelementoclonar+nump).getElementsByTagName('button');
 			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+nump+"');");	
 			btns[0].setAttribute("style","visibility:visible;");
@@ -121,22 +112,15 @@
 	}
 	
 	//este metodo sirve para obtener datos necesarios del empleado para el 
-	//registro de la nomina de manera AJAX
+	//registro de la nomina
     function get_action() { 
     	var valor = document.getElementById("buscar-nss").value
     	document.getElementById("registro-nss").value = valor;
     	if(valor.length > 9 && valor.length < 11)
     	{
-    		$.ajax({
-    			type:'POST',
-    			data:{op:'AJAX',dato:valor},
-    			url:'Nominas',
-    			success: function(res){
-    				$('#modalPedirNss').modal('hide');
-    				$("#input-p-1").val(res);
-    				$('#modalRegistro').modal('show');
-    			}
-    		});
+    		$('#modalPedirNss').modal('hide');
+			$('#modalRegistro').modal('show');
+    		
     	}else
     	{
     		alert("El NSS debe ser de 10 digitos");
@@ -182,16 +166,13 @@
       <table class="table table-sm">
 		<thead class="thead-dark">
 			<tr>
+				<th>Nombre Empleado</th>
 				<th>Fecha Pago</th>
-				<th>Total P</th>
-				<th>Total D</th>
-				<th>Cantidad Neta</th>
+				<th>Liquido</th>
+				<th>Periodo de Pago</th>
+				<th>Forma Pago</th>
 				<th>Dias Trabajados</th>
 				<th>Faltas</th>
-				<th>Fecha Inicio</th>
-				<th>Fecha Fin</th>
-				<th>Forma Pago</th>
-				<th>Nombre Empleado</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -199,31 +180,24 @@
 			<c:forEach var="dato" items="${datos}">
 				<c:if test="${dato.getEstatus() eq 'I'}">
 					<tr>
+					<td>${dato.getNombreEmpleado()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
 					<td>${dato.getFechaPago()}</td>
-					<td>${dato.getTotalP()}</td>
-					<td>${dato.getTotalD()}</td>
 					<td>${dato.getCantidadNeta()}</td>
+					<td>${dato.getFechaInicio()} - ${dato.getFechaFin()}</td>
+					<td>${dato.getFormaPago()}</td>
 					<td>${dato.getDiasTrabajados()}</td>
 					<td>${dato.getFaltas()}</td>
-					<td>${dato.getFechaInicio()}</td>
-					<td>${dato.getFechaFin()}</td>
-					<td>${dato.getFormaPago()}</td>
-					<td>${dato.getNombreEmpleado()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
-					
 					</tr>
 				</c:if>
 				<c:if test="${dato.getEstatus() eq 'A'}">
 					<tr>
+					<td>${dato.getNombreEmpleado()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
 	                <td>${dato.getFechaPago()}</td>
-					<td>${dato.getTotalP()}</td>
-					<td>${dato.getTotalD()}</td>
 					<td>${dato.getCantidadNeta()}</td>
+					<td>${dato.getFechaInicio()} - ${dato.getFechaFin()}</td>
+					<td>${dato.getFormaPago()}</td>
 					<td>${dato.getDiasTrabajados()}</td>
 					<td>${dato.getFaltas()}</td>
-					<td>${dato.getFechaInicio()}</td>
-					<td>${dato.getFechaFin()}</td>
-					<td>${dato.getFormaPago()}</td>
-					<td>${dato.getNombreEmpleado()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
 					<td>
 						<form action="${pageContext.servletContext.contextPath}/Nominas" method="post">
 							<input type="hidden" name="id" value="${dato.getIdNomina()}">
@@ -300,30 +274,29 @@
 		    <label>Percepciones de esta Nomina:</label>
 		    <div class="row">
 		    	<div class="col-md-2">
-		    		<button type="button" onclick="clonar(2,'percepciones','percepcion-contenido-','select-p-','input-p-')"style="width:40px;" id="agregar-percepcion">
+		    		<button type="button" onclick="clonar(2,'percepciones','percepcion-contenido-','select-p-')"style="width:40px;" id="agregar-percepcion">
 						<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/plus.png" style="max-width:100%;">
 					</button>
 		    	</div>
-		    	<div class="col-md-10">
+		    	<div class="container">
 		    		<div style="border-style:solid;border-width:thin;">
 		    		<span id="percepciones" name="percepciones">
          				  
          				  <!-- AQUI EMPIEZA UNA SOLA PERCEPCION -->
          				  <div id="percepcion-contenido-1">
          				  	 <hr style="width:80%;">
-					          <div class="col">
-					            
-				              <label>Percepcion:</label>
-				              <select id="select-p-1" name="select-p-1" disabled>
-				              <c:forEach var="dato" items="${datospercepciones}">
-				              	<option value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
-				              </c:forEach>
-				              </select>
-				              <br>
-				              <label>Importe:</label>
-				              <input id="input-p-1" pattern=".{11,11}" required name="input-p-1" type="number" value="" readonly>
-				              <button type="button" style="visibility:hidden;" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
-					            
+					          <div class="row">
+						          <div class="col-sm-10">
+						          	  <label>Percepcion:</label>
+						              <select id="select-p-1" name="select-p-1" disabled>
+						              <c:forEach var="dato" items="${datospercepciones}">
+						              	<option value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
+						              </c:forEach>
+						              </select>
+						          </div>
+				              	  <div class="col-sm-2">
+				              	  	<button type="button" style="visibility:hidden;" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
+				              	  </div>
 					          </div>
 					          <hr style="width:80%;">
          				  </div>
@@ -334,32 +307,33 @@
 		    	</div>
 		    </div>
 		    <br>
-		    <label>Deducciones:</label>
+		    <label>Deducciones de esta Nomina:</label>
 		    <div class="row">
 		    	<div class="col-md-2">
-		    		<button type="button" onclick="clonar(1,'deducciones','deduccion-contenido-','select-d-','input-d-')" style="width:40px;" id="agregar-deduccion">
+		    		<button type="button" onclick="clonar(1,'deducciones','deduccion-contenido-','select-d-')" style="width:40px;" id="agregar-deduccion">
 						<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/plus.png" style="max-width:100%;">
 					</button>
 		    	</div>
-		    	<div class="col-md-10">
+		    	<div class="container">
 					<div style="border-style:solid;border-width:thin;">
 		    		<span id="deducciones" name="deducciones">
          				  
          				  <!-- AQUI EMPIEZA UNA SOLA DEDUCCION -->
          				  <div id="deduccion-contenido-1">
          				  	 <hr style="width:80%;">
-					          <div class="col">
+					          <div class="row">
+					            <div class="col-sm-10">
+					              <label>Deduccion:</label>
+					              <select id="select-d-1" name="select-d-1">
+					              <c:forEach var="dato" items="${datosdeducciones}">
+					              	<option value="${dato.getIdDeduccion()}">${dato.getNombre()}</option>
+					              </c:forEach>
+					              </select>
+					            </div>
 					            
-				              <label>Deduccion:</label>
-				              <select id="select-d-1" name="select-d-1">
-				              <c:forEach var="dato" items="${datosdeducciones}">
-				              	<option value="${dato.getIdDeduccion()}">${dato.getNombre()}</option>
-				              </c:forEach>
-				              </select>
-				              <label>Importe:</label>
-				              <input id="input-d-1" name="input-d-1" type="number">
-				              <button type="button" style="visibility:hidden;" onclick="quitar(1,'deduccion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
-					            
+					            <div class="col-sm-2">
+					            	<button type="button" style="visibility:hidden;" onclick="quitar(1,'deduccion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
+					            </div>
 					          </div>
 					          <hr style="width:80%;">
          				  </div>

@@ -184,19 +184,13 @@ public class NominasServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String op = request.getParameter("op");
-		System.out.println("Entro al metodo POST: "+op);
+		
 		if(op.equals("AJAX"))
 		{
 			//ponemos el modo de respuestas en text/html para poder mandar objetos html
 			response.setContentType("text/html");
 			op="";//dejamos la op en vacio para que si envian de un form no AJAX 
-			String nss = request.getParameter("dato");//tomamos los datos necesarios para mostrar
 			
-			NominasDAO nomDAO = new NominasDAO();
-			float salario = nomDAO.SalarioEmpleado(nss);
-			//System.out.println(salario);
-			//request.setAttribute("salario",salario);
-			response.getWriter().write(salario+"");
 		}else
 		{
 			doGet(request, response);

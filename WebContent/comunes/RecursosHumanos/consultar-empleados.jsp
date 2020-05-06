@@ -24,6 +24,22 @@
     	 .modal-body { max-height: calc(100vh - 200px); overflow-y: auto; } 
 	</style>
 
+	<script type="text/javascript">
+	
+	function rellenarSalario(min,max)
+	{
+		document.getElementById('input-salario').min = min;
+		document.getElementById('input-salario').max = max;
+	}
+	
+	function cargarbase()
+	{
+		var select = document.getElementById("puesto");
+	    rellenarSalario(select.options[0].getAttribute('omin'),select.options[0].getAttribute('omax'));
+		
+	}
+	
+	</script>
 
 </head>
 <body>
@@ -362,7 +378,7 @@
 			        <div class="col-md-6">
 			        	<label>Salario:</label>
 			          <div class="form-group">
-			            <input type="number" name="salario" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
+			            <input type="number" id="input-salario" name="salario" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 			          </div>
 			        </div>
 			      </div>
@@ -399,9 +415,13 @@
 			        </div>
 			        <div class="col-md-4">
 				        <label for="Puesto">Puesto:</label>
-			    		<select class="form-control" id="puesto" name = "puesto">
+			    		<select 
+			    		onchange="rellenarSalario(this.options[this.selectedIndex].getAttribute('omin'),this.options[this.selectedIndex].getAttribute('omax'));"
+			    		class="form-control" 
+			    		id="puesto" 
+			    		name = "puesto">
 			      			<c:forEach var="dato" items="${datospuestos}">
-			      				<option value="${dato.getIdPuesto()}">${dato.getNombre()}</option>
+			      				<option omin="${dato.getSalarioMinimo()}" omax="${dato.getSalarioMaximo()})" value="${dato.getIdPuesto()}">${dato.getNombre()}</option>
 			      			</c:forEach>
 			    		</select>
 			        </div>
@@ -418,6 +438,9 @@
 			    </div>
 			    <br>
 			    <button type="submit" class="btn btn-primary">Registrar</button>
+			    <script type="text/javascript">
+			    	cargarbase();
+			    </script>
 			  </form>
 	      </div>
 			
