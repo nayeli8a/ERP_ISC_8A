@@ -70,17 +70,55 @@ public class AusenciasJustificadasServlet extends HttpServlet {
 				case "Modificar":
 					String error = "";
 					String mensaje="";
-		
+					
+					int idEmpleadoAusente;
 					ausJusdao = new AusenciasJustificadasDAO();
-					Date fechaSolicitud = (Date.valueOf(request.getParameter("fechaSolicitud")));
+					int idAusencia =(Integer.parseInt((request.getParameter("idAusencia"))));
+					Date fechaSolicitud = (Date.valueOf(request.getParameter("fecha-Solicitud")));
 					Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
 					Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
-					String tipo =request.getParameter("tipo");
-					String estatus = request.getParameter("estatus");
-					int idEmpleadoS=Integer.parseInt(request.getParameter("idEmpleadoS"));
-					int idEmpleadoA=Integer.parseInt(request.getParameter("idEmpleadoA"));
-					String nssempleado=  request.getParameter("nss");
+					String tipo = request.getParameter("tipo");
+					String nssAusente = request.getParameter("nssAusente");
+					//obtenemos los ID
+				    idEmpleadoAusente = ausJusdao.validarNSSEmpleado(nssAusente);
+				    //Obtenemos los dias disponibles de permiso 
+				    int diasVacaciones= ausJusdao.validarVacaciones(idEmpleadoAusente);
+				    int diasPermiso= ausJusdao.validarPermiso(idEmpleadoAusente);
+				    //calculamos los dias de permiso
+				    int calDias =(Integer.valueOf(request.getParameter("dias"))); 
+				
 		
+					if ("V".equals(tipo)) { // vacaciones
+						if (calDias <= diasVacaciones) {
+							ausJusdao.actualizar(fechaSolicitud, fechaInicio, fechaFin, tipo, idAusencia);
+									
+							mensaje = "Ausencia Justificada modificada con exito";
+							request.setAttribute("Mensajes", mensaje);
+
+						} else {
+							error = "El empleado solo cuenta con " + diasVacaciones + " dias de vacaiones";
+							request.setAttribute("Errores", error);
+						}
+
+					}
+					
+					if ("P".equals(tipo)) {// permiso
+						if (calDias <= diasPermiso) {
+							ausJusdao.actualizar(fechaSolicitud, fechaInicio, fechaFin, tipo, idAusencia);
+							mensaje = "Ausencia Justificada modificada con exito";
+							request.setAttribute("Mensajes", mensaje);
+						}
+
+						else {
+							error = "El empleado solo cuenta con " + diasPermiso + "dias de permiso";
+							request.setAttribute("Errores", error);
+						}
+
+					}
+				
+			
+
+					url="AusenciasJustificadas?op=Listar&pagina=1";
 				break;
             }
 

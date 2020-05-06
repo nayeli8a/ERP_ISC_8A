@@ -240,6 +240,25 @@ function validarFechasAusencias()
 }
 }
 
+function validarFechasAusenciasEditar()
+{
+   var fechaHoy=   new Date();
+   var fechaInicio = document.getElementById("fechaInicio").value;
+   var fechaFin = document.getElementById("fechaFin").value;
+
+   if(Date.parse(fechaInicio)>Date.parse(fechaHoy) && Date.parse(fechaInicio)< Date.parse(fechaFin) ) {
+	 return true;
+	 
+} else {
+	alert("Por favor seleccione un rango de fechas correcto");
+	return false; 
+	
+
+}
+}
+
+
+
 function restar (valor) {
 	   var fechaInicio = document.getElementById("fechaInicio").value;
 	   var fechaFin = document.getElementById("fechaFin").value;

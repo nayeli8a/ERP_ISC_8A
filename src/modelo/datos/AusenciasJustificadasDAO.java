@@ -189,20 +189,17 @@ public class AusenciasJustificadasDAO {
 			}
 	}
 
-  public void actualizar(AusenciasJustificadas ausJus)
+  public void actualizar(Date FechaSolicitud, Date FechaInicio, Date FechaFin,  String Tipo, int idAusencia)
 	{
-		String sql="update AusenciaJustificada set FechaSolicitud=?,FechaInicio=?,FechaFin=?,Tipo=?, idEmpleadoS=?, idEmpleadoA=?, Estatus=? where idAusencia=?";
+		String sql="update AusenciaJustificada set FechaSolicitud=?,FechaInicio=?,FechaFin=?,Tipo=? where idAusencia=?";
 		try {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 
-			ps.setDate(1, ausJus.getFechaSolicitud());
-      ps.setDate(2, ausJus.getFechaInicio());
-			ps.setDate(3,ausJus.getFechaFin());
-			ps.setString(4,ausJus.getTipo());
-		//	ps.setInt(5, ausJus.getIdEmpleadoS());
-		//	ps.setInt(5, ausJus.getIdEmpleadoA());
-			ps.setString(6,ausJus.getEstatus());
-			ps.setInt(7, ausJus.getIdAusencia());
+			ps.setDate(1,FechaSolicitud);
+			ps.setDate(2, FechaInicio);
+			ps.setDate(3,FechaFin);
+			ps.setString(4,Tipo);
+			ps.setInt(5, idAusencia);
 			ps.executeUpdate();
 
 		} catch (Exception e) {

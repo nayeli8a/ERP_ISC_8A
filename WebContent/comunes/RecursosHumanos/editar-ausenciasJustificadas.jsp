@@ -40,7 +40,7 @@
 		<p class="bg-primary text-white"> EDITAR AUSENCIAS JUSTIFICADAS</p>
 
 		<form action="${pageContext.servletContext.contextPath}/AusenciasJustificadas?op=Modificar"
-			method="post">
+			onsubmit="return validarFechasAusenciasEditar();" method="post">
 			<div class="container">
 				<legend> Datos del solicitante: </legend>
 				<div class="row">
@@ -55,7 +55,7 @@
 					<label>NSS</label>
 						<div class="form-group">
 							<input type="text" class="form-control"
-								 name="nombreAusente"  value="${datosAusencia.getNssAusente()}" readonly>
+								 name="nssAusente"  value="${datosAusencia.getNssAusente()}" readonly>
 						</div>
 					</div>
 					
@@ -117,7 +117,7 @@
 					<div class="col-md-4">
 						<label>Estatus de la Ausencia</label>
 						<div class="form-group">
-							<input type="text" class="form-control" name="dias" id="dias"
+							<input type="text" class="form-control" name="estatusAusencia" id="estatusAusencia"
 								value="${datosAusencia.getEstatusAusencia()}"  readonly>
 						</div>
 					</div>
@@ -137,6 +137,10 @@
 						<div class="form-group">
 							<input type="text" class="form-control"
 								 name="nombreAusente"  value="${datosAusencia.getNssAusente()}" readonly>
+						</div>
+						<div class="form-group">
+							<input type="hidden" class="form-control"
+								 name="idAusencia"  value="${datosAusencia.getIdAusencia()}" readonly>
 						</div>
 					</div>
 
