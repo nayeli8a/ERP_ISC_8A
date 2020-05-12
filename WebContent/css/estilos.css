@@ -69,110 +69,19 @@ a{
 }
 
 .contenido{
-  left: 0%;
+  left: 18%;
   top: 400px;
   width: 100%;
   height: 250px;
   position: absolute;
 }
 
-.fondocirculo{
-  top: 50px;
-  background:#004003;
+.opcion{
   margin: 10px;
-  width: 700px;
-  height: 700px;
+  width: 300px;
+  height: 200px;
   float: left;
   position: relative;
-  left: 30%;
-  border-radius:100%;
-}
-
-.fondocirculoblanco{
-  background:#ffffff;
-  width: 500px;
-  height: 500px;
-  position: absolute;
-  border-radius:100%;
-  top:100px;
-  left:100px;
-}
-
-.fondomenucirculoTOPr{
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	top: 0px;
-	background: #00BF0A;
-	border-radius:100%;
-}
-.textoTOP{
-	position:absolute;
-	top:0px;
-	left:100px;
-	color:#BF2419;
-}
-.textoRIGHT{
-	position:absolute;
-	top:130px;
-	left:0px;
-	color:#BF2419;
-}
-.textoLEFT{
-	position:absolute;
-	top:120px;
-	right:0px;
-	color:#BF2419;
-}
-.textoBOTTOM{
-	position:absolute;
-	bottom:0px;
-	left:100px;
-	color:#BF2419;
-}
-.fondoplanta{
-	background:#BF2419;
-	position:absolute;
-	width: 40px;
-	height: 40px;
-	left:120px;
-	top: 120px;
-	border-radius: 100%;
-}
-.planta1{
-	position: absolute;
-	width: 25px;
-	height: 25px;
-	left: 8px;
-	top: 8px;
-}
-
-.fondomenucirculoTOPl{
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	right: 0px;
-	background: #00BF0A;
-	border-radius:100%;
-}
-
-.fondomenucirculoBOTTOMr{
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	bottom: 0px;
-	background: #00BF0A;
-	border-radius:100%;
-}
-
-.fondomenucirculoBOTTOMl{
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	right:0px;
-	bottom: 0px;
-	background: #00BF0A;
-	border-radius:100%;
 }
 
 .descripcion{
@@ -184,7 +93,6 @@ a{
   width: 100%;
   height: 60%;
   padding: 0px;
-  
 }
 
 .foot{

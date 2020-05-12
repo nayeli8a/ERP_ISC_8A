@@ -44,140 +44,82 @@
 			</div>
 
 			<div class="contenido container">
-			
-				<div class= "fondocirculo">
-				
-				
-					<div class = fondocirculoblanco>
-					</div>
-					
-					
-					<div class = "fondomenucirculoTOPr">
-					
-					<div class = "textoTOP">
-						<a href="${pageContext.servletContext.contextPath}/Empleados?op=Listar&pagina=1">EMPLEADOS</a>
-					</div>
-					
-					<div class = "textoRIGHT">
-						<a href="${pageContext.servletContext.contextPath}/Horarios?op=Listar&pagina=1">HORARIOS</a>
-					</div>
-					
-					<div class = "textoLEFT">
-						<a href="${pageContext.servletContext.contextPath}/AusenciasJustificadas?op=Listar&pagina=1">AUSENCIAS <br> JUSTIFICADAS</a>
-					</div>
-					
-					<div class = "textoBOTTOM">
-						<a href="${pageContext.servletContext.contextPath}/DocumentacionEmpleado?op=Listar&pagina=1">DOCUMENTACIÓN <br> EMPLEADO</a>
-					</div>
-					
-					
-					<div class="fondoplanta">
-					
-					<img class = "planta1" src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/planta1.png" alt="">
-					
-					</div>
-					
-					
-					</div>
-					
-					<div class = "fondomenucirculoTOPl">
-					
-					<div class = "textoTOP">
-						<a href="${pageContext.servletContext.contextPath}/FormasPago?op=Listar&pagina=1">FORMAS <br> PAGO</a>
-					</div>
-					
-					<div class = "textoRIGHT">
-						<a href="${pageContext.servletContext.contextPath}/Nominas?op=Listar&pagina=1">NÓMINAS</a>
-					</div>
-					
-					<div class = "textoLEFT">
-						<a href="${pageContext.servletContext.contextPath}/NominasPercepciones?op=Listar&pagina=1">NÓMINAS <br> PERCEPCIONES</a>
-					</div>
-					
-					<div class = "textoBOTTOM">
-						<a href="${pageContext.servletContext.contextPath}/NominasDeducciones?op=Listar&pagina=1">NÓMINAS <br> Deducciones</a>
-					</div>
-					
-					<div class="fondoplanta">
-					
-					<img class = "planta1" src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/planta2.png" alt="">
-					
-					</div>
-					
-					</div>
-					
-					<div class = "fondomenucirculoBOTTOMr"><div class = "textoTOP">
-					
-					<a href="${pageContext.servletContext.contextPath}/Incapacidades?op=Listar&pagina=1">INCAPACIDADES</a>
-					</div>
-					
-					<div class = "textoRIGHT">
-						<a href="${pageContext.servletContext.contextPath}/Percepciones?op=Listar&pagina=1">PERCEPCIONES</a>
-					</div>
-					
-					<div class = "textoLEFT">
-						<a href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar&pagina=1">DEDUCCIONES</a>
-					</div>
-					
-					<div class = "textoBOTTOM">
-						<a href="${pageContext.servletContext.contextPath}/Departamentos?op=Listar&pagina=1">DEPARTAMENTOS</a>
-					</div>
-					
-					
-					
-					<div class="fondoplanta">
-					
-					<img class = "planta1" src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/planta3.png" alt="">
-					
-					</div>
-					
-					</div>
-					
-					<div class = "fondomenucirculoBOTTOMl">
-					
-					<div class = "textoTOP">
-					
-					
-						<a href="${pageContext.servletContext.contextPath}/Estado?op=Listar&pagina=1">ESTADOS</a>
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Estados</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Estado?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 
-					
-					</div>
-					
-					<div class = "textoRIGHT">
-						<a href="${pageContext.servletContext.contextPath}/Ciudades?op=Listar&pagina=1">CIUDADES</a>
-					</div>
-					
-					<div class = "textoLEFT">
-						<a href="${pageContext.servletContext.contextPath}/Puestos?op=Listar&pagina=1">PUESTOS</a>
-					</div>
-					
-					<div class = "textoBOTTOM">
-						<a href="${pageContext.servletContext.contextPath}/HistorialPuestos?op=Listar&pagina=1">Historial <br> PUESTOS</a>
-					</div>
-					
-					<div class="fondoplanta">
-					
-					<img class = "planta1" src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/planta4.png" alt="">
-					
-					</div>
-					
-					
-					</div>
-					
-					
-					
-					
-					
-					</div>
-					
-					
-					
-					
-				
-				
 				</div>
-			
+
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Ciudades</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Ciudades?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+
+				</div>
+
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Deducciones</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Deducciones?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+
+				</div>
+
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Percepciones</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Percepciones?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+
+				</div>
+
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Departamentos</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Departamentos?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+
+				</div>
+
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Puestos</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Puestos?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				</div>
+
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Empleados</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Empleados?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				</div>
+
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Horarios</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Horarios?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				</div>
+
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Incapacidades</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Incapacidades?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				</div>
+
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Ausencias Justificadas</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/AusenciasJustificadas?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				</div>
 				
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Formas de Pago</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/FormasPago?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				</div>
+				
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Nominas</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/Nominas?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				</div>
 
 			</div>
 
