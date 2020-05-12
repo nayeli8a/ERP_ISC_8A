@@ -67,7 +67,7 @@
 			var selects = document.getElementById(idelementoclonar+nump).getElementsByTagName('select');
 			selects[0].setAttribute("id",select+nump);
 			selects[0].setAttribute("name",select+nump);
-			selects[0].removeAttribute("disabled");
+			selects[0].removeAttribute("readonly");
 			var btns = document.getElementById(idelementoclonar+nump).getElementsByTagName('button');
 			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+nump+"');");	
 			btns[0].setAttribute("style","visibility:visible;");
@@ -288,7 +288,7 @@
 					          <div class="row">
 						          <div class="col-sm-10">
 						          	  <label>Percepcion:</label>
-						              <select id="select-p-1" name="select-p-1" disabled>
+						              <select id="select-p-1" name="select-p-1" readonly="readonly">
 						              <c:forEach var="dato" items="${datospercepciones}">
 						              	<option value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
 						              </c:forEach>

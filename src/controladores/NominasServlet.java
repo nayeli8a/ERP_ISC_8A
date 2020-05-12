@@ -61,6 +61,10 @@ public class NominasServlet extends HttpServlet {
 		switch(op)
 		{
 			case "Listar":
+				//vamos a ejecutar un procedimiento almacenado
+				//para que actualize los valores de las nominas
+				
+				
 				pagina = request.getParameter("pagina");
 				List<Nominas> datos = nomDAO.Consultar(pagina);
 				List<FormasPago> datospagos = fpdao.consultar();

@@ -345,7 +345,7 @@ public class RegistrarServlet extends HttpServlet {
 						for (int i = 0; i < cantidadpercepciones; i++) {
 							int idPercepcion = Integer.parseInt(request.getParameter("select-p-"+(i+1)));
 							int idNomina = ndao.NominaEmpleado(idempleado);
-							float importe = Float.parseFloat(request.getParameter("input-p-"+(i+1)));
+							float importe = 0;
 							//System.out.println(idPercepcion+" || "+idNomina+" || "+importe);
 							importetotalp+=importe;
 							npdao.Insertar(idNomina,idPercepcion,importe);
@@ -358,7 +358,7 @@ public class RegistrarServlet extends HttpServlet {
 						for (int i = 0; i < cantidaddeducciones; i++) {
 							int idDeduccion = Integer.parseInt(request.getParameter("select-d-"+(i+1)));
 							int idNomina = ndao.NominaEmpleado(idempleado);
-							float importe = Float.parseFloat(request.getParameter("input-d-"+(i+1)));
+							float importe = 0;
 							//System.out.println(idDeduccion+" || "+idNomina+" || "+importe);
 							importetotald+=importe;
 							nddao.Insertar(idNomina,idDeduccion,importe);
