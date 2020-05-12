@@ -97,6 +97,13 @@ a{
   top:100px;
   left:100px;
 }
+.logoblanco{
+  width: 150px;
+  height: 150px;
+  top:35%;
+  left:35%;
+  position:absolute;
+}
 
 .fondomenucirculoTOPr{
 	position: absolute;

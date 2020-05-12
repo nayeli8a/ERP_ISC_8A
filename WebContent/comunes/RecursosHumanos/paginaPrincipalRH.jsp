@@ -49,6 +49,9 @@
 				
 				
 					<div class = fondocirculoblanco>
+					
+					<img class = "logoblanco" src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito.png" alt="">
+					
 					</div>
 					
 					
