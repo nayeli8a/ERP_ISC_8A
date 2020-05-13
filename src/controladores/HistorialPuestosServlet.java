@@ -15,37 +15,40 @@ import javax.servlet.http.HttpSession;
 import modelo.beans.*;
 import modelo.datos.*;
 
-/**
- * Servlet implementation class IncapacidadesServlet
- */
+
 @WebServlet("/HistorialPuestos")
 public class HistorialPuestosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public HistorialPuestosServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
           // aqui va todo el codigo
           System.out.println("##Dentro de HistorialPuestosServlet##");
           String url = Constantes.PAGINAPRINCIPAL;
           String op = request.getParameter("op");
 
-					switch(op)
-					{
-					case "Listar":
-						HistorialPuestosDAO hpDAO = new HistorialPuestosDAO();
-					    String pagina = request.getParameter("pagina");
-						List<HistorialPuestos> datos = hpDAO.consultar(pagina);
-						request.setAttribute("datos", datos);
-						request.setAttribute("pagina",pagina);
-						url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"historialPuestos.jsp";
-					break;
+			switch(op)
+			{
+				case "Listar":
+					HistorialPuestosDAO hpDAO = new HistorialPuestosDAO();
+				    String pagina = request.getParameter("pagina");
+					List<HistorialPuestos> datos = hpDAO.Consultar(pagina);
+					request.setAttribute("datos", datos);
+					request.setAttribute("pagina",pagina);
+					url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"historialPuestos.jsp";
+				break;
+			}
+    }
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+    	doGet(request,response);
+    }
+}

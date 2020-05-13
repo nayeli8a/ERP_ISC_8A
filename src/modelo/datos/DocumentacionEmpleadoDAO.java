@@ -59,16 +59,14 @@ public class DocumentacionEmpleadoDAO{
   			while (rs.next()) {
   				DocumentacionEmpleado de = new DocumentacionEmpleado();
   				de.setIdDocumento(rs.getInt(1));
-          de.setNombreDocumento(rs.getString(2));
+  				de.setNombreDocumento(rs.getString(2));
   				de.setFechaEntrega(rs.getDate(3));
-  				de.setEvidencia(rs.getBinaryStream(4));
-          de.setNss(rs.getString(5));
+  				de.setDocumento(rs.getBinaryStream(4));
+  				de.setNss(rs.getString(5));
   				de.setIdEmpleado(rs.getInt(6));
   				de.setEstatus(rs.getString(7));
 
   				lista.add(de);
-
-
   			}
   		} catch (SQLException e) {
   			System.out.println("Error: " + e.getMessage());
@@ -87,7 +85,7 @@ public class DocumentacionEmpleadoDAO{
   				de.setIdDocumento(rs.getInt("idDocumento"));
           de.setNombreDocumento(rs.getString("nombreDocumento"));
   				de.setFechaEntrega(rs.getDate("fechaEntrega"));
-  				de.setEvidencia(rs.getBinaryStream("evidencia"));
+  				de.setDocumento(rs.getBinaryStream("evidencia"));
   				de.setNss(rs.getString("nss"));
   				de.setIdEmpleado(rs.getInt("idEmpleado"));
   				de.setEstatus(rs.getString("estatus"));
@@ -120,11 +118,11 @@ public class DocumentacionEmpleadoDAO{
   		try {
   			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 
-  			ps.setDate(1, DocumentacionEmpleado.getNombreDocumento());
-  			ps.setDate(2,DocumentacionEmpleado.getFechaEntrega());
-  			ps.setString(3,DocumentacionEmpleado.getDocumento());
-  			ps.setInt(4, DocumentacionEmpleado.getIdEmpleado());
-  			ps.setString(5,DocumentacionEmpleado.getEstatus());
+  			ps.setString(1,documento.getNombreDocumento());
+  			ps.setDate(2,documento.getFechaEntrega());
+  			ps.setBinaryStream(3,documento.getDocumento());
+  			ps.setInt(4,documento.getIdEmpleado());
+  			ps.setString(5,documento.getEstatus());
 
   			ps.executeUpdate();
 

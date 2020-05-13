@@ -50,22 +50,22 @@ public class HistorialPuestosDAO{
 	}
 
 
-  public HistorialPuestos ConsultaIndividual(int idEmpleado)
+  public HistorialPuestos ConsultaIndividual(int idPuesto)
 	{
 		String sql = "select * from HistorialPuestos where idPuesto = "+idPuesto;
-		HistorialPuestosDAO n = new HistorialPuestos();
+		HistorialPuestos hp = new HistorialPuestos();
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-        hp.setIdEmpleado(rs.getInt(1));
+				hp.setIdEmpleado(rs.getInt(1));
 				hp.setIdPuesto(rs.getInt(2));
 				hp.setIdDepartamento(rs.getInt(3));
 				hp.setFechaInicio(rs.getDate(4));
-        hp.setFechaFin(rs.getDate(5));
-        hp.setSalario(rs.getFloat(6));
-        hp.setEstatus(rs.getString(7));
+		        hp.setFechaFin(rs.getDate(5));
+		        hp.setSalario(rs.getFloat(6));
+		        hp.setEstatus(rs.getString(7));
 			}
 		} catch (SQLException e) {
 			System.out.println("Error al consultar individual HistorialPuestos: " + e.getMessage());
@@ -75,7 +75,7 @@ public class HistorialPuestosDAO{
 
   public void Eliminar(int idPuesto)
 	{
-		String sql = "execute sp_EliminarLogicamente 'HistorialPuestos','"+idEmpleado+"','idEmpleado'";
+		String sql = "execute sp_EliminarLogicamente 'HistorialPuestos','"+idPuesto+"','idEmpleado'";
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 				ps.executeUpdate();

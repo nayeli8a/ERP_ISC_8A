@@ -13,6 +13,8 @@ BEGIN
 	EXEC(@SQL)
 END
 
+-----Permisos
+grant exec on sp_EliminarLogicamente to RecursosHumanos
 
 execute sp_EliminarLogicamente 'Estados','1','idEstado';
 select * from Estados

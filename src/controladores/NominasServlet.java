@@ -1,14 +1,11 @@
 package controladores;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Level;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,14 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.istack.internal.logging.Logger;
-
-import jdk.nashorn.internal.runtime.Context;
 import modelo.beans.*;
 import modelo.datos.*;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
@@ -172,8 +167,12 @@ public class NominasServlet extends HttpServlet {
 					map.put("idNomina",idNomina);
 					reporte = (JasperReport)JRLoader.loadObjectFromFile(path);
 					JasperPrint jprint = JasperFillManager.fillReport(path,map,Conexion.getInstance().getCN());
-					JasperViewer viewer = new JasperViewer(jprint,false);
-					viewer.setVisible(true);
+
+			        //For Printing to the Default Printer
+			        JasperPrintManager.printReport(jprint, false); 
+			        
+					//JasperViewer viewer = new JasperViewer(jprint,false);
+					//viewer.setVisible(true);
 				} catch (JRException e) {
 					System.out.println("Error al generar el reporte "+e.getLocalizedMessage());
 				}

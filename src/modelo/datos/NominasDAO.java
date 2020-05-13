@@ -29,9 +29,13 @@ public class NominasDAO {
 	public List<Nominas> Consultar(String pagina)
 	{
 		ArrayList<Nominas> lista = new ArrayList<>();
+		String aux = "execute sp_actualizar_nomina";
 		String sql = "execute sp_paginaciondinamica 'Nominas_empleados','idNomina','"+pagina+"','10'";
 		try {
-			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(aux);
+			ps = Conexion.getInstance().getCN().prepareStatement(aux);
+			ps.execute();
+			
 			ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
