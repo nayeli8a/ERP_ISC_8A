@@ -24,27 +24,40 @@
 	<script>
 	var nump=1;
 	var numd=1;
-		function ponervalores(select,input,last,PoD)
+	
+		function ponervalores(select,last,PoD)
 		{
 			if(PoD == 1)
 			{
 				//aqui modificamos a las percepciones
 				document.getElementById(select).name = select+""+nump;
-				document.getElementById(input).name = input+""+nump;
 				document.getElementById(last).name = last+""+nump;
 				document.getElementById(select).id = select+""+nump;
-				document.getElementById(input).id = input+""+nump;
 				document.getElementById(last).id = last+""+nump;
+				document.getElementById("bpercepciones-").id = "bpercepciones-"+nump;
+				
+				if(nump > 1)
+				{
+					var btn = document.getElementById("bpercepciones-"+nump);
+					btn.setAttribute("style","visibility:visible;");
+				}
+				
 				nump = nump+1;
 			}else
 			{
 				//aqui modificamos a las deducciones
 				document.getElementById(select).name = select+""+numd;
-				document.getElementById(input).name = input+""+numd;
 				document.getElementById(last).name = last+""+numd;
 				document.getElementById(select).id = select+""+numd;
-				document.getElementById(input).id = input+""+numd;
 				document.getElementById(last).id = last+""+numd;
+				document.getElementById("bdeducciones-").id = "bdeducciones-"+numd;
+				
+				if(numd > 1)
+				{
+					var btn = document.getElementById("bdeducciones-"+numd);
+					btn.setAttribute("style","visibility:visible;");
+				}
+				
 				numd = numd+1;
 			}
 			
@@ -60,6 +73,70 @@
 	    	form.setAttribute("action",form.getAttribute("action")+"&percepciones="+nump);
 			form.submit();
 		}
+		
+		//si DoP es 1 es una deducion
+		function clonar(DoP,idelemento,select)
+		{
+			if(DoP==1)
+			{
+				var elemento = document.getElementById(idelemento);
+				var clon = elemento.cloneNode(true);
+				clon.setAttribute("id",idelemento+numd);
+				//ponemos el clon en la pagina html
+				document.getElementById("deduccionesSpan").appendChild(clon);
+				
+				var selects = document.getElementById("deduccionesSpan").getElementsByTagName('select');
+				selects[0].setAttribute("id",select+numd);
+				selects[0].setAttribute("name",select+numd);
+				selects[0].removeAttribute("readonly");
+				var btns = document.getElementById("deduccionesSpan").getElementsByTagName('button');
+				btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelemento+numd+"');");
+				btns[0].setAttribute("style","visibility:visible;");
+				btns[0].setAttribute("id","bdeducciones-"+numd);
+				numd++;
+			}else
+			{
+				var elemento = document.getElementById(idelemento);
+				var clon = elemento.cloneNode(true);
+				clon.setAttribute("id",idelemento+nump);
+				//ponemos el clon en la pagina html
+				document.getElementById("percepcionesSpan").appendChild(clon);
+				
+				var selects = document.getElementById("percepcionesSpan").getElementsByTagName('select');
+				selects[0].setAttribute("id",select+nump);
+				selects[0].setAttribute("name",select+nump);
+				selects[0].removeAttribute("readonly");
+				var btns = document.getElementById("percepcionesSpan").getElementsByTagName('button');
+				btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelemento+nump+"');");
+				btns[0].setAttribute("style","visibility:visible;");
+				btns[0].setAttribute("id","bpercepciones-"+nump);
+				nump++;
+			}
+			
+		}
+		
+		//si DoP es 1 es una deducion
+		function quitar(DoP,idelemento)
+		{
+			if(DoP==1)
+			{
+				if(numd>1)
+				{
+					var elem = document.getElementById(idelemento);
+					numd--;
+				    return elem.parentNode.removeChild(elem);
+				}
+			}else
+			{
+				if(nump>1)
+				{
+					var elem = document.getElementById(idelemento);
+					nump--;
+				    return elem.parentNode.removeChild(elem);
+				}		
+			}
+		}
+		
 	</script>
 
 </head>
@@ -158,51 +235,62 @@
 			      </div>
 			    </div>
 			    <br>
-					    
+			    
+			    <!-- Aqui empieza la parte de Percepciones -->
+				<button type="button" onclick="clonar(2,'percepciones-','select-p-')"style="width:40px;" id="agregar-percepcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/plus.png" style="max-width:100%;">
+				</button>
+				<br>    
 			    <label><b>Percepciones:</b></label>
 			    <c:forEach var="per" items="${percepciones}">
 			          
-			          <div class="col">
-			          <hr style="width:80%;">
-			          
-		              <label>Percepcion:</label>
-		              <br>
-		              <select id="select-p-" name="select-p-">
-		              <c:forEach var="dato" items="${datospercepciones}">
-		              
-	              		<c:if test="${dato.getIdPercepcion() eq per.getIdPercepcion()}">
-	              			<option selected value="${dato.getIdPercepcion()}">
-	              			${dato.getNombre()}
-	              			</option>
-	              		</c:if>
-	              		<c:if test="${dato.getIdPercepcion() != per.getIdPercepcion()}">
-	              			<option value="${dato.getIdPercepcion()}">
-	              			${dato.getNombre()}
-	              			</option>
-	              		</c:if>
-		              </c:forEach>
-		              </select>
-		              
-		              <label>Importe:</label>
-		              <br>
-		              <input id="input-p-" name="input-p-" type="number" value="${per.getImporte()}">
-		              
-		              <!-- Este input servira para guardar el valor anterior de la percepcion -->
-		              <input type="hidden" id="last-p-" name="last-p-" value="${per.getIdPercepcion()}">
-			          
-			          <hr style="width:80%;">
-			          	<script type="text/javascript">
-			          		ponervalores('input-p-','select-p-','last-p-',1);
-			          	</script>
+			          <div id="percepciones-" class="col">
+				          <hr style="width:80%;">
+				          
+			              <label>Percepcion:</label>
+			              <br>
+			              <select id="select-p-" name="select-p-">
+			              <c:forEach var="dato" items="${datospercepciones}">
+			              
+		              		<c:if test="${dato.getIdPercepcion() eq per.getIdPercepcion()}">
+		              			<option selected value="${dato.getIdPercepcion()}">
+		              			${dato.getNombre()}
+		              			</option>
+		              		</c:if>
+		              		<c:if test="${dato.getIdPercepcion() != per.getIdPercepcion()}">
+		              			<option value="${dato.getIdPercepcion()}">
+		              			${dato.getNombre()}
+		              			</option>
+		              		</c:if>
+			              </c:forEach>
+			              </select>
+			              
+			              <!-- Este input servira para guardar el valor anterior de la percepcion -->
+			              <input type="hidden" id="last-p-" name="last-p-" value="${per.getIdPercepcion()}">
+				          <div class="col-sm-2">
+			              	  	<button id="bpercepciones-" type="button" style="visibility:hidden;" onclick="quitar(2,'percepciones-')" class="btn-danger" style="width:40px;">X </button>
+			              </div>
+				          <hr style="width:80%;">
+				          <script type="text/javascript">
+				        	ponervalores('select-p-','last-p-',1);
+				          </script>
 			          </div>
 			    </c:forEach>
 			    <br>
-					    
+				<span id="percepcionesSpan">
+				
+				</span>
+				
+				<!-- Aqui empieza la parte de Deducciones --> 
+				<button type="button" onclick="clonar(1,'deducciones-','select-d-')"style="width:40px;" id="agregar-deduccion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/plus.png" style="max-width:100%;">
+				</button>
+				<br>  
 			    <label><b>Deducciones:</b></label>
 	    		<c:forEach var="ded" items="${deducciones}">
 			    
 			    	  <hr style="width:80%;">
-			          <div class="col">
+			          <div id="deducciones-" class="col">
 			            
 		              <label>Deduccion:</label>
 		              <br>
@@ -221,37 +309,43 @@
 	              		</c:if>
 		              </c:forEach>
 		              </select>
-		              <label>Importe:</label>
-		              <br>
-		              <input id="input-d-" name="input-d-" type="number" value="${ded.getImporte()}" >
 		              
 		              <!-- Este input servira para guardar el valor anterior de la deduccion -->
 		              <input type="hidden" id="last-d-" name="last-d-" value="${ded.getIdDeduccion()}">
-		              
+		              <div class="col-sm-2">
+			           	  	<button id="bdeducciones-" type="button" style="visibility:hidden;" onclick="quitar(1,'deducciones-')" class="btn-danger" style="width:40px;">X </button>
+			          </div>
 			          <hr style="width:80%;">
 			          	<script type="text/javascript">
-			          		ponervalores('input-d-','select-d-','last-d-',2);
+			          		ponervalores('select-d-','last-d-',2);
 			          	</script>
 			          </div>
 			    </c:forEach>
 			    <br>
+				<span id="deduccionesSpan">
+				
+				</span>
+					
 					    
 			    <label><b>Totales:</b></label>
 			    <div class="row">
 			      <div class="col-md-4">
-			        <label>Total Pagado</label>
+			        <label>Total Percepciones</label>
 			        <br>
-			        <input name="totalp" type="number" value="${datosnomina.getTotalP()}" required>
+			        <input readonly="" name="totalp" type="number" value="${datosnomina.getTotalP()}" 
+			        class="form-control" required>
 			      </div>
 			      <div class="col-md-4">
-			        <label>Total Deducido</label>
+			        <label>Total Deducciones</label>
 			        <br>
-			        <input name="totald" type="number" value="${datosnomina.getTotalD()}" required>
+			        <input readonly="" name="totald" type="number" value="${datosnomina.getTotalD()}" 
+			        class="form-control" required>
 			      </div>
 			      <div class="col-md-4">
-			        <label>Cantidad Neta</label>
+			        <label>Liquido</label>
 			        <br>
-			        <input name="cantidadneta" type="number" value="${datosnomina.getCantidadNeta()}" required>
+			        <input readonly="" name="cantidadneta" type="number" value="${datosnomina.getCantidadNeta()}" 
+			        class="form-control" required>
 			      </div>
 			    </div>
 			    <br>
