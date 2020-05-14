@@ -64,6 +64,45 @@ public class NominasDAO {
 		return lista;
 	}
 	
+	public List<Nominas> Consultar()
+	{
+		ArrayList<Nominas> lista = new ArrayList<>();
+		String aux = "execute sp_actualizar_nomina";
+		String sql = "select * from Nominas_empleados";
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(aux);
+			ps = Conexion.getInstance().getCN().prepareStatement(aux);
+			ps.execute();
+			
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Nominas n = new Nominas();
+				n.setIdNomina(rs.getInt(1));
+				n.setFechaPago(rs.getDate(2));
+				n.setTotalP(rs.getFloat(3));
+				n.setTotalD(rs.getFloat(4));
+				n.setCantidadNeta(rs.getFloat(5));
+				n.setDiasTrabajados(rs.getInt(6));
+				n.setFaltas(rs.getInt(7));
+				n.setFechaInicio(rs.getDate(8));
+				n.setFechaFin(rs.getDate(9));
+				n.setIdEmpleado(rs.getInt(10));
+				n.setFormaPago(rs.getString(11));
+				n.setEstatus(rs.getString(12));
+				n.setNss(rs.getString(13));
+				n.setNombreEmpleado(rs.getString(14));
+				n.setApaterno(rs.getString(15));
+				n.setAmaterno(rs.getString(16));
+				lista.add(n);
+			}
+		} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+		}
+		return lista;
+	}
+	
+	
 	public Nominas ConsultaIndividual(String idNomina)
 	{
 		String sql = "select * from Nominas_empleados where idNomina = "+idNomina;

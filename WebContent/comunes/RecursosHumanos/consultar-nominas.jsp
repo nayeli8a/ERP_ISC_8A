@@ -162,6 +162,9 @@
 		<button type="button" style="width:40px;" id="agregar" data-toggle="modal" data-target="#modalPedirNss" >
 			<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/plus.png" style="max-width:100%;">
 		</button>
+		<a href="<c:out value="${pageContext.servletContext.contextPath}"/>/NominasExcelServlet">
+			Descargar Excel
+		</a>
 		<div class="table-responsive table-bordered table-striped">
       <table class="table table-sm">
 		<thead class="thead-dark">
