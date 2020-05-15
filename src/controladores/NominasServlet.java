@@ -96,30 +96,25 @@ public class NominasServlet extends HttpServlet {
 				nom.setFechaInicio(Date.valueOf(request.getParameter("fechainicio")));
 				nom.setFechaFin(Date.valueOf(request.getParameter("fechafin")));
 				nomDAO.Actualizar(nom);
+				//generamos el idNomina en basa al id del empleado
+				idNomina = nomDAO.NominaEmpleado(nom.getIdEmpleado());
+				
+				//reseteamos las nominasdeducciones y nominaspercepciones
+				npdao.resetear(idNomina);
+				nddao.resetear(idNomina);
 				
 				//ahora actualizamos las percepciones de la nomina
 				int cantidadpercepciones = Integer.parseInt(request.getParameter("percepciones"));
-				
-				for (int i = 1; i < cantidadpercepciones; i++) {
-					//System.out.println("percecion "+(i)+" "+request.getParameter("select-p-"+(i)));
-					int idPercepcionVieja = Integer.parseInt(request.getParameter("last-p-"+(i)));
+				for (int i = 1; i < cantidadpercepciones+1; i++) {
 					int idPercepcionNueva = Integer.parseInt(request.getParameter("select-p-"+(i)));
-					idNomina = nomDAO.NominaEmpleado(nom.getIdEmpleado());
-					float importe = Float.parseFloat(request.getParameter("input-p-"+(i)));
-					//System.out.println(idPercepcion+" || "+idNomina+" || "+importe);
-					npdao.actualizar(idNomina,idPercepcionVieja,idPercepcionNueva,importe);
+					npdao.actualizar(idNomina,idPercepcionNueva);
 				}
 
 				//ahora insertamos las deducciones de la nomina
 				int cantidaddeducciones = Integer.parseInt(request.getParameter("deducciones"));
-				for (int i = 1; i < cantidaddeducciones; i++) {
-					//System.out.println("deduccion "+(i)+" "+request.getParameter("select-d-"+(i)));
-					int idDeduccionVieja = Integer.parseInt(request.getParameter("last-d-"+(i)));
+				for (int i = 1; i < cantidaddeducciones+1; i++) {
 					int idDeduccionNueva = Integer.parseInt(request.getParameter("select-d-"+(i)));
-					idNomina = nomDAO.NominaEmpleado(nom.getIdEmpleado());
-					float importe = Float.parseFloat(request.getParameter("input-d-"+(i)));
-					//System.out.println(idDeduccion+" || "+idNomina+" || "+importe);
-					nddao.actualizar(idNomina,idDeduccionVieja,idDeduccionNueva,importe);
+					nddao.actualizar(idNomina,idDeduccionNueva);
 				}
 				
 				
@@ -169,10 +164,10 @@ public class NominasServlet extends HttpServlet {
 					JasperPrint jprint = JasperFillManager.fillReport(path,map,Conexion.getInstance().getCN());
 
 			        //For Printing to the Default Printer
-			        JasperPrintManager.printReport(jprint, false); 
+			        //JasperPrintManager.printReport(jprint, false); 
 			        
-					//JasperViewer viewer = new JasperViewer(jprint,false);
-					//viewer.setVisible(true);
+					JasperViewer viewer = new JasperViewer(jprint,false);
+					viewer.setVisible(true);
 				} catch (JRException e) {
 					System.out.println("Error al generar el reporte "+e.getLocalizedMessage());
 				}

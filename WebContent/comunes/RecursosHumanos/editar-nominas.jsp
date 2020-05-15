@@ -25,32 +25,19 @@
 	var nump=1;
 	var numd=1;
 	
-		function ponervalores(select,last,PoD)
+		function ponervalores(iddiv,select,last,DoP)
 		{
-			if(PoD == 1)
-			{
-				//aqui modificamos a las percepciones
-				document.getElementById(select).name = select+""+nump;
-				document.getElementById(last).name = last+""+nump;
-				document.getElementById(select).id = select+""+nump;
-				document.getElementById(last).id = last+""+nump;
-				document.getElementById("bpercepciones-").id = "bpercepciones-"+nump;
-				
-				if(nump > 1)
-				{
-					var btn = document.getElementById("bpercepciones-"+nump);
-					btn.setAttribute("style","visibility:visible;");
-				}
-				
-				nump = nump+1;
-			}else
+			if(DoP == 1)
 			{
 				//aqui modificamos a las deducciones
+				document.getElementById(iddiv).id = iddiv+numd;
 				document.getElementById(select).name = select+""+numd;
 				document.getElementById(last).name = last+""+numd;
 				document.getElementById(select).id = select+""+numd;
 				document.getElementById(last).id = last+""+numd;
 				document.getElementById("bdeducciones-").id = "bdeducciones-"+numd;
+				var btn = document.getElementById("bdeducciones-"+numd);
+				btn.setAttribute("onclick","quitar("+DoP+",'deducciones-"+numd+"');");
 				
 				if(numd > 1)
 				{
@@ -59,6 +46,25 @@
 				}
 				
 				numd = numd+1;
+			}else
+			{
+				//aqui modificamos a las percepciones
+				document.getElementById(iddiv).id = iddiv+nump;
+				document.getElementById(select).name = select+""+nump;
+				document.getElementById(last).name = last+""+nump;
+				document.getElementById(select).id = select+""+nump;
+				document.getElementById(last).id = last+""+nump;
+				document.getElementById("bpercepciones-").id = "bpercepciones-"+nump;
+				var btn = document.getElementById("bpercepciones-"+nump);
+				btn.setAttribute("onclick","quitar("+DoP+",'percepciones-"+nump+"');");
+				
+				if(nump > 1)
+				{
+					var btn = document.getElementById("bpercepciones-"+nump);
+					btn.setAttribute("style","visibility:visible;");
+				}
+				
+				nump = nump+1;
 			}
 			
 		}
@@ -69,8 +75,8 @@
 		{
 			//tomamos el action del form y le contatenamos dos parametros mas
 			var form = document.getElementById("editar-nomina");	
-	    	form.setAttribute("action",form.getAttribute("action")+"&deducciones="+numd);
-	    	form.setAttribute("action",form.getAttribute("action")+"&percepciones="+nump);
+	    	form.setAttribute("action",form.getAttribute("action")+"&deducciones="+(numd-1));
+	    	form.setAttribute("action",form.getAttribute("action")+"&percepciones="+(nump-1));
 			form.submit();
 		}
 		
@@ -79,7 +85,8 @@
 		{
 			if(DoP==1)
 			{
-				var elemento = document.getElementById(idelemento);
+				alert(idelemento+(numd-1));
+				var elemento = document.getElementById(idelemento+(numd-1));
 				var clon = elemento.cloneNode(true);
 				clon.setAttribute("id",idelemento+numd);
 				//ponemos el clon en la pagina html
@@ -96,7 +103,8 @@
 				numd++;
 			}else
 			{
-				var elemento = document.getElementById(idelemento);
+				alert(idelemento+(nump-1));
+				var elemento = document.getElementById(idelemento+(nump-1));
 				var clon = elemento.cloneNode(true);
 				clon.setAttribute("id",idelemento+nump);
 				//ponemos el clon en la pagina html
@@ -118,12 +126,14 @@
 		//si DoP es 1 es una deducion
 		function quitar(DoP,idelemento)
 		{
+			alert("idElemento: "+idelemento);
 			if(DoP==1)
 			{
 				if(numd>1)
 				{
 					var elem = document.getElementById(idelemento);
-					numd--;
+					numd = numd-1;
+					alert("nump: "+nump+" numd:"+numd);
 				    return elem.parentNode.removeChild(elem);
 				}
 			}else
@@ -131,10 +141,13 @@
 				if(nump>1)
 				{
 					var elem = document.getElementById(idelemento);
-					nump--;
+					nump = nump-1;
+					alert("nump: "+nump+" numd:"+numd);
 				    return elem.parentNode.removeChild(elem);
 				}		
 			}
+			
+			
 		}
 		
 	</script>
@@ -268,11 +281,11 @@
 			              <!-- Este input servira para guardar el valor anterior de la percepcion -->
 			              <input type="hidden" id="last-p-" name="last-p-" value="${per.getIdPercepcion()}">
 				          <div class="col-sm-2">
-			              	  	<button id="bpercepciones-" type="button" style="visibility:hidden;" onclick="quitar(2,'percepciones-')" class="btn-danger" style="width:40px;">X </button>
+			              	  	<button id="bpercepciones-" type="button" style="visibility:hidden;" onclick="quitar(2,'percepciones-');" class="btn-danger" style="width:40px;">X </button>
 			              </div>
 				          <hr style="width:80%;">
 				          <script type="text/javascript">
-				        	ponervalores('select-p-','last-p-',1);
+				        	ponervalores('percepciones-','select-p-','last-p-',2);
 				          </script>
 			          </div>
 			    </c:forEach>
@@ -313,11 +326,11 @@
 		              <!-- Este input servira para guardar el valor anterior de la deduccion -->
 		              <input type="hidden" id="last-d-" name="last-d-" value="${ded.getIdDeduccion()}">
 		              <div class="col-sm-2">
-			           	  	<button id="bdeducciones-" type="button" style="visibility:hidden;" onclick="quitar(1,'deducciones-')" class="btn-danger" style="width:40px;">X </button>
+			           	  	<button id="bdeducciones-" type="button" style="visibility:hidden;" onclick="quitar(1,'deducciones-');" class="btn-danger" style="width:40px;">X </button>
 			          </div>
 			          <hr style="width:80%;">
 			          	<script type="text/javascript">
-			          		ponervalores('select-d-','last-d-',2);
+			          		ponervalores('deducciones-','select-d-','last-d-',1);
 			          	</script>
 			          </div>
 			    </c:forEach>

@@ -19,18 +19,29 @@ public class NominasDeduccionesDAO {
 		}
 	}
 	
-	public void actualizar(int idNomina,int idDeduccionV,int idDeduccionN,float importe)
+	public void actualizar(int idNomina,int idDeduccionN)
 	{
-		String sql = "Update NominasDeducciones set idDeduccion=?, importe=? where idNomina=? and idDeduccion=?";
+		String sql = "insert into NominasDeducciones (idNomina,idDeduccion,importe,estatus) values(?,?,0,'A')";;
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
-			ps.setInt(1,idDeduccionN);
-			ps.setFloat(2,importe);
-			ps.setInt(3,idNomina);
-			ps.setInt(4,idDeduccionV);
+			ps.setInt(2,idDeduccionN);
+			ps.setInt(1,idNomina);
 			ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("Error al actualizar la NominaDeduccion en la BD: "+e.getMessage());
+		}
+	}
+	
+	public void resetear(int idNomina)
+	{
+		//eliminamos las deducciones anteriores y agregamos las nuevas
+		String aux = "delete NominasDeducciones where idNomina=?";
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(aux);
+			ps.setInt(1,idNomina);
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println("Error al resetear NominasDeducciones en la BD: "+e.getMessage());
 		}
 	}
 }
