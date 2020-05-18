@@ -164,7 +164,7 @@ public class NominasServlet extends HttpServlet {
 					JasperPrint jprint = JasperFillManager.fillReport(path,map,Conexion.getInstance().getCN());
 
 			        //For Printing to the Default Printer
-			        //JasperPrintManager.printReport(jprint, false); 
+			        //JasperPrintManager.printReport(jprint,false); 
 			        
 					JasperViewer viewer = new JasperViewer(jprint,false);
 					viewer.setVisible(true);

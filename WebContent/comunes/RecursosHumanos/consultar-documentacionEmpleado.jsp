@@ -67,48 +67,49 @@
       				<thead class="thead-dark">
 
       					<tr>
-      						<th>idDocumento</th>
       						<th>nombreDocumento</th>
+      						<th>Documento</th>
       						<th>fechaEntrega</th>
-      						<th>documento</th>
-                  <th>nss</th>
+      						<th>Nombre Empleado</th>
+                  			<th>NSS</th>
       						<th>idEmpleado</th>
       						<th>Estatus</th>
+      						<th>Acciones</th>
       					</tr>
       				</thead>
       				<tbody id="myTable">
       					<c:forEach var="dato" items="${datos}">
       						<c:if test="${dato.getEstatus() eq 'I'}">
       							<tr>
-      								<td>${dato.getIdDocumento()}</td>
       								<td>${dato.getNombreDocumento()}</td>
-      								<td>${dato.getFechaEntrega()}</td>
       								<td>${dato.getDocumento()}</td>
-                      <td>${dato.getNss()}</td>
+      								<td>${dato.getFechaEntrega()}</td>
+                      				<td>${dato.getNombreEmpleado()}</td>
+      								<td>${dato.getNss()}</td>
       								<td>${dato.getIdEmpleado()}</td>
       								<td>${dato.getEstatus()}</td>
       							</tr>
       						</c:if>
       						<c:if test="${dato.getEstatus() eq 'A'}">
       							<tr>
-                      <td>${dato.getIdDocumento()}</td>
-      								<td>${dato.getNombreDocumento()}</td>
+                      				<td>${dato.getNombreDocumento()}</td>
+      								<td>
+      									<img src="PDF?idDocumento=${dato.getIdDocumento()}" style="max-width:50%;max-height: 50%;">
+      								</td>
       								<td>${dato.getFechaEntrega()}</td>
-      								<td>${dato.getDocumento()}</td>
-                      <td>${dato.getNss()}</td>
+                      				<td>${dato.getNombreEmpleado()}</td>
+      								<td>${dato.getNss()}</td>
       								<td>${dato.getIdEmpleado()}</td>
       								<td>${dato.getEstatus()}</td>
       								<td>
-      									<form action="DocumentacionEmpleado" method="post">
-      										<input type="hidden" name="id"
-      											value="${dato.getIdDocumento()}">
-      										<div id="${dato.getIdDocumento()}">
-      											<input type="submit" class="btn btn-warning" name="op"
-      												value="Editar"> <input type="submit"
-      												class="btn btn-danger" name="op" value="Eliminar"
-      												onclick="javascript:eliminar()">
-      										</div>
-      									</form>
+   									<form action="DocumentacionEmpleado" method="post">
+   										<input type="hidden" name="id" value="${dato.getIdDocumento()}">
+   										<div id="${dato.getIdDocumento()}">
+   											<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
+   											<input type="submit" class="btn btn-danger" name="op" value="Eliminar" 
+   											onclick="javascript:eliminar()">
+   										</div>
+   									</form>
       								</td>
       							</tr>
       						</c:if>
@@ -118,6 +119,8 @@
       			</table>
       		</div>
         </div>
+        
+        
         <!-- MODAL PARA REGISTRO -->
       	<div class="modal fade" id="modalRegistro">
       		<div class="modal-dialog modal-lg">
@@ -130,47 +133,85 @@
       				</div>
 
               <!-- Modal body -->
-      				<div class="modal-body" id="modal_div">
-      					<form
-      						action="${pageContext.servletContext.contextPath}/Registrar?op=DocumentacionEmpleado"
-      						onsubmit="return validarFechas();" method="post">
-      						<div class="form-group">
-      							<div class="row">
-      								<div class="col-sm">
-      									<label>Nombre Documento: </label> <input type="text"
-      										name="nombreDocumento" onkeypress="return soloLetras(event)" class="form-control" required>
-                          <label>Fecha entrega: </label> <input type="date" name="fechaEntrega"
-      										id="fechaEntrega" class="form-control"
-      										required>
-                        </div>
-                        <div class="col-sm">
-                          <label>documento: </label> <input type="file"
-                            name="documento" id="documento" class="form-control"
-                            required> <label>nss: </label> <input type="text"
-                              name="nss" id="nss" onkeypress="return soloLetras(event)" class="form-control"
-                              required> <label>idEmpleado: </label> <input
-                            type="number" name="idEmpleado" class="form-control"
-                            required> <br>
-                        </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Registrar</button>
+              <div class="container" style="border: dotted">
+					<div class="row">
+						<div class="col-md-12" style="text-align: center">
+							<label><b>Buscar el NSS de los empleados</b></label>
+						</div>
+						
+						<div class="col-md-6" style="text-align: center">
+							<label>Nombre</label>
+							<br>
+							<input type="text" style="width:100%" id="find-nombre">
+						</div>
+						<div class="col-md-3" style="text-align: center">
+							<label>A. Paterno</label>
+							<br>
+							<input type="text" style="width:100%" id="find-apaterno">
+						</div>
+						<div class="col-md-3" style="text-align: center">
+							<label>A. Materno</label>
+							<br>
+							<input type="text" style="width:100%" id="find-amaterno">
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12" style="text-align:center">
+							<button type="button" onclick="buscar_nss_ajax()" class="btn btn-primary">Buscar</button>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-md-12" style="text-align:center">
+							<label>NSS Empleado</label>
+							<br>
+							<span id="find_nss"></span>
+						</div>
+					</div>
+					<br>
+				</div>
+              
+     			<div class="modal-body" id="modal_div">
+					<form 
+					    enctype="multipart/form-data"
+						action="${pageContext.servletContext.contextPath}/Registrar?op=DocumentacionEmpleado"
+						onsubmit="return validarFechas();" method="post">
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm">
+									<label>Nombre Documento: </label>
+									<input type="text" name="nombreDocumento" class="form-control" required>
+									 
+									<label>Fecha entrega: </label>
+									<input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required>
+								</div>
+								<div class="col-sm">
+									<label>Documento:</label> 
+									<input type="file" name="documento"	id="documento" class="form-control" required>
+									 
+									<label>NSS:</label>
+									<input type="text" name="nss" id="nss" class="form-control"	required>
+									<br>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary">Registrar</button>
+						</div>
+					</form>
+			</div>
 
-            					</form>
+           <!-- Modal footer -->
+   				<div class="modal-footer">
+   					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+   				</div>
 
-            				</div>
+           			</div>
+           		</div>
+           	</div>
 
-                    <!-- Modal footer -->
-            				<div class="modal-footer">
-            					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-            				</div>
 
-            			</div>
-            		</div>
-            	</div>
-
-              <%
-            		//Aqui tendremos la paginacion
-            	%>
+              <%//Aqui tendremos la paginacion%>
+              
             	<nav aria-label="paginacion DocumentacionEmpleado">
             		<ul class="pagination justify-content-center">
             			<c:if test="${pagina eq 1}">

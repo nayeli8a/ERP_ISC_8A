@@ -6,27 +6,36 @@ import java.sql.Date;
 
 public class DocumentacionEmpleado{
 
+  //DocumentacionEmpleado
   private int idDocumento;
   private String nombreDocumento;
   private Date fechaEntrega;
   private InputStream documento;
   private int idEmpleado;
-  private String nss;
   private String estatus;
   
+  //Empleado
+  private String NombreEmpleado;
+  private String nss;
   
   
-public String getEstatus() {
-	return estatus;
+public String getNombreEmpleado() {
+	return NombreEmpleado;
 }
-public void setEstatus(String estatus) {
-	this.estatus = estatus;
+public void setNombreEmpleado(String nombreEmpleado) {
+	NombreEmpleado = nombreEmpleado;
 }
 public String getNss() {
 	return nss;
 }
 public void setNss(String nss) {
 	this.nss = nss;
+}
+public String getEstatus() {
+	return estatus;
+}
+public void setEstatus(String estatus) {
+	this.estatus = estatus;
 }
 public int getIdDocumento() {
 	return idDocumento;

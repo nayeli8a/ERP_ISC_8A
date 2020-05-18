@@ -1,38 +1,35 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import modelo.beans.*;
 import modelo.datos.*;
 
-/**
- * Servlet implementation class RegistrarServlet
- */
+@MultipartConfig(maxFileSize = 16177216)//15mb necesario para obtener objetos desde el formulario de envio de archivos
 @WebServlet("/Registrar")
 public class RegistrarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public RegistrarServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		// aqui va todo el codigo
@@ -260,53 +257,51 @@ public class RegistrarServlet extends HttpServlet {
 					System.out.println("DIAS PERMISO "+diasPermiso);
 					System.out.println(tipo);
 
-			if (idEmpleadoAusente != -1 && idEmpleadoJefe != -1) // Existen los
-																	// empleados
-			{
-				if (idEmpleadoAusente != idEmpleadoJefe) // Son diferentes
-				{
-					if ("V".equals(tipo)) { // vacaciones
-						if (calDias <= diasVacaciones) {
-							ausJusdao.insertarAusenciasJustificadas(fechaInicio, fechaFin, tipo, idEmpleadoAusente,
-									idEmpleadoJefe);
-							mensaje = "Ausencia Justificada registrada con exito";
-							request.setAttribute("Mensajes", mensaje);
+					if (idEmpleadoAusente != -1 && idEmpleadoJefe != -1) // Existen los
+						// empleados
+					{
+						if (idEmpleadoAusente != idEmpleadoJefe) // Son diferentes
+						{
+							if ("V".equals(tipo)) { // vacaciones
+								if (calDias <= diasVacaciones) {
+									ausJusdao.insertarAusenciasJustificadas(fechaInicio, fechaFin, tipo, idEmpleadoAusente,
+											idEmpleadoJefe);
+									mensaje = "Ausencia Justificada registrada con exito";
+									request.setAttribute("Mensajes", mensaje);
 
-						} else {
-							error = "El empleado solo cuenta con " + diasVacaciones + " dias de vacaiones";
-							request.setAttribute("Errores", error);
-						}
+								} else {
+									error = "El empleado solo cuenta con " + diasVacaciones + " dias de vacaiones";
+									request.setAttribute("Errores", error);
+								}
 
-					}
-					
-					if ("P".equals(tipo)) {// permiso
-						if (calDias <= diasPermiso) {
-							ausJusdao.insertarAusenciasJustificadas(fechaInicio, fechaFin, tipo, idEmpleadoAusente,
-									idEmpleadoJefe);
-							mensaje = "Ausencia Justificada registrada con exito";
-							request.setAttribute("Mensajes", mensaje);
+							}
+
+							if ("P".equals(tipo)) {// permiso
+								if (calDias <= diasPermiso) {
+									ausJusdao.insertarAusenciasJustificadas(fechaInicio, fechaFin, tipo, idEmpleadoAusente,
+											idEmpleadoJefe);
+									mensaje = "Ausencia Justificada registrada con exito";
+									request.setAttribute("Mensajes", mensaje);
+								}
+
+								else {
+									error = "El empleado solo cuenta con " + diasPermiso + "dias de permiso";
+									request.setAttribute("Errores", error);
+								}
+
+							}
 						}
 
 						else {
-							error = "El empleado solo cuenta con " + diasPermiso + "dias de permiso";
+							error = "El usuario que autoriza no puede ser el mismo que el ausente";
 							request.setAttribute("Errores", error);
+
 						}
 
-					
-				} 
-			}
-
-					else {
-						error = "El usuario que autoriza no puede ser el mismo que el ausente";
+					} else {
+						error = "Empleado no encontrado";
 						request.setAttribute("Errores", error);
-
 					}
-
-				} else {
-					error = "Empleado no encontrado";
-					request.setAttribute("Errores", error);
-				}
-			
 
 					url="AusenciasJustificadas?op=Listar&pagina=1";
 					break;
@@ -377,6 +372,7 @@ public class RegistrarServlet extends HttpServlet {
 
 					url="Nominas?op=Listar&pagina=1";
 					break;
+					
 				case "FormasPago":
 					FormasPagoDAO pagodao = new FormasPagoDAO();
 
@@ -394,21 +390,26 @@ public class RegistrarServlet extends HttpServlet {
 					}
 					url="FormasPago?op=Listar&pagina=1";
 					break;
-					case "DocumentacionEmpleado" :
+					
+				case "DocumentacionEmpleado" :
 						error = "";
 						mensaje="";
 						DocumentacionEmpleadoDAO dcedao = new DocumentacionEmpleadoDAO();
 						
 						String nombreDocumento = request.getParameter("nombreDocumento");
 						Date fechaEntrega = (Date.valueOf(request.getParameter("fechaEntrega")));
-						//InputStream documento = (InputStream.valueOf(request.getParameter("documento")));
-						nssempleado = request.getParameter("nssempleado");
+						
+						response.setContentType("text/html;charset=UFT-8");
+						Part Documento = request.getPart("documento");
+				        InputStream InputS = Documento.getInputStream();
+				        
+						nssempleado = request.getParameter("nss");
 
 					    estatus = "A";
 						idEmpleado = dcedao.validarNSSEmpleado(nssempleado);
 						if(idEmpleado != -1)
 						{
-							dcedao.insertarDocumentacionEmpleado(nombreDocumento, fechaEntrega,idEmpleado, estatus);
+							dcedao.insertar(InputS,nombreDocumento, fechaEntrega,idEmpleado, estatus);
 							mensaje = "Documentacion Empleado registrada con exito para el NSS: "+nssempleado;
 							request.setAttribute("Mensajes",mensaje);
 

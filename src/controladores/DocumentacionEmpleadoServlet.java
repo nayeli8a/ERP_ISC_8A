@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,24 +17,19 @@ import modelo.beans.DocumentacionEmpleado;
 import modelo.datos.Constantes;
 import modelo.datos.DocumentacionEmpleadoDAO;
 
-/**
- * Servlet implementation class IncapacidadesServlet
- */
+
+@MultipartConfig//necesario para obtener objetos desde el formulario de envio de archivos
 @WebServlet("/DocumentacionEmpleado")
 public class DocumentacionEmpleadoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public DocumentacionEmpleadoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    /**
-  	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-  	 */
+    
   	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
   				// aqui va todo el codigo
   				System.out.println("##Dentro de DocumentacionEmpleadoServlet##");

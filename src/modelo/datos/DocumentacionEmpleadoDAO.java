@@ -2,12 +2,18 @@ package modelo.datos;
 
 
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import modelo.beans.DocumentacionEmpleado;
 
@@ -36,12 +42,13 @@ public class DocumentacionEmpleadoDAO{
 		}
 
 
-    public void insertarDocumentacionEmpleado(String nombreDocumento, Date fechaEntrega,int idEmpleado, String estatus)
+    public void insertar(InputStream documento,String nombreDocumento, Date fechaEntrega,int idEmpleado, String estatus)
 	  {
-		  String sql = "insert into DocumentacionEmpleado values('"+nombreDocumento+"','"+fechaEntrega+"',null,"+idEmpleado+",'"+estatus+"')";
+		  String sql = "insert into DocumentacionEmpleado values('"+nombreDocumento+"','"+fechaEntrega+"',?,"+idEmpleado+",'"+estatus+"')";
 	    try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 				ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.setBlob(1, documento);
 				ps.executeUpdate();
 			} catch (Exception e) {
 				System.out.println("Error al insertar DocumentacionEmpleado en la BD: "+e.getMessage());
@@ -51,7 +58,7 @@ public class DocumentacionEmpleadoDAO{
     public List<DocumentacionEmpleado> consultar(String pagina)
   	{
   		ArrayList<DocumentacionEmpleado> lista = new ArrayList<>();
-  		String sql = "execute sp_paginaciondinamica 'DocumentacionEmpleado','idDocumento','"+pagina+"','10'";
+  		String sql = "execute sp_paginaciondinamica 'Documentacion_empleados','idDocumento','"+pagina+"','10'";
   		try {
   			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
   			ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -62,10 +69,10 @@ public class DocumentacionEmpleadoDAO{
   				de.setNombreDocumento(rs.getString(2));
   				de.setFechaEntrega(rs.getDate(3));
   				de.setDocumento(rs.getBinaryStream(4));
-  				de.setNss(rs.getString(5));
-  				de.setIdEmpleado(rs.getInt(6));
-  				de.setEstatus(rs.getString(7));
-
+  				de.setIdEmpleado(rs.getInt(5));
+  				de.setEstatus(rs.getString(6));
+  				de.setNombreEmpleado(rs.getString(7));
+  				de.setNss(rs.getString(8));
   				lista.add(de);
   			}
   		} catch (SQLException e) {
@@ -130,4 +137,34 @@ public class DocumentacionEmpleadoDAO{
   			System.out.println("Error al actualizar DocumentacionEmpleado"+e.getMessage());
   		}
   	}
+    
+    public void ListarPDF(int idDocumento, HttpServletResponse response)
+    {
+    	String sql = "select * from DocumentacionEmpleado where idDocumento = "+idDocumento;
+        InputStream is = null;
+        OutputStream os = null;
+        BufferedInputStream bufferedInputStream = null;
+        BufferedOutputStream bufferedOutputStream = null;
+        response.setContentType("image/*");
+        
+        try {
+			os = response.getOutputStream();
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+	        ResultSet rs = ps.executeQuery();
+	        if(rs.next())
+	        {
+	        	is = rs.getBinaryStream(4);
+	        }
+	        bufferedInputStream = new BufferedInputStream(is);
+	        bufferedOutputStream = new BufferedOutputStream(os);
+	        int i=0;
+	        while((i=bufferedInputStream.read()) != -1)
+	        {
+	        	bufferedOutputStream.write(i);
+	        }
+		} catch (Exception e) {
+			System.out.println("error dentro de DocumentacionEmpleadoDAO: "+e.getMessage());
+		}
+    }
+    
 }
