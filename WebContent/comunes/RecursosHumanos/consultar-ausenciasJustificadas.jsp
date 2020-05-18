@@ -175,11 +175,14 @@ function modificarAusencia(AoR,idAusencia) {
 								
 								<td>
 									<form action="AusenciasJustificadas" method="post">
-										<input type="hidden" name="id" value="${dato.getIdAusencia()}">
+										<input type="hidden" name="idAusencia" value="${dato.getIdAusencia()}">
 										<div id="${dato.getIdAusencia()}">
 											<input type="submit" 
 												class="btn btn-danger" name="op" value="Eliminar"
 												onclick="javascript:eliminar()">
+												<button type="submit" name="op" value="Imprimir">
+										<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/print.png" style="max-width:100%;">
+									</button>
 										</div>
 									</form>
 								</td>

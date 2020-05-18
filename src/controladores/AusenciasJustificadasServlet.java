@@ -2,9 +2,11 @@ package controladores;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +16,13 @@ import javax.servlet.http.HttpSession;
 
 import modelo.beans.AusenciasJustificadas;
 import modelo.datos.AusenciasJustificadasDAO;
+import modelo.datos.Conexion;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 
@@ -119,6 +128,31 @@ public class AusenciasJustificadasServlet extends HttpServlet {
 			
 
 					url="AusenciasJustificadas?op=Listar&pagina=1";
+				break;
+				case "Imprimir": 
+				idAusencia = Integer.parseInt(request.getParameter("idAusencia"));
+				JasperReport reporte ;//generamos el objeto para el reporte
+				
+				//obtenemos el contexto y la ruta del reporte 
+				ServletContext context = request.getServletContext();
+				String path = context.getRealPath("/WEB-INF/reportes/ReporteAusencias.jasper");
+				
+				try {
+					HashMap map = new HashMap();
+					map.put("idAusencia",idAusencia);
+					reporte = (JasperReport)JRLoader.loadObjectFromFile(path);
+					JasperPrint jprint = JasperFillManager.fillReport(path,map,Conexion.getInstance().getCN());
+
+			        //For Printing to the Default Printer
+			        //JasperPrintManager.printReport(jprint, false); 
+			        
+					JasperViewer viewer = new JasperViewer(jprint,false);
+					viewer.setVisible(true);
+				} catch (JRException e) {
+					System.out.println("Error al generar el reporte "+e.getLocalizedMessage());
+				}
+				url="AusenciasJustificadas?op=Listar&pagina=1";
+
 				break;
             }
 

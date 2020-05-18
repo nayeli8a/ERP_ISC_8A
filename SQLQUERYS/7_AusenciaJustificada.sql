@@ -68,9 +68,9 @@ AS
 		A.estatusAusencia,
 		DiasDescanso=(DATEDIFF ( DD, A.fechaInicio , A.fechaFin )),
 		nssAusente = E.nss,
-		NombreAusente= (Concat(E.nombre, '   ', E.apaterno,'   ', E.amaterno)),
+		NombreAusente= (Concat(E.nombre, ' ', E.apaterno,' ', E.amaterno)),
 		nssJefe=EJEFE.nss,
-		NombreJefe=(Concat(EJEFE.nombre,'   ', EJEFE.apaterno,'   ',EJEFE.amaterno))
+		NombreJefe=(Concat(EJEFE.nombre,' ', EJEFE.apaterno,' ',EJEFE.amaterno))
 	 
     FROM Empleados AS E INNER JOIN AusenciaJustificada AS A On A.idEmpleadoS = E.idEmpleado
 	INNER JOIN EMPLEADOS AS EJEFE ON A.idEmpleadoA=EJEFE.idEmpleado
