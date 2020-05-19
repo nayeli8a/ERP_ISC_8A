@@ -31,7 +31,7 @@
     <script type="text/javascript">
     function mostrarImagen(idelemento,idimagen)
     {
-    	document.getElementById(idelemento).src = 'PDF?idDocumento='+idimagen;
+    	document.getElementById(idelemento).src = "IMG?op=documentacion&idDocumento="+idimagen;
     }
     </script>
     
@@ -93,7 +93,7 @@
       								<td>
       									<a href="" data-toggle="modal" data-target="#modalImagen" 
 	                            		onclick="mostrarImagen('myImage','${dato.getIdDocumento()}')">
-      									<img src="PDF?idDocumento=${dato.getIdDocumento()}" style="max-width:30%;max-height: 30%;">
+      									<img src="IMG?op=documentacion&idDocumento=${dato.getIdDocumento()}" style="max-width:30%;max-height: 30%;">
       									</a>
       								</td>
       								<td>${dato.getFechaEntrega()}</td>
@@ -109,7 +109,7 @@
       								<td>
       									<a href="" data-toggle="modal" data-target="#modalImagen" 
 	                            		onclick="mostrarImagen('myImage','${dato.getIdDocumento()}')">
-      									<img src="PDF?idDocumento=${dato.getIdDocumento()}" style="max-width:30%;max-height: 30%;">
+      									<img src="IMG?op=documentacion&idDocumento=${dato.getIdDocumento()}" style="max-width:30%;max-height: 30%;">
       									</a>
       								</td>
       								<td>${dato.getFechaEntrega()}</td>

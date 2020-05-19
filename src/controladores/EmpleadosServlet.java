@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -9,17 +10,18 @@ import java.util.StringTokenizer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import modelo.datos.*;
 import modelo.beans.*;
 
-/**
- * Servlet implementation class EmpleadosServlet
- */
+
+@MultipartConfig(maxFileSize = 16177216)//15mb necesario para obtener objetos desde el formulario de envio de archivos
 @WebServlet("/Empleados")
 public class EmpleadosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -112,6 +114,29 @@ public class EmpleadosServlet extends HttpServlet {
 				}
 				break;
 			case "Editar":
+				//puestos
+				pdatos = pudao.consultar();
+				//sucursales 
+				sdatos = sdao.consultar();
+				//ciudades
+				cdatos = cdao.consultar();
+				//departamentos
+				ddatos = ddao.consultar();
+				
+			    Empleados datosemp = edao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
+				request.setAttribute("dato", datosemp);
+				request.setAttribute("datospuestos",pdatos);
+				request.setAttribute("datossucursales",sdatos);
+				request.setAttribute("datosciudades",cdatos);
+				request.setAttribute("datosdepartamentos",ddatos);
+				url=modelo.datos.Constantes.REGRESAR_RH_EDITAR+"empleados.jsp";
+				break;
+			case "Eliminar":
+				int id = Integer.parseInt(request.getParameter("id"));
+				edao.Eliminar(id);
+				url = "Empleados?op=Listar&pagina=1";
+				break;
+			case "Modificar":
 				e = new Empleados();
 				e.setIdEmpleado(Integer.parseInt(request.getParameter("edit_id")));
 				e.setNombre(request.getParameter("edit_nombre"));
@@ -125,7 +150,12 @@ public class EmpleadosServlet extends HttpServlet {
 				e.setEstadoCivil(request.getParameter("edit_estado-civil"));
 				e.setDiasVacaciones(Integer.parseInt(request.getParameter("edit_dias-vacaciones")));
 				e.setDiasPermiso(Integer.parseInt(request.getParameter("edit_dias-permiso")));
-				e.setFotografia(null);
+				
+				response.setContentType("text/html;charset=UFT-8");
+				Part Documento = request.getPart("foto");
+		        InputStream InputS = Documento.getInputStream();
+		        e.setFotografia(InputS);
+				
 				e.setDireccion(request.getParameter("edit_direccion"));
 				e.setColonia(request.getParameter("edit_colonia"));
 				e.setCodigoPostal(request.getParameter("edit_codigo-postal"));
@@ -140,12 +170,6 @@ public class EmpleadosServlet extends HttpServlet {
 				edao.Actualizar(e);
 				url = "Empleados?op=Listar&pagina=1";
 				break;
-			case "Eliminar":
-				int id = Integer.parseInt(request.getParameter("id"));
-				edao.Eliminar(id);
-				url = "Empleados?op=Listar&pagina=1";
-				break;
-				
 		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher(url);

@@ -63,6 +63,46 @@ public class EmpleadosDAO {
 		}
 		return lista;
 	}
+	
+	public Empleados consultaIndividual(int idEmpleado)
+	{
+		String sql = "select * from Empleados where idEmpleado = "+idEmpleado;
+		Empleados e = new Empleados();
+		try {
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				
+				e.setIdEmpleado(rs.getInt(1));
+				e.setNombre(rs.getString(2));
+				e.setApaterno(rs.getString(3));
+				e.setAmaterno(rs.getString(4));
+				e.setSexo(rs.getString(5));
+				e.setFechaContratacion(rs.getDate(6));
+				e.setFechaNacimiento(rs.getDate(7));
+				e.setSalario(rs.getFloat(8));
+				e.setNss(rs.getString(9));
+				e.setEstadoCivil(rs.getString(10));
+				e.setDiasVacaciones(rs.getInt(11));
+				e.setDiasPermiso(rs.getInt(12));
+				e.setFotografia(rs.getBinaryStream(13));
+				e.setDireccion(rs.getString(14));
+				e.setColonia(rs.getString(15));
+				e.setCodigoPostal(rs.getString(16));
+				e.setEscolaridad(rs.getString(17));
+				e.setPorcentajeComision(rs.getFloat(18));
+				e.setEstatus(rs.getString(19));
+				e.setIdDepartamento(rs.getInt(20));
+				e.setIdPuesto(rs.getInt(21));
+				e.setIdCiudad(rs.getInt(22));
+				e.setIdSucursal(rs.getInt(23));
+				
+			}
+		} catch (SQLException ex) {
+			System.out.println("Error al consultar empleados: " + ex.getMessage());
+		}
+		return e;
+	}
 
 	public void insertar(Empleados e)
 	{
@@ -107,7 +147,7 @@ public class EmpleadosDAO {
 	{
 		String sql = "UPDATE Empleados SET Nombre=?,Apaterno=?,Amaterno=?,Sexo=?,FechaContratacion=?,"
 				+ "FechaNacimiento=?,Salario=?,Nss=?,EstadoCivil=?,diasVacacionales=?,diasPermiso=?,"
-				+ "Fotografia="+null+",Direccion=?,Colonia=?,CodigoPostal=?,Escolaridad=?,"
+				+ "Fotografia=?,Direccion=?,Colonia=?,CodigoPostal=?,Escolaridad=?,"
 				+ "PorcentajeComision=?,idDepartamento=?,idPuesto=?,idCiudad=?,idSucursal=? "
 				+ "WHERE idEmpleado="+e.getIdEmpleado();
 		try {
@@ -124,15 +164,16 @@ public class EmpleadosDAO {
 			ps.setString(9, e.getEstadoCivil());
 			ps.setInt(10,e.getDiasVacaciones());
 			ps.setInt(11, e.getDiasPermiso());
-			ps.setString(12, e.getDireccion());
-			ps.setString(13, e.getColonia());
-			ps.setString(14, e.getCodigoPostal());
-			ps.setString(15, e.getEscolaridad());
-			ps.setFloat(16, e.getPorcentajeComision());
-			ps.setInt(17, e.getIdDepartamento());
-			ps.setInt(18, e.getIdPuesto());
-			ps.setInt(19, e.getIdCiudad());
-			ps.setInt(20, e.getIdSucursal());
+			ps.setBinaryStream(12,e.getFotografia());
+			ps.setString(13, e.getDireccion());
+			ps.setString(14, e.getColonia());
+			ps.setString(15, e.getCodigoPostal());
+			ps.setString(16, e.getEscolaridad());
+			ps.setFloat(17, e.getPorcentajeComision());
+			ps.setInt(18, e.getIdDepartamento());
+			ps.setInt(19, e.getIdPuesto());
+			ps.setInt(20, e.getIdCiudad());
+			ps.setInt(21, e.getIdSucursal());
 			ps.executeUpdate();
 			
 		} catch (Exception ex) {

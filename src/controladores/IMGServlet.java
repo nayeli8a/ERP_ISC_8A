@@ -13,26 +13,44 @@ import javax.servlet.http.HttpServletResponse;
 import com.darwinsys.*;
 
 import modelo.datos.DocumentacionEmpleadoDAO;
+import modelo.datos.EmpleadosDAO;
 
 
 @MultipartConfig(maxFileSize = 16177216)//15mb
-@WebServlet("/PDF")
-public class PDFServlet extends HttpServlet {
+@WebServlet("/IMG")
+public class IMGServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     
-    public PDFServlet() {
+    public IMGServlet() {
         super();
     }
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DocumentacionEmpleadoDAO dedao = new DocumentacionEmpleadoDAO();
-		System.out.println("### PDF Servlet ###");
+		System.out.println("### IMG Servlet ###");
 		
-		//este metodo servira para mandar la imagen de las personas
-		int id = Integer.parseInt(request.getParameter("idDocumento"));
-		dedao.ListarPDF(id, response);
+		String op = request.getParameter("op");
+		
+		
+		switch (op) {
+		case "documentacion":
+			DocumentacionEmpleadoDAO dedao = new DocumentacionEmpleadoDAO();
+			//este metodo servira para mandar la imagen de las personas
+			int id = Integer.parseInt(request.getParameter("idDocumento"));
+			dedao.ListarPDF(id, response);
+			break;
+
+		case "fotoempleado":
+			EmpleadosDAO edao = new EmpleadosDAO();
+			id = Integer.parseInt(request.getParameter("idFoto"));
+			edao.ListarImagen(id, response);
+			break;
+		}
+		
+		
+		
+		
 		
 	}
 

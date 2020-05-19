@@ -152,7 +152,12 @@ public class RegistrarServlet extends HttpServlet {
 				e.setEstadoCivil(request.getParameter("estado-civil"));
 				e.setDiasVacaciones(Integer.parseInt(request.getParameter("dias-vacaciones")));
 				e.setDiasPermiso(Integer.parseInt(request.getParameter("dias-permiso")));
-				e.setFotografia(null);
+				
+				response.setContentType("text/html;charset=UFT-8");
+				Part Documento = request.getPart("foto");
+		        InputStream InputS = Documento.getInputStream();
+		        e.setFotografia(InputS);
+				
 				e.setDireccion(request.getParameter("direccion"));
 				e.setColonia(request.getParameter("colonia"));
 				e.setCodigoPostal(request.getParameter("codigo-postal"));
@@ -400,8 +405,8 @@ public class RegistrarServlet extends HttpServlet {
 						Date fechaEntrega = (Date.valueOf(request.getParameter("fechaEntrega")));
 						
 						response.setContentType("text/html;charset=UFT-8");
-						Part Documento = request.getPart("documento");
-				        InputStream InputS = Documento.getInputStream();
+						Documento = request.getPart("documento");
+				        InputS = Documento.getInputStream();
 				        
 						nssempleado = request.getParameter("nss");
 

@@ -111,8 +111,6 @@
 					</tr>
 				</thead>
 				
-				<form id="formVER" action="" method="post">
-				
 				<tbody id="myTable">
 					<c:forEach var="dato" items="${datosempleados}">
 						<c:if test="${dato.getEstatus() eq 'I'}">
@@ -128,7 +126,12 @@
 							<td>${dato.getEstadoCivil()}</td>
 							<td>${dato.getDiasVacaciones()}</td>
 							<td>${dato.getDiasPermiso()}</td>
-							<td>${dato.getFotografia()}</td>
+							<td>
+							<a href="" data-toggle="modal" data-target="#modalImagen" 
+                       			onclick="mostrarImagen('myImage','${dato.getIdEmpleado()}')">
+								<img src="IMG?op=fotoempleado&idFoto=${dato.getIdEmpleado()}" style="max-width:100%;max-height: 100%;">
+							</a>
+							</td>
 							<td>${dato.getDireccion()}</td>
 							<td>${dato.getColonia()}</td>
 							<td>${dato.getCodigoPostal()}</td>
@@ -187,7 +190,12 @@
 							<td>${dato.getEstadoCivil()}</td>
 							<td>${dato.getDiasVacaciones()}</td>
 							<td>${dato.getDiasPermiso()}</td>
-							<td>${dato.getFotografia()}</td>
+							<td>
+							<a href="" data-toggle="modal" data-target="#modalImagen" 
+                       			onclick="mostrarImagen('myImage','${dato.getIdEmpleado()}')">
+								<img src="IMG?op=fotoempleado&idFoto=${dato.getIdEmpleado()}" style="max-width:100%;max-height: 100%;">
+							</a>
+							</td>
 							<td>${dato.getDireccion()}</td>
 							<td>${dato.getColonia()}</td>
 							<td>${dato.getCodigoPostal()}</td>
@@ -235,18 +243,7 @@
 								<form action="Empleados" method="post">
 									<input type="hidden" name="id" value="${dato.getIdEmpleado()}">
 									<div id="${dato.getIdEmpleado()}">
-										<input type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalEdicion" value="Editar"
-										onclick="rellenarEmpleado('${dato.getIdEmpleado()}',
-										'${dato.getNombre()}','${dato.getApaterno()}',
-										'${dato.getAmaterno()}','${dato.getSexo()}',
-										'${dato.getFechaContratacion()}','${dato.getFechaNacimiento()}','${dato.getSalario()}','${dato.getNss()}',
-										'${dato.getEstadoCivil()}','${dato.getDiasVacaciones()}',
-										'${dato.getDiasPermiso()}','${dato.getIdEmpleado()}',
-										'${dato.getDireccion()}','${dato.getColonia()}',
-										'${dato.getCodigoPostal()}','${dato.getEscolaridad()}',
-										'${dato.getPorcentajeComision()}','${dato.getEstatus()}',
-										'${dato.getIdDepartamento()}','${dato.getIdPuesto()}',
-										'${dato.getIdCiudad()}','${dato.getIdSucursal()}');"> 
+										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
 										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
 									</div>
 								</form>
@@ -256,7 +253,6 @@
 						
 					</c:forEach>
 				</tbody>
-				</form>
 			</table>
 		</div>
 	</div>
@@ -452,203 +448,36 @@
 	  </div>
 	</div>
 	
-
-	<!-- MODAL PARA EDICION -->
-	<div class="modal fade" id="modalEdicion">
+	
+	<!-- MODAL PARA VER LOS DISTINTOS ELEMENTOS -->
+	<span id="res"></span>
+	
+	
+	<!-- MODAL PARA MOSTRAR LAS IMAGENES -->
+	<div class="modal fade" id="modalImagen">
 	  <div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	
 	      <!-- Modal Header -->
 	      <div class="modal-header">
-	        <h4 class="modal-title">Edicion de Empleados</h4>
+	        <h4 class="modal-title">Mostrar Imagen</h4>
 	        <button type="button" class="close" data-dismiss="modal">&times;</button>
 	      </div>
 	
 	      <!-- Modal body -->
-	      <div class="modal-body" id="modal_div">
-	      <% //Aqui va todo el cuerpo del modal%>
-	      	<form action="${pageContext.servletContext.contextPath}/Empleados?op=Editar" method="post">
-			    <div class="container">
-			      <legend> Datos Generales: </legend>
-			      <div class="row">
-			        <div class="col-md-4">
-			          <div class="form-group">
-			            <input type="text" id="edit_nombre" class="form-control" placeholder="Nombre(s)" 
-			            name="edit_nombre" onkeypress="return soloLetras(event)">
-			          </div>
-			        </div>
-			        <div class="col-md-4" >
-			          <div class="form-group">
-			            <input type="text" id="edit_apaterno" class="form-control" placeholder="Apellido Paterno" 
-			            name="edit_apaterno" onkeypress="return soloLetras(event)">
-			          </div>
-			        </div>
-			        <div class="col-md-4" >
-			          <div class="form-group">
-			            <input type="text" id="edit_amaterno" class="form-control" placeholder="Apellido Materno" 
-			            name="edit_amaterno" onkeypress="return soloLetras(event)">
-			          </div>
-			        </div>
-			      </div>
-			      <div class="row">
-			        <div class="col-md-6">
-			        	<label>Sexo:</label>
-			          <select class="form-control" id="edit_sexo" name="edit_sexo">
-			            <option value="M">Masculino</option>
-			            <option value="F">Femenino</option>
-			          </select>
-			        </div>
-			        <div class="col-md-6">
-			        	<label>Estado Civil:</label>
-			          <select class="form-control" id="edit_estado-civil" name="edit_estado-civil">
-			            <option value="Casado">Casado</option>
-			            <option value="Soltero">Soltero</option>
-			           
-			          </select>
-			        </div>
-			      </div>
-			      <br>
-			      <div class="row">
-			        <div class="col-md-6">
-			        	<label>Numero de Seguro Social:</label>
-			          <div class="form-group">
-			            <input type="text" id="edit_nss" name="edit_nss" placeholder="NSS" value="" required class="form-control">
-			          </div>
-			        </div>
-			        <div class="col-md-6">
-			        	<label>Fecha de Nacimiento:</label>
-			          <div class="form-group">
-			            <input type="date" id="edit_fecha-nacimiento" name="edit_fecha-nacimiento" value="" required class="form-control">
-			          </div>
-			        </div>
-			      </div>
-
-			      <div class="row">
-			      	<div class="col-md-12">
-			      		<small>Domicilio del empleado:</small>
-			      	</div>
-			        <div class="col-md-4">
-			          <div class="form-group">
-			            <input type="text" id="edit_direccion" name="edit_direccion" placeholder="Direccion" value="" required 
-			            class="form-control">
-			          </div>
-			        </div>
-			        <div class="col-md-4">
-			          <div class="form-group">
-			            <input type="text" id="edit_colonia" name="edit_colonia" placeholder="Colonia" value="" required 
-			            class="form-control">
-			          </div>
-			        </div>
-			        <div class="col-md-4">
-			          <div class="form-group">
-			            <input type="text" id="edit_codigo-postal" name="edit_codigo-postal" placeholder="Codigo Postal" value="" required 
-			            class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
-			          </div>
-			        </div>
-			      </div>
-
-			      <div class="row">
-			      	<div class="col-md-4">
-				        <label for="Ciudad">Ciudad:</label>
-			    		<select class="form-control" id="edit_ciudad" name = "edit_ciudad">
-			      			<c:forEach var="dato" items="${datosciudades}">
-			      				<option value="${dato.getIdCiudad()}">${dato.getNombre()}</option>
-			      			</c:forEach>
-			    		</select>
-			        </div>
-			        <div class="col-md-4">
-				        <label for="Escolaridad">Escolaridad:</label>
-			    		<input type="text" id="edit_escolaridad" name="edit_escolaridad" placeholder="Escolaridad" value="" required class="form-control" onkeypress="return soloLetras(event)">
-			        </div>
-			      </div>
-
-
-			      <legend> Datos del empleado: </legend>
-			      <div class="row">
-			      	<input type="hidden" id="edit_id" name="edit_id" value="">
-			      	<div class="col-md-4">
-			      		<label>Foto:</label>
-			    		<img id="edit_foto" src="" style="max-width:50%;">	
-			    	</div>
-			        <div class="col-md-4">
-			        	<label>Fecha de Contratacion:</label>
-			          <div class="form-group">
-			            <input type="date" id="edit_fecha-contratacion" name="edit_fecha-contratacion" value="" required class="form-control">
-			          </div>
-			        </div>
-
-			        <div class="col-md-4">
-			        	<label>Salario:</label>
-			          <div class="form-group">
-			            <input type="number" id="edit_salario" name="edit_salario" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
-			          </div>
-			        </div>
-			      </div>
-			      
-			      <div class="row">
-			      	<div class="col-md-4">
-			      		<label>Dias Vacaciones:</label>
-			          <div class="form-group">
-			            <input type="number" id="edit_dias-vacaciones" name="edit_dias-vacaciones" value="" required class="form-control"onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
-			          </div>
-			      	</div>
-			      	<div class="col-md-4">
-			      		<label>Dias Permiso:</label>
-			          <div class="form-group">
-			            <input type="number" id="edit_dias-permiso" name="edit_dias-permiso" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
-			          </div>
-			      	</div>
-			      	<div class="col-md-4">
-			      		<label>% Comision:</label>
-			          <div class="form-group">
-			            <input type="number" id="edit_porcentaje-comision" name="edit_porcentaje-comision" value="" required class="form-control" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
-			          </div>
-			      	</div>
-			      </div>
-
-			      <div class="row">
-			      	<div class="col-md-4">
-				        <label for="Departamento">Departamento:</label>
-			    		<select class="form-control" id="edit_departamento" name = "edit_departamento">
-			      			<c:forEach var="dato" items="${datosdepartamentos}">
-			      				<option value="${dato.getIdDepartamento()}">${dato.getNombre()}</option>
-			      			</c:forEach>
-			    		</select>
-			        </div>
-			        <div class="col-md-4">
-				        <label for="Puesto">Puesto:</label>
-			    		<select class="form-control" id="edit_puesto" name = "edit_puesto">
-			      			<c:forEach var="dato" items="${datospuestos}">
-			      				<option value="${dato.getIdPuesto()}">${dato.getNombre()}</option>
-			      			</c:forEach>
-			    		</select>
-			        </div>
-			        <div class="col-md-4">
-				        <label for="Sucursal">Sucursal:</label>
-			    		<select class="form-control" id="edit_sucursal" name = "edit_sucursal">
-			      			<c:forEach var="dato" items="${datossucursales}">
-			      				<option value="${dato.getIdSucursal()}">${dato.getNombre()}</option>
-			      			</c:forEach>
-			    		</select>
-			        </div>
-			      </div>
-
-			    </div>
-			    <br>
-			    <button type="submit" class="btn btn-primary">Registrar</button>
-			  </form>
+	      <div class="modal-body" align="center" id="modal_div">
+	       	<img id="myImage" src="" style="max-width:100%;" >
 	      </div>
 			
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 	      </div>
 	
 	    </div>
 	  </div>
 	</div>
 	
-	<!-- MODAL PARA VER LOS DISTINTOS ELEMENTOS -->
-	<span id="res"></span>
 	
 	<% //Aqui tendremos la paginacion%>
 	<nav aria-label="paginacion Empleados">

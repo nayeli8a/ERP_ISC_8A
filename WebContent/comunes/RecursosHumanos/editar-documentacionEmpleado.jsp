@@ -37,7 +37,7 @@
 					<div class="row" style="text-align: left;">
 						<div class="col-sm-8">
 							<input type="hidden" id="idDocumento" name="idDocumento" value="${datos.getIdDocumento()}">
-							<img src="PDF?idDocumento=${datos.getIdDocumento()}" style="max-width:100%;max-height:100%;">
+							<img src="IMG?op=documentacion&idDocumento=${datos.getIdDocumento()}" style="max-width:100%;max-height:100%;">
 						</div>
 						<div class="col-sm-4">
 							<div class="col">
