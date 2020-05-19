@@ -27,6 +27,14 @@
     <script type="text/javascript"
     	src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
     <link rel="icon" type="image/png" href="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito_32x.ico">
+    
+    <script type="text/javascript">
+    function mostrarImagen(idelemento,idimagen)
+    {
+    	document.getElementById(idelemento).src = 'PDF?idDocumento='+idimagen;
+    }
+    </script>
+    
     </head>
     <body>
     	<c:if test="${not empty Errores }">
@@ -82,7 +90,12 @@
       						<c:if test="${dato.getEstatus() eq 'I'}">
       							<tr>
       								<td>${dato.getNombreDocumento()}</td>
-      								<td>${dato.getDocumento()}</td>
+      								<td>
+      									<a href="" data-toggle="modal" data-target="#modalImagen" 
+	                            		onclick="mostrarImagen('myImage','${dato.getIdDocumento()}')">
+      									<img src="PDF?idDocumento=${dato.getIdDocumento()}" style="max-width:30%;max-height: 30%;">
+      									</a>
+      								</td>
       								<td>${dato.getFechaEntrega()}</td>
                       				<td>${dato.getNombreEmpleado()}</td>
       								<td>${dato.getNss()}</td>
@@ -94,7 +107,10 @@
       							<tr>
                       				<td>${dato.getNombreDocumento()}</td>
       								<td>
-      									<img src="PDF?idDocumento=${dato.getIdDocumento()}" style="max-width:50%;max-height: 50%;">
+      									<a href="" data-toggle="modal" data-target="#modalImagen" 
+	                            		onclick="mostrarImagen('myImage','${dato.getIdDocumento()}')">
+      									<img src="PDF?idDocumento=${dato.getIdDocumento()}" style="max-width:30%;max-height: 30%;">
+      									</a>
       								</td>
       								<td>${dato.getFechaEntrega()}</td>
                       				<td>${dato.getNombreEmpleado()}</td>
@@ -133,7 +149,8 @@
       				</div>
 
               <!-- Modal body -->
-              <div class="container" style="border: dotted">
+     		<div class="modal-body" id="modal_div">
+     			<div class="container" style="border: dotted">
 					<div class="row">
 						<div class="col-md-12" style="text-align: center">
 							<label><b>Buscar el NSS de los empleados</b></label>
@@ -171,33 +188,32 @@
 					</div>
 					<br>
 				</div>
-              
-     			<div class="modal-body" id="modal_div">
-					<form 
-					    enctype="multipart/form-data"
-						action="${pageContext.servletContext.contextPath}/Registrar?op=DocumentacionEmpleado"
-						onsubmit="return validarFechas();" method="post">
-						<div class="form-group">
-							<div class="row">
-								<div class="col-sm">
-									<label>Nombre Documento: </label>
-									<input type="text" name="nombreDocumento" class="form-control" required>
-									 
-									<label>Fecha entrega: </label>
-									<input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required>
-								</div>
-								<div class="col-sm">
-									<label>Documento:</label> 
-									<input type="file" name="documento"	id="documento" class="form-control" required>
-									 
-									<label>NSS:</label>
-									<input type="text" name="nss" id="nss" class="form-control"	required>
-									<br>
-								</div>
+     		
+				<form 
+				    enctype="multipart/form-data"
+					action="${pageContext.servletContext.contextPath}/Registrar?op=DocumentacionEmpleado"
+					onsubmit="return validarFechas();" method="post">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm">
+								<label>Nombre Documento: </label>
+								<input type="text" name="nombreDocumento" class="form-control" required>
+								 
+								<label>Fecha entrega: </label>
+								<input type="date" name="fechaEntrega" id="fechaEntrega" class="form-control" required>
 							</div>
-							<button type="submit" class="btn btn-primary">Registrar</button>
+							<div class="col-sm">
+								<label>Documento:</label> 
+								<input type="file" name="documento"	id="documento" class="form-control" required>
+								 
+								<label>NSS:</label>
+								<input type="text" name="nss" id="nss" class="form-control"	required>
+								<br>
+							</div>
 						</div>
-					</form>
+						<button type="submit" class="btn btn-primary">Registrar</button>
+					</div>
+				</form>
 			</div>
 
            <!-- Modal footer -->
@@ -208,6 +224,32 @@
            			</div>
            		</div>
            	</div>
+
+	<!-- MODAL PARA MOSTRAR LAS IMAGENES -->
+	<div class="modal fade" id="modalImagen">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">Mostrar Imagen</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body" align="center" id="modal_div">
+	       	<img id="myImage" src="" style="max-width:100%;" >
+	      </div>
+			
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+
 
 
               <%//Aqui tendremos la paginacion%>

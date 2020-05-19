@@ -76,33 +76,33 @@ public class DocumentacionEmpleadoDAO{
   				lista.add(de);
   			}
   		} catch (SQLException e) {
-  			System.out.println("Error: " + e.getMessage());
+  			System.out.println("Error al consultar DocumentacionEmpleadoDAO: " + e.getMessage());
   		}
   		return lista;
   	}
 
     public DocumentacionEmpleado consultaIndividual(int idDocumento){
-  		String sql="select * from  DocumentacionEmpleado where idDocumento=?";
+  		String sql="select * from  Documentacion_empleados where idDocumento=?";
   		DocumentacionEmpleado de = new DocumentacionEmpleado();
   		try{
   			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
   			ps.setInt(1, idDocumento);
   			ResultSet rs=ps.executeQuery();
   			if(rs.next()){
-  				de.setIdDocumento(rs.getInt("idDocumento"));
-          de.setNombreDocumento(rs.getString("nombreDocumento"));
-  				de.setFechaEntrega(rs.getDate("fechaEntrega"));
-  				de.setDocumento(rs.getBinaryStream("evidencia"));
-  				de.setNss(rs.getString("nss"));
-  				de.setIdEmpleado(rs.getInt("idEmpleado"));
-  				de.setEstatus(rs.getString("estatus"));
-
+  				de.setIdDocumento(rs.getInt(1));
+  				de.setNombreDocumento(rs.getString(2));
+  				de.setFechaEntrega(rs.getDate(3));
+  				de.setDocumento(rs.getBinaryStream(4));
+  				de.setIdEmpleado(rs.getInt(5));
+  				de.setEstatus(rs.getString(6));
+  				de.setNombreEmpleado(rs.getString(7));
+  				de.setNss(rs.getString(8));
   			}
   			ps.close();
   			rs.close();
   		}
   		catch(SQLException e){
-  			System.out.println("Error DocumentacionEmpleado DAO:"+e.getMessage());
+  			System.out.println("Error al consultar individual DocumentacionEmpleadoDAO:"+e.getMessage());
   		}
   		return de;
   	}
@@ -121,7 +121,7 @@ public class DocumentacionEmpleadoDAO{
 
     public void actualizar(DocumentacionEmpleado documento)
   	{
-  		String sql="update DocumentacionEmpleado set nombreDocumento=?,fechaEntrega=?,Documento=?,idEmpleado=?, Estatus=? where idEmpleado=?";
+  		String sql="update DocumentacionEmpleado set nombreDocumento=?,fechaEntrega=?,Documento=?,idEmpleado=?, Estatus=? where idDocumento=?";
   		try {
   			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 
@@ -130,7 +130,7 @@ public class DocumentacionEmpleadoDAO{
   			ps.setBinaryStream(3,documento.getDocumento());
   			ps.setInt(4,documento.getIdEmpleado());
   			ps.setString(5,documento.getEstatus());
-
+  			ps.setInt(6, documento.getIdDocumento());
   			ps.executeUpdate();
 
   		} catch (Exception e) {

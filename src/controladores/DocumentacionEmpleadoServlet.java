@@ -1,6 +1,7 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.util.List;
 
@@ -12,13 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import modelo.beans.DocumentacionEmpleado;
 import modelo.datos.Constantes;
 import modelo.datos.DocumentacionEmpleadoDAO;
 
 
-@MultipartConfig//necesario para obtener objetos desde el formulario de envio de archivos
+@MultipartConfig(maxFileSize = 16177216)//15mb necesario para obtener objetos desde el formulario de envio de archivos
 @WebServlet("/DocumentacionEmpleado")
 public class DocumentacionEmpleadoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -38,7 +40,7 @@ public class DocumentacionEmpleadoServlet extends HttpServlet {
 
           switch(op)
   				{
-  				case "Listar":
+  	          case "Listar":
   					DocumentacionEmpleadoDAO dedao = new DocumentacionEmpleadoDAO();
   				    String pagina = request.getParameter("pagina");
   					List<DocumentacionEmpleado> datos = dedao.consultar(pagina);
@@ -48,11 +50,11 @@ public class DocumentacionEmpleadoServlet extends HttpServlet {
   				break;
   				case "Editar":
   					dedao = new DocumentacionEmpleadoDAO();
-  					DocumentacionEmpleado datosDocumentacionEmpleado = dedao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
-  					request.setAttribute("datosDocumentacionEmpleado", datosDocumentacionEmpleado);
+  					DocumentacionEmpleado datosed = dedao.consultaIndividual(Integer.parseInt(request.getParameter("id")));
+  					request.setAttribute("datos", datosed);
   					url=modelo.datos.Constantes.REGRESAR_RH_EDITAR+"documentacionEmpleado.jsp";
   					break;
-            case "Eliminar":
+              case "Eliminar":
     					dedao = new DocumentacionEmpleadoDAO();
     					dedao.eliminar(request.getParameter("id"));
     					url = "DocumentacionEmpleado?op=Listar&pagina=1";
@@ -62,7 +64,12 @@ public class DocumentacionEmpleadoServlet extends HttpServlet {
       					DocumentacionEmpleado de = new DocumentacionEmpleado();
       					de.setNombreDocumento(request.getParameter("nombreDocumento"));
       					de.setFechaEntrega(Date.valueOf(request.getParameter("fechaEntrega")));
-                de.setDocumento(null);
+                        
+      					response.setContentType("text/html;charset=UFT-8");
+						Part Documento = request.getPart("documento");
+				        InputStream InputS = Documento.getInputStream();
+				        de.setDocumento(InputS);
+      					
       					de.setIdEmpleado(Integer.valueOf(request.getParameter("idEmpleado")));
       					de.setEstatus(request.getParameter("estatus"));
       					de.setIdDocumento(Integer.valueOf(request.getParameter("idDocumento")));
