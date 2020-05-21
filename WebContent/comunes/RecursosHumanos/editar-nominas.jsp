@@ -195,12 +195,20 @@
 			          <input type="number" name="idEmpleado" class="form-control" value="${datosnomina.getIdEmpleado()}" readonly="">
 			        </div>
 			      </div>
-			      <div class="col-md-4">
+			      <div class="col-md-2">
 			      	<label for="Estatus">Estatus</label>
 			    	<br>
 			    	<select id="estatus" name="estatus">
 						<option value="A">Activo</option>
 						<option value="I">Inactivo</option>
+					</select>
+				  </div>
+				  <div class="col-md-2">
+			      	<label for="EstatusNomina">Estatus Nomina</label>
+			    	<br>
+			    	<select id="estatusNomina" name="estatusNomina">
+						<option value="C">En Captura</option>
+						<option value="P">Pagada</option>
 					</select>
 				  </div>
 			    </div>

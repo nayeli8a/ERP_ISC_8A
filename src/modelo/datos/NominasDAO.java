@@ -15,8 +15,8 @@ public class NominasDAO {
 			int faltas,Date fechaInicio,Date fechaFin,int idEmpleado,
 			int idFormaPago)
 	{
-		String sql = "insert into Nominas (estatus,fechaPago,totalP,totalD,cantidadNeta,diasTrabajados,faltas,fechaInicio,fechaFin,idEmpleado,idFormaPago)"
-				+ "values('A','"+fechaPago+"','"+totalP+"','"+totalD+"','"+cantidadNeta+"','"+diasTrabajados+"','"+faltas+"','"+fechaInicio+"','"+fechaFin+"','"+idEmpleado+"','"+idFormaPago+"')";
+		String sql = "insert into Nominas (EstatusNomina,estatus,fechaPago,totalP,totalD,cantidadNeta,diasTrabajados,faltas,fechaInicio,fechaFin,idEmpleado,idFormaPago)"
+				+ "values('C','A','"+fechaPago+"','"+totalP+"','"+totalD+"','"+cantidadNeta+"','"+diasTrabajados+"','"+faltas+"','"+fechaInicio+"','"+fechaFin+"','"+idEmpleado+"','"+idFormaPago+"')";
 	    try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 				ps = Conexion.getInstance().getCN().prepareStatement(sql);
@@ -30,7 +30,7 @@ public class NominasDAO {
 	{
 		ArrayList<Nominas> lista = new ArrayList<>();
 		String aux = "execute sp_actualizar_nomina";
-		String sql = "execute sp_paginaciondinamica 'Nominas_empleados','idNomina','"+pagina+"','10'";
+		String sql = "execute sp_paginaciondinamica 'Nominas_empleados','fechaPago','"+pagina+"','10'";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(aux);
 			ps = Conexion.getInstance().getCN().prepareStatement(aux);
@@ -56,6 +56,7 @@ public class NominasDAO {
 				n.setNombreEmpleado(rs.getString(14));
 				n.setApaterno(rs.getString(15));
 				n.setAmaterno(rs.getString(16));
+				n.setEstatusNomina(rs.getString(17));
 				lista.add(n);
 			}
 		} catch (SQLException e) {
@@ -94,6 +95,7 @@ public class NominasDAO {
 				n.setNombreEmpleado(rs.getString(14));
 				n.setApaterno(rs.getString(15));
 				n.setAmaterno(rs.getString(16));
+				n.setEstatusNomina(rs.getString(17));
 				lista.add(n);
 			}
 		} catch (SQLException e) {
@@ -128,6 +130,7 @@ public class NominasDAO {
 				n.setNombreEmpleado(rs.getString(14));
 				n.setApaterno(rs.getString(15));
 				n.setAmaterno(rs.getString(16));
+				n.setEstatusNomina(rs.getString(17));
 			}
 		} catch (SQLException e) {
 			System.out.println("Error al consultar individual nomina: " + e.getMessage());
@@ -149,7 +152,7 @@ public class NominasDAO {
 	public void Actualizar(Nominas nom)
 	{
 		String sql="update Nominas set fechaPago=?,totalP=?,totalD=?,cantidadNeta=?,diasTrabajados=?,"
-				+ "faltas=?,fechaInicio=?,fechaFin=?,idEmpleado=?,idFormaPago=?,estatus=? where idNomina = "+nom.getIdNomina();
+				+ "faltas=?,fechaInicio=?,fechaFin=?,idEmpleado=?,idFormaPago=?,estatus=?,EstatusNomina='C' where idNomina = "+nom.getIdNomina();
 		try {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 
@@ -207,6 +210,19 @@ public class NominasDAO {
 			System.out.println("Error al obtener el salario del empleado con nss: " + e.getMessage());
 		}
 		return salario;
+	}
+	
+	public void PagarNomina(int idNomina)
+	{
+		String sql = "update Nominas set EstatusNomina = 'P' where idNomina = "+idNomina;
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("Error al pagar la nomina: " + e.getMessage());
+		}
+		
 	}
 	
 }

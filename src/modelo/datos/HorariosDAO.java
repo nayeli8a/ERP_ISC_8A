@@ -57,10 +57,14 @@ public class HorariosDAO {
 
   public int validarNSSEmpleado(String nssempleado) {
 		int idEmpleado=-1;
-		String sql = "SELECT idEmpleado FROM Empleados WHERE nss=?";
+		String sql="IF(Exists(select idEmpleado from Empleados where nss = ? and estatus = 'A'))"+
+					"	select idEmpleado from Empleados where nss = ?;"+
+					"ELSE"+
+					"	select -1;";
 		try {
 			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 			ps.setString(1, nssempleado);
+			ps.setString(2, nssempleado);
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {

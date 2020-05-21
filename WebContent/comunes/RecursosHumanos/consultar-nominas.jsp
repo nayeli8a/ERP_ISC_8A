@@ -169,17 +169,18 @@
       <table class="table table-sm">
 		<thead class="thead-dark">
 			<tr>
-				<th>Nombre Empleado</th>
-				<th>Fecha Pago</th>
+				<th style="width: 20%">Nombre Empleado</th>
+				<th style="width: 10%">Fecha Pago</th>
 				<th>Liquido</th>
-				<th>Periodo de Pago</th>
+				<th style="width: 20%">Periodo de Pago</th>
 				<th>Forma Pago</th>
 				<th>Dias Trabajados</th>
 				<th>Faltas</th>
-				<th>Acciones</th>
+				<th style="width: 10%">Estatus Nomina</th>
+				<th style="width: auto;">Acciones</th>
 			</tr>
 		</thead>
-        <tbody id="myTable">
+        <tbody id="myTable" style="text-align: center">
 			<c:forEach var="dato" items="${datos}">
 				<c:if test="${dato.getEstatus() eq 'I'}">
 					<tr>
@@ -190,6 +191,11 @@
 					<td>${dato.getFormaPago()}</td>
 					<td>${dato.getDiasTrabajados()}</td>
 					<td>${dato.getFaltas()}</td>
+					<td>
+						<div style="background-color: red;text-align: center;">
+						<h8 class="texto">Inactiva</h8>
+						</div>
+					</td>
 					</tr>
 				</c:if>
 				<c:if test="${dato.getEstatus() eq 'A'}">
@@ -202,17 +208,40 @@
 					<td>${dato.getDiasTrabajados()}</td>
 					<td>${dato.getFaltas()}</td>
 					<td>
-						<form action="${pageContext.servletContext.contextPath}/Nominas" method="post">
-							<input type="hidden" name="id" value="${dato.getIdNomina()}">
-							<input type="hidden" name="idEmpleado" value="${dato.getIdEmpleado()}">
-							<div id="${dato.getIdNomina()}">
+						<c:if test="${dato.getEstatusNomina() eq 'C' }">
+							<div id="status-${dato.getEstatusNomina()}" style="background-color: orange;text-align: center;">
+							<h8 class="texto">En Captura</h8>
+							</div>
+						</c:if>
+						<c:if test="${dato.getEstatusNomina() eq 'P' }">
+							<div id="status-${dato.getEstatusNomina()}" style="background-color: green;text-align: center;">
+							<h8 class="texto">Pagada</h8>
+							</div>
+						</c:if>
+					</td>
+					<td>
+					<form action="${pageContext.servletContext.contextPath}/Nominas" method="post">
+						<input type="hidden" name="id" value="${dato.getIdNomina()}">
+						<input type="hidden" name="idEmpleado" value="${dato.getIdEmpleado()}">
+						<div id="${dato.getIdNomina()}">
+							<c:if test="${dato.getEstatusNomina() eq 'P' }">
 								<button type="submit" name="op" value="Imprimir">
-									<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/print.png" style="max-width:100%;">
+										<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/print.png" style="max-width:100%;">
 								</button>
+								<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
+							</c:if>
+							<c:if test="${dato.getEstatusNomina() eq 'C' }">
+								<button type="submit" name="op" value="Imprimir">
+										<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/print.png" style="max-width:100%;">
+								</button>
+								<input type="submit" class="btn btn-success" name="op" value="Pagar">
+								<br>
 								<input type="submit" class="btn btn-warning" name="op" value="Editar">
 								<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
-							</div>
-						</form>
+									
+							</c:if>	
+						</div>
+					</form>
 					</td>
 					</tr>
 			 	</c:if>

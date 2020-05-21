@@ -14,6 +14,7 @@ public class Nominas {
 	Date fechaInicio;
 	Date fechaFin;
 	String estatus;
+	String estatusNomina;//C (En captura) P(Pagada)
 	
 	//EMPLEADOS
 	int idEmpleado;
@@ -28,6 +29,12 @@ public class Nominas {
 	
 	
 	
+	public String getEstatusNomina() {
+		return estatusNomina;
+	}
+	public void setEstatusNomina(String estatusNomina) {
+		this.estatusNomina = estatusNomina;
+	}
 	public int getIdEmpleado() {
 		return idEmpleado;
 	}

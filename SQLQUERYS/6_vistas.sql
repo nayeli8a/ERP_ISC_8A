@@ -65,7 +65,7 @@ CREATE VIEW Nominas_empleados
 AS  
    select 
 	n.idNomina,n.fechaPago,n.totalP,n.totalD,n.cantidadNeta,n.diasTrabajados,n.faltas,n.fechaInicio,n.fechaFin,n.idEmpleado,f.nombre as FormaPago,n.estatus,
-	e.nss,e.nombre,e.apaterno,e.amaterno
+	e.nss,e.nombre,e.apaterno,e.amaterno,n.EstatusNomina
 	from Nominas n 
 	join Empleados e on e.idEmpleado = n.idEmpleado 
 	join FormasPago f on n.idFormaPago = f.idFormaPago;

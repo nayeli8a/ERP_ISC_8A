@@ -95,6 +95,7 @@ public class NominasServlet extends HttpServlet {
 				nom.setFaltas(Integer.parseInt(request.getParameter("faltas")));
 				nom.setFechaInicio(Date.valueOf(request.getParameter("fechainicio")));
 				nom.setFechaFin(Date.valueOf(request.getParameter("fechafin")));
+				nom.setEstatusNomina(request.getParameter("estatusNomina"));
 				nomDAO.Actualizar(nom);
 				//generamos el idNomina en basa al id del empleado
 				idNomina = nomDAO.NominaEmpleado(nom.getIdEmpleado());
@@ -171,7 +172,12 @@ public class NominasServlet extends HttpServlet {
 				} catch (JRException e) {
 					System.out.println("Error al generar el reporte "+e.getLocalizedMessage());
 				}
-				
+				url="Nominas?op=Listar&pagina=1";
+				break;
+			case "Pagar":
+				idNomina = Integer.parseInt(request.getParameter("id"));
+				nomDAO.PagarNomina(idNomina);
+				url="Nominas?op=Listar&pagina=1";
 				break;
 		}
 		

@@ -319,6 +319,7 @@ public class RegistrarServlet extends HttpServlet {
 					NominasPercepcionesDAO npdao = new NominasPercepcionesDAO();
 
 					int idempleado = hdao.validarNSSEmpleado(request.getParameter("nss"));
+					System.out.println("El empleado es: "+idempleado);
 					if(idempleado!=-1)
 					{
 						//existe
@@ -371,7 +372,8 @@ public class RegistrarServlet extends HttpServlet {
 					}else
 					{
 						//no existe, regresamos
-						error="El NSS ingresado no corresponde a \\n ningun empleado,\\n Porfavor ingrese uno valido";
+						error="El NSS ingresado no corresponde a \\n ningun empleado registrado"
+								+ "\\nO El empleado esta Inactivo,\\n Porfavor ingrese uno valido";
 						request.setAttribute("Errores",error);
 					}
 
