@@ -147,6 +147,17 @@
     	document.getElementById("registro-nss").value = valor;
     	if(valor.length > 9 && valor.length < 11)
     	{
+    		//document.getElementById("formVER").setAttribute('action',valor);
+        	//document.forms["formVER"].submit();
+    		$.ajax({
+    			type:'POST',
+    			data:{op:'AJAX',datos:valor},
+    			url:'Nominas',
+    			success: function(res){
+    				$("#salario-empleado").attr("value",res);
+    			}
+    		});
+    		
     		$('#modalPedirNss').modal('hide');
 			$('#modalRegistro').modal('show');
     		
@@ -296,6 +307,7 @@
       <% //Aqui va todo el cuerpo del modal%>
       <form id="registrar-nomina" action="${pageContext.servletContext.contextPath}/Registrar?op=Nomina" method="post">
       	<div class="container" style="border-style:solid;">
+      		<input type="text" id="salario-empleado" value="">
 		    <label><b>Datos Empleado:</b></label>
 		    <div class="row">
 		      <div class="col-md-8" style="text-align: center">

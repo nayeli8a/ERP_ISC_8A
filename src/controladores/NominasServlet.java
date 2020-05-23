@@ -195,6 +195,14 @@ public class NominasServlet extends HttpServlet {
 			response.setContentType("text/html");
 			op="";//dejamos la op en vacio para que si envian de un form no AJAX 
 			
+			String nss = request.getParameter("datos");
+			System.out.println(nss+" debe mostrar nss");
+			//buscamos el salario del empleado
+			EmpleadosDAO edao = new EmpleadosDAO();
+			Float salario = edao.salarioEmpleado(nss);
+			
+			//mandamos la respuesta
+			response.getWriter().write(salario+"");
 		}else
 		{
 			doGet(request, response);

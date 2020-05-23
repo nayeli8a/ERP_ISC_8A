@@ -222,4 +222,22 @@ public class EmpleadosDAO {
 		}
     }
 	
+	public float salarioEmpleado (String nss)
+	{
+		String sql = "select salario from empleados where nss = '"+nss+"'";
+		float salario = 0;
+		
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				salario = rs.getFloat(1);
+			}
+		} catch (Exception e) {
+			System.out.println("Error al obtener el salario del empleado: " + e.getMessage());
+		}
+		return salario;
+	}
+	
 }
