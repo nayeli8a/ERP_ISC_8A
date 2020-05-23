@@ -34,6 +34,29 @@
 	var elementosd=1;//contador de deducciones para evitar que se eliminen todos los nodos 
 	var elementosp=1;//contador de percepciones
 	
+	function pasardias(dias,num)
+	{
+		var select = document.getElementById('select-p-'+num);
+		document.getElementById('p-'+num).value=dias;
+	}
+	
+	function pasarporcentaje(porcentaje,num)
+	{
+		var select = document.getElementById('select-d-'+num);
+		document.getElementById('d-'+num).value=porcentaje;
+	}
+	
+	function cargarinicial()
+	{
+		var select = document.getElementById("select-p-1");
+        var dias = select.options[0].getAttribute('dias');
+      	document.getElementById("p-1").value = dias;
+      	
+      	var select = document.getElementById("select-d-1");
+        var dias = select.options[0].getAttribute('porcentaje');
+      	document.getElementById("d-1").value = dias;
+	}
+	
 	//si DoP es 1 es una deducion
 	function clonar(DoP,iddondeclonar,idelementoclonar,select)
 	{
@@ -50,9 +73,12 @@
 			var selects = document.getElementById(idelementoclonar+numd).getElementsByTagName('select');
 			selects[0].setAttribute("id",select+numd);
 			selects[0].setAttribute("name",select+numd);
+			selects[0].setAttribute("onchange","pasarporcentaje(this.options[this.selectedIndex].getAttribute('porcentaje'),"+numd+")");
 			var btns = document.getElementById(idelementoclonar+numd).getElementsByTagName('button');
 			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+numd+"');");
 			btns[0].setAttribute("style","visibility:visible;");
+			var inputporcentaje = document.getElementById(idelementoclonar+numd).getElementsByTagName('input');
+			inputporcentaje[0].setAttribute("id","d-"+numd);
 			elementosd++;
 		}else
 		{
@@ -68,9 +94,12 @@
 			selects[0].setAttribute("id",select+nump);
 			selects[0].setAttribute("name",select+nump);
 			selects[0].removeAttribute("readonly");
+			selects[0].setAttribute("onchange","pasardias(this.options[this.selectedIndex].getAttribute('dias'),"+nump+")");
 			var btns = document.getElementById(idelementoclonar+nump).getElementsByTagName('button');
 			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+nump+"');");	
 			btns[0].setAttribute("style","visibility:visible;");
+			var inputdias = document.getElementById(idelementoclonar+nump).getElementsByTagName('input');
+			inputdias[0].setAttribute("id","p-"+nump);
 			elementosp++;
 		}
 		
@@ -320,11 +349,16 @@
 					          <div class="row">
 						          <div class="col-sm-10">
 						          	  <label>Percepcion:</label>
-						              <select id="select-p-1" name="select-p-1" readonly="readonly">
+						              <select 
+						              onchange="pasardias(this.options[this.selectedIndex].getAttribute('dias'),1)" 
+						              id="select-p-1" 
+						              name="select-p-1" 
+						              readonly="readonly">
 						              <c:forEach var="dato" items="${datospercepciones}">
-						              	<option value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
+						              	<option dias="${dato.getDiasPagar()}" value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
 						              </c:forEach>
 						              </select>
+						              <input id="p-1" type="text" value="">
 						          </div>
 				              	  <div class="col-sm-2">
 				              	  	<button type="button" style="visibility:hidden;" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
@@ -356,11 +390,15 @@
 					          <div class="row">
 					            <div class="col-sm-10">
 					              <label>Deduccion:</label>
-					              <select id="select-d-1" name="select-d-1">
+					              <select
+					              onchange="pasarporcentaje(this.options[this.selectedIndex].getAttribute('porcentaje'),1)"
+					              id="select-d-1" 
+					              name="select-d-1">
 					              <c:forEach var="dato" items="${datosdeducciones}">
-					              	<option value="${dato.getIdDeduccion()}">${dato.getNombre()}</option>
+					              	<option porcentaje="${dato.getPorcentaje()}" value="${dato.getIdDeduccion()}">${dato.getNombre()}</option>
 					              </c:forEach>
 					              </select>
+					              <input id="d-1" type="text" value="">
 					            </div>
 					            
 					            <div class="col-sm-2">
@@ -369,12 +407,13 @@
 					          </div>
 					          <hr style="width:80%;">
          				  </div>
-				          <!-- AQUI TERMINA UNA SOLA PERCEPCION -->
+				          <!-- AQUI TERMINA UNA SOLA DEDUCCION -->
 				          
 		    		</span>
 		    		</div>
 		    	</div>
 		    </div>
+		    <script type="text/javascript">cargarinicial()</script>
 		    <br>
 		    <div align="center">
 		      <button type="button" onclick="agregar_nomina()" class="btn btn-primary">Registrar</button>
