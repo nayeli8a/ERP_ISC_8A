@@ -69,138 +69,12 @@ a{
 }
 
 .contenido{
-  left: 0%;
+  left: 18%;
   top: 400px;
   width: 100%;
   height: 250px;
   position: absolute;
 }
-
-.fondocirculo{
-  top: 50px;
-  background:#004003;
-  margin: 10px;
-  width: 700px;
-  height: 700px;
-  float: left;
-  position: relative;
-  left: 30%;
-  border-radius:100%;
-}
-
-.fondocirculoblanco{
-  background:#ffffff;
-  width: 500px;
-  height: 500px;
-  position: absolute;
-  border-radius:100%;
-  top:100px;
-  left:100px;
-}
-.logoblanco{
-  width: 150px;
-  height: 150px;
-  top:35%;
-  left:35%;
-  position:absolute;
-}
-
-.fondomenucirculoTOPr{
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	top: 0px;
-	background: #00BF0A;
-	border-radius:100%;
-	border: 2px solid #004003;
-}
-.textoTOP{
-	position:absolute;
-	top:10px;
-	left:100px;
-	color:#BF2419;
-}
-.textoRIGHT{
-	position:absolute;
-	top:130px;
-	left:7px;
-	color:#BF2419;
-}
-.textoLEFT{
-	position:absolute;
-	top:120px;
-	right:0px;
-	color:#BF2419;
-}
-.textoBOTTOM{
-	position:absolute;
-	bottom:10px;
-	left:100px;
-	color:#BF2419;
-}
-.fondoplanta{
-	background:#BF2419;
-	position:absolute;
-	width: 40px;
-	height: 40px;
-	left:120px;
-	top: 120px;
-	border-radius: 100%;
-}
-.planta1{
-	position: absolute;
-	width: 25px;
-	height: 25px;
-	left: 8px;
-	top: 8px;
-}
-
-.fondomenucirculoTOPl{
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	right: 0px;
-	background: #00BF0A;
-	border-radius:100%;
-	border: 2px solid #004003;
-}
-
-.fondomenucirculoBOTTOMr{
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	bottom: 0px;
-	background: #00BF0A;
-	border-radius:100%;
-	border: 2px solid #004003;
-}
-
-.fondomenucirculoBOTTOMl{
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	right:0px;
-	bottom: 0px;
-	background: #00BF0A;
-	border-radius:100%;
-	border: 2px solid #004003;
-}
-
-.boton_personalizado{
-    text-decoration: none;
-    padding: 5px;
-    font-weight: 600;
-    font-size: 10px;
-    color: #ffffff;
-    background-color: #038011;
-    border-radius: 6px;
-    border: 2px solid #004003;
-  }
-  .boton_personalizado:hover{
-    text-decoration: none;
-    color: #1883ba;
-    background-color: #ffffff;
-  }
 
 .opcion{
   margin: 10px;
@@ -219,7 +93,6 @@ a{
   width: 100%;
   height: 60%;
   padding: 0px;
-  
 }
 
 .foot{
