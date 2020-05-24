@@ -85,6 +85,7 @@ public class NominasServlet extends HttpServlet {
 				nom.setIdNomina(Integer.parseInt(request.getParameter("id")));
 				nom.setIdEmpleado(hdao.validarNSSEmpleado(request.getParameter("nss")));
 				nom.setIdFormaPago(Integer.parseInt(request.getParameter("idformapago")));
+				nom.setNombreEmpleado(request.getParameter("nombre"));
 				
 				nom.setEstatus(request.getParameter("estatus"));
 				nom.setFechaPago(Date.valueOf(request.getParameter("fechapago")));

@@ -222,6 +222,7 @@
 		</thead>
         <tbody id="myTable" style="text-align: center">
 			<c:forEach var="dato" items="${datos}">
+			
 				<c:if test="${dato.getEstatus() eq 'I'}">
 					<tr>
 					<td>${dato.getNombreEmpleado()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
@@ -261,6 +262,7 @@
 					</td>
 					<td>
 					<form action="${pageContext.servletContext.contextPath}/Nominas" method="post">
+					
 						<input type="hidden" name="id" value="${dato.getIdNomina()}">
 						<input type="hidden" name="idEmpleado" value="${dato.getIdEmpleado()}">
 						<div id="${dato.getIdNomina()}">
@@ -307,23 +309,50 @@
       <% //Aqui va todo el cuerpo del modal%>
       <form id="registrar-nomina" action="${pageContext.servletContext.contextPath}/Registrar?op=Nomina" method="post">
       	<div class="container" style="border-style:solid;">
-      		<input type="text" id="salario-empleado" value="">
-		    <label><b>Datos Empleado:</b></label>
+			<legend> Datos del empleado: </legend>
+		
 		    <div class="row">
-		      <div class="col-md-8" style="text-align: center">
+		    
+		     	<div class="col-md-4" style="text-align: center">
+		        <label>Nombre del Empleado:</label>
+		        <br>
+		        <input name="nombre" id="nombre" type="text"  value="" readonly required>
+		      </div>
+		      
+		      <div class="col-md-4" style="text-align: center">
 		        <label>Nss Empleado</label>
 		        <br>
 		        <input name="nss" id="registro-nss" type="text" style="width:200px;" readonly required>
 		      </div>
-		      <div class="col-md-4">
-		        <label>Forma de Pago</label>
+		      
+		       <div class="col-md-4" style="text-align: center">
+		        <label>Salario diario</label>
+		        <br>
+				<input type="text" id="salario-empleado" value="" >
+		      </div>
+		      
+		    </div>
+		    <br>
+		    
+		   <legend> Datos de la nomina </legend>
+		    
+		    <div class="col-md-4">
+		        <label>Forma de Pago:</label>
 		        <select id="idformapago" name="idformapago" required>
 		        <c:forEach var="dato" items="${datospagos}">
-		        	<option value="${dato.getIdFormaPago()}">${dato.getNombre()}</option>
+		        	<option  value="${dato.getIdFormaPago()}">${dato.getNombre()}</option>
 		        </c:forEach>
+		        
 		        </select>
 		      </div>
-		    </div>
+		     <div class="col-md-4">
+		        <label>Dias a pagar:</label>
+		        <input name="dias" id="dias" type="number"  required>
+		        
+		      </div>
+		    
+		      
+		    
 		    <br>
 		    <label><b>Fechas:</b></label>
 		    <div class="row">
@@ -361,20 +390,31 @@
 					          <div class="row">
 						          <div class="col-sm-10">
 						          	  <label>Percepcion:</label>
+						          	    <div class="col-sm-2">
+				              	  	<button type="button" onclick="percepciones()" >Checar</button>
+				              	  </div>
+						          	
 						              <select 
 						              onchange="pasardias(this.options[this.selectedIndex].getAttribute('dias'),1)" 
 						              id="select-p-1" 
 						              name="select-p-1" 
 						              readonly="readonly">
 						              <c:forEach var="dato" items="${datospercepciones}">
-						              	<option dias="${dato.getDiasPagar()}" value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
+						              	<option dias="${dato.getDiasPagar()}"value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
 						              </c:forEach>
 						              </select>
 						              <input id="p-1" type="text" value="">
-						          </div>
-				              	  <div class="col-sm-2">
-				              	  	<button type="button" style="visibility:hidden;" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
+						                
+							        <label>Monto de percepcion</label>
+							        <input name="percepcion" id="percepcion" type="number" required>
+							        
+						           <div class="col-sm-2">
+				              	  	<button type="button" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
 				              	  </div>
+						          </div>
+						          
+						          
+				              	
 					          </div>
 					          <hr style="width:80%;">
          				  </div>

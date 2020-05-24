@@ -325,6 +325,8 @@ public class RegistrarServlet extends HttpServlet {
 						//existe
 						n.setIdEmpleado(idempleado);
 						n.setIdFormaPago(Integer.parseInt(request.getParameter("idformapago")));
+						n.setNombreEmpleado(request.getParameter("nombre"));
+						
 
 						n.setFechaPago(Date.valueOf(request.getParameter("fechapago")));
 						n.setTotalP(0);
