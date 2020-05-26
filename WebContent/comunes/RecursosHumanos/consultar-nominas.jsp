@@ -98,8 +98,14 @@
 			var btns = document.getElementById(idelementoclonar+nump).getElementsByTagName('button');
 			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+nump+"');");	
 			btns[0].setAttribute("style","visibility:visible;");
+			btns[1].setAttribute("onclick","percepciones('percepcion-"+nump+"','p-"+nump+"');");
+	
 			var inputdias = document.getElementById(idelementoclonar+nump).getElementsByTagName('input');
 			inputdias[0].setAttribute("id","p-"+nump);
+			inputdias[1].setAttribute("id","percepcion-"+nump);
+			inputdias[1].setAttribute("value","");
+			
+
 			elementosp++;
 		}
 		
@@ -168,6 +174,27 @@
 		
     }
 	
+    function percepciones(idmonto, iddias)
+    {
+       var salario = document.getElementById("salario-empleado").value;
+       var dias = document.getElementById(iddias).value;
+       var percepcion = salario*dias;
+       var Respercepcion= document.getElementById(idmonto);
+       Respercepcion.setAttribute("value",percepcion);
+
+    }
+
+
+    function totalpercepciones(valor) {
+		var resultado;
+		resultado+= valor; 
+	 	resultado= document.getElementById("total-deducciones");
+     	resultado.setAttribute("value",resultado);
+    
+    }
+    
+    
+    
 	</script>
 	
 </head>
@@ -345,14 +372,6 @@
 		        
 		        </select>
 		      </div>
-		     <div class="col-md-4">
-		        <label>Dias a pagar:</label>
-		        <input name="dias" id="dias" type="number"  required>
-		        
-		      </div>
-		    
-		      
-		    
 		    <br>
 		    <label><b>Fechas:</b></label>
 		    <div class="row">
@@ -372,6 +391,7 @@
 		        <input name="fechafin" type="date" required>
 		      </div>
 		    </div>
+		    
 		    <br>
 		    <label>Percepciones de esta Nomina:</label>
 		    <div class="row">
@@ -388,13 +408,10 @@
          				  <div id="percepcion-contenido-1">
          				  	 <hr style="width:80%;">
 					          <div class="row">
-						          <div class="col-sm-10">
-						          	  <label>Percepcion:</label>
-						          	    <div class="col-sm-2">
-				              	  	<button type="button" onclick="percepciones()" >Checar</button>
-				              	  </div>
-						          	
-						              <select 
+						     
+						         <div class="col-md-3">
+						         	<label>Percepcion:</label>
+										<select 
 						              onchange="pasardias(this.options[this.selectedIndex].getAttribute('dias'),1)" 
 						              id="select-p-1" 
 						              name="select-p-1" 
@@ -403,19 +420,38 @@
 						              	<option dias="${dato.getDiasPagar()}"value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
 						              </c:forEach>
 						              </select>
-						              <input id="p-1" type="text" value="">
-						                
-							        <label>Monto de percepcion</label>
-							        <input name="percepcion" id="percepcion" type="number" required>
+						           </div>
+						           
+						           <div class="col-md-3">
+						           <label>Dias de percepcion:</label>
+						          <br>
+						           <input id="p-1" type="text" value="">
+						           
+						           
+						           </div>
+						           
+						               
+						           <div class="col-md-4">
+						               <label>Monto de percepcion:</label>
+						               <br>
+							        <input name="percepcion-1" id="percepcion-1" type="number" placeholder="Click en checar" onchange="totalpercepciones(this.value)" readonly >
 							        
+						           
+						           </div>
+						          
+						           
+						     
 						           <div class="col-sm-2">
-				              	  	<button type="button" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
+				              	  	<button type="button" style="visibility:hidden;" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
 				              	  </div>
+				              	  <div class="col-sm-2">
+					              	  	<button type="button"  class="btn btn-outline-success" onclick="percepciones('percepcion-1', 'p-1')" >Checar</button>
+					              	  </div>
 						          </div>
 						          
 						          
 				              	
-					          </div>
+					          
 					          <hr style="width:80%;">
          				  </div>
 				          <!-- AQUI TERMINA UNA SOLA PERCEPCION -->
@@ -439,9 +475,9 @@
          				  <!-- AQUI EMPIEZA UNA SOLA DEDUCCION -->
          				  <div id="deduccion-contenido-1">
          				  	 <hr style="width:80%;">
-					          <div class="row">
-					            <div class="col-sm-10">
-					              <label>Deduccion:</label>
+					         <div class="row">
+					          <div class="col-md-3">
+					           <label>Deduccion:</label>
 					              <select
 					              onchange="pasarporcentaje(this.options[this.selectedIndex].getAttribute('porcentaje'),1)"
 					              id="select-d-1" 
@@ -450,13 +486,33 @@
 					              	<option porcentaje="${dato.getPorcentaje()}" value="${dato.getIdDeduccion()}">${dato.getNombre()}</option>
 					              </c:forEach>
 					              </select>
+					           </div>
+					          
+					            <div class="col-md-3">
+					             <label>% de deducción: </label>
 					              <input id="d-1" type="text" value="">
 					            </div>
+					            
+					               <div class="col-md-4">
+						               <label>Monto de deducción:</label>
+						               <br>
+							        <input name="deduccion-1" id="deduccion-1" type="number" placeholder="Click en checar"  readonly>
+							        
+						           
+						           </div>
 					            
 					            <div class="col-sm-2">
 					            	<button type="button" style="visibility:hidden;" onclick="quitar(1,'deduccion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
 					            </div>
+					            
+					            <div class="col-sm-2">
+					              	  	<button type="button"  class="btn btn-outline-success" onclick="deducciones('deduccion-1', 'd-1')" >Checar</button>
+					              	  </div>
+					            
 					          </div>
+					          
+					          
+					          
 					          <hr style="width:80%;">
          				  </div>
 				          <!-- AQUI TERMINA UNA SOLA DEDUCCION -->
@@ -472,6 +528,26 @@
 		    </div>
 		    <br>
 		  </div>
+		  
+		  <div class="row">
+			<div class="col-md-3">
+			<label>Total deducciones:</label>
+		    <input name="total-deducciones" id="total-deducciones" type="text"  value="" readonly required>
+		    </div>
+		    
+		    <div class="col-md-3">
+			<label>Total percepciones:</label>
+		    <input name="total-percepciones" id="total-percepciones" type="text"  value="" readonly required>
+		    </div>
+		    
+		    <div class="col-md-3">
+			<label>Salario:</label>
+		    <input name="salario" id="salario" type="text"  value="" readonly required>
+		    </div>
+		  
+		  </div>
+		  
+		  
       </form>
       </div>
    <!-- Modal footer -->

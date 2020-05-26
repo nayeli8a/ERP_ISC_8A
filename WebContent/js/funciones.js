@@ -245,15 +245,6 @@ function validarFechasAusenciasEditar()
 }
 }
 
-function percepciones()
-{
-   var salario = document.getElementById("salario-empleado").value;
-   var dias = document.getElementById("p-1").value;
-   var percepcion = salario*dias;
-   var Respercepcion= document.getElementById("percepcion");
-   Respercepcion.setAttribute("value",percepcion);
-
-}
 
 
 
