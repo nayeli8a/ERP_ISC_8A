@@ -184,15 +184,23 @@
 
     }
 
-
+	var resp=0;
     function totalpercepciones(valor) {
-		var resultado;
-		resultado+= valor; 
-	 	resultado= document.getElementById("total-deducciones");
-     	resultado.setAttribute("value",resultado);
+		resp += valor;
+	    document.getElementById("total-percepciones").value = resp;
     
     }
     
+    
+    function totalp()
+    {
+    	var respuesta=0;
+    	for (var i = 1; i < nump+1;i++ )
+    	{
+    		respuesta += parseInt(document.getElementById("percepcion-"+i).value);
+    	}
+    	document.getElementById("total-percepciones").value = respuesta;
+    }
     
     
 	</script>
@@ -506,7 +514,7 @@
 					            </div>
 					            
 					            <div class="col-sm-2">
-					              	  	<button type="button"  class="btn btn-outline-success" onclick="deducciones('deduccion-1', 'd-1')" >Checar</button>
+					              	  	<button type="button"  class="btn btn-outline-success" onclick="" >Checar</button>
 					              	  </div>
 					            
 					          </div>
@@ -538,13 +546,15 @@
 		    <div class="col-md-3">
 			<label>Total percepciones:</label>
 		    <input name="total-percepciones" id="total-percepciones" type="text"  value="" readonly required>
+		    <button type="button" onclick="totalp()">GenerarTotal</button>
 		    </div>
 		    
 		    <div class="col-md-3">
 			<label>Salario:</label>
 		    <input name="salario" id="salario" type="text"  value="" readonly required>
 		    </div>
-		  
+		  	
+		  	
 		  </div>
 		  
 		  
