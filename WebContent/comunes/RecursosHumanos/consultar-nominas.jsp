@@ -77,8 +77,13 @@
 			var btns = document.getElementById(idelementoclonar+numd).getElementsByTagName('button');
 			btns[0].setAttribute("onclick","quitar("+DoP+",'"+idelementoclonar+numd+"');");
 			btns[0].setAttribute("style","visibility:visible;");
+			btns[1].setAttribute("onclick","deducciones('deduccion-"+numd+"','d-"+numd+"');");
+
 			var inputporcentaje = document.getElementById(idelementoclonar+numd).getElementsByTagName('input');
 			inputporcentaje[0].setAttribute("id","d-"+numd);
+			inputporcentaje[1].setAttribute("id","deduccion-"+numd);
+			inputporcentaje[1].setAttribute("value","");
+			
 			elementosd++;
 		}else
 		{
@@ -181,13 +186,29 @@
        var percepcion = salario*dias;
        var Respercepcion= document.getElementById(idmonto);
        Respercepcion.setAttribute("value",percepcion);
+       totalp();
 
     }
+    
+    function deducciones(idmonto, idporcentaje)
+    {
+       var totalP = document.getElementById("total-percepciones").value;
+       var porcentaje = document.getElementById(idporcentaje).value;
+       porcentaje=porcentaje/100;
+       var resultado = porcentaje*totalP;
+       document.getElementById(idmonto).value= resultado;
+
+      
+     
+    }
+    
+    
 
 	var resp=0;
     function totalpercepciones(valor) {
 		resp += valor;
 	    document.getElementById("total-percepciones").value = resp;
+	    
     
     }
     
@@ -514,7 +535,7 @@
 					            </div>
 					            
 					            <div class="col-sm-2">
-					              	  	<button type="button"  class="btn btn-outline-success" onclick="" >Checar</button>
+					              	  	<button type="button"  class="btn btn-outline-success" onclick="deducciones('deduccion-1', 'd-1')">Checar</button>
 					              	  </div>
 					            
 					          </div>
@@ -546,7 +567,6 @@
 		    <div class="col-md-3">
 			<label>Total percepciones:</label>
 		    <input name="total-percepciones" id="total-percepciones" type="text"  value="" readonly required>
-		    <button type="button" onclick="totalp()">GenerarTotal</button>
 		    </div>
 		    
 		    <div class="col-md-3">
