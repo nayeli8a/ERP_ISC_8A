@@ -81,6 +81,7 @@
 
 			var inputporcentaje = document.getElementById(idelementoclonar+numd).getElementsByTagName('input');
 			inputporcentaje[0].setAttribute("id","d-"+numd);
+			inputporcentaje[0].setAttribute("value","");
 			inputporcentaje[1].setAttribute("id","deduccion-"+numd);
 			inputporcentaje[1].setAttribute("value","");
 			
@@ -197,9 +198,7 @@
        porcentaje=porcentaje/100;
        var resultado = porcentaje*totalP;
        document.getElementById(idmonto).value= resultado;
-
-      
-     
+       totald();
     }
     
     
@@ -223,7 +222,24 @@
     	document.getElementById("total-percepciones").value = respuesta;
     }
     
+    function totald()
+    {
+    	var respuesta=0;
+    	for (var i = 1; i < nump+1;i++ )
+    	{
+    		respuesta += parseInt(document.getElementById("deduccion-"+i).value);
+    	}
+    	document.getElementById("total-deducciones").value = respuesta;
+    	totalsalario();
+    }
     
+    function totalsalario()
+    {
+    	var respuesta=0;
+    	respuesta = document.getElementById("total-percepciones").value;
+    	respuesta -= document.getElementById("total-deducciones").value;
+    	document.getElementById("total-salario").value = respuesta;
+    }
 	</script>
 	
 </head>
@@ -570,8 +586,8 @@
 		    </div>
 		    
 		    <div class="col-md-3">
-			<label>Salario:</label>
-		    <input name="salario" id="salario" type="text"  value="" readonly required>
+			<label>Salario Quincenal:</label>
+		    <input name="total-salario" id="total-salario" type="text"  value="" readonly required>
 		    </div>
 		  	
 		  	
