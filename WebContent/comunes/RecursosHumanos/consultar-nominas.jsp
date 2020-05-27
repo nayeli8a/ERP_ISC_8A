@@ -384,13 +384,7 @@
 			<legend> Datos del empleado: </legend>
 		
 		    <div class="row">
-		    
-		     	<div class="col-md-4" style="text-align: center">
-		        <label>Nombre del Empleado:</label>
-		        <br>
-		        <input name="nombre" id="nombre" type="text"  value="" readonly required>
-		      </div>
-		      
+
 		      <div class="col-md-4" style="text-align: center">
 		        <label>Nss Empleado</label>
 		        <br>
@@ -400,7 +394,7 @@
 		       <div class="col-md-4" style="text-align: center">
 		        <label>Salario diario</label>
 		        <br>
-				<input type="text" id="salario-empleado" value="" >
+				<input type="text" id="salario-empleado" value="" readonly >
 		      </div>
 		      
 		    </div>
@@ -470,7 +464,7 @@
 						           <div class="col-md-3">
 						           <label>Dias de percepcion:</label>
 						          <br>
-						           <input id="p-1" type="text" value="">
+						           <input id="p-1" type="text" value="" readonly >
 						           
 						           
 						           </div>
@@ -535,7 +529,7 @@
 					          
 					            <div class="col-md-3">
 					             <label>% de deducción: </label>
-					              <input id="d-1" type="text" value="">
+					              <input id="d-1" type="text" value="" readonly >
 					            </div>
 					            
 					               <div class="col-md-4">
