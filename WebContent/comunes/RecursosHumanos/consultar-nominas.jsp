@@ -240,6 +240,24 @@
     	respuesta -= document.getElementById("total-deducciones").value;
     	document.getElementById("total-salario").value = respuesta;
     }
+    
+    function obtenerDiasTrabajados(valor)
+    {
+       var fechaInicio = document.getElementById("fechaInicio").value;
+       var fechaFin = document.getElementById("fechaFin").value;
+       var faltas = document.getElementById("faltas").value;
+	   var aux= (Date.parse(fechaFin)- Date.parse(fechaInicio))
+	   aux=(aux/24);//dias
+	   aux=(aux/60);//minutos
+	   aux=(aux/60);//segundos
+	   aux=(aux/1000);//milisegundos
+	   var dias=aux-faltas; //dias (INT)
+   	   document.getElementById("dias-trabajados").value = dias;
+
+
+
+    }
+    
 	</script>
 	
 </head>
@@ -422,13 +440,30 @@
 		      <div class="col-md-4">
 		        <label>Fecha de Inicio</label>
 		        <br>
-		        <input name="fechainicio" type="date" required>
+		        <input name="fechainicio" id="fechaInicio" type="date" onchange="obtenerDiasTrabajados(this.value);" required>
 		      </div>
 		      <div class="col-md-4">
 		        <label>Fecha Final</label>
 		        <br>
-		        <input name="fechafin" type="date" required>
+		        <input name="fechafin" id="fechaFin" type="date" onchange="obtenerDiasTrabajados(this.value);" required>
 		      </div>
+		    </div>
+		    
+		    <div class=row>
+		     	<div class="col-md-4">
+		     	<label>Dias trabajados:</label>
+		   	    <input name="dias-trabajados"  id="dias-trabajados" type="number" readonly>
+		     	
+		     	
+		     	</div>
+		     	
+		     	<div class="col-md-4">
+		     	<label>Faltas:</label>
+		     	 <input name="faltas" id="faltas" type="number" min="0" max="15" onchange="obtenerDiasTrabajados(this.value);" required>
+		     	
+		     	
+		     	</div>
+		    
 		    </div>
 		    
 		    <br>
