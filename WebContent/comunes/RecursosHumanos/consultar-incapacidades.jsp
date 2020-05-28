@@ -52,6 +52,12 @@
 	    	}
 			
 	    }
+		
+	    
+	    function mostrarImagen(idelemento,idimagen)
+	    {
+	    	document.getElementById(idelemento).src = "IMG?op=incapacidad&idIncapacidad="+idimagen;
+	    }
 	</script>
 
 </head>
@@ -109,8 +115,13 @@
 								<td>${dato.getFechaInicio()}</td>
 								<td>${dato.getFechaFin()}</td>
 								<td>${dato.getEnfermedad()}</td>
-								<td>${dato.getEvidencia()}</td>
-								<td>${dato.getNss()}</td>
+									<td>
+      									<a href="" data-toggle="modal" data-target="#modalImagen" 
+	                            		onclick="mostrarImagen('myImage','${dato.getIdIncapacidad()}')">
+      									<img src="IMG?op=incapacidad&idIncapacidad=${dato.getIdIncapacidad()}" style="max-width:30%;max-height: 30%;">
+      									</a>
+      								</td>	
+      								<td>${dato.getNss()}</td>
 								<td>${dato.getEstatus()}</td>
 							</tr>
 						</c:if>
@@ -119,8 +130,13 @@
 								<td>${dato.getFechaInicio()}</td>
 								<td>${dato.getFechaFin()}</td>
 								<td>${dato.getEnfermedad()}</td>
-								<td>${dato.getEvidencia()}</td>
-								<td>${dato.getNss()}</td>
+									<td>
+      									<a href="" data-toggle="modal" data-target="#modalImagen" 
+	                            		onclick="mostrarImagen('myImage','${dato.getIdIncapacidad()}')">
+      									<img src="IMG?op=incapacidad&idIncapacidad=${dato.getIdIncapacidad()}" style="max-width:30%;max-height: 30%;">
+      									</a>
+      								</td>								
+      								<td>${dato.getNss()}</td>
 								<td>${dato.getEstatus()}</td>
 								<td>
 									<form action="Incapacidades" method="post">
@@ -218,8 +234,9 @@
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>Evidencia: </label> <input type="file"
-										class="form-control-file border">
+									<label>Evidencia: </label>
+								<input type="file" name="evidencia"	id="evidencia" class="form-control" required>
+									
 								</div>
 							</div>
 						</div>
@@ -237,6 +254,33 @@
 			</div>
 		</div>
 	</div>
+
+
+	<!-- MODAL PARA MOSTRAR LAS IMAGENES -->
+	<div class="modal fade" id="modalImagen">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">Mostrar Imagen</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body" align="center" id="modal_div">
+	       	<img id="myImage" src="" style="max-width:100%;" >
+	      </div>
+			
+	      <!-- Modal footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+	      </div>
+	
+	    </div>
+	  </div>
+	</div>
+
 
 	<%
 		//Aqui tendremos la paginacion

@@ -2,12 +2,18 @@ package modelo.datos;
 
 
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import modelo.beans.Incapacidades;
 
@@ -37,12 +43,13 @@ public class IncapacidadesDAO {
 
 	  
 	
-	  public void insertarIncapacidades(Date fechaInicio, Date fechaFin, String enfermedad, String evidencia, int idEmpleado, String estatus)
+	  public void insertarIncapacidades(InputStream documento, Date fechaInicio, Date fechaFin, String enfermedad, int idEmpleado, String estatus)
 	  {
-		  String sql = "insert into Incapacidades values('"+fechaInicio+"','"+fechaFin+"','"+enfermedad+"',null,"+idEmpleado+",'"+estatus+"')";
+		  String sql = "insert into Incapacidades values('"+fechaInicio+"','"+fechaFin+"','"+enfermedad+"',?,"+idEmpleado+",'"+estatus+"')";
 	    try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 				ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.setBlob(1, documento);
 				ps.executeUpdate();
 			} catch (Exception e) {
 				System.out.println("Error al insertar la incapacidad en la BD: "+e.getMessage());
@@ -143,6 +150,34 @@ public class IncapacidadesDAO {
 		}
 	}
 	
+    public void ListarPDF(int idIncapacidad, HttpServletResponse response)
+    {
+    	String sql = "select * from Incapacidades where idIncapacidad = "+idIncapacidad;
+        InputStream is = null;
+        OutputStream os = null;
+        BufferedInputStream bufferedInputStream = null;
+        BufferedOutputStream bufferedOutputStream = null;
+        response.setContentType("image/*");
+        
+        try {
+			os = response.getOutputStream();
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+	        ResultSet rs = ps.executeQuery();
+	        if(rs.next())
+	        {
+	        	is = rs.getBinaryStream(5);
+	        }
+	        bufferedInputStream = new BufferedInputStream(is);
+	        bufferedOutputStream = new BufferedOutputStream(os);
+	        int i=0;
+	        while((i=bufferedInputStream.read()) != -1)
+	        {
+	        	bufferedOutputStream.write(i);
+	        }
+		} catch (Exception e) {
+			System.out.println("error dentro de IncapacidadesDAO: "+e.getMessage());
+		}
+    }
 	
 	}
 
