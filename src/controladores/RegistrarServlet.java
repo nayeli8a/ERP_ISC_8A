@@ -222,11 +222,15 @@ public class RegistrarServlet extends HttpServlet {
 				Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
 				nssempleado= request.getParameter("nssempleado");
 				String enfermedad =request.getParameter("enfermedad");
+				
+				response.setContentType("text/html;charset=UFT-8");
+				Documento = request.getPart("evidencia");
+		        InputS = Documento.getInputStream();
 			    estatus = "A";
 				idEmpleado = indao.validarNSSEmpleado(nssempleado);
 				if(idEmpleado != -1)
 				{
-					indao.insertarIncapacidades(fechaInicio, fechaFin, enfermedad, null,idEmpleado, estatus);
+					indao.insertarIncapacidades(InputS, fechaInicio, fechaFin, enfermedad,idEmpleado, estatus);
 					mensaje = "Incapacidad registrada con exito para el NSS: "+nssempleado;
 					request.setAttribute("Mensajes",mensaje);
 

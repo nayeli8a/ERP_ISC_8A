@@ -14,6 +14,7 @@ import com.darwinsys.*;
 
 import modelo.datos.DocumentacionEmpleadoDAO;
 import modelo.datos.EmpleadosDAO;
+import modelo.datos.IncapacidadesDAO;
 
 
 @MultipartConfig(maxFileSize = 16177216)//15mb
@@ -46,6 +47,13 @@ public class IMGServlet extends HttpServlet {
 			id = Integer.parseInt(request.getParameter("idFoto"));
 			edao.ListarImagen(id, response);
 			break;
+			
+		case "incapacidad":
+			IncapacidadesDAO idao = new IncapacidadesDAO();
+			id = Integer.parseInt(request.getParameter("idIncapacidad"));
+			idao.ListarPDF(id, response);
+			break;	
+			
 		}
 		
 		
