@@ -2,6 +2,7 @@ package controladores;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -189,21 +190,53 @@ public class NominasServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String op = request.getParameter("op");
-		
+		String opt = request.getParameter("opt");
 		if(op.equals("AJAX"))
 		{
 			//ponemos el modo de respuestas en text/html para poder mandar objetos html
 			response.setContentType("text/html");
-			op="";//dejamos la op en vacio para que si envian de un form no AJAX 
 			
-			String nss = request.getParameter("datos");
-			System.out.println(nss+" debe mostrar nss");
-			//buscamos el salario del empleado
-			EmpleadosDAO edao = new EmpleadosDAO();
-			Float salario = edao.salarioEmpleado(nss);
+			if(opt.equals("verconcepto"))
+			{
+				op="";//dejamos la op en vacio para que si envian de un form no AJAX
+				
+				int idnomina = Integer.parseInt(request.getParameter("datos"));
+				NominasDAO ndao = new NominasDAO();
+				List<NominasPercepciones> datosp = ndao.obtenerconceptosp(idnomina);
+				List<NominasDeducciones> datosd = ndao.obtenerconceptosd(idnomina);
+				
+				float totalp=0,totald=0;
+				
+				String respuesta = "<label><b>Percepciones:</b></label><br><ul>";
+				for (int i = 0; i < datosp.size(); i++) {
+					respuesta+="<li>"+datosp.get(i).getNombre()+"\t$"+datosp.get(i).getImporte()+"</li><br>";
+					totalp+=datosp.get(i).getImporte();
+				}
+				respuesta+="<label><b>Total</b></label><br>$"+totalp+"</ul><br>";
+				
+				respuesta+="<label><b>Deducciones:</b></label><br><ul>";
+				for (int i = 0; i < datosd.size(); i++) {
+					respuesta+="<li>"+datosd.get(i).getNombre()+"\t$"+datosd.get(i).getImporte()+"</li><br>";
+					totald+=datosd.get(i).getImporte();
+				}
+				respuesta+="<label><b>Total</b></label><br>$"+totald+"</ul><br>";
+				
+				response.getWriter().write(respuesta);
+				
+			}else
+			{
+				op="";//dejamos la op en vacio para que si envian de un form no AJAX 
+				
+				String nss = request.getParameter("datos");
+				//System.out.println(nss+" debe mostrar nss");
+				//buscamos el salario del empleado
+				EmpleadosDAO edao = new EmpleadosDAO();
+				Float salario = edao.salarioEmpleado(nss);
+				
+				//mandamos la respuesta
+				response.getWriter().write(salario+"");
+			}
 			
-			//mandamos la respuesta
-			response.getWriter().write(salario+"");
 		}else
 		{
 			doGet(request, response);

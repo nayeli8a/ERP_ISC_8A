@@ -94,7 +94,9 @@
 					<div class="col-md-4">
 						<label>Tipo:</label> 
 						<select class="form-control" id="tipo" name="tipo" required>
-						<option value="${datosAusencia.getTipo()}" selected> ${datosAusencia.getTipo()}</option>
+						<option value="${datosAusencia.getTipo()}" selected> 
+							${datosAusencia.getTipo()}
+						</option>
 							<option value="V">Vacaciones</option>
 							<option value="P">Permiso</option>
 						</select>
@@ -118,7 +120,10 @@
 						<label>Estatus de la Ausencia</label>
 						<div class="form-group">
 							<input type="text" class="form-control" name="estatusAusencia" id="estatusAusencia"
-								value="${datosAusencia.getEstatusAusencia()}"  readonly>
+								<c:if test="${datosAusencia.getEstatusAusencia() eq 'P' }">
+								value="${datosAusencia.getEstatusAusencia()}" readonly>
+								</c:if>
+								
 						</div>
 					</div>
 				</div>

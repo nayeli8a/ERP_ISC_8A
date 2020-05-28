@@ -163,7 +163,7 @@
         	//document.forms["formVER"].submit();
     		$.ajax({
     			type:'POST',
-    			data:{op:'AJAX',datos:valor},
+    			data:{op:'AJAX',opt:"",datos:valor},
     			url:'Nominas',
     			success: function(res){
     				$("#salario-empleado").attr("value",res);
@@ -179,6 +179,20 @@
     	}
 		
     }
+	
+	//este metodo sirve para obtener la lista de las nominaspercepciones y nominasdeduciones de la nomina
+	function verconceptos(idnomina)
+	{
+   		$.ajax({
+   			type:'POST',
+   			data:{op:'AJAX',opt:"verconcepto",datos:idnomina},
+   			url:'Nominas',
+   			success: function(res){
+   				$('#conceptos').html(res);
+				$('#modalVER').modal('show');
+   			}
+   		});
+	}
 	
     function percepciones(idmonto, iddias)
     {
@@ -299,6 +313,7 @@
       <table class="table table-sm">
 		<thead class="thead-dark">
 			<tr>
+				<th>No.Nomina</th>
 				<th style="width: 20%">Nombre Empleado</th>
 				<th style="width: 10%">Fecha Pago</th>
 				<th>Liquido</th>
@@ -308,6 +323,7 @@
 				<th>Faltas</th>
 				<th style="width: 10%">Estatus Nomina</th>
 				<th style="width: auto;">Acciones</th>
+				<th style="width: 10%;">Conceptos:</th>
 			</tr>
 		</thead>
         <tbody id="myTable" style="text-align: center">
@@ -315,6 +331,7 @@
 			
 				<c:if test="${dato.getEstatus() eq 'I'}">
 					<tr>
+					<td>${dato.getIdNomina()}</td>
 					<td>${dato.getNombreEmpleado()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
 					<td>${dato.getFechaPago()}</td>
 					<td>${dato.getCantidadNeta()}</td>
@@ -327,10 +344,13 @@
 						<h8 class="texto">Inactiva</h8>
 						</div>
 					</td>
+					<td></td>
+					<td></td>
 					</tr>
 				</c:if>
 				<c:if test="${dato.getEstatus() eq 'A'}">
 					<tr>
+					<td>${dato.getIdNomina()}</td>
 					<td>${dato.getNombreEmpleado()} ${dato.getApaterno()} ${dato.getAmaterno()}</td>
 	                <td>${dato.getFechaPago()}</td>
 					<td>${dato.getCantidadNeta()}</td>
@@ -357,20 +377,36 @@
 						<input type="hidden" name="idEmpleado" value="${dato.getIdEmpleado()}">
 						<div id="${dato.getIdNomina()}">
 							<c:if test="${dato.getEstatusNomina() eq 'P' }">
+								<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
+							</c:if>
+							<c:if test="${dato.getEstatusNomina() eq 'C' }">
+								<input type="submit" class="btn btn-success" name="op" value="Pagar">
+								<br>
+								<input type="submit" class="btn btn-warning" name="op" value="Editar">
+							</c:if>	
+						</div>
+					</form>
+					</td>
+					<td>
+					<form action="${pageContext.servletContext.contextPath}/Nominas" method="post">
+						<input type="hidden" name="id" value="${dato.getIdNomina()}">
+						<input type="hidden" name="idEmpleado" value="${dato.getIdEmpleado()}">
+						<div id="${dato.getIdNomina()}">
+							<c:if test="${dato.getEstatusNomina() eq 'P' }">
 								<button type="submit" name="op" value="Imprimir">
 										<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/print.png" style="max-width:100%;">
 								</button>
-								<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
+								<button type="button" name="op" onclick="verconceptos(${dato.getIdNomina()})">
+										<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/details.png" style="max-width:100%;">
+								</button>
 							</c:if>
 							<c:if test="${dato.getEstatusNomina() eq 'C' }">
 								<button type="submit" name="op" value="Imprimir">
 										<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/print.png" style="max-width:100%;">
 								</button>
-								<input type="submit" class="btn btn-success" name="op" value="Pagar">
-								<br>
-								<input type="submit" class="btn btn-warning" name="op" value="Editar">
-								<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
-									
+								<button type="button" name="op" onclick="verconceptos(${dato.getIdNomina()})">
+										<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/details.png" style="max-width:100%;">
+								</button>
 							</c:if>	
 						</div>
 					</form>
@@ -707,6 +743,34 @@
 	    </div>
 	  </div>
 </div>
+
+	<!-- MODAL PARA OBTENER NSS -->
+	<div class="modal fade" id="modalVER">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	
+	      <!-- Modal Header -->
+	      <div class="modal-header">
+	        <h4 class="modal-title">Conceptos de la nomina</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <!-- Modal body -->
+	      <div class="modal-body" id="modal_div">
+	      <% //Aqui va todo el cuerpo del modal%>
+	      <div class="container" style="border: dotted">
+				<span id="conceptos">
+					
+				</span>
+		  </div>
+	      </div>
+	   <!-- Modal footer -->
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+		      </div>
+		    </div>
+		  </div>
+	</div>
 
 
 <% //Aqui tendremos la paginacion%>

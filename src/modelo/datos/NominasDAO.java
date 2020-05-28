@@ -225,4 +225,56 @@ public class NominasDAO {
 		
 	}
 	
+	public List<NominasPercepciones> obtenerconceptosp(int idnomina)
+	{
+		String sqlp = "select p.nombre,np.importe from NominasPercepciones np join Percepciones p "+ 
+				      "on p.idPercepcion = np.idPercepcion and np.idNomina = "+idnomina;
+		List<NominasPercepciones> datosp = new ArrayList();
+		
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sqlp);
+			ps = Conexion.getInstance().getCN().prepareStatement(sqlp);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next())
+			{
+				NominasPercepciones np = new NominasPercepciones();
+				np.setNombre(rs.getString(1));
+				np.setImporte(rs.getFloat(2));
+				datosp.add(np);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error al obtenerconceptos : " + e.getMessage());
+		}
+		return datosp;
+	}
+	
+	public List<NominasDeducciones> obtenerconceptosd(int idnomina)
+	{
+		String sqld = "select d.nombre,nd.importe from NominasDeducciones nd join Deducciones d "+
+					  "on d.idDeduccion = nd.idDeduccion and nd.idNomina = "+idnomina;
+		List<NominasDeducciones> datosd = new ArrayList();
+		
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sqld);
+			ps = Conexion.getInstance().getCN().prepareStatement(sqld);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next())
+			{
+				NominasDeducciones nd = new NominasDeducciones();
+				nd.setNombre(rs.getString(1));
+				nd.setImporte(rs.getFloat(2));
+				datosd.add(nd);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error al obtenerconceptos : " + e.getMessage());
+		}
+		return datosd;
+	}
+	
+	
+	
 }

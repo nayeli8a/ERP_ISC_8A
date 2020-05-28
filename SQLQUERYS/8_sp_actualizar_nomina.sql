@@ -48,6 +48,7 @@ BEGIN
 
 				UPDATE NominasPercepciones SET NominasPercepciones.importe = #TablaTemporalP.importe
 				FROM NominasPercepciones join #TablaTemporalP ON NominasPercepciones.idPercepcion = #TablaTemporalP.idPercepcion
+				where NominasPercepciones.idNomina = @idNomina;
 
 				drop table #TablaTemporalP;
 
@@ -74,6 +75,7 @@ BEGIN
 
 				UPDATE NominasDeducciones SET NominasDeducciones.importe = #TablaTemporalD.importe
 				FROM NominasDeducciones join #TablaTemporalD ON NominasDeducciones.idDeduccion = #TablaTemporalD.idDeduccion
+				where NominasDeducciones.idNomina = @idNomina;
 
 				drop table #TablaTemporalD;
 
