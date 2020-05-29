@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib uri  = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -498,22 +498,15 @@
 		    </div>
 		    
 		    <div class=row>
-		    <div class="col-md-4">
-		     	<label>Faltas:</label>
-		     	 <input type="number" name="faltas" id="faltas"  min="0" max="15" onchange="obtenerDiasTrabajados(this.value);" required>
-		     	
-		     	</div>
-		    
-		    
+			    <div class="col-md-4">
+			     	<label>Faltas:</label>
+			     	 <input type="number" name="faltas" id="faltas"  min="0" max="15" onchange="obtenerDiasTrabajados(this.value);" required>
+			    </div>
+			    
 		     	<div class="col-md-4">
 		     	<label>Dias trabajados:</label>
 		   	    <input name="dias-trabajados"  id="dias-trabajados" type="number" readonly>
-		     	
-		     	
 		     	</div>
-		     	
-		     	
-		    
 		    </div>
 		    
 		    <br>
@@ -525,57 +518,54 @@
 					</button>
 		    	</div>
 		    	<div class="container">
-		    		<div style="border-style:solid;border-width:thin;">
+		    		<div style="border-style:solid;border-width:thin;text-align: center;">
 		    		<span id="percepciones" name="percepciones">
          				  
          				  <!-- AQUI EMPIEZA UNA SOLA PERCEPCION -->
          				  <div id="percepcion-contenido-1">
          				  	 <hr style="width:80%;">
-					          <div class="row">
+					          <div class="row" style="text-align:center;">
 						     
-						         <div class="col-md-3">
+						         <div class="col-sm-4">
 						         	<label>Percepcion:</label>
-										<select 
+						         	<br>
+									<select 
 						              onchange="pasardias(this.options[this.selectedIndex].getAttribute('dias'),1)" 
 						              id="select-p-1" 
 						              name="select-p-1" 
-						              readonly="readonly">
+						              readonly="readonly"
+						              style="width: 100%"
+						              >
 						              <c:forEach var="dato" items="${datospercepciones}">
 						              	<option dias="${dato.getDiasPagar()}"value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
 						              </c:forEach>
-						              </select>
-						           </div>
+						            </select>
+						         </div>
 						           
-						           <div class="col-md-3">
-						           <label>Dias de percepcion:</label>
-						          <br>
-						           <input id="p-1" type="text" value="" readonly >
-						           
-						           
-						           </div>
+					             <div class="col-sm-4">
+					           	  <label>Dias de percepcion:</label>
+					          	  <br>
+					           	  <input id="p-1" type="text" value="" style="width: 100%" readonly >
+					             </div>
 						           
 						               
-						           <div class="col-md-4">
-						               <label>Monto de percepcion:</label>
-						               <br>
-							        <input name="percepcion-1" id="percepcion-1" type="number" placeholder="Click en checar" onchange="totalpercepciones(this.value)" readonly >
-							        
-						           
-						           </div>
-						          
-						           
-						     
-						           <div class="col-sm-2">
+					           <div class="col-sm-4">
+					               <label>Monto de percepcion:</label>
+					               <br>
+						           <input name="percepcion-1" style="width: 100%" id="percepcion-1" type="number" placeholder="Click en checar" onchange="totalpercepciones(this.value)" readonly >
+					           </div>
+						     </div>
+						     <br>
+						     <div class="row" style="text-align:center;">
+					              <div class="col-sm-4">
 				              	  	<button type="button" style="visibility:hidden;" onclick="quitar(2,'percepcion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
 				              	  </div>
-				              	  <div class="col-sm-2">
+				              	  
+				              	  <div class="col-sm-4">
 					              	  	<button type="button"  class="btn btn-outline-success" onclick="percepciones('percepcion-1', 'p-1')" >Checar</button>
-					              	  </div>
-						          </div>
-						          
-						          
-				              	
-					          
+					              </div>
+						     </div>
+						         
 					          <hr style="width:80%;">
          				  </div>
 				          <!-- AQUI TERMINA UNA SOLA PERCEPCION -->
@@ -593,47 +583,51 @@
 					</button>
 		    	</div>
 		    	<div class="container">
-					<div style="border-style:solid;border-width:thin;">
+					<div style="border-style:solid;border-width:thin;text-align: center">
 		    		<span id="deducciones" name="deducciones">
          				  
          				  <!-- AQUI EMPIEZA UNA SOLA DEDUCCION -->
          				  <div id="deduccion-contenido-1">
          				  	 <hr style="width:80%;">
 					         <div class="row">
-					          <div class="col-md-3">
+					          <div class="col-sm-4">
 					           <label>Deduccion:</label>
-					              <select
-					              onchange="pasarporcentaje(this.options[this.selectedIndex].getAttribute('porcentaje'),1)"
-					              id="select-d-1" 
-					              name="select-d-1">
+					           <br>
+				               <select
+				               onchange="pasarporcentaje(this.options[this.selectedIndex].getAttribute('porcentaje'),1)"
+				               id="select-d-1" 
+				               name="select-d-1"
+				               style="width: 100%"
+				               >
 					              <c:forEach var="dato" items="${datosdeducciones}">
 					              	<option porcentaje="${dato.getPorcentaje()}" value="${dato.getIdDeduccion()}">${dato.getNombre()}</option>
 					              </c:forEach>
 					              </select>
 					           </div>
 					          
-					            <div class="col-md-3">
+					            <div class="col-sm-4">
 					             <label>% de deducción: </label>
-					              <input id="d-1" type="text" value="" readonly >
+					             <br>
+					             <input id="d-1" type="text" style="width: 100%" value="" readonly >
 					            </div>
 					            
-					               <div class="col-md-4">
-						               <label>Monto de deducción:</label>
-						               <br>
-							        <input name="deduccion-1" id="deduccion-1" type="number" placeholder="Click en checar"  readonly>
-							        
-						           
-						           </div>
+				               <div class="col-sm-4">
+					            <label>Monto de deducción:</label>
+					            <br>
+						        <input name="deduccion-1" style="width: 100%" id="deduccion-1" type="number" placeholder="Click en checar"  readonly>
+					           </div>
+					         </div>
+					         <br>
+					         <div class="row" style="width: 100%">
 					            
-					            <div class="col-sm-2">
-					            	<button type="button" style="visibility:hidden;" onclick="quitar(1,'deduccion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
+					            <div class="col-sm-4">
+					              <button type="button" style="visibility:hidden;" onclick="quitar(1,'deduccion-contenido-1')" class="btn-danger" style="width:40px;">X </button>
 					            </div>
 					            
-					            <div class="col-sm-2">
-					              	  	<button type="button"  class="btn btn-outline-success" onclick="deducciones('deduccion-1', 'd-1')">Checar</button>
-					              	  </div>
-					            
-					          </div>
+					            <div class="col-sm-4">
+					              <button type="button"  class="btn btn-outline-success" onclick="deducciones('deduccion-1', 'd-1')">Checar</button>
+					            </div>
+					         </div>
 					          
 					          
 					          
@@ -653,20 +647,20 @@
 		    <br>
 		  </div>
 		  
-		  <div class="row">
-			<div class="col-md-3">
+		  <div class="row" style="text-align: center;">
+			<div class="col-sm-4">
 			<label>Total deducciones:</label>
-		    <input name="total-deducciones" id="total-deducciones" type="text"  value="" readonly required>
+		    <input style="text-align: center;" name="total-deducciones" id="total-deducciones" type="text"  value="" readonly required>
 		    </div>
 		    
-		    <div class="col-md-3">
+		    <div class="col-sm-4">
 			<label>Total percepciones:</label>
-		    <input name="total-percepciones" id="total-percepciones" type="text"  value="" readonly required>
+		    <input style="text-align: center;" name="total-percepciones" id="total-percepciones" type="text"  value="" readonly required>
 		    </div>
 		    
-		    <div class="col-md-3">
+		    <div class="col-sm-4">
 			<label>Salario Quincenal:</label>
-		    <input name="total-salario" id="total-salario" type="text"  value="" readonly required>
+		    <input style="text-align: center;" name="total-salario" id="total-salario" type="text"  value="" readonly required>
 		    </div>
 		  	
 		  	

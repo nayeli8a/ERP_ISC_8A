@@ -331,15 +331,14 @@ public class RegistrarServlet extends HttpServlet {
 						n.setIdFormaPago(Integer.parseInt(request.getParameter("idformapago")));
 						n.setNombreEmpleado(request.getParameter("nombre"));
 						
-
-						n.setFechaPago(Date.valueOf(request.getParameter("fechapago")));
-						n.setTotalP(0);
-						n.setTotalD(0);
-						n.setCantidadNeta(0);
-						n.setDiasTrabajados(0);
-						n.setFaltas(0);
 						n.setFechaInicio(Date.valueOf(request.getParameter("fechainicio")));
 						n.setFechaFin(Date.valueOf(request.getParameter("fechafin")));
+						n.setFechaPago(Date.valueOf(request.getParameter("fechapago")));
+						n.setDiasTrabajados(Integer.parseInt(request.getParameter("dias-trabajados")));
+						n.setFaltas(Integer.parseInt(request.getParameter("faltas")));
+						n.setTotalP(0);//estos valores son calculados
+						n.setTotalD(0);
+						n.setCantidadNeta(0);
 
 						ndao.Insertar(n.getFechaPago(),n.getTotalP(),n.getTotalD(),
 								n.getCantidadNeta(),n.getDiasTrabajados(),n.getFaltas(),n.getFechaInicio(),
