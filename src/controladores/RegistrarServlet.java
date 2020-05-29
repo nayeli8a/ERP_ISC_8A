@@ -218,20 +218,24 @@ public class RegistrarServlet extends HttpServlet {
 				error = "";
 				mensaje="";
 				IncapacidadesDAO indao = new IncapacidadesDAO();
-				Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
-				Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
-				nssempleado= request.getParameter("nssempleado");
-				String enfermedad =request.getParameter("enfermedad");
+				Incapacidades in = new Incapacidades();
+				
+				in.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
+				in.setFechaFin(Date.valueOf(request.getParameter("fechaFin")));
+				in.setNss(request.getParameter("nssempleado"));
+				in.setEnfermedad(request.getParameter("enfermedad"));
 				
 				response.setContentType("text/html;charset=UFT-8");
 				Documento = request.getPart("evidencia");
 		        InputS = Documento.getInputStream();
-			    estatus = "A";
-				idEmpleado = indao.validarNSSEmpleado(nssempleado);
-				if(idEmpleado != -1)
+		        in.setEvidencia(InputS);
+		        
+			    in.setEstatus("A");
+				in.setIdEmpleado(indao.validarNSSEmpleado(in.getNss()));
+				if(in.getIdEmpleado() != -1)
 				{
-					indao.insertarIncapacidades(InputS, fechaInicio, fechaFin, enfermedad,idEmpleado, estatus);
-					mensaje = "Incapacidad registrada con exito para el NSS: "+nssempleado;
+					indao.insertarIncapacidades(in);
+					mensaje = "Incapacidad registrada con exito para el NSS: "+in.getNss();
 					request.setAttribute("Mensajes",mensaje);
 
 				}else
@@ -246,8 +250,8 @@ public class RegistrarServlet extends HttpServlet {
 					int idEmpleadoAusente;
 					int idEmpleadoJefe;
 					AusenciasJustificadasDAO ausJusdao = new AusenciasJustificadasDAO();
-					fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
-					fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
+					Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
+					Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
 					String tipo = request.getParameter("tipo");
 					String nssAusente = request.getParameter("nssAusente");
 					String nssJefe = request.getParameter("nssJefe");

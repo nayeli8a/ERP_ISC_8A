@@ -1,39 +1,37 @@
 package controladores;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import modelo.beans.Incapacidades;
 import modelo.datos.Constantes;
 import modelo.datos.IncapacidadesDAO;
 
-/**
- * Servlet implementation class IncapacidadesServlet
- */
+
+@MultipartConfig(maxFileSize = 16177216)//15mb necesario para obtener objetos desde el formulario de envio de archivos
 @WebServlet("/Incapacidades")
 public class IncapacidadesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+   
     public IncapacidadesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				// aqui va todo el codigo
 				System.out.println("##Dentro de IncapacidadesServlet##");
@@ -67,7 +65,12 @@ public class IncapacidadesServlet extends HttpServlet {
 					in.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
 					in.setFechaFin(Date.valueOf(request.getParameter("fechaFin")));
 					in.setEnfermedad(request.getParameter("enfermedad"));
-					in.setEvidencia(null);
+					
+					response.setContentType("text/html;charset=UFT-8");
+					Part Documento = request.getPart("evidencia");
+			        InputStream InputS = Documento.getInputStream();
+			        in.setEvidencia(InputS);
+					
 					in.setIdEmpleado(Integer.valueOf(request.getParameter("idEmpleado")));
 					in.setEstatus(request.getParameter("estatus"));
 					in.setIdIncapacidad(Integer.valueOf(request.getParameter("idIncapacidad")));
@@ -83,9 +86,7 @@ public class IncapacidadesServlet extends HttpServlet {
 				rd.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

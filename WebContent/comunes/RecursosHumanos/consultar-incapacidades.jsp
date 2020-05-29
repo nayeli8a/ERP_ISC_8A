@@ -158,6 +158,8 @@
 			</table>
 		</div>
 	</div>
+	
+	
 	<!-- MODAL PARA REGISTRO -->
 	<div class="modal fade" id="modalRegistro">
 		<div class="modal-dialog modal-lg">
@@ -213,7 +215,10 @@
 				
 					<form
 						action="${pageContext.servletContext.contextPath}/Registrar?op=Incapacidades"
-						onsubmit="return validarFechas();" method="post">
+						onsubmit="return validarFechas();" 
+						method="post"
+						enctype="multipart/form-data"
+						>
 						<div class="form-group">
 							<div class="row">
 								<div class="col-sm">

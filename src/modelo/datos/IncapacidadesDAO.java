@@ -43,13 +43,18 @@ public class IncapacidadesDAO {
 
 	  
 	
-	  public void insertarIncapacidades(InputStream documento, Date fechaInicio, Date fechaFin, String enfermedad, int idEmpleado, String estatus)
+	  public void insertarIncapacidades(Incapacidades in)
 	  {
-		  String sql = "insert into Incapacidades values('"+fechaInicio+"','"+fechaFin+"','"+enfermedad+"',?,"+idEmpleado+",'"+estatus+"')";
+		  String sql = "insert into Incapacidades (fechaInicio,fechaFin,enfermedad,evidencia,idEmpleado,estatus) values (?,?,?,?,?,?)";
 	    try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 				ps = Conexion.getInstance().getCN().prepareStatement(sql);
-				ps.setBlob(1, documento);
+				ps.setDate(1,in.getFechaInicio());
+				ps.setDate(2, in.getFechaFin());
+				ps.setString(3, in.getEnfermedad());
+				ps.setBinaryStream(4, in.getEvidencia());
+				ps.setInt(5, in.getIdEmpleado());
+				ps.setString(6, in.getEstatus());
 				ps.executeUpdate();
 			} catch (Exception e) {
 				System.out.println("Error al insertar la incapacidad en la BD: "+e.getMessage());

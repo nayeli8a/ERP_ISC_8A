@@ -51,9 +51,12 @@
 	<div class="card bg-light" style="margin-top: 80px">
 		<p class="bg-primary text-white">EDITAR INCAPACIDADES</p>
 
-		<form action="${pageContext.servletContext.contextPath}/Incapacidades?op=Modificar"
-			onsubmit="return validarFechas();" method="post">
-			
+		<form 
+		action="${pageContext.servletContext.contextPath}/Incapacidades?op=Modificar"
+		onsubmit="return validarFechas();" 
+		method="post"
+		enctype="multipart/form-data"
+		>
 			<div class="form-group">
 
 				<legend> Datos del empleado: </legend>
@@ -145,8 +148,8 @@
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
-							<label>Evidencia: </label> <input type="file"
-								class="form-control-file border">
+							<label>Evidencia: </label> 
+							<input type="file" required name="evidencia" class="form-control-file border">
 						</div>
 					</div>
 
