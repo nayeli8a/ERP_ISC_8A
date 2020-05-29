@@ -260,16 +260,28 @@
        var fechaInicio = document.getElementById("fechaInicio").value;
        var fechaFin = document.getElementById("fechaFin").value;
        var faltas = document.getElementById("faltas").value;
-	   var aux= (Date.parse(fechaFin)- Date.parse(fechaInicio))
-	   aux=(aux/24);//dias
-	   aux=(aux/60);//minutos
-	   aux=(aux/60);//segundos
-	   aux=(aux/1000);//milisegundos
-	   var dias=aux-faltas; //dias (INT)
-   	   document.getElementById("dias-trabajados").value = dias;
+       if (faltas>=0 & faltas<=15) {
+    	   var aux= (Date.parse(fechaFin)- Date.parse(fechaInicio))
+    	   aux=(aux/24);//dias
+    	   aux=(aux/60);//minutos
+    	   aux=(aux/60);//segundos
+    	   aux=(aux/1000);//milisegundos
+    	   var dias=(aux+1)-faltas; //dias (INT)
+    	   if(dias<0){
+           	   document.getElementById("dias-trabajados").value = 0;    	
+
+    	   }
+    	   else{
+           	   document.getElementById("dias-trabajados").value = dias;    	
+   
+    	   }
+    	   } else {
+           	 document.getElementById("faltas").value = 0;
+     			alert("Las faltas deben estar en un rango de 0 a 15 días ");
 
 
-
+    	   }
+ 
     }
     
 	</script>
@@ -486,6 +498,13 @@
 		    </div>
 		    
 		    <div class=row>
+		    <div class="col-md-4">
+		     	<label>Faltas:</label>
+		     	 <input type="number" name="faltas" id="faltas"  min="0" max="15" onchange="obtenerDiasTrabajados(this.value);" required>
+		     	
+		     	</div>
+		    
+		    
 		     	<div class="col-md-4">
 		     	<label>Dias trabajados:</label>
 		   	    <input name="dias-trabajados"  id="dias-trabajados" type="number" readonly>
@@ -493,12 +512,7 @@
 		     	
 		     	</div>
 		     	
-		     	<div class="col-md-4">
-		     	<label>Faltas:</label>
-		     	 <input name="faltas" id="faltas" type="number" min="0" max="15" onchange="obtenerDiasTrabajados(this.value);" required>
 		     	
-		     	
-		     	</div>
 		    
 		    </div>
 		    

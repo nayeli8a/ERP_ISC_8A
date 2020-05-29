@@ -150,6 +150,37 @@
 			
 		}
 		
+		 function obtenerDiasTrabajados(valor)
+		    {
+		       var fechaInicio = document.getElementById("fechainicio").value;
+		       var fechaFin = document.getElementById("fechafin").value;
+		       var faltas = document.getElementById("faltas").value;
+		       if (faltas>=0 & faltas<=15) {
+		    	   var aux= (Date.parse(fechaFin)- Date.parse(fechaInicio))
+		    	   aux=(aux/24);//dias
+		    	   aux=(aux/60);//minutos
+		    	   aux=(aux/60);//segundos
+		    	   aux=(aux/1000);//milisegundos
+		    	   var dias=(aux+1)-faltas; //dias (INT)
+		    	   if(dias<0){
+		    		   
+			       	   document.getElementById("diast").value = 0;  
+		    	   }
+		    	   else{
+		    		   
+			       	   document.getElementById("diast").value = dias;   
+		    	   }
+		    	     	
+		    	   } else {
+		           	 document.getElementById("faltas").value = 0;
+		     			alert("Las faltas deben estar en un rango de 0 a 15 días ");
+
+
+		    	   }
+		 
+		    }
+		    
+		
 	</script>
 
 </head>
@@ -218,12 +249,12 @@
 			    	<div class="col-md-4">
 			        <label>Faltas Acumuladas</label>
 			        <br>
-			        <input name="faltas" type="number" value="${datosnomina.getFaltas()}" required>
+			        <input name="faltas" id="faltas" type="number" value="${datosnomina.getFaltas()}" onchange="obtenerDiasTrabajados(this.value);"  required>
 			      </div>
 			      <div class="col-md-4">
 			        <label>Dias Trabajados</label>
 			        <br>
-			        <input name="diast" type="number" value="${datosnomina.getDiasTrabajados()}" required>
+			        <input name="diast" id="diast" type="number" value="${datosnomina.getDiasTrabajados()}" required>
 			      </div>
 			      <div class="col-md-3">
 			        <label>Forma de Pago</label>
@@ -247,12 +278,12 @@
 			      <div class="col-md-4">
 			        <label>Fecha de Inicio</label>
 			        <br>
-			        <input name="fechainicio" type="date" value="${datosnomina.getFechaInicio()}" required>
+			        <input name="fechainicio" id="fechainicio" type="date" onchange="obtenerDiasTrabajados(this.value);"  value="${datosnomina.getFechaInicio()}" required>
 			      </div>
 			      <div class="col-md-4">
 			        <label>Fecha Final</label>
 			        <br>
-			        <input name="fechafin" type="date" value="${datosnomina.getFechaFin()}" required>
+			        <input name="fechafin" id="fechafin" type="date" onchange="obtenerDiasTrabajados(this.value);"  value="${datosnomina.getFechaFin()}" required>
 			      </div>
 			    </div>
 			    <br>
