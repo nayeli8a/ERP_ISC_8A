@@ -129,6 +129,9 @@ public class NominasServlet extends HttpServlet {
 				n = nomDAO.ConsultaIndividual(id+"");
 				datospagos = fpdao.consultar();
 				
+				//obtenemos el salario del empleado
+				Float salario = nomDAO.SalarioEmpleado(n.getNss());
+				
 				//obtenemos un objeto de las percepciones del empleado con el idNomina
 				List<NominasPercepciones> percepciones = pdao.PercepcionesEmpleado(Integer.parseInt(id));
 				
@@ -140,7 +143,7 @@ public class NominasServlet extends HttpServlet {
 				List<Percepciones> datospercepciones = pdao.consultar();
 				
 				
-				
+				request.setAttribute("salario",salario);
 				request.setAttribute("percepciones",percepciones);
 				request.setAttribute("deducciones",deducciones);
 				request.setAttribute("datosdeducciones",datosdeducciones);

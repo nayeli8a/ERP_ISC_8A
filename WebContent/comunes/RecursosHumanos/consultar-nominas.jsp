@@ -239,7 +239,7 @@
     function totald()
     {
     	var respuesta=0;
-    	for (var i = 1; i < nump+1;i++ )
+    	for (var i = 1; i < numd+1;i++ )
     	{
     		respuesta += parseInt(document.getElementById("deduccion-"+i).value);
     	}
@@ -537,7 +537,7 @@
 						              style="width: 100%"
 						              >
 						              <c:forEach var="dato" items="${datospercepciones}">
-						              	<option dias="${dato.getDiasPagar()}"value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
+						              	<option dias="${dato.getDiasPagar()}" value="${dato.getIdPercepcion()}">${dato.getNombre()}</option>
 						              </c:forEach>
 						            </select>
 						         </div>
