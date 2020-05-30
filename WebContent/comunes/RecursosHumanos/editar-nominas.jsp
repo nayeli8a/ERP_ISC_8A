@@ -25,6 +25,14 @@
 	var nump=1;
 	var numd=1;
 	
+	  function totalsalario()
+	    {
+	    	var respuesta=0;
+	    	respuesta = document.getElementById("total-percepciones").value;
+	    	respuesta -= document.getElementById("total-deducciones").value;
+	    	document.getElementById("total-salario").value = respuesta;
+	    }
+	
 		function percepciones(idmonto, iddias)
 	    {
 	       var salario = document.getElementById("salario-empleado").value;
@@ -55,17 +63,18 @@
 		function totalp()
 	    {
 	    	var respuesta=0;
-	    	for (var i = 1; i < nump+1;i++ )
+	    	for (var i = 1; i < nump;i++ )
 	    	{
 	    		respuesta += parseInt(document.getElementById("montop-"+i).value);
 	    	}
 	    	document.getElementById("total-percepciones").value = respuesta;
 	    }
 		
+		
 		function totald()
 	    {
 	    	var respuesta=0;
-	    	for (var i = 1; i < numd+1;i++ )
+	    	for (var i = 1; i < numd;i++ )
 	    	{
 	    		respuesta += parseInt(document.getElementById("montod-"+i).value);
 	    	}
@@ -520,7 +529,7 @@
 		              <div class="col-sm-4">
 			          	<label>Monto de deducción:</label>
 			            <br>
-				      	<input name="montod-" style="width: 100%" id="montod-" type="number" placeholder="Click en checar"  readonly>
+				      	<input name="montod-" style="width: 100%" id="montod-" type="number" placeholder="Click en checar"  onchange="totald(this.value)" readonly>
 			          </div>
 		              
 		              <br>
