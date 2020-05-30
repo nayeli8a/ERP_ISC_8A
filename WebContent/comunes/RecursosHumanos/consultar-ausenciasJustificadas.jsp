@@ -126,7 +126,7 @@ function modificarAusencia(AoR,idAusencia) {
 							
 							</tr>
 						</c:if>
-						<c:if test="${dato.getEstatusAusencia() eq 'R'}">
+						<c:if test="${dato.getEstatusAusencia() eq 'R' and dato.getEstatus() eq 'A'}">
 						
 							<tr>
 								<td>${dato.getNombreAusente()}</td>
@@ -158,7 +158,7 @@ function modificarAusencia(AoR,idAusencia) {
 							
 							</tr>
 						</c:if>
-						<c:if test="${dato.getEstatusAusencia() eq 'A'}">
+						<c:if test="${dato.getEstatusAusencia() eq 'A' and dato.getEstatus() eq 'A'}">
 						
 							<tr>
 								<td>${dato.getNombreAusente()}</td>
@@ -175,11 +175,11 @@ function modificarAusencia(AoR,idAusencia) {
 								
 								<td>
 									<form action="AusenciasJustificadas" method="post">
-										<input type="hidden" name="idAusencia" value="${dato.getIdAusencia()}">
+										<input type="hidden" name="id" value="${dato.getIdAusencia()}">
 										<div id="${dato.getIdAusencia()}">
 											<input type="submit" 
 												class="btn btn-danger" name="op" value="Eliminar"
-												onclick="javascript:eliminar()">
+												onclick="eliminar()">
 												<button type="submit" name="op" value="Imprimir">
 										<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/print.png" style="max-width:100%;">
 									</button>
@@ -190,7 +190,7 @@ function modificarAusencia(AoR,idAusencia) {
 							
 							</tr>
 						</c:if>
-							<c:if test="${dato.getEstatusAusencia() eq 'P'}">
+							<c:if test="${dato.getEstatusAusencia() eq 'P' and dato.getEstatus() eq 'A'}">
 						
 							<tr>
 								<td>${dato.getNombreAusente()}</td>
@@ -210,9 +210,7 @@ function modificarAusencia(AoR,idAusencia) {
 										<input type="hidden" name="id" value="${dato.getIdAusencia()}">
 										<div id="${dato.getIdAusencia()}">
 											<input type="submit" class="btn btn-warning" name="op"
-												value="Editar"> <input type="submit"
-												class="btn btn-danger" name="op" value="Eliminar"
-												onclick="javascript:eliminar()">
+												value="Editar"> 
 										</div>
 									</form>
 								</td>
