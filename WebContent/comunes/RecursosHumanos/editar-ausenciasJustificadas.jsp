@@ -90,19 +90,16 @@
 				</div>
 
 				<div class="row">
-					
 					<div class="col-md-4">
 						<label>Tipo:</label> 
 						<select class="form-control" id="tipo" name="tipo" required>
 						<option value="${datosAusencia.getTipo()}" selected> 
-							${datosAusencia.getTipo()}
+							${datosAusencia.getTipo() eq 'P' ? 'Permiso':'Vacaciones'}
 						</option>
 							<option value="V">Vacaciones</option>
 							<option value="P">Permiso</option>
 						</select>
 					</div>
-					
-					
 					
 					<div class="col-md-4">
 						<label>Dias descanso:</label>
@@ -112,18 +109,22 @@
 						</div>
 					</div>
 					
-					
-				
-					
-					
 					<div class="col-md-4">
 						<label>Estatus de la Ausencia</label>
 						<div class="form-group">
-							<input type="text" class="form-control" name="estatusAusencia" id="estatusAusencia"
-								<c:if test="${datosAusencia.getEstatusAusencia() eq 'P' }">
-								value="${datosAusencia.getEstatusAusencia()}" readonly>
-								</c:if>
-								
+							<input 
+							type="text" 
+							class="form-control" 
+							value="<c:if test="${datosAusencia.getEstatusAusencia() eq 'P'}">Pendiente</c:if>"
+							readonly
+							>
+							<input 
+							style="visibility: hidden;"
+							type="text" 
+							name="estatusAusencia" 
+							id="estatusAusencia"
+							value="${datosAusencia.getEstatusAusencia()}"
+							>	
 						</div>
 					</div>
 				</div>
@@ -150,10 +151,10 @@
 					</div>
 
 			</div>
-
-
-
-			<button type="submit" class="btn btn-primary">Aceptar</button>
+			<div style="text-align: center;">
+				<button type="submit" class="btn btn-primary">Aceptar</button>
+			</div>
+			<br>
 		</form>
 	</div>
 </body>
