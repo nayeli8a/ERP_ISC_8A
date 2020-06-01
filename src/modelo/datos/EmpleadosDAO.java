@@ -24,6 +24,7 @@ public class EmpleadosDAO {
 	ResultSet rs;
 	
 	public List<Empleados> consultar(String pagina)
+	
 	{
 		ArrayList<Empleados> lista = new ArrayList<>();
 		String sql = "execute sp_paginaciondinamica 'Empleados','idEmpleado','"+pagina+"','10'";
@@ -102,6 +103,21 @@ public class EmpleadosDAO {
 			System.out.println("Error al consultar empleados: " + ex.getMessage());
 		}
 		return e;
+	}
+	
+	public void InsertarHistorial(int idEmpleado, int idPuesto, int idDepartamento, Date fechaInicio, Date fechaFin,
+			float salario) 
+	{
+		String sql = "insert into HistorialPuestos (estatus,idEmpleado,idPuesto,idDepartamento,fechaInicio,fechaFin,salario)"
+				+ "values('A','" + idEmpleado + "','" + idPuesto + "','" + idDepartamento + "','" + fechaInicio + "','"
+				+ fechaFin + "','" + salario + "')";
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("Error al insertar en HistorialPuestos en la BD: " + e.getMessage());
+		}
 	}
 
 	public void insertar(Empleados e)
@@ -239,5 +255,31 @@ public class EmpleadosDAO {
 		}
 		return salario;
 	}
+	
+	
+	  public int validarNSSEmpleado(String nssempleado) {
+			int idEmpleado=-1;
+			String sql="IF(Exists(select idEmpleado from Empleados where nss = ? and estatus = 'A'))"+
+						"	select idEmpleado from Empleados where nss = ?;"+
+						"ELSE"+
+						"	select -1;";
+			try {
+				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+				ps.setString(1, nssempleado);
+				ps.setString(2, nssempleado);
+				ResultSet rs = ps.executeQuery();
+
+				if (rs.next()) {
+					//si encuentra el nombre de un empleado, si existe el empleado
+					idEmpleado = rs.getInt(1) ;
+				}
+				rs.close();
+				ps.close();
+
+			} catch (SQLException e) {
+				System.out.println("Error al conectar con la BD " + e.getMessage());
+			}
+			return idEmpleado;
+		}
 	
 }

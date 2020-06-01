@@ -31,7 +31,8 @@ public class HistorialPuestosServlet extends HttpServlet {
     {
           // aqui va todo el codigo
           System.out.println("##Dentro de HistorialPuestosServlet##");
-          String url = Constantes.PAGINAPRINCIPAL;
+		 String url="";
+
           String op = request.getParameter("op");
 
 			switch(op)

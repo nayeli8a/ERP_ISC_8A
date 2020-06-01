@@ -126,6 +126,11 @@
 					<div class="descripcion"><h2>Documentación Empleado</h2></div>
 					<a href="${pageContext.servletContext.contextPath}/DocumentacionEmpleado?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
 				</div>
+				<div class="opcion">
+					<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo5.jpg" alt="">
+					<div class="descripcion"><h2>Historial Puestos</h2></div>
+					<a href="${pageContext.servletContext.contextPath}/HistorialPuestos?op=Listar&pagina=1"><button type="button" name="button" class="derecha btn btn-secondary">Consultar</button></a>
+				</div>
 
 			</div>
 

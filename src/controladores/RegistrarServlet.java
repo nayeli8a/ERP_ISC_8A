@@ -171,6 +171,13 @@ public class RegistrarServlet extends HttpServlet {
 
 				EmpleadosDAO emdao = new EmpleadosDAO();
 				emdao.insertar(e);
+				int departamento= Integer.parseInt(request.getParameter("departamento"));
+				int puesto = Integer.parseInt(request.getParameter("puesto"));
+				Date fechaInicio= Date.valueOf(request.getParameter("fecha-contratacion"));
+				float salario = Float.parseFloat(request.getParameter("salario"));
+				String nss = request.getParameter("nss");
+				int id = emdao.validarNSSEmpleado(nss);
+				emdao.InsertarHistorial(id, puesto, departamento, fechaInicio, null, salario);
 				url = "Empleados?op=Listar&pagina=1";
 
 			break;
@@ -250,7 +257,7 @@ public class RegistrarServlet extends HttpServlet {
 					int idEmpleadoAusente;
 					int idEmpleadoJefe;
 					AusenciasJustificadasDAO ausJusdao = new AusenciasJustificadasDAO();
-					Date fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
+				    fechaInicio = (Date.valueOf(request.getParameter("fechaInicio")));
 					Date fechaFin = (Date.valueOf(request.getParameter("fechaFin")));
 					String tipo = request.getParameter("tipo");
 					String nssAusente = request.getParameter("nssAusente");
