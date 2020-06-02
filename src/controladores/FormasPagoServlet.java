@@ -59,7 +59,7 @@ public class FormasPagoServlet extends HttpServlet {
 			case "Modificar":
 				pagodao = new FormasPagoDAO();
 				FormasPago pago = new FormasPago();
-				pago.setIdFormaPago(Integer.parseInt(request.getParameter("id")));
+				pago.setIdFormaPago(Integer.parseInt(request.getParameter("idFormaPago")));
 				pago.setNombre(request.getParameter("nombre"));
 				pago.setEstatus(request.getParameter("estatus"));
 				pagodao = new FormasPagoDAO();
