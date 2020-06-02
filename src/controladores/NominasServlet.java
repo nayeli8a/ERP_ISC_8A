@@ -90,9 +90,9 @@ public class NominasServlet extends HttpServlet {
 				
 				nom.setEstatus(request.getParameter("estatus"));
 				nom.setFechaPago(Date.valueOf(request.getParameter("fechapago")));
-				nom.setTotalP(Float.valueOf(request.getParameter("totalp")));
-				nom.setTotalD(Float.valueOf(request.getParameter("totald")));
-				nom.setCantidadNeta(Float.valueOf(request.getParameter("cantidadneta")));
+				nom.setTotalP(Float.valueOf(request.getParameter("total-percepciones")));
+				nom.setTotalD(Float.valueOf(request.getParameter("total-deducciones")));
+				nom.setCantidadNeta(Float.valueOf(request.getParameter("total-salario")));
 				nom.setDiasTrabajados(Integer.parseInt(request.getParameter("diast")));
 				nom.setFaltas(Integer.parseInt(request.getParameter("faltas")));
 				nom.setFechaInicio(Date.valueOf(request.getParameter("fechainicio")));
