@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib uri  = "http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri  = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,12 +10,12 @@
 
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
+
 	<!-- Bootstrap core CSS and JS-->
 	<link href="<c:out value="${pageContext.servletContext.contextPath}"/>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/vendor/jquery/jquery.js"></script>
 	<script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/vendor/bootstrap/js/bootstrap.min.js"></script>
-		
+
     <!-- Nuestras hojas de estilo-->
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
     <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
@@ -25,53 +25,59 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
 		<a class="btn btn-primary"href="${pageContext.servletContext.contextPath}/General?op=RegresarRH">Atras</a>
 	</nav>
-	
-	
+
+
 	<div class="container" style="margin-top:100px">
 	  <h2>Buscador</h2>
-	  <p>Escribe la información a buscar</p>  
+	  <p>Escribe la información a buscar</p>
 	  <input class="form-control" id="myInput" type="text" placeholder="Buscador...">
 	  		  <script>javascript:buscar();</script>
 		<h2 align="center">Historial Puestos </h2>
 		<hr class="bg-info">
-		<button type="button" class="btn btn-success" id="agregar" data-toggle="modal" data-target="#modalRegistro" >Agregar</button>
-		
+
 		<div class="table-responsive table-bordered table-striped">
-			<table class="table table-sm">
+			<table class="table table-sm" style="text-align:center;width:fixed;table-layout:fixed;border-collapse:collapse">
 				<thead class="thead-dark">
 
 					<tr>
-						<th>Empleado</th>
-						<th>Puesto</th>
-						<th>Departamento</th>
-						<th>Fecha inicio</th>
-						<th>Fecha fin</th>
-						<th>Salario</th>
+						<th>Historial Empleados</th>
 					</tr>
 				</thead>
 				<tbody id="myTable">
-					<c:forEach var="dato" items="${datos}">
-				
-						<c:if test="${dato.getEstatus() eq 'A'}">
-							<tr>
-							<td>${dato.getIdEmpleado()}</td>
-							<td>${dato.getIdPuesto()}</td>
-							<td>${dato.getIdDepartamento()}</td>
-							<td>${dato.getFechaFin()}</td>
-							<td>${dato.getFechaFin()}</td>
-						  <td>${dato.getSalario()}</td>
-							</tr>
-						</c:if>
+				<c:forEach var="emp" items="${datos}">
+					<tr>
+						<td style="overflow-x:scroll;overflox-y:scroll;white-space: nowrap;" >
+							<c:forEach var="puesto" items="${datos.getPuestos()}">
+								<div class="card" style="width: 18rem;display: inline-block;">
+								  <div class="card-body" style="white-space: normal;">
+								    <h5 class="card-title">Vendedor</h5>
+								    <p class="card-text">
+								    	<b>Empleado:</b>
+								    	<label>${emp.getNombre()}</label>
+								    	<br>
+								    	<b>Fecha Inicio:</b>
+								    	<label>${puesto.getFechaInicio()}</label>
+								    	<br>
+								    	<b>Fecha Fin:</b>
+								    	<label>${puesto.getFechaFin()}</label>
+								    </p>
+								  </div>
+								</div>
+							</c:forEach>
+						</td>
 						
-					</c:forEach>
+					</tr>
+				</c:forEach>
+					
+					
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
-		
-	
-		<% //Aqui tendremos la paginacion%>
+
+
+
+		<% /*Aqui tendremos la paginacion */%>
 	<nav aria-label="paginacion ciudades">
 	  <ul class="pagination justify-content-center">
 	    <c:if test="${pagina eq 1}">
@@ -90,6 +96,6 @@
 	    </li>
 	  </ul>
 	</nav>
-	
+
 </body>
 </html>

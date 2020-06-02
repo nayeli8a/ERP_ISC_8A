@@ -20,18 +20,18 @@ import modelo.datos.*;
 public class HistorialPuestosServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    
+
     public HistorialPuestosServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
           // aqui va todo el codigo
           System.out.println("##Dentro de HistorialPuestosServlet##");
-		 String url="";
+		 			String url="";
 
           String op = request.getParameter("op");
 
@@ -40,14 +40,17 @@ public class HistorialPuestosServlet extends HttpServlet {
 				case "Listar":
 					HistorialPuestosDAO hpDAO = new HistorialPuestosDAO();
 				    String pagina = request.getParameter("pagina");
-					List<HistorialPuestos> datos = hpDAO.Consultar(pagina);
+					List<Empleados> datos = hpDAO.Consultar(pagina);
 					request.setAttribute("datos", datos);
 					request.setAttribute("pagina",pagina);
 					url=modelo.datos.Constantes.REGRESAR_RH_CONSULTA+"historialPuestos.jsp";
 				break;
 			}
+
+			RequestDispatcher rd = request.getRequestDispatcher(url);
+			rd.forward(request, response);
     }
-    
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
     	doGet(request,response);

@@ -2,6 +2,8 @@ package modelo.beans;
 
 import java.io.InputStream;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Empleados{
 
@@ -29,8 +31,18 @@ public class Empleados{
   private int idCiudad;
   private int idSucursal;
   
+  //para el historial
+  private ArrayList<HistorialPuestos> puestos;
+  
+  
   
 
+public ArrayList<HistorialPuestos> getPuestos() {
+	return puestos;
+}
+public void setPuestos(ArrayList<HistorialPuestos> puestos) {
+	this.puestos = puestos;
+}
 public String getSexo() {
 	return sexo;
 }
