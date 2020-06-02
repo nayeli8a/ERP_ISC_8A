@@ -36,7 +36,7 @@
 		<hr class="bg-info">
 
 		<div class="table-responsive table-bordered table-striped">
-			<table class="table table-sm" style="text-align:center;width:fixed;table-layout:fixed;border-collapse:collapse">
+			<table class="table table-sm" style="width:fixed;table-layout:fixed;border-collapse:collapse">
 				<thead class="thead-dark">
 
 					<tr>
@@ -47,10 +47,10 @@
 				<c:forEach var="emp" items="${datos}">
 					<tr>
 						<td style="overflow-x:scroll;overflox-y:scroll;white-space: nowrap;" >
-							<c:forEach var="puesto" items="${datos.getPuestos()}">
+							<c:forEach var="puesto" items="${emp.getPuestos()}">
 								<div class="card" style="width: 18rem;display: inline-block;">
 								  <div class="card-body" style="white-space: normal;">
-								    <h5 class="card-title">Vendedor</h5>
+								    <h5 class="card-title">${puesto.getNombrepuesto()}</h5>
 								    <p class="card-text">
 								    	<b>Empleado:</b>
 								    	<label>${emp.getNombre()}</label>

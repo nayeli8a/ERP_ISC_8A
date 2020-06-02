@@ -161,7 +161,7 @@ constraint Horarios_Empleados_FK foreign key (idEmpleado) references Empleados(i
 );
 
 create table HistorialPuestos(
-idEmpleado int not null IDENTITY(1,1),
+idEmpleado int not null,
 idPuesto int not null,
 idDepartamento int not null,
 fechaInicio date not null,

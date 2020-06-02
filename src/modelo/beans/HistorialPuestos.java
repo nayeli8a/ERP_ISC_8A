@@ -14,11 +14,20 @@ public class HistorialPuestos{
   private String nss;
 ////
   private int idPuesto;
+  private String nombrepuesto;
 ////
   private int idDepartamento;
   private String estatus;
   
-  
+
+
+public String getNombrepuesto() {
+	return nombrepuesto;
+}
+
+public void setNombrepuesto(String nombrepuesto) {
+	this.nombrepuesto = nombrepuesto;
+}
 
 public String getEstatus() {
 	return estatus;
