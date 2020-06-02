@@ -224,6 +224,8 @@ public class NominasServlet extends HttpServlet {
 				}
 				respuesta+="<label><b>Total</b></label><br>$"+totald+"</ul><br>";
 				
+				respuesta+="<hr style=\"width:80%;\"><center><b>Salario Quincenal:</b><br>"+(totalp-totald)+"</center>";
+				
 				response.getWriter().write(respuesta);
 				
 			}else
