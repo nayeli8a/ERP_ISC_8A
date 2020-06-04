@@ -244,7 +244,7 @@
 									<input type="hidden" name="id" value="${dato.getIdEmpleado()}">
 									<div id="${dato.getIdEmpleado()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
-										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
+										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="eliminar()">
 									</div>
 								</form>
 							</td>

@@ -159,37 +159,41 @@ public class EmpleadosDAO {
 		}
 	}
 	
-	public void Actualizar(Empleados e)
+	public void Actualizar(String Nombre, String Apaterno, String Amaterno, String sexo, Date FechaContratacion,
+			Date fechaNacimiento, Float Salario, String Nss, String EstadoCivil, int DiasVacaciones, int diasPermiso,
+			InputStream Fotografia, String Direccion, String Colonia, String CodigoPostal, String escolaridad, Float PorcentajeC, int idDepartamento,
+			int idPuesto, int idCiudad, int idSucursal, int idEmpleado)
 	{
 		String sql = "UPDATE Empleados SET Nombre=?,Apaterno=?,Amaterno=?,Sexo=?,FechaContratacion=?,"
 				+ "FechaNacimiento=?,Salario=?,Nss=?,EstadoCivil=?,diasVacacionales=?,diasPermiso=?,"
 				+ "Fotografia=?,Direccion=?,Colonia=?,CodigoPostal=?,Escolaridad=?,"
 				+ "PorcentajeComision=?,idDepartamento=?,idPuesto=?,idCiudad=?,idSucursal=? "
-				+ "WHERE idEmpleado="+e.getIdEmpleado();
+				+ "WHERE idEmpleado="+idEmpleado;
 		try {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 
-			ps.setString(1, e.getNombre());
-			ps.setString(2,e.getApaterno());
-			ps.setString(3, e.getAmaterno());
-			ps.setString(4,e.getSexo());
-			ps.setDate(5, e.getFechaContratacion());
-			ps.setDate(6, e.getFechaNacimiento());
-			ps.setFloat(7, e.getSalario());
-			ps.setString(8, e.getNss());
-			ps.setString(9, e.getEstadoCivil());
-			ps.setInt(10,e.getDiasVacaciones());
-			ps.setInt(11, e.getDiasPermiso());
-			ps.setBinaryStream(12,e.getFotografia());
-			ps.setString(13, e.getDireccion());
-			ps.setString(14, e.getColonia());
-			ps.setString(15, e.getCodigoPostal());
-			ps.setString(16, e.getEscolaridad());
-			ps.setFloat(17, e.getPorcentajeComision());
-			ps.setInt(18, e.getIdDepartamento());
-			ps.setInt(19, e.getIdPuesto());
-			ps.setInt(20, e.getIdCiudad());
-			ps.setInt(21, e.getIdSucursal());
+			ps.setString(1, Nombre);
+			ps.setString(2,Apaterno);
+			ps.setString(3, Amaterno);
+			ps.setString(4,sexo);
+			ps.setDate(5, FechaContratacion);
+			ps.setDate(6, fechaNacimiento);
+			ps.setFloat(7, Salario);
+			ps.setString(8, Nss);
+			ps.setString(9, EstadoCivil);
+			ps.setInt(10,DiasVacaciones);
+			ps.setInt(11, diasPermiso);
+			ps.setBinaryStream(12,Fotografia);
+			ps.setString(13, Direccion);
+			ps.setString(14, Colonia);
+			ps.setString(15, CodigoPostal);
+			ps.setString(16, escolaridad);
+			ps.setFloat(17,  PorcentajeC);
+			ps.setInt(18, idDepartamento);
+			ps.setInt(19, idPuesto);
+			ps.setInt(20, idCiudad);
+			ps.setInt(21, idSucursal);
+			
 			ps.executeUpdate();
 			
 		} catch (Exception ex) {
@@ -197,6 +201,45 @@ public class EmpleadosDAO {
 		}
 	}
 	
+	public void ActualizarSinImagen(String Nombre, String Apaterno, String Amaterno, String sexo, Date FechaContratacion,
+			Date fechaNacimiento, Float Salario, String Nss, String EstadoCivil, int DiasVacaciones, int diasPermiso,
+			String Direccion, String Colonia, String CodigoPostal, String escolaridad, Float PorcentajeC, int idDepartamento,
+			int idPuesto, int idCiudad, int idSucursal, int idEmpleado)
+	{
+		String sql = "UPDATE Empleados SET Nombre=?,Apaterno=?,Amaterno=?,Sexo=?,FechaContratacion=?,"
+				+ "FechaNacimiento=?,Salario=?,Nss=?,EstadoCivil=?,diasVacacionales=?,diasPermiso=?,"
+				+ "Direccion=?,Colonia=?,CodigoPostal=?,Escolaridad=?,"
+				+ "PorcentajeComision=?,idDepartamento=?,idPuesto=?,idCiudad=?,idSucursal=? "
+				+ "WHERE idEmpleado="+idEmpleado;
+		try {
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+
+			ps.setString(1, Nombre);
+			ps.setString(2,Apaterno);
+			ps.setString(3, Amaterno);
+			ps.setString(4,sexo);
+			ps.setDate(5, FechaContratacion);
+			ps.setDate(6, fechaNacimiento);
+			ps.setFloat(7, Salario);
+			ps.setString(8, Nss);
+			ps.setString(9, EstadoCivil);
+			ps.setInt(10,DiasVacaciones);
+			ps.setInt(11, diasPermiso);
+			ps.setString(12, Direccion);
+			ps.setString(13, Colonia);
+			ps.setString(14, CodigoPostal);
+			ps.setString(15, escolaridad);
+			ps.setFloat(16,  PorcentajeC);
+			ps.setInt(17, idDepartamento);
+			ps.setInt(18, idPuesto);
+			ps.setInt(19, idCiudad);
+			ps.setInt(20, idSucursal);
+			ps.executeUpdate();
+			
+		} catch (Exception ex) {
+			System.out.println("Error al actualizar al empleado sin imagen"+ex.getMessage());
+		}
+	}
 	public void Eliminar(int idEmpleado)
 	{
 		String sql = "execute sp_EliminarLogicamente 'Empleados','"+idEmpleado+"','idEmpleado'";

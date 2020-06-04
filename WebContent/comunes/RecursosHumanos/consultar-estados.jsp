@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="<c:out value="${pageContext.servletContext.contextPath}"/>/css/estilo.css">
     <script type="text/javascript" src="<c:out value="${pageContext.servletContext.contextPath}"/>/js/funciones.js"></script>
     <link rel="icon" type="image/png" href="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/carrito_32x.ico">
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" data-target="#navbarResponsive">
@@ -65,13 +66,33 @@
 							<td>${dato.getSiglas()}</td>
 							<td>${dato.getEstatus()}</td>
 							<td>
-								<form action="Estado" method="post">
+								<form action="Estado" method="post" >
 									<input type="hidden" name="id" value="${dato.getIdEstado()}">
 									<div id="${dato.getIdEstado()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
-										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
 									</div>
 								</form>
+							
+								<form action="Estado" method="post" id="miFormulario" >
+									<input type="hidden" name="id" value="${dato.getIdEstado()}">
+									<div id="${dato.getIdEstado()}">
+										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick  >
+									</div>
+								</form>
+								<script >
+
+
+						(function() {
+						    var form = document.getElementById('miFormulario');
+						    form.addEventListener('submit', function(event) {
+						      // si es false entonces que no haga el submit
+						      if (!confirm('Realmente desea eliminar?')) {
+						        event.preventDefault();
+						      }
+						    }, false);
+						  })();
+						  
+						</script>
 							</td>
 							</tr>
 						</c:if>

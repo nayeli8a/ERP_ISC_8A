@@ -157,7 +157,7 @@
 			    	</div>
 			        <div class="col-md-4">
 				        <label for="foto">Sube una nueva Fotografia:</label>
-			    		<input type="file" name="foto"	id="foto" class="form-control" required>
+			    		<input type="file" name="foto"	id="foto" class="form-control" >
 			        </div>
 			        </div>
 			        <div class="row">

@@ -197,7 +197,73 @@ public class EmpleadosServlet extends HttpServlet {
 				e.setIdCiudad(Integer.parseInt(request.getParameter("edit_ciudad")));
 				e.setIdSucursal(Integer.parseInt(request.getParameter("edit_sucursal")));
 				
-				edao.Actualizar(e);
+				
+				if(InputS.read()==-1){
+					int idEmpleado=(Integer.parseInt(request.getParameter("edit_id")));
+					String Nombre=(request.getParameter("edit_nombre"));
+					String  Apaterno=(request.getParameter("edit_apaterno"));
+					String Amaterno=(request.getParameter("edit_amaterno"));
+					String Sexo=(request.getParameter("edit_sexo"));
+					Date FechaContratacion=(Date.valueOf(request.getParameter("edit_fecha-contratacion")));
+					Date FechaNacimiento=(Date.valueOf(request.getParameter("edit_fecha-nacimiento")));
+					Float Salario=(Float.parseFloat(request.getParameter("edit_salario")));
+					String Nss=(request.getParameter("edit_nss"));
+					String EstadoCivil=(request.getParameter("edit_estado-civil"));
+					int DiasVacaciones=(Integer.parseInt(request.getParameter("edit_dias-vacaciones")));
+					int DiasPermiso=(Integer.parseInt(request.getParameter("edit_dias-permiso")));
+					
+					response.setContentType("text/html;charset=UFT-8");
+					Part DocumentoS = request.getPart("foto");
+			        InputStream Input = DocumentoS.getInputStream();
+			        
+					
+					String Direccion=(request.getParameter("edit_direccion"));
+					String Colonia =(request.getParameter("edit_colonia"));
+					String CodigoPostal=(request.getParameter("edit_codigo-postal"));
+					String Escolaridad=(request.getParameter("edit_escolaridad"));
+					Float PorcentajeComision=(Float.parseFloat(request.getParameter("edit_porcentaje-comision")));
+					String estatus= request.getParameter("estatus");
+					int idDepartamento=(Integer.parseInt(request.getParameter("edit_departamento")));
+					int idCiudad=(Integer.parseInt(request.getParameter("edit_ciudad")));
+					int idSucursal=(Integer.parseInt(request.getParameter("edit_sucursal")));
+					int idPuesto=(Integer.parseInt(request.getParameter("edit_puesto")));
+
+					//SinImagen
+					edao.ActualizarSinImagen(Nombre, Apaterno, Amaterno, Sexo, FechaContratacion, FechaNacimiento, Salario, Nss, EstadoCivil, DiasVacaciones, DiasPermiso, Direccion, Colonia, CodigoPostal, Escolaridad, PorcentajeComision, idDepartamento, idPuesto, idCiudad, idSucursal, idEmpleado);
+					
+				}
+				else {
+					//conImagen
+					int idEmpleado=(Integer.parseInt(request.getParameter("edit_id")));
+					String Nombre=(request.getParameter("edit_nombre"));
+					String  Apaterno=(request.getParameter("edit_apaterno"));
+					String Amaterno=(request.getParameter("edit_amaterno"));
+					String Sexo=(request.getParameter("edit_sexo"));
+					Date FechaContratacion=(Date.valueOf(request.getParameter("edit_fecha-contratacion")));
+					Date FechaNacimiento=(Date.valueOf(request.getParameter("edit_fecha-nacimiento")));
+					Float Salario=(Float.parseFloat(request.getParameter("edit_salario")));
+					String Nss=(request.getParameter("edit_nss"));
+					String EstadoCivil=(request.getParameter("edit_estado-civil"));
+					int DiasVacaciones=(Integer.parseInt(request.getParameter("edit_dias-vacaciones")));
+					int DiasPermiso=(Integer.parseInt(request.getParameter("edit_dias-permiso")));
+					response.setContentType("text/html;charset=UFT-8");
+					Part DocumentoS = request.getPart("foto");
+			        InputStream Input = DocumentoS.getInputStream();
+					String Direccion=(request.getParameter("edit_direccion"));
+					String Colonia =(request.getParameter("edit_colonia"));
+					String CodigoPostal=(request.getParameter("edit_codigo-postal"));
+					String Escolaridad=(request.getParameter("edit_escolaridad"));
+					Float PorcentajeComision=(Float.parseFloat(request.getParameter("edit_porcentaje-comision")));
+					String estatus= request.getParameter("estatus");
+					int idDepartamento=(Integer.parseInt(request.getParameter("edit_departamento")));
+					int idCiudad=(Integer.parseInt(request.getParameter("edit_ciudad")));
+					int idSucursal=(Integer.parseInt(request.getParameter("edit_sucursal")));
+					int idPuesto=(Integer.parseInt(request.getParameter("edit_puesto")));
+					edao.Actualizar(Nombre, Apaterno, Amaterno, Sexo, FechaContratacion, FechaNacimiento, Salario, Nss, EstadoCivil, DiasVacaciones, DiasPermiso, Input, Direccion, Colonia, CodigoPostal, Escolaridad, PorcentajeComision, idDepartamento, idPuesto, idCiudad, idSucursal, idEmpleado);
+
+					
+				}
+				
 				url = "Empleados?op=Listar&pagina=1";
 				break;
 		}

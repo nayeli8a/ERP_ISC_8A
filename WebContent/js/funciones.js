@@ -1,8 +1,15 @@
 function eliminar() 
 {
-	if (confirm("¿Estás seguro de eliminar este elemento?"))
+	if (confirm("++¿Estás seguro de eliminar este elemento?")){
 		alert("Eliminado correctamente");
-	return;
+		return true;
+	}
+	else {
+		alert("Ok");
+		return false;
+	}
+		
+
 }
 
 function getHoraActual()
@@ -264,6 +271,7 @@ function restar (valor) {
 
   
 }
+
 
 
 
