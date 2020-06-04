@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -163,7 +165,35 @@ public class EmpleadosServlet extends HttpServlet {
 				e.setPorcentajeComision(Float.parseFloat(request.getParameter("edit_porcentaje-comision")));
 				e.setEstatus("A");
 				e.setIdDepartamento(Integer.parseInt(request.getParameter("edit_departamento")));
+				
+				//buscamos el puesto que el empleado tenia registrado en la BD
+				//si es diferente al que se toma de la peticion
+				//agregamos un nuevo registro en HistorialPuesto
 				e.setIdPuesto(Integer.parseInt(request.getParameter("edit_puesto")));
+				
+				int auxpuesto = pudao.CambioPuesto(e.getIdEmpleado());
+				
+				if(auxpuesto != e.getIdPuesto())
+				{
+					//se cambio de puesto
+					HistorialPuestosDAO hdao = new HistorialPuestosDAO();
+					HistorialPuestos hp = new HistorialPuestos();
+					hp.setIdEmpleado(e.getIdEmpleado());
+					hp.setIdDepartamento(e.getIdDepartamento());
+					hp.setIdPuesto(e.getIdPuesto());
+					
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+					LocalDateTime now = LocalDateTime.now();  
+					hp.setFechaInicio(Date.valueOf(dtf.format(now).toString()));
+					//System.out.println(dtf.format(now).toString());
+					
+					LocalDateTime sameDayNextYear = LocalDateTime.now().plusYears(1); 
+					hp.setFechaFin(Date.valueOf(dtf.format(sameDayNextYear).toString()));
+					//System.out.println(dtf.format(sameDayNextYear).toString());
+					
+					hdao.Insertar(hp);
+				}
+				
 				e.setIdCiudad(Integer.parseInt(request.getParameter("edit_ciudad")));
 				e.setIdSucursal(Integer.parseInt(request.getParameter("edit_sucursal")));
 				

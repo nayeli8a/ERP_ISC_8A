@@ -128,6 +128,7 @@ public class PuestosDAO {
 				System.out.println("Error: " + e.getMessage());
 			}
 	}
+	
 	public void actualizar(Puestos p)
 	{
 		String sql="update Puestos set Nombre=?, SalarioMinimo=?, SalarioMaximo=?, Estatus=? where idPuesto=?";
@@ -144,6 +145,26 @@ public class PuestosDAO {
 		} catch (Exception e) {
 			System.out.println("Error al actualizar el puesto "+e.getMessage());
 		}
+	}
+	
+	public int CambioPuesto(int idEmpleado)
+	{
+		int idPuesto = -1;
+		String sql = "select idPuesto from HistorialPuestos where idEmpleado = "+idEmpleado+" order by fechaInicio desc";
+		try{
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				idPuesto = rs.getInt(1);
+			}
+			ps.close();
+			rs.close();
+		}
+		catch(SQLException e){
+			System.out.println("Error CambioPuesto :"+e.getMessage());
+		}
+		
+		return idPuesto;
 	}
 
 

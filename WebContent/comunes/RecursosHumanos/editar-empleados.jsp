@@ -118,8 +118,17 @@
 			      	<div class="col-md-4">
 				        <label for="Ciudad">Ciudad:</label>
 			    		<select class="form-control" id="edit_ciudad" name = "edit_ciudad">
-			      			<c:forEach var="dato" items="${datosciudades}">
-			      				<option value="${dato.getIdCiudad()}">${dato.getNombre()}</option>
+			      			<c:forEach var="ciu" items="${datosciudades}">
+			      				<c:if test="${dato.getIdCiudad() eq ciu.getIdCiudad()}">
+			              			<option selected value="${ciu.getIdCiudad()}">
+			              			${ciu.getNombre()}
+			              			</option>
+			              		</c:if>
+			              		<c:if test="${dato.getIdCiudad() != ciu.getIdCiudad()}">
+			              			<option value="${ciu.getIdCiudad()}">
+			              			${ciu.getNombre()}
+			              			</option>
+			              		</c:if>
 			      			</c:forEach>
 			    		</select>
 			        </div>
@@ -188,24 +197,51 @@
 			      	<div class="col-md-4">
 				        <label for="Departamento">Departamento:</label>
 			    		<select class="form-control" id="edit_departamento" name = "edit_departamento">
-			      			<c:forEach var="dato" items="${datosdepartamentos}">
-			      				<option value="${dato.getIdDepartamento()}">${dato.getNombre()}</option>
+			      			<c:forEach var="dep" items="${datosdepartamentos}">
+			      				<c:if test="${dato.getIdDepartamento() eq dep.getIdDepartamento()}">
+			              			<option selected value="${dep.getIdDepartamento()}">
+			              			${dep.getNombre()}
+			              			</option>
+			              		</c:if>
+			              		<c:if test="${dato.getIdDepartamento() != dep.getIdDepartamento()}">
+			              			<option value="${dep.getIdDepartamento()}">
+			              			${dep.getNombre()}
+			              			</option>
+			              		</c:if>
 			      			</c:forEach>
 			    		</select>
 			        </div>
 			        <div class="col-md-4">
 				        <label for="Puesto">Puesto:</label>
 			    		<select class="form-control" id="edit_puesto" name = "edit_puesto">
-			      			<c:forEach var="dato" items="${datospuestos}">
-			      				<option value="${dato.getIdPuesto()}">${dato.getNombre()}</option>
+			      			<c:forEach var="pu" items="${datospuestos}">
+			      				<c:if test="${dato.getIdPuesto() eq pu.getIdPuesto()}">
+			              			<option selected value="${pu.getIdPuesto()}">
+			              			${pu.getNombre()}
+			              			</option>
+			              		</c:if>
+			              		<c:if test="${dato.getIdPuesto() != pu.getIdPuesto()}">
+			              			<option value="${pu.getIdPuesto()}">
+			              			${pu.getNombre()}
+			              			</option>
+			              		</c:if>
 			      			</c:forEach>
 			    		</select>
 			        </div>
 			        <div class="col-md-4">
 				        <label for="Sucursal">Sucursal:</label>
 			    		<select class="form-control" id="edit_sucursal" name = "edit_sucursal">
-			      			<c:forEach var="dato" items="${datossucursales}">
-			      				<option value="${dato.getIdSucursal()}">${dato.getNombre()}</option>
+			      			<c:forEach var="suc" items="${datossucursales}">
+			      				<c:if test="${dato.getIdSucursal() eq suc.getIdSucursal()}">
+			              			<option selected value="${suc.getIdSucursal()}">
+			              			${suc.getNombre()}
+			              			</option>
+			              		</c:if>
+			              		<c:if test="${dato.getIdSucursal() != suc.getIdSucursal()}">
+			              			<option value="${suc.getIdSucursal()}">
+			              			${suc.getNombre()}
+			              			</option>
+			              		</c:if>
 			      			</c:forEach>
 			    		</select>
 			        </div>

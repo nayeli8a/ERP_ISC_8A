@@ -67,6 +67,24 @@ public class HistorialPuestosDAO{
 				System.out.println("Error al eliminar HistorialPuestos: " + e.getMessage());
 			}
 	}
+  
+  public void Insertar(HistorialPuestos hp)
+  {
+	  String sql = "insert into HistorialPuestos values (?,?,?,?,?,(select salario from Empleados where idEmpleado = ?),'A')";
+		try {
+			PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps = Conexion.getInstance().getCN().prepareStatement(sql);
+			ps.setInt(1,hp.getIdEmpleado());
+			ps.setInt(2,hp.getIdPuesto());
+			ps.setInt(3,hp.getIdDepartamento());
+			ps.setDate(4,hp.getFechaInicio());
+			ps.setDate(5,hp.getFechaFin());
+			ps.setInt(6,hp.getIdEmpleado());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("Error al insertar en HistorialPuestos en la BD: " + e.getMessage());
+		}
+  }
 
 
 }
