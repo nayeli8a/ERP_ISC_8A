@@ -43,7 +43,7 @@
 							<div class="col">
 								<label>Sube el nuevo documento:</label>
 								<br>
-								<input type="file" id="documento" name="documento" required>
+								<input type="file" id="documento" name="documento" >
 							</div>
 							<br>
 							<div class="col">

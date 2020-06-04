@@ -62,18 +62,37 @@ public class DocumentacionEmpleadoServlet extends HttpServlet {
               case "Modificar":
       				    dedao = new DocumentacionEmpleadoDAO();
       					DocumentacionEmpleado de = new DocumentacionEmpleado();
-      					de.setNombreDocumento(request.getParameter("nombreDocumento"));
-      					de.setFechaEntrega(Date.valueOf(request.getParameter("fechaEntrega")));
-                        
+      					String NombreDocumento=request.getParameter("nombreDocumento");
+      					Date FechaEntrega=Date.valueOf(request.getParameter("fechaEntrega"));
+      					int idEmpleado=Integer.valueOf(request.getParameter("idEmpleado"));
+      					String estatus=request.getParameter("estatus");
+      					int idDocumento=Integer.valueOf(request.getParameter("idDocumento"));
       					response.setContentType("text/html;charset=UFT-8");
 						Part Documento = request.getPart("documento");
 				        InputStream InputS = Documento.getInputStream();
-				        de.setDocumento(InputS);
+      				
+      					if(InputS.read()==-1){
+      						//Sin imagen 
+      						dedao.actualizarSinImagen(NombreDocumento, FechaEntrega, idEmpleado, estatus, idDocumento);
+      						
+      					}
+      					else{
+      						de.setNombreDocumento(request.getParameter("nombreDocumento"));
+          					de.setFechaEntrega(Date.valueOf(request.getParameter("fechaEntrega")));
+          					response.setContentType("text/html;charset=UFT-8");
+    						Part DocumentoS = request.getPart("documento");
+    				        InputStream Input = DocumentoS.getInputStream();
+          					de.setDocumento(Input);
+          					de.setIdEmpleado(Integer.valueOf(request.getParameter("idEmpleado")));
+          					de.setEstatus(request.getParameter("estatus"));
+          					de.setIdDocumento(Integer.valueOf(request.getParameter("idDocumento")));
+          					dedao.actualizar(de);
+
+      						
+      					}
       					
-      					de.setIdEmpleado(Integer.valueOf(request.getParameter("idEmpleado")));
-      					de.setEstatus(request.getParameter("estatus"));
-      					de.setIdDocumento(Integer.valueOf(request.getParameter("idDocumento")));
-      					dedao.actualizar(de);
+      					
+      					
       					url = "DocumentacionEmpleado?op=Listar&pagina=1";
       					break;
 

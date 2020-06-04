@@ -118,6 +118,24 @@ public class DocumentacionEmpleadoDAO{
   				System.out.println("Error: " + e.getMessage());
   			}
   	}
+    
+    public void actualizarSinImagen(String NombreDocumento, Date FechaEntrega, int idEmpleado, String Estatus, int idDocumento )
+  	{
+  		String sql="update DocumentacionEmpleado set nombreDocumento=?,fechaEntrega=?,idEmpleado=?, Estatus=? where idDocumento=?";
+  		try {
+  			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+
+  			ps.setString(1, NombreDocumento);
+  			ps.setDate(2,FechaEntrega);
+  			ps.setInt(3,idEmpleado);
+  			ps.setString(4, Estatus);
+  			ps.setInt(5, idDocumento);
+  			ps.executeUpdate();
+
+  		} catch (Exception e) {
+  			System.out.println("Error al actualizar DocumentacionEmpleado sin imagen"+e.getMessage());
+  		}
+  	}
 
     public void actualizar(DocumentacionEmpleado documento)
   	{
