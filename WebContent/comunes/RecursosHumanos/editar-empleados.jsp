@@ -60,14 +60,23 @@
 			      <div class="row">
 			        <div class="col-md-6">
 			        	<label>Sexo:</label>
-			          <select class="form-control" id="edit_sexo" name="edit_sexo">
+			          <select class="form-control" id="edit_sexo" name="edit_sexo" >
+			          <option value="${dato.getSexo()}" selected> 
+							${dato.getSexo() eq 'M' ? 'Masculino':'Femenino'}
+						</option>
 			            <option value="M">Masculino</option>
 			            <option value="F">Femenino</option>
 			          </select>
 			        </div>
+			        
+		
+			        
 			        <div class="col-md-6">
 			        	<label>Estado Civil:</label>
 			          <select class="form-control" id="edit_estado-civil" name="edit_estado-civil">
+			           <option value="${dato.getEstadoCivil()}" selected> 
+							${dato.getEstadoCivil() eq 'Casado' ? 'Casado':'Soltero'}
+						</option>
 			            <option value="Casado">Casado</option>
 			            <option value="Soltero">Soltero</option>
 			           
