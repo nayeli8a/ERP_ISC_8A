@@ -56,7 +56,7 @@
 	    
 	    function mostrarImagen(idelemento,idimagen)
 	    {
-	    	document.getElementById(idelemento).src = "IMG?op=incapacidad&idIncapacidad="+idimagen;
+	    	document.getElementById(idelemento).src = "IMG?op=incapacidad&evidencia="+idimagen;
 	    }
 	</script>
 
@@ -118,7 +118,7 @@
 									<td>
       									<a href="" data-toggle="modal" data-target="#modalImagen" 
 	                            		onclick="mostrarImagen('myImage','${dato.getIdIncapacidad()}')">
-      									<img src="IMG?op=incapacidad&idIncapacidad=${dato.getIdIncapacidad()}" style="max-width:30%;max-height: 30%;">
+      									<img src="IMG?op=incapacidad&evidencia${dato.getIdIncapacidad()}" style="max-width:30%;max-height: 30%;">
       									</a>
       								</td>	
       								<td>${dato.getNss()}</td>
@@ -133,7 +133,7 @@
 									<td>
       									<a href="" data-toggle="modal" data-target="#modalImagen" 
 	                            		onclick="mostrarImagen('myImage','${dato.getIdIncapacidad()}')">
-      									<img src="IMG?op=incapacidad&idIncapacidad=${dato.getIdIncapacidad()}" style="max-width:30%;max-height: 30%;">
+      									<img src="IMG?op=incapacidad&evidencia=${dato.getIdIncapacidad()}" style="max-width:30%;max-height: 30%;">
       									</a>
       								</td>								
       								<td>${dato.getNss()}</td>

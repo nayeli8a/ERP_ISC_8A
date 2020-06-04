@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -134,19 +135,19 @@ public class IncapacidadesDAO {
 				System.out.println("Error: " + e.getMessage());
 			}
 	}
-	public void actualizar(Incapacidades incapacidad)
+	public void actualizar(Date FechaInicio, Date FechaFin, String Enfermedad, InputStream Evidencia,  int idEmpleado, String Estatus ,int idIncapacidad)
 	{
 		String sql="update Incapacidades set FechaInicio=?,FechaFin=?,Enfermedad=?, Evidencia=?, idEmpleado=?, Estatus=? where idIncapacidad=?";
 		try {
 			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
 	
-			ps.setDate(1, incapacidad.getFechaInicio());
-			ps.setDate(2,incapacidad.getFechaFin());
-			ps.setString(3,incapacidad.getEnfermedad());
-			ps.setBinaryStream(4, incapacidad.getEvidencia());	
-			ps.setInt(5, incapacidad.getIdEmpleado());
-			ps.setString(6,incapacidad.getEstatus());
-			ps.setInt(7,incapacidad.getIdIncapacidad());
+			ps.setDate(1, FechaInicio);
+			ps.setDate(2,FechaFin);
+			ps.setString(3,Enfermedad);
+			ps.setBinaryStream(4, Evidencia);	
+			ps.setInt(5, idEmpleado);
+			ps.setString(6,Estatus);
+			ps.setInt(7,idIncapacidad);
 			
 			ps.executeUpdate();
 			
@@ -154,10 +155,32 @@ public class IncapacidadesDAO {
 			System.out.println("Error al actualizar la incapacidad"+e.getMessage());
 		}
 	}
+
 	
-    public void ListarPDF(int idIncapacidad, HttpServletResponse response)
+	
+	public void actualizarSinImagen(Date FechaInicio, Date FechaFin, String Enfermedad,int idEmpleado, String Estatus ,int idIncapacidad)
+	{
+		String sql="update Incapacidades set FechaInicio=?,FechaFin=?,Enfermedad=?, idEmpleado=?, Estatus=? where idIncapacidad=?";
+		try {
+			PreparedStatement ps=Conexion.getInstance().getCN().prepareStatement(sql);
+	
+			ps.setDate(1, FechaInicio);
+			ps.setDate(2,FechaFin);
+			ps.setString(3,Enfermedad);
+			ps.setInt(4, idEmpleado);
+			ps.setString(5,Estatus);
+			ps.setInt(6,idIncapacidad);
+			
+			ps.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("Error al actualizar la incapacidad sin foto"+e.getMessage());
+		}
+	}
+	
+    public void ListarPDF(int evidencia, HttpServletResponse response)
     {
-    	String sql = "select * from Incapacidades where idIncapacidad = "+idIncapacidad;
+    	String sql = "select * from Incapacidades where idIncapacidad = "+evidencia;
         InputStream is = null;
         OutputStream os = null;
         BufferedInputStream bufferedInputStream = null;

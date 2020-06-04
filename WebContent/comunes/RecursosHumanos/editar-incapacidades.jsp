@@ -149,7 +149,13 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>Evidencia: </label> 
-							<input type="file" required name="evidencia" class="form-control-file border">
+							<input type="hidden" id="evidencia" name="evidencia" value="${datosIncapacidades.getIdIncapacidad()}">
+							<img src="IMG?op=incapacidad&evidencia=${datosIncapacidades.getIdIncapacidad()}" style="max-width:50%;max-height:50%;">
+							<br>
+							<label>Sube el nuevo documento:</label>
+							<br>
+							<input type="file" id="evidencianueva" name="evidencianueva" value="">
+							
 						</div>
 					</div>
 

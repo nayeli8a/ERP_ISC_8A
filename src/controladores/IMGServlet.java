@@ -50,7 +50,8 @@ public class IMGServlet extends HttpServlet {
 			
 		case "incapacidad":
 			IncapacidadesDAO idao = new IncapacidadesDAO();
-			id = Integer.parseInt(request.getParameter("idIncapacidad"));
+			id = Integer.parseInt(request.getParameter("evidencia"));
+			System.out.println(id);
 			idao.ListarPDF(id, response);
 			break;	
 			

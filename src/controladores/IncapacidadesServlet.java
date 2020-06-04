@@ -62,19 +62,38 @@ public class IncapacidadesServlet extends HttpServlet {
 				case "Modificar":
 				    indao = new IncapacidadesDAO();
 					Incapacidades in = new Incapacidades ();
-					in.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
-					in.setFechaFin(Date.valueOf(request.getParameter("fechaFin")));
-					in.setEnfermedad(request.getParameter("enfermedad"));
-					
+					Date FechaInicio=Date.valueOf(request.getParameter("fechaInicio"));
+					Date FechaFin=Date.valueOf(request.getParameter("fechaFin"));
+					String Enfermedad=(request.getParameter("enfermedad"));
 					response.setContentType("text/html;charset=UFT-8");
-					Part Documento = request.getPart("evidencia");
+					Part Documento = request.getPart("evidencianueva");
 			        InputStream InputS = Documento.getInputStream();
-			        in.setEvidencia(InputS);
+			        int idEmpleado=(Integer.valueOf(request.getParameter("idEmpleado")));
+					String Estatus=(request.getParameter("estatus"));
+					int idIncapacidad =(Integer.valueOf(request.getParameter("idIncapacidad")));
+					if(InputS.read()==-1){
+						
+						System.out.println("##actualizacion Sin imagen##");
+						System.out.println(InputS.read());
+						indao.actualizarSinImagen(FechaInicio, FechaFin, Enfermedad, idEmpleado, Estatus, idIncapacidad);
+					}
+					else{
+						System.out.println("##actualizacion CON imagen##");
+						in.setFechaInicio(Date.valueOf(request.getParameter("fechaInicio")));
+						in.setFechaFin(Date.valueOf(request.getParameter("fechaFin")));
+						in.setEnfermedad(request.getParameter("enfermedad"));
+						response.setContentType("text/html;charset=UFT-8");
+						Documento = request.getPart("evidencianueva");
+				        InputS = Documento.getInputStream();
+				        in.setEvidencia(InputS);
+				        in.setIdEmpleado(Integer.valueOf(request.getParameter("idEmpleado")));
+						in.setEstatus(request.getParameter("estatus"));
+						in.setIdIncapacidad(Integer.valueOf(request.getParameter("idIncapacidad")));
+						indao.actualizar(FechaInicio, FechaFin, Enfermedad, InputS, idEmpleado, Estatus, idIncapacidad);
+						
+					}
 					
-					in.setIdEmpleado(Integer.valueOf(request.getParameter("idEmpleado")));
-					in.setEstatus(request.getParameter("estatus"));
-					in.setIdIncapacidad(Integer.valueOf(request.getParameter("idIncapacidad")));
-					indao.actualizar(in);
+					
 					url = "Incapacidades?op=Listar&pagina=1";
 
 					
