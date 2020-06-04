@@ -66,11 +66,11 @@
 							<td>${dato.getSalarioMaximo()}</td>
 							<td>${dato.getEstatus()}</td>
 							<td>
-								<form action="Puestos" method="post">
+								<form id="formulario" action="Puestos" method="post">
 									<input type="hidden" name="id" value="${dato.getIdPuesto()}">
 									<div id="${dato.getIdPuesto()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
-										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
+										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="return eliminar()">
 									</div>
 								</form>
 							</td>

@@ -66,11 +66,11 @@
 							<td>${dato.getDiasPagar()}</td>
 							<td>${dato.getEstatus()}</td>
 							<td>
-								<form action="Percepciones" method="post">
+								<form id="formulario" action="Percepciones" method="post">
 									<input type="hidden" name="id" value="${dato.getIdPercepcion()}">
 									<div id="${dato.getIdPercepcion()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
-										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
+										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="return eliminar()">
 									</div>
 								</form>
 							</td>

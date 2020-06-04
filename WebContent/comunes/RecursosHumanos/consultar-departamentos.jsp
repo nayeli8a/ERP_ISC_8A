@@ -60,11 +60,11 @@
 							<td>${dato.getNombre()}</td>
 							<td>${dato.getEstatus()}</td>
 							<td>
-								<form action="Departamentos" method="post">
+								<form id="formulario" action="Departamentos" method="post">
 									<input type="hidden" name="id" value="${dato.getIdDepartamento()}">
 									<div id="${dato.getIdDepartamento()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
-										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
+										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="return eliminar()">
 									</div>
 								</form>
 							</td>

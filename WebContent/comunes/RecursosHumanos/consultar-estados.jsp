@@ -73,26 +73,13 @@
 									</div>
 								</form>
 							
-								<form action="Estado" method="post" id="miFormulario" >
+								<form action="Estado" method="post" id="formulario" >
 									<input type="hidden" name="id" value="${dato.getIdEstado()}">
 									<div id="${dato.getIdEstado()}">
-										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick  >
+										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="return eliminar()"  >
 									</div>
 								</form>
-								<script >
-
-
-						(function() {
-						    var form = document.getElementById('miFormulario');
-						    form.addEventListener('submit', function(event) {
-						      // si es false entonces que no haga el submit
-						      if (!confirm('Realmente desea eliminar?')) {
-						        event.preventDefault();
-						      }
-						    }, false);
-						  })();
-						  
-						</script>
+								
 							</td>
 							</tr>
 						</c:if>

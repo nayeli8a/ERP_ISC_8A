@@ -240,11 +240,11 @@
 							<td><button type="submit" name ="opcion" value="AusenciasJustificadas">VER</button></td>
 							<td><button type="submit" name ="opcion" value="Documentacion">VER</button></td>
 							<td>
-								<form action="Empleados" method="post">
+								<form id="formulario" action="Empleados" method="post">
 									<input type="hidden" name="id" value="${dato.getIdEmpleado()}">
 									<div id="${dato.getIdEmpleado()}">
 										<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
-										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="eliminar()">
+										<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="return eliminar()">
 									</div>
 								</form>
 							</td>

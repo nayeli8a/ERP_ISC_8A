@@ -382,13 +382,13 @@
 						</c:if>
 					</td>
 					<td>
-					<form action="${pageContext.servletContext.contextPath}/Nominas" method="post">
+					<form id="formulario" action="${pageContext.servletContext.contextPath}/Nominas" method="post">
 					
 						<input type="hidden" name="id" value="${dato.getIdNomina()}">
 						<input type="hidden" name="idEmpleado" value="${dato.getIdEmpleado()}">
 						<div id="${dato.getIdNomina()}">
 							<c:if test="${dato.getEstatusNomina() eq 'P' }">
-								<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="javascript:eliminar()">
+								<input type="submit" class="btn btn-danger" name="op" value="Eliminar" onclick="return eliminar()">
 							</c:if>
 							<c:if test="${dato.getEstatusNomina() eq 'C' }">
 								<input type="submit" class="btn btn-success" name="op" value="Pagar">

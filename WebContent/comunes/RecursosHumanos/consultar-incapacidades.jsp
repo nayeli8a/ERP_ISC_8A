@@ -139,14 +139,14 @@
       								<td>${dato.getNss()}</td>
 								<td>${dato.getEstatus()}</td>
 								<td>
-									<form action="Incapacidades" method="post">
+									<form id="formulario" action="Incapacidades" method="post">
 										<input type="hidden" name="id"
 											value="${dato.getIdIncapacidad()}">
 										<div id="${dato.getIdIncapacidad()}">
 											<input type="submit" class="btn btn-warning" name="op"
 												value="Editar"> <input type="submit"
 												class="btn btn-danger" name="op" value="Eliminar"
-												onclick="javascript:eliminar()">
+												onclick="return eliminar()">
 										</div>
 									</form>
 								</td>

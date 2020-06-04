@@ -118,12 +118,12 @@
       								<td>${dato.getIdEmpleado()}</td>
       								<td>${dato.getEstatus()}</td>
       								<td>
-   									<form action="DocumentacionEmpleado" method="post">
+   									<form id="formulario" action="DocumentacionEmpleado" method="post">
    										<input type="hidden" name="id" value="${dato.getIdDocumento()}">
    										<div id="${dato.getIdDocumento()}">
    											<input type="submit" class="btn btn-warning" name="op" value="Editar"> 
    											<input type="submit" class="btn btn-danger" name="op" value="Eliminar" 
-   											onclick="javascript:eliminar()">
+   											onclick="return eliminar()">
    										</div>
    									</form>
       								</td>
