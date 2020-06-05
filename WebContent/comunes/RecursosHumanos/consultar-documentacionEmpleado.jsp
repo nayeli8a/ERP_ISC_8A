@@ -76,7 +76,7 @@
 
       					<tr>
       						<th>nombreDocumento</th>
-      						<th>Documento</th>
+      						<th style="width: 10%">Documento</th>
       						<th>fechaEntrega</th>
       						<th>Nombre Empleado</th>
                   			<th>NSS</th>
@@ -93,7 +93,7 @@
       								<td>
       									<a href="" data-toggle="modal" data-target="#modalImagen" 
 	                            		onclick="mostrarImagen('myImage','${dato.getIdDocumento()}')">
-      									<img src="IMG?op=documentacion&idDocumento=${dato.getIdDocumento()}" style="max-width:30%;max-height: 30%;">
+      									<img src="IMG?op=documentacion&idDocumento=${dato.getIdDocumento()}" style="max-width:100%;max-height: 100%;">
       									</a>
       								</td>
       								<td>${dato.getFechaEntrega()}</td>
@@ -109,7 +109,7 @@
       								<td>
       									<a href="" data-toggle="modal" data-target="#modalImagen" 
 	                            		onclick="mostrarImagen('myImage','${dato.getIdDocumento()}')">
-      									<img src="IMG?op=documentacion&idDocumento=${dato.getIdDocumento()}" style="max-width:30%;max-height: 30%;">
+      									<img src="IMG?op=documentacion&idDocumento=${dato.getIdDocumento()}" style="max-width:100%;max-height: 100%;">
       									</a>
       								</td>
       								<td>${dato.getFechaEntrega()}</td>

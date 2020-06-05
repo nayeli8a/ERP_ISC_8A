@@ -130,7 +130,7 @@ public class AusenciasJustificadasServlet extends HttpServlet {
 					url="AusenciasJustificadas?op=Listar&pagina=1";
 				break;
 				case "Imprimir": 
-				idAusencia = Integer.parseInt(request.getParameter("idAusencia"));
+				idAusencia = Integer.parseInt(request.getParameter("id"));
 				JasperReport reporte ;//generamos el objeto para el reporte
 				
 				//obtenemos el contexto y la ruta del reporte 

@@ -136,7 +136,7 @@
 						<th>Fecha Inicio</th>
 						<th>Fecha Fin</th>
 						<th>Motivo</th>
-						<th>Evidencia</th>
+						<th style="width:10%">Evidencia</th>
 						<th>NSS empleado</th>
 						<th>Estatus</th>
 					</tr>
@@ -151,7 +151,7 @@
 									<td>
       									<a href="" data-toggle="modal" data-target="#modalImagen" 
 	                            		onclick="mostrarImagen('myImage','${dato.getIdIncapacidad()}')">
-      									<img src="IMG?op=incapacidad&evidencia=${dato.getIdIncapacidad()}" style="max-width:50%;max-height: 50%;">
+      									<img src="IMG?op=incapacidad&evidencia=${dato.getIdIncapacidad()}" style="max-width:100%;max-height: 100%;">
       									</a>
       								</td>	
       								<td>${dato.getNss()}</td>
@@ -166,7 +166,7 @@
 									<td>
       									<a href="" data-toggle="modal" data-target="#modalImagen" 
 	                            		onclick="mostrarImagen('myImage','${dato.getIdIncapacidad()}')">
-      									<img src="IMG?op=incapacidad&evidencia=${dato.getIdIncapacidad()}" style="max-width:50%;max-height: 50%;">
+      									<img src="IMG?op=incapacidad&evidencia=${dato.getIdIncapacidad()}" style="max-width:100%;max-height:100%;">
       									</a>
       								</td>								
       								<td>${dato.getNss()}</td>

@@ -327,7 +327,7 @@
 				<th>No.Nomina</th>
 				<th style="width: 20%">Nombre Empleado</th>
 				<th style="width: 10%">Fecha Pago</th>
-				<th>Liquido</th>
+				<th>Salario Neto</th>
 				<th style="width: 20%">Periodo de Pago</th>
 				<th>Forma Pago</th>
 				<th>Dias Trabajados</th>
