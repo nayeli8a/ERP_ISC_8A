@@ -140,7 +140,7 @@ public class NominasDAO {
 	
 	public void Eliminar(int idNomina)
 	{
-		String sql = "execute sp_EliminarLogicamente 'Nominas','"+idNomina+"','idNomina'";
+		String sql = "execute sp_EliminarLogicamente 'Nominas','"+idNomina+"','idNomina','Empleados'";
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 				ps.executeUpdate();

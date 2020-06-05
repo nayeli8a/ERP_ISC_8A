@@ -26,7 +26,7 @@ public class HorariosDAO {
   }
 
   public void eliminar(String id){
-		String sql = "execute sp_EliminarLogicamente 'Horarios','"+id+"','idHorario'";
+		String sql = "execute sp_EliminarLogicamente 'Horarios','"+id+"','idHorario','Empleados'";
 		System.out.println(sql);
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);

@@ -118,7 +118,7 @@ public class PuestosDAO {
 	}
 	
 	public void eliminar(String id){
-		String sql = "execute sp_EliminarLogicamente 'Puestos','"+id+"','idPuesto'";
+		String sql = "execute sp_EliminarLogicamente 'Puestos','"+id+"','idPuesto','Empleados'";
 		System.out.println(sql);
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);

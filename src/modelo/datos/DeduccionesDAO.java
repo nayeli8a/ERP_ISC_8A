@@ -142,7 +142,7 @@ public class DeduccionesDAO {
 	}
 	
 	public void eliminar(String id){
-		String sql = "execute sp_EliminarLogicamente 'Deducciones','"+id+"','idDeduccion'";
+		String sql = "execute sp_EliminarLogicamente 'Deducciones','"+id+"','idDeduccion','NominasDeducciones'";
 		System.out.println(sql);
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);

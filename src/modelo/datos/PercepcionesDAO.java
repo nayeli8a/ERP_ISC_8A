@@ -119,7 +119,7 @@ public class PercepcionesDAO {
 	}
 	
 	public void eliminar(String id){
-		String sql = "execute sp_EliminarLogicamente 'Percepciones','"+id+"','idPercepcion'";
+		String sql = "execute sp_EliminarLogicamente 'Percepciones','"+id+"','idPercepcion','NominasPercepciones'";
 		System.out.println(sql);
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);

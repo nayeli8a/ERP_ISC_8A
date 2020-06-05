@@ -128,7 +128,7 @@ public class CiudadesDAO {
 	}
 	
 	public void eliminar(String id){
-		String sql = "execute sp_EliminarLogicamente 'Ciudades','"+id+"','idCiudad'";
+		String sql = "execute sp_EliminarLogicamente 'Ciudades','"+id+"','idCiudad','Estados'";
 		try {
 				ps = Conexion.getInstance().getCN().prepareStatement(sql);
 				ps.executeUpdate();

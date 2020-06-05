@@ -33,7 +33,9 @@
 		<div class="contenedorPadre">
 		
 			<div class="cabecera">
-				<img src="${pageContext.servletContext.contextPath}/imagenes/campo3.jpg" alt="">
+				<div class="d-flex justify-content-center">
+					<img src="${pageContext.servletContext.contextPath}/imagenes/campo3.jpg" alt="">
+				</div>
 				<div class="tituloCabecera">
 					<h1>AGRONEGOCIOS</h1>
 					<h2>Usuario: ${usuario.getNombre()}</h2>

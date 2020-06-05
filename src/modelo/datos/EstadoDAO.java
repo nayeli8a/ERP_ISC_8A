@@ -112,7 +112,7 @@ public class EstadoDAO {
 	}
 	
 	public void eliminar(String id){
-		String sql = "execute sp_EliminarLogicamente 'Estados','"+id+"','idEstado'";
+		String sql = "execute sp_EliminarLogicamente 'Estados','"+id+"','idEstado','Ciudades'";
 		System.out.println(sql);
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);

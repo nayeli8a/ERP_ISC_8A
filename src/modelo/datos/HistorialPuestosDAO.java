@@ -59,7 +59,7 @@ public class HistorialPuestosDAO{
 
   public void Eliminar(int idPuesto)
 	{
-		String sql = "execute sp_EliminarLogicamente 'HistorialPuestos','"+idPuesto+"','idEmpleado'";
+		String sql = "execute sp_EliminarLogicamente 'HistorialPuestos','"+idPuesto+"','idEmpleado','Empleados'";
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);
 				ps.executeUpdate();

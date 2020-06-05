@@ -178,7 +178,7 @@ public class AusenciasJustificadasDAO {
 
 
   public void eliminar(String id){
-		String sql = "execute sp_EliminarLogicamente 'AusenciaJustificada','"+id+"','idAusencia'";
+		String sql = "execute sp_EliminarLogicamente 'AusenciaJustificada','"+id+"','idAusencia','Empleados'";
 		System.out.println(sql);
 		try {
 				PreparedStatement ps = Conexion.getInstance().getCN().prepareStatement(sql);

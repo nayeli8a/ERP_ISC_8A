@@ -38,7 +38,10 @@ if(session.getAttribute("usuario") != null)
 <body style="background-color:">
 
 <nav class">
-<center> <img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo3.jpg" alt="logo" height="180" width="980">
+<center> 
+<div class="d-flex justify-content-center">
+	<img src="<c:out value="${pageContext.servletContext.contextPath}"/>/imagenes/campo3.jpg" alt="logo" height="180" width="980">
+</div>
 
 </nav>
 <div class="alert alert-warning" style="background:#509a1f;">
