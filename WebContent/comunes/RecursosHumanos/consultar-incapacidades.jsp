@@ -62,24 +62,32 @@
 	    function validarFechas()
 	    {
 	       var hoy = new Date();
-	       var plazo = new Date()+10;
+	       var plazo = new Date();
+	       plazo.setDate(plazo.getDate() + 10);
 	       var fechaInicio = document.getElementById("fechaInicio").value;
 	       var fechaFin = document.getElementById("fechaFin").value;
 			
 	       	//alert("entro a validar fechas"+fechaInicio+" "+fechaFin);
 	       	if(Date.parse(fechaInicio) < Date.parse(fechaFin))
 			{
-				if(Date.parse(fechaInicio) >= Date.parse(hoy) && Date.parse(fechaInicio) > Date.parse(plazo))
+				if(Date.parse(fechaInicio) >= Date.parse(hoy))
 				{
-					return true;
+					if(Date.parse(fechaInicio) < Date.parse(plazo))
+					{
+						return true;
+					}else
+					{
+						alert("fechas incorrectas:\nLa fechaInicio debe ser menor a un plazo maximo de 10 dias");
+			    		return false; 
+					}
 				}else
 				{
-					alert("fechas incorrectas");
+					alert("fechas incorrectas:\nLa fechaInicio debe ser mayor o igual a la fecha actual");
 		    		return false; 
 				}
 			}else
 			{
-				alert("fechas incorrectas");
+				alert("fechas incorrectas:\nLa fechaInicio debe ser menor a la fechaFin");
 	    		return false; 
 			}
 	    }
