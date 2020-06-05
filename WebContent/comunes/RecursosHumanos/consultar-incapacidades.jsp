@@ -65,16 +65,23 @@
 	       var plazo = new Date()+10;
 	       var fechaInicio = document.getElementById("fechaInicio").value;
 	       var fechaFin = document.getElementById("fechaFin").value;
-
-	       if(Date.parse(fechaInicio)<=Date.parse(hoy) || Date.parse(fechaInicio)>=Date.parse(plazo) && Date.parse(fechaInicio)< Date.parse(fechaFin) ) {
-	    	   return true;
-	    	 
-	    } else {
-	    	alert("fechas incorrectas");
-	    	return false; 
-	    	
-
-	    }
+			
+	       	//alert("entro a validar fechas"+fechaInicio+" "+fechaFin);
+	       	if(Date.parse(fechaInicio) < Date.parse(fechaFin))
+			{
+				if(Date.parse(fechaInicio) >= Date.parse(hoy) && Date.parse(fechaInicio) > Date.parse(plazo))
+				{
+					return true;
+				}else
+				{
+					alert("fechas incorrectas");
+		    		return false; 
+				}
+			}else
+			{
+				alert("fechas incorrectas");
+	    		return false; 
+			}
 	    }
 	</script>
 
@@ -233,7 +240,7 @@
 				
 					<form
 						action="${pageContext.servletContext.contextPath}/Registrar?op=Incapacidades"
-						 
+						onsubmit="return validarFechas()"  
 						method="post"
 						enctype="multipart/form-data"
 						>
@@ -248,11 +255,13 @@
 
 								</div>
 								<div class="col-sm">
-									<label>Fecha inicio: </label> <input type="date"
-										name="fechaInicio" id="fechaInicio" class="form-control"
-										required> <label>Fecha fin: </label> <input
-										type="date" name="fechaFin" id="fechaFin" class="form-control"
-										required> <br>
+									<label>Fecha inicio: </label> 
+									<input type="date" name="fechaInicio" id="fechaInicio" class="form-control"
+										required> 
+									<label>Fecha fin: </label> 
+									<input type="date" name="fechaFin" id="fechaFin" class="form-control"
+										required> 
+									<br>
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -263,7 +272,7 @@
 								</div>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-primary" onclick="return validarFechas();">Registrar</button>
+						<button type="submit" class="btn btn-primary">Registrar</button>
 
 					</form>
 
