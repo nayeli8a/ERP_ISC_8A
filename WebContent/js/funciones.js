@@ -188,6 +188,8 @@ function validarFechas()
 }
 }
 
+
+
 //FUNCIONES PARA CLONAR Y ELIMINAR ELEMENTOS DEL HTML
 function clonar(iddondeclonar,idelementoclonar)
 {

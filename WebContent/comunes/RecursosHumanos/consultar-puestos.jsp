@@ -105,12 +105,8 @@
 				<br>
 				<label>Salario Maximo: </label>
 				<input type="number" class="form-control" id="salarioMaximo" required name="salarioMaximo" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
+               <input type="hidden"  id="estatus" name="estatus" value="A">
 
-				<label for="Estatus">Estatus</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
-		      			<option value="A">Activo</option>
-		      			<option value="I">Inactivo</option>
-		    		</select>
 		    	<br>
 		    	<button type="submit" class="btn btn-primary">Registrar</button>
 			</div>

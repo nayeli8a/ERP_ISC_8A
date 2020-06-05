@@ -58,6 +58,24 @@
 	    {
 	    	document.getElementById(idelemento).src = "IMG?op=incapacidad&evidencia="+idimagen;
 	    }
+	    
+	    function validarFechas()
+	    {
+	       var hoy = new Date();
+	       var plazo = new Date()+10;
+	       var fechaInicio = document.getElementById("fechaInicio").value;
+	       var fechaFin = document.getElementById("fechaFin").value;
+
+	       if(Date.parse(fechaInicio)<=Date.parse(hoy) || Date.parse(fechaInicio)>=Date.parse(plazo) && Date.parse(fechaInicio)< Date.parse(fechaFin) ) {
+	    	   return true;
+	    	 
+	    } else {
+	    	alert("fechas incorrectas");
+	    	return false; 
+	    	
+
+	    }
+	    }
 	</script>
 
 </head>
@@ -118,7 +136,7 @@
 									<td>
       									<a href="" data-toggle="modal" data-target="#modalImagen" 
 	                            		onclick="mostrarImagen('myImage','${dato.getIdIncapacidad()}')">
-      									<img src="IMG?op=incapacidad&evidencia=${dato.getIdIncapacidad()}" style="max-width:30%;max-height: 30%;">
+      									<img src="IMG?op=incapacidad&evidencia=${dato.getIdIncapacidad()}" style="max-width:50%;max-height: 50%;">
       									</a>
       								</td>	
       								<td>${dato.getNss()}</td>
@@ -133,7 +151,7 @@
 									<td>
       									<a href="" data-toggle="modal" data-target="#modalImagen" 
 	                            		onclick="mostrarImagen('myImage','${dato.getIdIncapacidad()}')">
-      									<img src="IMG?op=incapacidad&evidencia=${dato.getIdIncapacidad()}" style="max-width:30%;max-height: 30%;">
+      									<img src="IMG?op=incapacidad&evidencia=${dato.getIdIncapacidad()}" style="max-width:50%;max-height: 50%;">
       									</a>
       								</td>								
       								<td>${dato.getNss()}</td>
@@ -215,7 +233,7 @@
 				
 					<form
 						action="${pageContext.servletContext.contextPath}/Registrar?op=Incapacidades"
-						onsubmit="return validarFechas();" 
+						 
 						method="post"
 						enctype="multipart/form-data"
 						>
@@ -245,7 +263,7 @@
 								</div>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-primary">Registrar</button>
+						<button type="submit" class="btn btn-primary" onclick="return validarFechas();">Registrar</button>
 
 					</form>
 

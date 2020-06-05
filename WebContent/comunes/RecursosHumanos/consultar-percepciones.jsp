@@ -98,19 +98,16 @@
 	  <form action="${pageContext.servletContext.contextPath}/Registrar?op=Percepciones" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
-				<input type="text" onkeypress="return soloLetras(event)" class="form-control"  name="nom_percepciones" required>
+				<input type="text"  class="form-control"  name="nom_percepciones" required>
 				<br>
 				<label>Descripcion: </label>
 				<input type="text" class="form-control"  name="descripcion" required>
 				<br>
 				<label>Dias a pagar: </label>
 				<input type="number" class="form-control" name="diasPagar"  required min="1" max="30"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
-				<label for="Estatus">Estatus</label>
-		    		<select class="form-control" name = "estatus">
-		      			<option value="A">Activo</option>
-		      			<option value="I">Inactivo</option>
-		    		</select>
-		    	<br>
+				<br>
+				<input type="hidden"  id="estatus" name="estatus" value="A">
+
 		    	<button type="submit" class="btn btn-primary">Registrar</button>
 			</div>
 		</form>

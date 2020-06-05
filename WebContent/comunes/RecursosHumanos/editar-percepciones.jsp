@@ -37,7 +37,7 @@
 				<input type="text" readonly name="idpercepcion" readonly required placeholder="idpercepcion" value="${datospercepciones.getIdPercepcion()}">
 				<br>
 				<label>Nombre :</label>
-				<input type="text" onkeypress="return soloLetras(event)" class="form-control" id="nom_percepciones" name="nom_percepciones" required value="${datospercepciones.getNombre()}">
+				<input type="text" class="form-control" id="nom_percepciones" name="nom_percepciones" required value="${datospercepciones.getNombre()}">
 				<br>
 				
 				<label>Descripcion :</label>

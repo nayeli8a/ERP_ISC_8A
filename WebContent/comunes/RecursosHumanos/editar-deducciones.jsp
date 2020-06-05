@@ -36,7 +36,7 @@
 				<input type="text" readonly name="idDeduccion" readonly required placeholder="idDeduccion" value="${datosdeducciones.getIdDeduccion()}">
 				<br>
 				<label>Nombre :</label>
-				<input type="text" onkeypress="return soloLetras(event)" class="form-control" id="nom_deducciones" name="nom_deducciones" required value="${datosdeducciones.getNombre()}">
+				<input type="text"  class="form-control" id="nom_deducciones" name="nom_deducciones" required value="${datosdeducciones.getNombre()}">
 				<br>
 				
 				<label>Descripcion :</label>

@@ -107,16 +107,13 @@
 	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Estado" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
-				<input type="text" onkeypress="return soloLetras(event)" class="form-control" style="text-transform:uppercase;" id="nom_estado" name="nom_estado" required>
+				<input type="text" onkeypress="return soloLetras(event)" class="form-control"  id="nom_estado" name="nom_estado" required>
 				<br>
 				<label>Siglas: </label>
-				<input type="text" onkeypress="return soloLetras(event)" class="form-control" style="text-transform:uppercase;" id="siglas" name="siglas" required>
+				<input type="text" onkeypress="return soloLetras(event)" class="form-control" id="siglas" name="siglas" required>
 				<br>
-				<label for="Estatus">Estatus</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
-		      			<option value="A">Activo</option>
-		      			<option value="I">Inactivo</option>
-		    		</select>
+               <input type="hidden"  id="estatus" name="estatus" value="A">
+
 		    	<br>
 		    	<button type="submit" class="btn btn-primary">Registrar</button>
 			</div>

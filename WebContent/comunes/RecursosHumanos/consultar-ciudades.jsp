@@ -117,18 +117,14 @@
 		    	<br>
 		    	
 				<label>Nombre Ciudad:</label>
-				<input type="text" onkeypress="return soloLetras(event)" class="form-control" style="text-transform:uppercase;" id="nom_ciudad" name="nom_ciudad" required>
+				<input type="text" onkeypress="return soloLetras(event)" class="form-control"  id="nom_ciudad" name="nom_ciudad" required>
 				<br>
-				<label for="Estatus">Estatus:</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
-	      				<option value="A">Activo</option>
-	      				<option value="I">Inactivo</option>
-		    		</select>
-		    	<br>
+				<input type="hidden"  id="estatus" name="estatus" value="A">
+				
+			
 		    	<button type="submit" class="btn btn-primary">Registrar</button>
 			</div>
 		</form>
-	      	<% //Aqui va todo el cuerpo del modal, el cual contiene todo los datos necesarios para el cliente%> 
 	      	
 	      </div>
 			

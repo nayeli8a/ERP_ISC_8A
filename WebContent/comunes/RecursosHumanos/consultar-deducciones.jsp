@@ -98,7 +98,7 @@
 	      <form action="${pageContext.servletContext.contextPath}/Registrar?op=Deducciones" method="post">
 			<div class="form-group">
 				<label>Nombre: </label>
-				<input type="text"  onkeypress="return soloLetras(event)" class="form-control" id="nom_deducciones" name="nom_deducciones" required >
+				<input type="text" class="form-control" id="nom_deducciones" name="nom_deducciones" required >
 				<br>
 				<label>Descripcion: </label>
 				<input type="text" class="form-control" id="descripcion" name="descripcion" required >
@@ -106,11 +106,8 @@
 				<label>Porcentaje: </label>
 				<input type="number" class="form-control" id="porcentaje" required name="porcentaje" min="1.0" max="100.0" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;">
 
-				<label for="Estatus">Estatus</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
-		      			<option value="A">Activo</option>
-		      			<option value="I">Inactivo</option>
-		    		</select>
+				<input type="hidden"  id="estatus" name="estatus" value="A">
+
 		    	<br>
 		    	<button type="submit" class="btn btn-primary">Registrar</button>
 			</div>

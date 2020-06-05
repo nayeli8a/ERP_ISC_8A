@@ -94,12 +94,8 @@
 				<label>Nombre: </label>
 				<input type="text" onkeypress="return soloLetras(event)" class="form-control" id="nom_departamentos" name="nom_departamentos" required >
 				<br>
-			
-				<label for="Estatus">Estatus</label>
-		    		<select class="form-control" id="estatus" name = "estatus">
-		      			<option value="A">Activo</option>
-		      			<option value="I">Inactivo</option>
-		    		</select>
+			      <input type="hidden"  id="estatus" name="estatus" value="A">
+
 		    	<br>
 		    	<button type="submit" class="btn btn-primary">Registrar</button>
 			</div>
